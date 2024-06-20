@@ -3,47 +3,76 @@ import "./Registration.css";
 
 const TeacherReg = () => {
   return (
-    <section class="container">
+    <section className="container">
       <header>Registration Form</header>
-      <form action="#" class="form">
-        <div class="input-box">
-          <label>Full Name</label>
-          <input type="text" placeholder="Enter Full Name" required />
+      <form action="#" className="form">
+        <div className="input-box">
+          <label htmlFor="full-name">Full Name</label>
+          <input
+            type="text"
+            id="full-name"
+            placeholder="Enter Full Name"
+            required
+          />
         </div>
-        <div class="input-box">
-          <label>Email Address</label>
-          <input type="text" placeholder="Enter Email Address" required />
+        <div className="input-box">
+          <label htmlFor="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter Email Address"
+            required
+          />
         </div>
-        <div class="column">
-          <div class="input-box">
-            <label>Birth Date</label>
-            <input type="date" placeholder="Enter Birth Date" required />
+        <div className="column">
+          <div className="input-box">
+            <label htmlFor="birth-date">Birth Date</label>
+            <input
+              type="date"
+              id="birth-date"
+              placeholder="Enter Birth Date"
+              required
+            />
           </div>
         </div>
-        <div class="gender-box">
+        <div className="gender-box">
           <h3>Gender</h3>
-          <div class="gender-option">
-            <div class="gender">
-              <input type="radio" id="check-male" name="gender" checked />
-              <label for="check-male">Male</label>
+          <div className="gender-option">
+            <div className="gender">
+              <input
+                type="radio"
+                id="check-male"
+                name="gender"
+                defaultChecked
+              />
+              <label htmlFor="check-male">Male</label>
             </div>
-            <div class="gender">
+            <div className="gender">
               <input type="radio" id="check-female" name="gender" />
-              <label for="check-female">Female</label>
+              <label htmlFor="check-female">Female</label>
             </div>
           </div>
         </div>
-        <div class="input-box">
-          <label>Phone Number</label>
-          <input type="text" placeholder="Enter Phone Number" required />
+        <div className="input-box">
+          <label htmlFor="phone">Phone Number</label>
+          <input
+            type="text"
+            id="phone"
+            placeholder="Enter Phone Number"
+            required
+          />
         </div>
-        <div class="input-box">
-          <label>School Name</label>
-          <input type="text" placeholder="Enter Name of our School" required />
+        <div className="input-box">
+          <label htmlFor="school-name">School Name</label>
+          <input
+            type="text"
+            id="school-name"
+            placeholder="Enter Name of your School"
+            required
+          />
         </div>
-
-        <div class="input-box">
-          <label>Password</label>
+        <div className="input-box">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
@@ -51,8 +80,8 @@ const TeacherReg = () => {
             required
           />
         </div>
-        <div class="input-box">
-          <label>Confirm Password</label>
+        <div className="input-box">
+          <label htmlFor="confirm-password">Confirm Password</label>
           <input
             type="password"
             id="confirm-password"
@@ -60,7 +89,7 @@ const TeacherReg = () => {
             required
           />
         </div>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </section>
   );

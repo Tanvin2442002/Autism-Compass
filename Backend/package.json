@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hasnat0006/Autism-Compass#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "oracledb": "^6.5.1"
   }
