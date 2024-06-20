@@ -9,8 +9,6 @@
 
 body,
 html {
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,19 +26,28 @@ html {
   right: 20px;
   display: flex;
   align-items: center;
+  list-style: none;
 }
 
-.LogInSignUpBtn button {
+.LogInSignUpBtn li {
   margin-left: 10px;
+  position: relative;
+}
+
+.LogInSignUpBtn a {
   padding: 10px 20px;
   font-size: 16px;
+  color: white;
+  text-decoration: none;
   border: none;
   cursor: pointer;
   transition: background 0.3s;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
 }
 
-.LogInSignUpBtn button:hover {
-  background: rgba(255, 255, 255, 0.2);
+.LogInSignUpBtn a:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .introduction {
@@ -50,17 +57,18 @@ html {
   justify-content: center;
   height: 100%;
   text-align: center;
+  color: #fff;
+  padding: 20px;
 }
 
 .introduction h2 {
   font-size: 2rem;
-  color: #fff;
+  margin-bottom: 10px;
 }
 
 .introduction h1 {
   font-size: 3rem;
-  color: #fff;
-  margin-top: 10px;
+  margin-top: 0;
 }
 
 .signUpContainer {
@@ -69,31 +77,40 @@ html {
 }
 
 .signUpOptions {
+  margin-top: 10px;
   display: none;
   position: absolute;
   top: 100%;
   right: 0;
-  flex-direction: column;
+  width: 170px;
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 8px;
+  list-style: none;
 }
 
 .signUpContainer:hover .signUpOptions,
 .signUpOptions:hover {
   display: flex;
+  flex-direction: column;
 }
 
-.signUpOptions button {
+.signUpOptions li {
   margin: 5px 0;
+}
+
+.signUpOptions a {
   padding: 10px 20px;
   font-size: 16px;
+  color: #333;
+  text-decoration: none;
   border: none;
   cursor: pointer;
   transition: background 0.3s;
+  border-radius: 5px;
 }
 
-.signUpOptions button:hover {
+.signUpOptions a:hover {
   background: rgba(0, 0, 0, 0.1);
 }
