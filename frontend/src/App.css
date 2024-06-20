@@ -82,8 +82,8 @@ html {
   position: absolute;
   top: 100%;
   right: 0;
-  width: 170px;
-  background: #fff;
+  width: 120px;
+  background: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 8px;
@@ -114,3 +114,4 @@ html {
 .signUpOptions a:hover {
   background: rgba(0, 0, 0, 0.1);
 }
+

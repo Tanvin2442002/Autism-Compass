@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import LogIn from "./LogInRegForm/Login";
 import ParentReg from "./LogInRegForm/ParentReg";
+import DoctorReg from "./LogInRegForm/DoctorReg";
+import ChildReg from "./LogInRegForm/ChildReg";
+import TeacherReg from "./LogInRegForm/TeacherReg";
 
 function App() {
   return (
@@ -27,7 +30,7 @@ function App() {
                 <Link to="/signup/doctor">Doctor</Link>
               </li>
               <li>
-                <Link to="/signup/therapyorg">Therapy Org.</Link>
+                <Link to="/signup/teacher">Teacher</Link>
               </li>
             </div>
           </div>
@@ -40,6 +43,9 @@ function App() {
         <Routes>
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup/parent" element={<ParentReg />} />
+          <Route path="/signup/child" element={<ChildReg />} />
+          <Route path="/signup/doctor" element={<DoctorReg />} />
+          <Route path="/signup/teacher" element={<TeacherReg />} />
         </Routes>
       </div>
     </Router>
