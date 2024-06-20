@@ -1,11 +1,27 @@
-import ParentReg from "./LogInRegForm/ParentReg.js";
-// import LogIn from "./LogInRegForm/Login.js";
-
+import React from "react";
+import "./App.css";
 
 function App() {
   return (
-    <ParentReg />
+    <div className="landingPage">
+      <div className="LogInSignUpBtn">
+        <button>Log In</button>
+        <div className="signUpContainer">
+          <button className="signUpButton">Sign Up</button>
+          <div className="signUpOptions">
+            <button>Parent</button>
+            <button>Child</button>
+            <button>Doctor</button>
+            <button>Therapy Org.</button>
+          </div>
+        </div>
+      </div>
+      <div className="introduction">
+        <h2>Welcome to</h2>
+        <h1>AUTISM COMPASS</h1>
+      </div>
+    </div>
   );
-};
+}
 
 export default App;

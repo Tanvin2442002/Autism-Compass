@@ -1,38 +1,99 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body,
+html {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(86, 153, 190);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.landingPage {
+  width: 100%;
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.LogInSignUpBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.LogInSignUpBtn button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.LogInSignUpBtn button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.introduction {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100%;
+  text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+.introduction h2 {
+  font-size: 2rem;
+  color: #fff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.introduction h1 {
+  font-size: 3rem;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.signUpContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.signUpOptions {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.signUpContainer:hover .signUpOptions,
+.signUpOptions:hover {
+  display: flex;
+}
+
+.signUpOptions button {
+  margin: 5px 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.signUpOptions button:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
