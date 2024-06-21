@@ -12,21 +12,20 @@ const LogIn = () => {
     e.preventDefault();
     const response = await fetch("http://localhost:5000/login", {
       method: "POST",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, type: userType }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-
     let data = await response.json();
-    if (data.NAME) {
-		console.log(JSON.stringify(data));
-		// Redirect to the dashboard
-		navigate("/dashboard");
-		localStorage.setItem("user", JSON.stringify(data));
-	} else {
-		alert("Invalid credentials");
-	}
+    if (data.EMAIL) {
+      console.log(JSON.stringify(data));
+      // Redirect to the dashboard
+      navigate("/dashboard");
+      localStorage.setItem("user", JSON.stringify(data));
+    } else {
+      alert("Invalid credentials");
+    }
   };
 
   return (

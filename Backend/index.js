@@ -7,24 +7,26 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, type } = req.body;
+  // console.log(email, password, type);
   try {
     const connection = await getConnection();
     if (!connection) {
       throw new Error("Database connection not established");
     }
     // Log incoming request data
-    console.log(`Login attempt with email: ${email}`);
+    // console.log(`Login attempt with email: ${email}`);
     const result = await connection.execute(
       `SELECT *
-             FROM USERS
+             FROM LOG_IN
              WHERE EMAIL = :email
-             AND PASSWORD = :password`,
-      { email, password }
+             AND PASSWORD = :password
+             AND TYPE = :type`,
+      { email, password, type }
     );
 
     // Log query result
-    console.log(`Query result: ${JSON.stringify(result)}`);
+    console.log(`Query result: ${JSON.stringify(result.rows)}`);
 
     const rows = result.rows;
 
@@ -41,6 +43,20 @@ app.post("/login", async (req, res) => {
     res.send({ result: "No user found!" });
   }
   console.log("Request processed");
+});
+
+app.post("/info", async (req, res) => {
+  const email = req.body.email;
+  const connection = await getConnection();
+  console.log(`Email: ${email}`);
+  let result = await connection.execute(
+    `SELECT *
+           FROM CHILD
+           WHERE EMAIL = :email`,
+    { email }
+  );
+  res.send(result.rows);
+  console.log(`Query result: ${JSON.stringify(result.rows)}`);
 });
 
 app.listen(5000, () => {
