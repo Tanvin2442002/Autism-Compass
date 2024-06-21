@@ -121,7 +121,7 @@ body {
 }
 
 .select-box {
-    background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><path fill="none" stroke="%23707070" stroke-width="1" d="M0 0l5 5 5-5"/></svg>') no-repeat right 15px center;
+    /* background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><path fill="none" stroke="%23707070" stroke-width="1" d="M0 0l5 5 5-5"/></svg>') no-repeat right 15px center; */
     background-color: white;
     background-size: 10px 5px;
 }

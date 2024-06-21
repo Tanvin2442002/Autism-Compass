@@ -1,26 +1,53 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 
 const ChildReg = () => {
+  const navigate = useNavigate();
+  const handleChildRegForm = async (e) => {
+    e.preventDefault();
+
+    const childData = {
+      C_ID: Math.floor(Math.random() * 1000),
+      NAME: document.getElementById("full-name").value,
+      DOB: document.getElementById("birth-date").value,
+      EMAIL: document.getElementById("email").value,
+      CONTACT_NO: document.getElementById("phone").value,
+      P_EMAIL: document.getElementById("parent-email").value,
+      CITY: document.getElementById("city").value,
+      STREET: document.getElementById("street").value,
+      POSTAL_CODE: document.getElementById("postal-code").value,
+      PASSWORD: document.getElementById("password").value,
+      CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
+    };
+    if (childData.PASSWORD !== childData.CONFIRM_PASSWORD) {
+      alert("Passwords do not match");
+      return;
+    }
+    console.log(childData);
+    const response = await fetch("http://localhost:5000/childreg", {
+      method: "POST",
+      body: JSON.stringify(childData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let data = await response.json();
+    console.log(data);
+    localStorage.setItem("child", JSON.stringify(data));
+    navigate('/dashboard');
+  };
+
   return (
     <section className="container">
-      <header>Registration Form</header>
-      <form action="#" className="form">
+      <header>Child Registration Form</header>
+      <form onSubmit={handleChildRegForm} className="form">
         <div className="input-box">
           <label htmlFor="full-name">Full Name</label>
           <input
             type="text"
             id="full-name"
             placeholder="Enter Full Name"
-            required
-          />
-        </div>
-        <div className="input-box">
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter Email Address"
             required
           />
         </div>
@@ -35,7 +62,16 @@ const ChildReg = () => {
             />
           </div>
         </div>
-        <div className="gender-box">
+        <div className="input-box">
+          <label htmlFor="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter Email Address"
+            required
+          />
+        </div>
+        {/* <div className="gender-box">
           <h3>Gender</h3>
           <div className="gender-option">
             <div className="gender">
@@ -52,7 +88,7 @@ const ChildReg = () => {
               <label htmlFor="check-female">Female</label>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="input-box">
           <label htmlFor="phone">Phone Number</label>
           <input
@@ -73,7 +109,7 @@ const ChildReg = () => {
         </div>
         <div className="input-box address">
           <label htmlFor="address-line1">Address</label>
-          <input
+          {/* <input
             type="text"
             id="address-line1"
             placeholder="Address line 1"
@@ -84,9 +120,9 @@ const ChildReg = () => {
             id="address-line2"
             placeholder="Address line 2"
             required
-          />
+          /> */}
           <div className="column">
-            <div className="input-box">
+            {/* <div className="input-box">
               <label htmlFor="country">Country</label>
               <select id="country" className="select-box">
                 <option hidden>Country</option>
@@ -96,6 +132,15 @@ const ChildReg = () => {
                 <option>Japan</option>
                 <option>Malaysia</option>
               </select>
+            </div> */}
+            <div className="input-box">
+              <label htmlFor="street">Street</label>
+              <input
+                type="text"
+                id="street"
+                placeholder="Enter your street"
+                required
+              />
             </div>
             <div className="input-box">
               <label htmlFor="city">City</label>

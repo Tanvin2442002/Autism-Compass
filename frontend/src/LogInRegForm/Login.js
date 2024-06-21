@@ -22,7 +22,7 @@ const LogIn = () => {
       console.log(JSON.stringify(data));
       // Redirect to the dashboard
       navigate("/dashboard");
-      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem(userType, JSON.stringify(data));
     } else {
       alert("Invalid credentials");
     }
