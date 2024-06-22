@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 const registrationRouter = require("./Route/registration");
-app.use("/api", registrationRouter);
+app.use("/reg", registrationRouter);
 
 app.post("/login", async (req, res) => {
   const { email, password, type } = req.body;

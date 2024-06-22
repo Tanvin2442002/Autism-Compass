@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 
 const ParentReg = () => {
+  const navigate = useNavigate();
   const handleParentRegForm = async (e) => {
     e.preventDefault();
     const parentData = {
@@ -17,21 +19,21 @@ const ParentReg = () => {
       CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
     };
     console.log(parentData);
-    // if (parentData.PASSWORD !== parentData.CONFIRM_PASSWORD) {
-    //   alert("Passwords do not match");
-    //   return;
-    // }
-    // const response = await fetch("http://localhost:5000/parentreg", {
-    //   method: "POST",
-    //   body: JSON.stringify(parentData),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // let data = await response.json();
-    // console.log(data);
-    // localStorage.setItem("parent", JSON.stringify(data));
-    // navigate("/dashboard");
+    if (parentData.PASSWORD !== parentData.CONFIRM_PASSWORD) {
+      alert("Passwords do not match");
+      return;
+    }
+    const response = await fetch("http://localhost:5000/reg/parent", {
+      method: "POST",
+      body: JSON.stringify(parentData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let data = await response.json();
+    console.log(data);
+    localStorage.setItem("parent", parentData.JSON.stringify(data));
+    navigate("/dashboard");
   };
 
   return (

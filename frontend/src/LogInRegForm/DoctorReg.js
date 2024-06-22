@@ -1,18 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 
 const DoctorReg = () => {
+  const navigate = useNavigate();
   const handleDoctorRegForm = async (e) => {
     e.preventDefault();
 
     const doctorData = {
-      D_ID: Math.floor(Math.random() * 1000),
+      H_ID: Math.floor(Math.random() * 1000),
       NAME: document.getElementById("full-name").value,
-      DOB: document.getElementById("birth-date").value,
+      //DOB: document.getElementById("birth-date").value,
       EMAIL: document.getElementById("email").value,
       CONTACT_NO: document.getElementById("phone").value,
       DEGREE: document.getElementById("degree").value,
-      FIELD_OF_SPECIALIZATION: document.getElementById(
+      FIELD_OF_SPEC: document.getElementById(
         "field-of-specialization"
       ).value,
       CITY: document.getElementById("city").value,
@@ -26,11 +28,23 @@ const DoctorReg = () => {
       return;
     }
     console.log(doctorData);
-
+    const response = await fetch("http://localhost:5000/reg/doctor", {
+      method: "POST",
+      body: JSON.stringify(doctorData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // let data = await response.json();
+    // console.log(data);
+    localStorage.setItem("doctor", JSON.stringify(doctorData));
+    navigate("/dashboard");
   };
+
+
   return (
     <section className="container">
-      <header>Registration Form</header>
+      <header>Doctor Registration Form</header>
       <form onSubmit={handleDoctorRegForm} className="form">
         <div className="input-box">
           <label>Full Name</label>
@@ -50,7 +64,7 @@ const DoctorReg = () => {
             required
           />
         </div>
-        <div className="column">
+        {/* <div className="column">
           <div className="input-box">
             <label>Birth Date</label>
             <input
@@ -60,7 +74,7 @@ const DoctorReg = () => {
               required
             />
           </div>
-        </div>
+        </div> */}
         {/* <div className="gender-box">
           <h3>Gender</h3>
           <div className="gender-option">
@@ -160,3 +174,8 @@ const DoctorReg = () => {
 };
 
 export default DoctorReg;
+
+
+
+
+
