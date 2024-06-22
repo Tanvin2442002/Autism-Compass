@@ -2,47 +2,49 @@ import React, { useState } from "react";
 import "./Registration.css";
 
 const ParentReg = () => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    birthDate: "",
-    gender: "Male",
-    phoneNumber: "",
-    streetAddress1: "",
-    streetAddress2: "",
-    country: "",
-    city: "",
-    postalCode: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleParentRegForm = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    const parentData = {
+      P_ID: Math.floor(Math.random() * 1000),
+      NAME: document.getElementById("full-name").value,
+      DOB: document.getElementById("birth-date").value,
+      EMAIL: document.getElementById("email").value,
+      CONTACT_NO: document.getElementById("phone").value,
+      CITY: document.getElementById("city").value,
+      STREET: document.getElementById("street").value,
+      POSTAL_CODE: document.getElementById("postal-code").value,
+      PASSWORD: document.getElementById("password").value,
+      CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
+    };
+    console.log(parentData);
+    // if (parentData.PASSWORD !== parentData.CONFIRM_PASSWORD) {
+    //   alert("Passwords do not match");
+    //   return;
+    // }
+    // const response = await fetch("http://localhost:5000/parentreg", {
+    //   method: "POST",
+    //   body: JSON.stringify(parentData),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // let data = await response.json();
+    // console.log(data);
+    // localStorage.setItem("parent", JSON.stringify(data));
+    // navigate("/dashboard");
   };
 
   return (
     <section className="container">
-      <header>Registration Form</header>
-      <form className="form" onSubmit={handleSubmit}>
+      <header>Parent Registration Form</header>
+      <form className="form" onSubmit={handleParentRegForm}>
         <div className="input-box">
           <label>Full Name</label>
           <input
             type="text"
             name="fullName"
             placeholder="Enter Full Name"
-            value={formData.fullName}
-            onChange={handleChange}
+            id="full-name"
             required
           />
         </div>
@@ -51,9 +53,8 @@ const ParentReg = () => {
           <input
             type="text"
             name="email"
+            id = "email"
             placeholder="Enter Email Address"
-            value={formData.email}
-            onChange={handleChange}
             required
           />
         </div>
@@ -63,13 +64,12 @@ const ParentReg = () => {
             <input
               type="date"
               name="birthDate"
-              value={formData.birthDate}
-              onChange={handleChange}
+              id = "birth-date"
               required
             />
           </div>
         </div>
-        <div className="gender-box">
+        {/* <div className="gender-box">
           <h3>Gender</h3>
           <div className="gender-option">
             <div className="gender">
@@ -95,21 +95,20 @@ const ParentReg = () => {
               <label htmlFor="check-female">Female</label>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="input-box">
           <label>Phone Number</label>
           <input
             type="text"
             name="phoneNumber"
             placeholder="Enter Phone Number"
-            value={formData.phoneNumber}
-            onChange={handleChange}
+            id = "phone"
             required
           />
         </div>
         <div className="input-box address">
           <label>Address</label>
-          <input
+          {/* <input
             type="text"
             name="streetAddress1"
             placeholder="Enter street address"
@@ -124,9 +123,9 @@ const ParentReg = () => {
             value={formData.streetAddress2}
             onChange={handleChange}
             required
-          />
+          /> */}
           <div className="column">
-            <div className="input-box">
+            {/* <div className="input-box">
               <label>Country</label>
               <select
                 name="country"
@@ -142,6 +141,15 @@ const ParentReg = () => {
                 <option>Japan</option>
                 <option>Malaysia</option>
               </select>
+            </div> */}
+            <div className="input-box">
+              <label htmlFor="street">Street</label>
+              <input
+                type="text"
+                id="street"
+                placeholder="Enter your street"
+                required
+              />
             </div>
             <div className="input-box">
               <label>City</label>
@@ -149,8 +157,7 @@ const ParentReg = () => {
                 type="text"
                 name="city"
                 placeholder="Enter your city"
-                value={formData.city}
-                onChange={handleChange}
+                id = "city"
                 required
               />
             </div>
@@ -160,8 +167,7 @@ const ParentReg = () => {
                 type="number"
                 name="postalCode"
                 placeholder="Enter postal code"
-                value={formData.postalCode}
-                onChange={handleChange}
+                id = "postal-code"
                 required
               />
             </div>
@@ -174,8 +180,6 @@ const ParentReg = () => {
             name="password"
             id="password"
             placeholder="Enter password"
-            value={formData.password}
-            onChange={handleChange}
             required
           />
         </div>
@@ -186,8 +190,6 @@ const ParentReg = () => {
             name="confirmPassword"
             id="confirm-password"
             placeholder="Confirm password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
             required
           />
         </div>

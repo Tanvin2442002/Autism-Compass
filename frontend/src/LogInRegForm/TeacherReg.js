@@ -2,10 +2,29 @@ import React from "react";
 import "./Registration.css";
 
 const TeacherReg = () => {
+  const handleTeacherRegForm = async (e) => {
+    e.preventDefault();
+
+    const teacherData = {
+      T_ID: Math.floor(Math.random() * 1000),
+      NAME: document.getElementById("full-name").value,
+      EMAIL: document.getElementById("email").value,
+      CONTACT_NO: document.getElementById("phone").value,
+      INSTITUTION_NAME: document.getElementById("institution-name").value,
+      PASSWORD: document.getElementById("password").value,
+      CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
+    };
+    if (teacherData.PASSWORD !== teacherData.CONFIRM_PASSWORD) {
+      alert("Passwords do not match");
+      return;
+    }
+    console.log(teacherData);
+  };
+
   return (
     <section className="container">
-      <header>Registration Form</header>
-      <form action="#" className="form">
+      <header>Teacher Registration Form</header>
+      <form onSubmit={handleTeacherRegForm} className="form">
         <div className="input-box">
           <label htmlFor="full-name">Full Name</label>
           <input
@@ -24,35 +43,6 @@ const TeacherReg = () => {
             required
           />
         </div>
-        <div className="column">
-          <div className="input-box">
-            <label htmlFor="birth-date">Birth Date</label>
-            <input
-              type="date"
-              id="birth-date"
-              placeholder="Enter Birth Date"
-              required
-            />
-          </div>
-        </div>
-        <div className="gender-box">
-          <h3>Gender</h3>
-          <div className="gender-option">
-            <div className="gender">
-              <input
-                type="radio"
-                id="check-male"
-                name="gender"
-                defaultChecked
-              />
-              <label htmlFor="check-male">Male</label>
-            </div>
-            <div className="gender">
-              <input type="radio" id="check-female" name="gender" />
-              <label htmlFor="check-female">Female</label>
-            </div>
-          </div>
-        </div>
         <div className="input-box">
           <label htmlFor="phone">Phone Number</label>
           <input
@@ -63,10 +53,10 @@ const TeacherReg = () => {
           />
         </div>
         <div className="input-box">
-          <label htmlFor="school-name">School Name</label>
+          <label htmlFor="school-name">Institution Name</label>
           <input
             type="text"
-            id="school-name"
+            id="institution-name"
             placeholder="Enter Name of your School"
             required
           />

@@ -6,42 +6,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const registrationRouter = require("./Route/registration");
+app.use("/api", registrationRouter);
+
 app.post("/login", async (req, res) => {
   const { email, password, type } = req.body;
-  // console.log(email, password, type);
-  try {
-    const connection = await getConnection();
-    if (!connection) {
-      throw new Error("Database connection not established");
-    }
-    // Log incoming request data
-    // console.log(`Login attempt with email: ${email}`);
-    const result = await connection.execute(
-      `SELECT *
+  const connection = await getConnection();
+  if (!connection) {
+    throw new Error("Database connection not established");
+  }
+  const result = await connection.execute(
+    `SELECT *
              FROM LOG_IN
              WHERE EMAIL = :email
              AND PASSWORD = :password
              AND TYPE = :type`,
-      { email, password, type }
-    );
-
-    // Log query result
-    console.log(`Query result: ${JSON.stringify(result.rows)}`);
-
-    const rows = result.rows;
-
-    if (rows.length > 0) {
-      res.send(rows[0]);
-      console.log(`User logged in: ${email}`);
-    } else {
-      // res.status(401).send("Invalid credentials");
-      res.send({ result: "No user found!" });
-    }
-  } catch (err) {
-    // console.error("Error during /login request:", err);
-    // res.status(500).send("Internal Server Error");
-    res.send({ result: "No user found!" });
-  }
+    { email, password, type }
+  );
+  console.log(`Query result: ${JSON.stringify(result.rows)}`);
+  const rows = result.rows;
+  if (rows.length > 0) {
+    res.send(rows[0]);
+    console.log(`User logged in: ${email}`);
+  } else res.send({ result: "No user found!" });
   console.log("Request processed");
 });
 
@@ -89,7 +76,9 @@ app.post("/childreg", async (req, res) => {
     },
     { autoCommit: true }
   );
-  res.status(201).send({ message: "Child registered successfully!", resultReg });
+  res
+    .status(201)
+    .send({ message: "Child registered successfully!", resultReg });
 
   console.log("Request processed");
 });
