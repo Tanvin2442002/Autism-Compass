@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 
 const TeacherReg = () => {
+  const navigate = useNavigate();
   const handleTeacherRegForm = async (e) => {
     e.preventDefault();
 
@@ -10,7 +12,7 @@ const TeacherReg = () => {
       NAME: document.getElementById("full-name").value,
       EMAIL: document.getElementById("email").value,
       CONTACT_NO: document.getElementById("phone").value,
-      INSTITUTION_NAME: document.getElementById("institution-name").value,
+      INSTITUTION: document.getElementById("institution-name").value,
       PASSWORD: document.getElementById("password").value,
       CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
     };
@@ -19,6 +21,17 @@ const TeacherReg = () => {
       return;
     }
     console.log(teacherData);
+    const response = await fetch("http://localhost:5000/reg/teacher", {
+      method: "POST",
+      body: JSON.stringify(teacherData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // let data = await response.json();
+    // console.log(data);
+    localStorage.setItem("teacher", JSON.stringify(teacherData));
+    navigate("/dashboard");
   };
 
   return (
@@ -86,3 +99,6 @@ const TeacherReg = () => {
 };
 
 export default TeacherReg;
+
+
+
