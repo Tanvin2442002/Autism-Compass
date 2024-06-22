@@ -10,7 +10,6 @@ const DoctorReg = () => {
     const doctorData = {
       H_ID: Math.floor(Math.random() * 1000),
       NAME: document.getElementById("full-name").value,
-      //DOB: document.getElementById("birth-date").value,
       EMAIL: document.getElementById("email").value,
       CONTACT_NO: document.getElementById("phone").value,
       DEGREE: document.getElementById("degree").value,

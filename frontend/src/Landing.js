@@ -11,7 +11,7 @@ const Landing = () => {
         </li>
         <div className="signUpContainer">
           <li>
-            <Link to="/signup">Sign Up</Link>
+            <Link>Sign Up</Link>
           </li>
           <div className="signUpOptions">
             <li>

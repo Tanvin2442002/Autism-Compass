@@ -1,12 +1,20 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 
 const LogIn = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [userType, setUserType] = React.useState("");
+  const [rememberMe, setRememberMe] = React.useState(false);
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const savedRememberMe = JSON.parse(localStorage.getItem("rememberMe"));
+    if (savedRememberMe) {
+      setRememberMe(savedRememberMe);
+    }
+  }, []);
 
   const handleLogIn = async (e) => {
     e.preventDefault();
@@ -17,6 +25,7 @@ const LogIn = () => {
         "Content-Type": "application/json",
       },
     });
+    console.log(rememberMe + "   REMEMBER ME");
     let data = await response.json();
     if (data.EMAIL) {
       console.log(JSON.stringify(data));
@@ -70,8 +79,12 @@ const LogIn = () => {
         </div>
         <div className="remember-forgot">
           <label>
-            <input type="checkbox" />
-            Remember Me
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
+            Remember me
           </label>
           <a href="https://www.google.com/">Forgot Password</a>
         </div>
@@ -80,8 +93,7 @@ const LogIn = () => {
         </button>
         <div className="register-link">
           <p>
-            Don't have an account?{" "}
-            <a href="https://www.google.com/">Register</a>
+            Don't have an account? <Link to="/">Register</Link>
           </p>
         </div>
       </form>
