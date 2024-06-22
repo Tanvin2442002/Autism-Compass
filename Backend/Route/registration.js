@@ -105,4 +105,34 @@ router.post("/doctor", async (req, res) => {
   console.log("Request processed");
 });
 
+router.post("/teacher", async (req, res) => {
+  const connection = await getConnection();
+  console.log("Received data:", req.body);
+  const resultReg = await connection.execute(
+    `INSERT INTO TEACHER (T_ID, NAME, CONTACT_NO, EMAIL,INSTITUTION)
+                 VALUES (:T_ID, :NAME, :CONTACT_NO, :EMAIL, :INSTITUTION)`,
+    {
+      T_ID: req.body.T_ID,
+      NAME: req.body.NAME,
+      CONTACT_NO: req.body.CONTACT_NO,
+      EMAIL: req.body.EMAIL,
+      INSTITUTION: req.body.INSTITUTION,
+    },
+    { autoCommit: true }
+  );
+  const resultLog = await connection.execute(
+    `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
+                 VALUES (:EMAIL, :PASSWORD, 'doctor')`,
+    {
+      EMAIL: req.body.EMAIL,
+      PASSWORD: req.body.PASSWORD,
+    },
+    { autoCommit: true }
+  );
+  res
+    .status(201)
+    .send({ message: "Doctor registered successfully!", resultReg });
+  console.log("Request processed");
+});
+
 module.exports = router;
