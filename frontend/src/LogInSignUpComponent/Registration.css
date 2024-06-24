@@ -57,7 +57,7 @@ body {
     width: 100%;
     outline: none;
     font-size: 1rem;
-    color: #707070;
+    color: #000000;
     margin-top: 8px;
     border: 1px solid #031f4763;
     border-radius: 6px;
@@ -67,6 +67,15 @@ body {
     -moz-appearance: none;
     transition: box-shadow 0.3s ease;
 }
+
+.container form .input-box input::placeholder,
+.container form .input-box .date-input,
+.container form .input-box .select-box option{
+    color: #000000;
+    font-size: 1rem;
+    opacity: 0.6;
+}
+
 
 .input-box input:focus,
 .select-box:focus {
@@ -84,11 +93,13 @@ body {
 }
 
 
-.select-box {
-    /* background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><path fill="none" stroke="%23707070" stroke-width="1" d="M0 0l5 5 5-5"/></svg>') no-repeat right 15px center; */
+/* .select-box {
+    /* background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><path fill="none" stroke="%23707070" stroke-width="1" d="M0 0l5 5 5-5"/></svg>') no-repeat right 15px center;
     background-color: white;
+    border: 5px solid red;
     background-size: 10px 5px;
-}
+} */
+
 .password-container {
     position: relative;
 }
@@ -108,16 +119,20 @@ body {
 }
 
 .form button {
-    height: 55px;
+    position: relative;
+    height: 50px;
     width: 100%;
-    color: #fff;
+    outline: none;
     font-size: 1rem;
-    font-weight: 400;
-    margin-top: 30px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background: rgba(69, 112, 147, 0.501);
+    color: #000000;
+    margin-top: 8px;
+    border: 1px solid #031f4763;
+    border-radius: 6px;
+    padding: 0 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: box-shadow 0.3s ease;
 }
 
 .form button:hover {

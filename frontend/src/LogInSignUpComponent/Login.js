@@ -86,7 +86,7 @@ const LogIn = () => {
                         />
                         Remember me
                     </label>
-                    <a href="https://www.google.com/">Forgot Password</a>
+                    <Link to='/reset-password'> Forgot Password</Link>
                 </div>
                 <button type="submit" className="btn">
                     LOGIN

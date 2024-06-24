@@ -1,0 +1,269 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 5px solid red; */
+}
+
+.wrapper {
+    width: 420px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(9px);
+    color: #fff;
+    border-radius: 12px;
+    padding: 30px 40px;
+}
+
+.wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input,
+.input-box select {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(247, 238, 238, 0.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 0 45px 0 20px;
+    transition: all 0.5s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+form .input-box input::placeholder,
+.input-box select option {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.input-box select {
+    color: #fff;
+    padding-right: 20px;
+}
+
+.input-box select option {
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+
+.input-box input:hover,
+.input-box input:focus,
+.input-box select:hover,
+.input-box select:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 20px rgba(239, 234, 234, 0.8);
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    pointer-events: none;
+    color: #fff;
+}
+
+.wrapper .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+}
+
+.remember-forgot label input {
+    accent-color: #fff;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background: #39729de2;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgb(255, 254, 254);
+    cursor: pointer;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 600;
+    transition: all 0.5s ease;
+}
+
+.wrapper .btn:hover {
+    background: #305c7d;
+    box-shadow: 0 0 20px rgba(157, 207, 229, 0.8);
+}
+
+.wrapper .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.register-link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+
+/*----------------- reset password------------- */
+
+.resetpass {
+    margin: 0 auto;
+    padding: 20px;
+    width: 500px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.resetpass h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.resetpass form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-box-in-resetpass {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #000000;
+    margin-top: 8px;
+    border: 2px solid #031f4763;
+    border-radius: 6px;
+    padding: 0 15px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-box-in-resetpass:focus,
+.input-box-in-resetpass:hover {
+    border-color: #007bff;
+    /* Change border color on focus/hover */
+    box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
+}
+
+.input-box-in-resetpass.invalid {
+    border-color: rgba(255, 0, 0, 0.63);
+    box-shadow: 0 0 5px rgba(225, 65, 65, 0.688);
+}
+
+.input-box-in-resetpass.valid {
+    border-color: #2B831A;
+    /* Green border color for valid input */
+}
+
+.VerifyBtn {
+    background-color: #0088ff;
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #ffffff;
+    margin-top: 8px;
+    border-radius: 6px;
+    appearance: none;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.VerifyBtn.sent {
+    background-color: #2B831A;
+    /* Green background color for sent verification button */
+}
+
+.VerifyBtn:hover {
+    background-color: #1100ff;
+}
+
+.recoverpassBtn {
+    background-color: #0088ff;
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #ffffff;
+    margin-top: 8px;
+    border-radius: 6px;
+    appearance: none;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.recoverpassBtn:hover {
+    background-color: #1100ff;
+}
+
+.password-input-container {
+    position: relative;
+}
+.password-toggle-icon {
+    position: absolute;
+    right: 10px;
+    top: 54%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ccc;
+}
+
+@media (max-width: 480px) {
+    .resetpass {
+        padding: 10px;
+    }
+
+    .input-box-in-resetpass,
+    .VerifyBtn,
+    .recoverpassBtn {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

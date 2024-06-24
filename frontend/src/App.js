@@ -2,11 +2,12 @@ import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Landing from "./Landing";
-import ChildReg from "./LogInRegForm/ChildReg";
-import DoctorReg from "./LogInRegForm/DoctorReg";
-import LogIn from "./LogInRegForm/Login";
-import ParentReg from "./LogInRegForm/ParentReg";
-import TeacherReg from "./LogInRegForm/TeacherReg";
+import ChildReg from "./LogInSignUpComponent/ChildReg";
+import DoctorReg from "./LogInSignUpComponent/DoctorReg";
+import LogIn from "./LogInSignUpComponent/Login";
+import ParentReg from "./LogInSignUpComponent/ParentReg";
+import TeacherReg from "./LogInSignUpComponent/TeacherReg";
+import ResetPass from "./LogInSignUpComponent/ResetPass";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/signup/doctor" element={<DoctorReg />} />
         <Route path="/signup/teacher" element={<TeacherReg />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path='/reset-password' element={<ResetPass />} />
       </Routes>
     </Router>
   );
