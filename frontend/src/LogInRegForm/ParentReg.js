@@ -1,77 +1,85 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./Registration.css";
 
 const ParentReg = () => {
-  const navigate = useNavigate();
-  const handleParentRegForm = async (e) => {
-    e.preventDefault();
-    const parentData = {
-      P_ID: Math.floor(Math.random() * 1000),
-      NAME: document.getElementById("full-name").value,
-      DOB: document.getElementById("birth-date").value,
-      EMAIL: document.getElementById("email").value,
-      CONTACT_NO: document.getElementById("phone").value,
-      CITY: document.getElementById("city").value,
-      STREET: document.getElementById("street").value,
-      POSTAL_CODE: document.getElementById("postal-code").value,
-      PASSWORD: document.getElementById("password").value,
-      CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
-    };
-    console.log(parentData);
-    if (parentData.PASSWORD !== parentData.CONFIRM_PASSWORD) {
-      alert("Passwords do not match");
-      return;
-    }
-    const response = await fetch("http://localhost:5000/reg/parent", {
-      method: "POST",
-      body: JSON.stringify(parentData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    let data = await response.json();
-    console.log(data);
-    localStorage.setItem("parent", parentData.JSON.stringify(data));
-    navigate("/dashboard");
-  };
+	const navigate = useNavigate();
 
-  return (
-    <section className="container">
-      <header>Parent Registration Form</header>
-      <form className="form" onSubmit={handleParentRegForm}>
-        <div className="input-box">
-          <label>Full Name</label>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Enter Full Name"
-            id="full-name"
-            required
-          />
-        </div>
-        <div className="input-box">
-          <label>Email Address</label>
-          <input
-            type="text"
-            name="email"
-            id = "email"
-            placeholder="Enter Email Address"
-            required
-          />
-        </div>
-        <div className="column">
-          <div className="input-box">
-            <label>Birth Date</label>
-            <input
-              type="date"
-              name="birthDate"
-              id = "birth-date"
-              required
-            />
-          </div>
-        </div>
-        {/* <div className="gender-box">
+	const [showPassword, setShowPassword] = React.useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+	const toggleShowPassword = () => {setShowPassword(!showPassword);};
+	const toggleShowConfirmPassword = () => {setShowConfirmPassword(!showConfirmPassword);};
+
+	const handleParentRegForm = async (e) => {
+		e.preventDefault();
+		const parentData = {
+			P_ID: Math.floor(Math.random() * 1000),
+			NAME: document.getElementById("full-name").value,
+			DOB: document.getElementById("birth-date").value,
+			EMAIL: document.getElementById("email").value,
+			CONTACT_NO: document.getElementById("phone").value,
+			CITY: document.getElementById("city").value,
+			STREET: document.getElementById("street").value,
+			POSTAL_CODE: document.getElementById("postal-code").value,
+			PASSWORD: document.getElementById("password").value,
+			CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
+		};
+		console.log(parentData);
+		if (parentData.PASSWORD !== parentData.CONFIRM_PASSWORD) {
+			alert("Passwords do not match");
+			return;
+		}
+		const response = await fetch("http://localhost:5000/reg/parent", {
+			method: "POST",
+			body: JSON.stringify(parentData),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		let data = await response.json();
+		console.log(data);
+		localStorage.setItem("parent", parentData.JSON.stringify(data));
+		navigate("/dashboard");
+	};
+
+	return (
+		<section className="container">
+			<header>Parent Registration Form</header>
+			<form className="form" onSubmit={handleParentRegForm}>
+				<div className="input-box">
+					<label>Full Name</label>
+					<input
+						type="text"
+						name="fullName"
+						placeholder="Enter Full Name"
+						id="full-name"
+						required
+					/>
+				</div>
+				<div className="input-box">
+					<label>Email Address</label>
+					<input
+						type="text"
+						name="email"
+						id="email"
+						placeholder="Enter Email Address"
+						required
+					/>
+				</div>
+				<div className="column">
+					<div className="input-box">
+						<label>Birth Date</label>
+						<input
+							type="date"
+							name="birthDate"
+							id="birth-date"
+							required
+						/>
+					</div>
+				</div>
+				{/* <div className="gender-box">
           <h3>Gender</h3>
           <div className="gender-option">
             <div className="gender">
@@ -98,19 +106,19 @@ const ParentReg = () => {
             </div>
           </div>
         </div> */}
-        <div className="input-box">
-          <label>Phone Number</label>
-          <input
-            type="text"
-            name="phoneNumber"
-            placeholder="Enter Phone Number"
-            id = "phone"
-            required
-          />
-        </div>
-        <div className="input-box address">
-          <label>Address</label>
-          {/* <input
+				<div className="input-box">
+					<label>Phone Number</label>
+					<input
+						type="text"
+						name="phoneNumber"
+						placeholder="Enter Phone Number"
+						id="phone"
+						required
+					/>
+				</div>
+				<div className="input-box address">
+					<label>Address</label>
+					{/* <input
             type="text"
             name="streetAddress1"
             placeholder="Enter street address"
@@ -126,8 +134,8 @@ const ParentReg = () => {
             onChange={handleChange}
             required
           /> */}
-          <div className="column">
-            {/* <div className="input-box">
+					<div className="column">
+						{/* <div className="input-box">
               <label>Country</label>
               <select
                 name="country"
@@ -144,61 +152,73 @@ const ParentReg = () => {
                 <option>Malaysia</option>
               </select>
             </div> */}
-            <div className="input-box">
-              <label htmlFor="street">Street</label>
-              <input
-                type="text"
-                id="street"
-                placeholder="Enter your street"
-                required
-              />
-            </div>
-            <div className="input-box">
-              <label>City</label>
-              <input
-                type="text"
-                name="city"
-                placeholder="Enter your city"
-                id = "city"
-                required
-              />
-            </div>
-            <div className="input-box">
-              <label>Postal Code</label>
-              <input
-                type="number"
-                name="postalCode"
-                placeholder="Enter postal code"
-                id = "postal-code"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        <div className="input-box">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter password"
-            required
-          />
-        </div>
-        <div className="input-box">
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            id="confirm-password"
-            placeholder="Confirm password"
-            required
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-  );
+						<div className="input-box">
+							<label htmlFor="street">Street</label>
+							<input
+								type="text"
+								id="street"
+								placeholder="Enter your street"
+								required
+							/>
+						</div>
+						<div className="input-box">
+							<label>City</label>
+							<input
+								type="text"
+								name="city"
+								placeholder="Enter your city"
+								id="city"
+								required
+							/>
+						</div>
+						<div className="input-box">
+							<label>Postal Code</label>
+							<input
+								type="number"
+								name="postalCode"
+								placeholder="Enter postal code"
+								id="postal-code"
+								required
+							/>
+						</div>
+					</div>
+				</div>
+				<div className="input-box">
+					<label>Password</label>
+					<div className="password-container">
+						<input
+							type={showPassword ? "text" : "password"}
+							id="password"
+							placeholder="Enter password"
+							required
+						/>
+						<FontAwesomeIcon
+							icon={showPassword ? faEyeSlash : faEye}
+							onClick={toggleShowPassword}
+							className="password-icon"
+						/>
+					</div>
+				</div>
+				<div className="input-box">
+					<label>Confirm Password</label>
+					<div className="password-container">
+						<input
+							type={showConfirmPassword ? "text" : "password"}
+							id="confirm-password"
+							placeholder="Confirm password"
+							required
+						/>
+						<FontAwesomeIcon
+							icon={showConfirmPassword ? faEyeSlash : faEye}
+							onClick={toggleShowConfirmPassword}
+							className="password-icon"
+						/>
+					</div>
+				</div>
+				<button type="submit">Submit</button>
+			</form>
+		</section>
+	);
 };
 
 export default ParentReg;

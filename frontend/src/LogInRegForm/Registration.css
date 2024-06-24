@@ -5,16 +5,18 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-}
+} */
 
 body {
-    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: rgb(86, 153, 190);
-} */
+}
 
 .container {
     position: relative;
@@ -27,8 +29,8 @@ body {
 }
 
 .container header {
-    font-size: 1.5rem;
-    color: #333;
+    font-size: 1.8rem;
+    color: #062248;
     font-weight: 500;
     text-align: center;
 }
@@ -40,9 +42,11 @@ body {
 .form .input-box {
     width: 100%;
     margin-top: 20px;
+    /* border: 5px solid red; */
 }
 
 .input-box label {
+    font-size: 1.1rem;
     color: #333;
 }
 
@@ -55,7 +59,7 @@ body {
     font-size: 1rem;
     color: #707070;
     margin-top: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #031f4763;
     border-radius: 6px;
     padding: 0 15px;
     appearance: none;
@@ -66,12 +70,12 @@ body {
 
 .input-box input:focus,
 .select-box:focus {
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
 }
 
 .form .input-box input:hover,
 .form .select-box:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
 }
 
 .form .column {
@@ -79,51 +83,28 @@ body {
     column-gap: 15px;
 }
 
-.form .gender-box h3 {
-    margin-top: 20px;
-}
-
-.gender-box h3 {
-    color: #333;
-    font-size: 1rem;
-    font-weight: 400;
-    margin-bottom: 8px;
-}
-
-.form .gender-option,
-.form .gender {
-    display: flex;
-    align-items: center;
-    column-gap: 50px;
-    flex-wrap: wrap;
-}
-
-.form .gender {
-    column-gap: 5px;
-}
-
-.gender input {
-    accent-color: rgb(75, 125, 182);
-}
-
-.form .gender input,
-.form .gender label {
-    cursor: pointer;
-}
-
-.gender label {
-    color: #707070;
-}
-
-.address input,
-.address .select-box {
-    margin-top: 15px;
-}
 
 .select-box {
     /* background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><path fill="none" stroke="%23707070" stroke-width="1" d="M0 0l5 5 5-5"/></svg>') no-repeat right 15px center; */
     background-color: white;
     background-size: 10px 5px;
+}
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    padding-right: 30px;
+}
+
+.password-icon {
+    position: absolute;
+    opacity: 50%;
+    color: rgb(24, 23, 23);
+    right: 10px;
+    top: 55%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
 .form button {
@@ -136,20 +117,16 @@ body {
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
-    background: rgb(69, 112, 147);
+    background: rgba(69, 112, 147, 0.501);
 }
 
 .form button:hover {
-    background: rgb(32, 60, 90);
+    background: rgb(38, 73, 109);
 }
+
 
 @media screen and (max-width: 500px) {
     .form .column {
         flex-wrap: wrap;
-    }
-
-    .form .gender-option,
-    .form .gender {
-        row-gap: 15px;
     }
 }
