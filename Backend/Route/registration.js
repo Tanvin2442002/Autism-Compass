@@ -1,7 +1,7 @@
 const express = require("express");
 const { getConnection } = require("../DB/connection");
-
 const router = express.Router();
+const dotenv = require("dotenv");
 
 router.post("/child", async (req, res) => {
     const connection = await getConnection();
@@ -133,6 +133,41 @@ router.post("/teacher", async (req, res) => {
         .status(201)
         .send({ message: "Doctor registered successfully!", resultReg });
     console.log("Request processed");
+});
+
+router.post("/check-email", async (req, res) => {
+    const connection = await getConnection();
+    console.log("Received data:", req.body);
+    const result = await connection.execute(
+        `SELECT EMAIL FROM LOG_IN WHERE EMAIL = :EMAIL`,
+        {
+            EMAIL: req.body.EMAIL,
+        },
+        { autoCommit: true }
+    );
+    if (result.rows.length == 0) {
+        res.status(200).send({ valid: false });
+    } else {
+        res.status(200).send({ valid: true });
+    }
+    console.log("Request processed");
+
+});
+
+router.post("/update-password", async (req, res) => {
+    const connection = await getConnection();
+    console.log("Received data:", req.body);
+    const result = await connection.execute(
+        `UPDATE LOG_IN SET PASSWORD = :PASSWORD WHERE EMAIL = :EMAIL`,
+        {
+            EMAIL: req.body.EMAIL,
+            PASSWORD: req.body.PASSWORD,
+        },
+        { autoCommit: true }
+    );
+    res.status(200).send({ message: "Password updated successfully!" });
+    console.log("Request processed");
+
 });
 
 module.exports = router;

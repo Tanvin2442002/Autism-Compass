@@ -1,138 +1,228 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import './Login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import "./Registration.css";
 
-const ResetPass = () => {
-    const [email, setEmail] = useState('');
-    const [isEmailValid, setIsEmailValid] = useState(false);
-    const [showVerifyButton, setShowVerifyButton] = useState(false);
-    const [verificationSent, setVerificationSent] = useState(false);
-    const [verificationCode, setVerificationCode] = useState('');
-    const [isVerificationCodeValid, setIsVerificationCodeValid] = useState(false);
-    const [isVerificationCodeMatched, setIsVerificationCodeMatched] = useState(false);
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [isPasswordsMatched, setIsPasswordsMatched] = useState(false);
+const ChildReg = () => {
+    const navigate = useNavigate();
+
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const toggleShowPassword = () => { setShowPassword(!showPassword); };
+    const toggleShowConfirmPassword = () => { setShowConfirmPassword(!showConfirmPassword); };
 
-    const handleEmailChange = (event) => {
-        const inputEmail = event.target.value;
-        setEmail(inputEmail);
 
-        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail);
-        setIsEmailValid(isValid);
-        setShowVerifyButton(isValid && !verificationSent);
-    };
+    const handleChildRegForm = async (e) => {
+        e.preventDefault();
 
-    const handleVerifyClick = () => {
-        console.log('Verification code sent');
-        setVerificationSent(true);
-    };
-
-    const handleVerificationCodeChange = (event) => {
-        const code = event.target.value;
-        setVerificationCode(code);
-        const isValidCode = code.length === 6;
-        setIsVerificationCodeValid(isValidCode);
-        setIsVerificationCodeMatched(code === '123456'); // Replace with your actual verification logic
-    };
-
-    const handleNewPasswordChange = (event) => {
-        const password = event.target.value;
-        setNewPassword(password);
-        setIsPasswordsMatched(password && password === confirmPassword);
-    };
-
-    const handleConfirmPasswordChange = (event) => {
-        const password = event.target.value;
-        setConfirmPassword(password);
-        setIsPasswordsMatched(password && password === newPassword);
-    };
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const handleRecoverPassword = () => {
-        console.log('Recover password logic');
+        const childData = {
+            C_ID: Math.floor(Math.random() * 1000),
+            NAME: document.getElementById("full-name").value,
+            DOB: document.getElementById("birth-date").value,
+            EMAIL: document.getElementById("email").value,
+            CONTACT_NO: document.getElementById("phone").value,
+            P_EMAIL: document.getElementById("parent-email").value,
+            CITY: document.getElementById("city").value,
+            STREET: document.getElementById("street").value,
+            POSTAL_CODE: document.getElementById("postal-code").value,
+            PASSWORD: document.getElementById("password").value,
+            CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
+        };
+        if (childData.PASSWORD !== childData.CONFIRM_PASSWORD) {
+            alert("Passwords do not match");
+            return;
+        }
+        console.log(childData);
+        const response = await fetch('http://localhost:5000/reg/child', {
+            method: "POST",
+            body: JSON.stringify(childData),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        let data = await response.json();
+        console.log(data);
+        localStorage.setItem("child", JSON.stringify(data));
+        navigate('/dashboard');
     };
 
     return (
-        <div className="resetpass">
-            <h1>Recover Password</h1>
-            <form>
-                <label>Email</label>
-                <input
-                    type="email"
-                    id='email'
-                    placeholder="Enter your email"
-                    className={`input-box-in-resetpass ${email && !isEmailValid ? 'invalid' : (email && isEmailValid ? 'valid' : '')}`}
-                    value={email}
-                    onChange={handleEmailChange}
-                />
-                <button
-                    className={`VerifyBtn ${verificationSent ? 'sent' : ''}`}
-                    onClick={handleVerifyClick}
-                    disabled={!showVerifyButton || verificationSent}
-                >
-                    {verificationSent ? 'Verification code sent' : 'Send verification code'}
-                </button>
-                {showVerifyButton && verificationSent && (
-                    <>
-                        <label>Verification Code</label>
+        <section className="container">
+            <header>Child Registration Form</header>
+            <form onSubmit={handleChildRegForm} className="form">
+                <div className="input-box">
+                    <label htmlFor="full-name">Full Name</label>
+                    <input
+                        type="text"
+                        id="full-name"
+                        placeholder="Enter Full Name"
+                        required
+                    />
+                </div>
+                <div className="column">
+                    <div className="input-box">
+                        <label htmlFor="birth-date">Birth Date</label>
                         <input
-                            type="text"
-                            id='verificationCode'
-                            placeholder="Enter the verification Code"
-                            className={`input-box-in-resetpass ${verificationCode && !isVerificationCodeValid ? 'invalid' : (verificationCode && isVerificationCodeValid ? 'valid' : '')}`}
-                            value={verificationCode}
-                            onChange={handleVerificationCodeChange}
+                            type="date"
+                            id="birth-date"
+                            placeholder="Enter Birth Date"
+                            required
                         />
-                    </>
-                )}
-                {isVerificationCodeMatched && (
-                    <>
-                        <label>New Password</label>
-                        <div className="password-input-container">
+                    </div>
+                </div>
+                <div className="input-box">
+                    <label htmlFor="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter Email Address"
+                        required
+                    />
+                </div>
+                {/* <div className="gender-box">
+          <h3>Gender</h3>
+          <div className="gender-option">
+            <div className="gender">
+              <input
+                type="radio"
+                id="check-male"
+                name="gender"
+                defaultChecked
+              />
+              <label htmlFor="check-male">Male</label>
+            </div>
+            <div className="gender">
+              <input type="radio" id="check-female" name="gender" />
+              <label htmlFor="check-female">Female</label>
+            </div>
+          </div>
+        </div> */}
+                <div className="input-box">
+                    <label htmlFor="phone">Phone Number</label>
+                    <input
+                        type="text"
+                        id="phone"
+                        placeholder="Enter Phone Number"
+                        required
+                    />
+                </div>
+                <div className="input-box">
+                    <label htmlFor="parent-email">Parent's Email Address</label>
+                    <input
+                        type="email"
+                        id="parent-email"
+                        placeholder="Enter Your Parent's Email Address"
+                        required
+                    />
+                </div>
+                <div className="input-box address">
+                    <label htmlFor="address-line1">Address</label>
+                    {/* <input
+            type="text"
+            id="address-line1"
+            placeholder="Address line 1"
+            required
+          />
+          <input
+            type="text"
+            id="address-line2"
+            placeholder="Address line 2"
+            required
+          /> */}
+                    <div className="column">
+                        {/* <div className="input-box">
+              <label htmlFor="country">Country</label>
+              <select id="country" className="select-box">
+                <option hidden>Country</option>
+                <option>Bangladesh</option>
+                <option>India</option>
+                <option>America</option>
+                <option>Japan</option>
+                <option>Malaysia</option>
+              </select>
+            </div> */}
+                        <div className="input-box">
+                            <label htmlFor="street">Street</label>
                             <input
-                                type={showPassword ? 'text' : 'password'}
-                                id='Password'
-                                placeholder="Enter new Password"
-                                className={`input-box-in-resetpass ${newPassword && !isPasswordsMatched ? 'invalid' : (newPassword && isPasswordsMatched ? 'valid' : '')}`}
-                                value={newPassword}
-                                onChange={handleNewPasswordChange}
-                            />
-                            <FontAwesomeIcon
-                                icon={showPassword ? faEyeSlash : faEye}
-                                className="password-toggle-icon"
-                                onClick={togglePasswordVisibility}
+                                type="text"
+                                id="street"
+                                placeholder="Enter your street"
+                                required
                             />
                         </div>
-                        <label>Confirm New Password</label>
-                        <div className="password-input-container">
+                        <div className="input-box">
+                            <label htmlFor="city">City</label>
                             <input
-                                type={showPassword ? 'text' : 'password'}
-                                id='confirmPassword'
-                                placeholder="Enter Confirm New Password"
-                                className={`input-box-in-resetpass ${confirmPassword && !isPasswordsMatched ? 'invalid' : (confirmPassword && isPasswordsMatched ? 'valid' : '')}`}
-                                value={confirmPassword}
-                                onChange={handleConfirmPasswordChange}
-                            />
-                            <FontAwesomeIcon
-                                icon={showPassword ? faEyeSlash : faEye}
-                                className="password-toggle-icon"
-                                onClick={togglePasswordVisibility}
+                                type="text"
+                                id="city"
+                                placeholder="Enter your city"
+                                required
                             />
                         </div>
-                        {isPasswordsMatched && (
-                            <button className="recoverpassBtn" onClick={handleRecoverPassword}>Recover Password</button>
-                        )}
-                    </>
-                )}
+                        <div className="input-box">
+                            <label htmlFor="postal-code">Postal Code</label>
+                            <input
+                                type="number"
+                                id="postal-code"
+                                placeholder="Enter postal code"
+                                required
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="input-box">
+                    <label htmlFor="disability-type">Disability Type</label>
+                    <select id="disability-type" className="select-box">
+                        <option hidden>Select one-</option>
+                        <option>Social Communication Disorder (SCD)</option>
+                        <option>Expressive Language Disorder</option>
+                        <option>Pragmatic Language Impairment</option>
+                        <option>Intellectual Disability (ID)</option>
+                        <option>Attention-Deficit/Hyperactivity Disorder (ADHD)</option>
+                        <option>Sensory Processing Disorder (SPD)</option>
+                        <option>Dyspraxia (Developmental Coordination Disorder)</option>
+                        <option>Generalized Anxiety Disorder (GAD)</option>
+                        <option>Specific Learning Disorder (SLD)</option>
+                        <option>Nonverbal Learning Disability (NVLD)</option>
+                    </select>
+                </div>
+                <div className="input-box">
+                    <label>Password</label>
+                    <div className="password-container">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            id="password"
+                            placeholder="Enter password"
+                            required
+                        />
+                        <FontAwesomeIcon
+                            icon={showPassword ? faEyeSlash : faEye}
+                            onClick={toggleShowPassword}
+                            className="password-icon"
+                        />
+                    </div>
+                </div>
+                <div className="input-box">
+                    <label>Confirm Password</label>
+                    <div className="password-container">
+                        <input
+                            type={showConfirmPassword ? "text" : "password"}
+                            id="confirm-password"
+                            placeholder="Confirm password"
+                            required
+                        />
+                        <FontAwesomeIcon
+                            icon={showConfirmPassword ? faEyeSlash : faEye}
+                            onClick={toggleShowConfirmPassword}
+                            className="password-icon"
+                        />
+                    </div>
+                </div>
+                <button type="submit">Submit</button>
             </form>
-        </div>
+        </section>
     );
 };
 
-export default ResetPass;
+export default ChildReg;
