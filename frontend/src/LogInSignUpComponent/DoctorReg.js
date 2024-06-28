@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./Registration.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DoctorReg = () => {
     const navigate = useNavigate();
@@ -31,7 +33,17 @@ const DoctorReg = () => {
             CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
         };
         if (doctorData.PASSWORD !== doctorData.CONFIRM_PASSWORD) {
-            alert("Passwords do not match");
+            console.log("Passwords do not match");
+            toast.error("Passwords do not match", {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
         console.log(doctorData);
@@ -51,6 +63,7 @@ const DoctorReg = () => {
 
     return (
         <section className="container">
+            <ToastContainer />
             <header>Doctor Registration Form</header>
             <form onSubmit={handleDoctorRegForm} className="form">
                 <div className="input-box">

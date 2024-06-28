@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./Registration.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ParentReg = () => {
 	const navigate = useNavigate();
@@ -28,7 +30,17 @@ const ParentReg = () => {
 		};
 		console.log(parentData);
 		if (parentData.PASSWORD !== parentData.CONFIRM_PASSWORD) {
-			alert("Passwords do not match");
+			console.log("Passwords do not match");
+			toast.error("Passwords do not match!", {
+				position: "top-right",
+				autoClose: 2500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: false,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			});
 			return;
 		}
 		const response = await fetch("http://localhost:5000/reg/parent", {
@@ -46,6 +58,7 @@ const ParentReg = () => {
 
 	return (
 		<section className="container">
+			<ToastContainer />
 			<header>Parent Registration Form</header>
 			<form className="form" onSubmit={handleParentRegForm}>
 				<div className="input-box">
