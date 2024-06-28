@@ -1,7 +1,7 @@
 const express = require("express");
 const { getConnection } = require("../DB/connection");
 const router = express.Router();
-const dotenv = require("dotenv");
+//const dotenv = require("dotenv");
 
 router.post("/child", async (req, res) => {
     const connection = await getConnection();
