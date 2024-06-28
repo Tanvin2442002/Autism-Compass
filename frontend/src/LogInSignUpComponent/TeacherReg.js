@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./Registration.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const TeacherReg = () => {
     const navigate = useNavigate();
@@ -26,7 +28,17 @@ const TeacherReg = () => {
             CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
         };
         if (teacherData.PASSWORD !== teacherData.CONFIRM_PASSWORD) {
-            alert("Passwords do not match");
+            console.log("Passwords do not match");
+            toast.error("Passwords do not match!", {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
         console.log(teacherData);
@@ -45,6 +57,7 @@ const TeacherReg = () => {
 
     return (
         <section className="container">
+            <ToastContainer />
             <header>Teacher Registration Form</header>
             <form onSubmit={handleTeacherRegForm} className="form">
                 <div className="input-box">
