@@ -1,6 +1,10 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
+//import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import "./Login.css";
+
+//const clientId = '332857765250-ptdf9qj9t8pak1o8ucdvtvr6prsko7vc.apps.googleusercontent.com';
+
 
 const LogIn = () => {
     const [email, setEmail] = React.useState("");
@@ -36,6 +40,8 @@ const LogIn = () => {
             alert("Invalid credentials");
         }
     };
+
+   
 
     return (
         <div className="wrapper">
@@ -97,7 +103,9 @@ const LogIn = () => {
                     </p>
                 </div>
             </form>
-        </div>
+            
+            </div>
+       
     );
 };
 

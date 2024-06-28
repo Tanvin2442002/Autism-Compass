@@ -10,6 +10,7 @@ import TeacherReg from "./LogInSignUpComponent/TeacherReg";
 import ResetPass from "./LogInSignUpComponent/ResetPass";
 
 function App() {
+
   return (
     <Router>
       <Routes>
