@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-import "./Login.css";
 import 'react-toastify/dist/ReactToastify.css';
+import "./Login.css";
 
 const LogIn = () => {
     const [email, setEmail] = React.useState("");
@@ -11,29 +11,38 @@ const LogIn = () => {
     const [rememberMe, setRememberMe] = React.useState(false);
     const navigate = useNavigate();
 
-    React.useEffect(() => {
-        const savedRememberMe = JSON.parse(localStorage.getItem("rememberMe"));
-        if (savedRememberMe) {
-            setRememberMe(savedRememberMe);
-        }
-    }, []);
-
     const handleLogIn = async (e) => {
         e.preventDefault();
         const response = await fetch("http://localhost:5000/login", {
             method: "POST",
-            body: JSON.stringify({ email, password, type: userType }),
+            body: JSON.stringify({ email, password, type: userType.toUpperCase() }),
             headers: {
                 "Content-Type": "application/json",
             },
         });
-        console.log(rememberMe + "   REMEMBER ME");
-        let data = await response.json();
-        if (data.EMAIL) {
-            console.log(JSON.stringify(data));
+        // console.log(`Email: ${email}, Password: ${password}, Type: ${userType.toUpperCase()}`);
+        const data = await response.json();
+        // console.log(data);
+        let ID = "";
+        if (data.TYPE === "CHILD") {
+            ID = data.C_ID;
+        } else if (data.TYPE === "PARENT") {
+            ID = data.P_ID;
+        } else if (data.TYPE === "HEALTH_PROFESSIONAL") {
+            ID = data.H_ID;
+        } else if (data.TYPE === "TEACHER") {
+            ID = data.T_ID;
+        }
+        console.log('ID: ', ID);
+        let userData = {
+            ID: ID,
+            TYPE: data.TYPE,
+        };
+        if (data.TYPE) {
+            console.log(userData);
             // Redirect to the dashboard
             navigate("/dashboard");
-            localStorage.setItem(userType, JSON.stringify(data));
+            localStorage.setItem("USER", JSON.stringify(userData));
         } else {
             console.log("Invalid credentials");
             toast.error('Invalid credentials', {
@@ -88,7 +97,7 @@ const LogIn = () => {
                             <option value="child">Child</option>
                             <option value="parent">Parent</option>
                             <option value="teacher">Teacher</option>
-                            <option value="doctor">Doctor</option>
+                            <option value="Health_professional">Health_professional</option>
                         </select>
                         <i className="bx bxs-down-arrow"></i>
                     </div>

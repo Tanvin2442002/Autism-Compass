@@ -170,4 +170,30 @@ router.post("/update-password", async (req, res) => {
 
 });
 
+router.post("/user-info", async (req, res) => {
+    const connection = await getConnection();
+
+    const { TYPE, ID } = req.body;
+
+    const idColumn = `${TYPE[0]}_ID`;
+
+    const query = `
+            SELECT *
+            FROM ${TYPE}
+            WHERE ${idColumn} = :id
+        `;
+
+    const result = await connection.execute(query, { id: ID });
+
+    if (result.rows.length > 0) {
+        res.status(200).send(result.rows);
+    } else {
+        res.status(404).send({ message: "User not found" });
+    }
+    console.log(`Query result: ${JSON.stringify(result.rows)}`);
+    console.log("Request processed");
+    
+});
+
+
 module.exports = router;

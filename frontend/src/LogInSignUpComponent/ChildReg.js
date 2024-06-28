@@ -55,7 +55,7 @@ const ChildReg = () => {
         });
         let data = await response.json();
         console.log(data);
-        localStorage.setItem("child", JSON.stringify(data));
+        localStorage.setItem("child", childData.C_ID);
         navigate('/dashboard');
     };
 
