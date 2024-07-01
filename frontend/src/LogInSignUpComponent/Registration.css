@@ -7,7 +7,7 @@
     font-family: "Poppins", sans-serif;
 } */
 
-body {
+/* body {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -17,9 +17,10 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
-}
+} */
 
 .container {
+    margin-top: 250px;
     position: relative;
     width: 100%;
     background: #fff;
@@ -35,23 +36,23 @@ body {
     text-align: center;
 }
 
-.container .form {
+.container form {
     margin-top: 30px;
 }
 
-.form .input-box {
+form .input-box {
     width: 100%;
     margin-top: 20px;
     /* border: 5px solid red; */
 }
 
-.input-box label {
+.container form .input-box label {
     font-size: 1.1rem;
     color: #333;
 }
 
-.form .input-box input,
-.form .select-box {
+.container form .input-box input,
+.container form .select-box {
     position: relative;
     height: 50px;
     width: 100%;
@@ -77,34 +78,27 @@ body {
 }
 
 
-.input-box input:focus,
-.select-box:focus {
+.container form .input-box input:focus,
+.container form .select-box:focus {
     box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
 }
 
-.form .input-box input:hover,
-.form .select-box:hover {
+.container form .input-box input:hover,
+.container form .select-box:hover {
     box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
 }
 
-.form .column {
+.container form .column {
     display: flex;
     column-gap: 15px;
 }
 
 
-/* .select-box {
-    /* background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><path fill="none" stroke="%23707070" stroke-width="1" d="M0 0l5 5 5-5"/></svg>') no-repeat right 15px center;
-    background-color: white;
-    border: 5px solid red;
-    background-size: 10px 5px;
-} */
-
-.password-container {
+.container form .input-box .password-container {
     position: relative;
 }
 
-.password-container input {
+.container form .input-box .password-container input {
     padding-right: 30px;
 }
 
@@ -118,7 +112,7 @@ body {
     cursor: pointer;
 }
 
-.form button {
+.container form button {
     position: relative;
     height: 50px;
     width: 100%;
@@ -135,13 +129,13 @@ body {
     transition: box-shadow 0.3s ease;
 }
 
-.form button:hover {
+.container form button:hover {
     background: rgb(38, 73, 109);
 }
 
 
 @media screen and (max-width: 500px) {
-    .form .column {
+    form .column {
         flex-wrap: wrap;
     }
 }

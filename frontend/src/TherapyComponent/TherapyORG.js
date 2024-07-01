@@ -1,19 +1,14 @@
 import React from 'react';
 import './therapyORG.css';
 import 'boxicons/css/boxicons.min.css';
+import Navbar from '../Navbar';
+
 
 const TherapyOrganizations = () => {
     return (
         <div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
             <div className="wrapper2">
+            <Navbar />
                 <h1>Therapy Organizations</h1>
                 <div className="search-box">
                     <input type="text" placeholder="Search organizations..." required />

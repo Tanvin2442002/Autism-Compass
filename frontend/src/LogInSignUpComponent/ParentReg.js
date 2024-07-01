@@ -60,7 +60,7 @@ const ParentReg = () => {
 		<section className="container">
 			<ToastContainer />
 			<header>Parent Registration Form</header>
-			<form className="form" onSubmit={handleParentRegForm}>
+			<form  onSubmit={handleParentRegForm}>
 				<div className="input-box">
 					<label>Full Name</label>
 					<input

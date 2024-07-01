@@ -1,19 +1,13 @@
 import React from 'react';
 import './availableTherapy.css';
-// import 'boxicons/css/boxicons.min.css';
+import 'boxicons/css/boxicons.min.css';
+import Navbar from '../Navbar';
 
 const AvailableTherapies = () => {
     return (
-        <div className="container">
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
+        <div className="container1">
             <div className="wrapper">
+                <Navbar />
                 <h1>Available Therapies</h1>
                 <div className="search-box">
                     <input type="text" placeholder="Search therapies..." required />
