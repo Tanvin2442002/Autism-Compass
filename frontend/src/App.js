@@ -8,7 +8,7 @@ import LogIn from "./LogInSignUpComponent/Login";
 import ParentReg from "./LogInSignUpComponent/ParentReg";
 import TeacherReg from "./LogInSignUpComponent/TeacherReg";
 import ResetPass from "./LogInSignUpComponent/ResetPass";
-
+//import ProductDetails from "./productComponent/prodductDetails";
 function App() {
 
   return (
@@ -22,6 +22,7 @@ function App() {
         <Route path="/signup/teacher" element={<TeacherReg />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/reset-password' element={<ResetPass />} />
+        <Route path="/products/productdetails/:id" element={<ProductDetails />} /> 
       </Routes>
     </Router>
   );

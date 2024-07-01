@@ -2,17 +2,19 @@ const express = require("express");
 const cors = require("cors");
 const { getConnection } = require("./DB/connection");
 const { OAuth2Client } = require("google-auth-library");
+const routerProduct = require('./Route/productDetails');
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 const registrationRouter = require("./Route/registration");
 app.use("/reg", registrationRouter);
+app.use(routerProduct);
 
 
 const client = new OAuth2Client('120968135958-a9lj4l0q1n5s33qsu08pvvbevcrg4nsn.apps.googleusercontent.com');
 
-app.post("/login", async (req, res) => {
+app.post("/login", async (req, res) => {     //app.post("/login", async(req,res)=>{   }) // name age password
     const { email, password, type } = req.body;
     const connection = await getConnection();
     if (!connection) {
@@ -147,3 +149,4 @@ app.post("/childreg", async (req, res) => {
 app.listen(5000, () => {
     console.log("Server is running on port 5000...");
 });
+
