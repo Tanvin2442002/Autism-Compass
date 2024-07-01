@@ -5,6 +5,7 @@
 }
 
 body {
+    width: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -17,7 +18,7 @@ body {
 }
 
 .wrapper {
-    width: 420px;
+    /* width: 420px; */
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(9px);
@@ -246,6 +247,7 @@ form .input-box input::placeholder,
 .password-input-container {
     position: relative;
 }
+
 .password-toggle-icon {
     position: absolute;
     right: 10px;

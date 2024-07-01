@@ -8,6 +8,10 @@ import LogIn from "./LogInSignUpComponent/Login";
 import ParentReg from "./LogInSignUpComponent/ParentReg";
 import TeacherReg from "./LogInSignUpComponent/TeacherReg";
 import ResetPass from "./LogInSignUpComponent/ResetPass";
+import Profile from "./LogInSignUpComponent/Profile";
+import Therapy from "./TherapyComponent/Therapy";
+import TherapyDetails from "./TherapyComponent/TherapyDetails";
+import TherapyOrganizations from "./TherapyComponent/TherapyORG";
 
 function App() {
 
@@ -22,6 +26,10 @@ function App() {
         <Route path="/signup/teacher" element={<TeacherReg />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/reset-password' element={<ResetPass />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/therapy' element={<Therapy />} />
+        <Route path='/therapy/details' element={<TherapyDetails />} />
+        <Route path='/therapy/org' element={<TherapyOrganizations />} />
       </Routes>
     </Router>
   );
