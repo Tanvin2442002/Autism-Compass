@@ -59,7 +59,7 @@ const TeacherReg = () => {
         <section className="container">
             <ToastContainer />
             <header>Teacher Registration Form</header>
-            <form onSubmit={handleTeacherRegForm} className="form">
+            <form onSubmit={handleTeacherRegForm}>
                 <div className="input-box">
                     <label htmlFor="full-name">Full Name</label>
                     <input

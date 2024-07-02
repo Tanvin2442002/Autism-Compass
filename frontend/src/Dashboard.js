@@ -1,12 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+// import './Dashboard.css'; // Ensure to create and use this CSS file
+import Navbar from './Navbar';
+
 
 
 const Dashboard = () => {
     return (
-        <div>
-            <h1>This is Dashboard Page</h1>
-            <Link to="/profile">Go to Profile</Link>
+
+        <div className="dashboard">
+            <header className="upper">
+                <h1>AUTISM COMPASS</h1>
+            </header>
+            <Navbar />
         </div>
     );
 };

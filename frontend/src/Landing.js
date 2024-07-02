@@ -1,7 +1,5 @@
 import React from "react";
-//import { Link } from "react-router-dom";
 import { useNavigate as navigate, Link } from "react-router-dom";
-// import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import "./App.css";
 
 const clientId="120968135958-a9lj4l0q1n5s33qsu08pvvbevcrg4nsn.apps.googleusercontent.com";

@@ -11,9 +11,7 @@ app.use("/reg", registrationRouter);
 app.use(routerProduct);
 
 
-
-
-app.post("/login", async (req, res) => {     //app.post("/login", async(req,res)=>{   }) // name age password
+app.post("/login", async (req, res) => {     
     const { email, password, type } = req.body;
     const connection = await getConnection();
     if (!connection) {

@@ -1,0 +1,123 @@
+
+.container1 {
+   margin-top: 950px;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   background-color: #588197;
+}
+
+.wrapper {
+   width: 100%;
+   max-width: 1200px;
+   background: rgba(255, 255, 255, 0.2);
+   backdrop-filter: blur(5px);
+   color: #fffffff1;
+   border-radius: 12px;
+   text-align: center;
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper h1 {
+   font-size: 36px;
+}
+
+.search-box {
+   position: relative;
+   width: 100%;
+}
+
+.search-box input {
+   width: 100%;
+   height: 50px;
+   background: rgba(0, 0, 0, 0.3);
+   border: none;
+   outline: none;
+   border-radius: 25px;
+   font-size: 16px;
+   color: #fff;
+   padding: 0 20px;
+   transition: all 0.5s ease;
+}
+
+.search-box input::placeholder {
+   color: #ffffff;
+}
+
+.search-box input:hover {
+   background: rgba(0, 0, 0, 0.4);
+   box-shadow: 0 0 20px rgba(239, 234, 234, 0.8);
+}
+
+.search-box input:focus {
+   background: rgba(0, 0, 0, 0.5);
+   box-shadow: 0 0 25px rgba(239, 234, 234, 0.9);
+}
+
+.search-box i {
+   position: absolute;
+   right: 20px;
+   top: 50%;
+   transform: translateY(-50%);
+   font-size: 20px;
+   pointer-events: none;
+   color: #fff;
+   transition: color 0.3s ease;
+}
+
+.search-box i:hover {
+   color: #007bff;
+}
+
+.therapy-list {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.therapy-item {
+   background: #f8f8f8;
+   border: 2px solid rgba(255, 255, 255, 0.2);
+   border-radius: 12px;
+   padding: 20px;
+   text-align: left;
+   color: #333;
+   transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.therapy-item:hover {
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+   transform: translateY(-5px);
+}
+
+.therapy-item h2 {
+   font-size: 24px;
+   margin-bottom: 10px;
+}
+
+.therapy-item p {
+   font-size: 16px;
+   /* margin-bottom: 20px; */
+}
+
+.therapy-item .btn {
+   width: auto;
+   height: 40px;
+   background: #39729de2;
+   border: none;
+   outline: none;
+   border-radius: 20px;
+   box-shadow: 0 0 10px rgb(255, 254, 254);
+   cursor: pointer;
+   font-size: 16px;
+   color: #ffffff;
+   font-weight: 600;
+   transition: all 0.5s ease;
+   padding: 0 20px;
+}
+
+.therapy-item .btn:hover {
+   background: #305c7d;
+   box-shadow: 0 0 20px rgba(157, 207, 229, 0.8);
+}

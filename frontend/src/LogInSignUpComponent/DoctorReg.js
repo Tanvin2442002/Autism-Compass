@@ -65,7 +65,7 @@ const DoctorReg = () => {
         <section className="container">
             <ToastContainer />
             <header>Doctor Registration Form</header>
-            <form onSubmit={handleDoctorRegForm} className="form">
+            <form onSubmit={handleDoctorRegForm}>
                 <div className="input-box">
                     <label>Full Name</label>
                     <input

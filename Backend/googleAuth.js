@@ -1,3 +1,5 @@
+
+
 // app.post("/auth/google", async (req, res) => {
 //     const { token } = req.body;
 
@@ -26,7 +28,7 @@
 //                  VALUES (:EMAIL, :PASSWORD, 'google')`,
 //                 {
 //                     EMAIL: email,
-//                     PASSWORD: "", 
+//                     PASSWORD: "",
 //                 },
 //                 { autoCommit: true }
 //             );
