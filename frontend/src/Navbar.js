@@ -33,16 +33,16 @@ const Navbar = () => {
                     <Link to="/Products">Products</Link>
                     {isProductsHovered && (
                         <div className="products-dropdown">
-                            <Link to="/Products">Products</Link>
-                            <Link to="/Carts">Cart</Link>
-                            <Link to="/Delivery">Delivery</Link>
+                            <Link to="/products">Products</Link>
+                            <Link to="/carts">Cart</Link>
+                            <Link to="/delivery">Delivery</Link>
                         </div>
                     )}
                 </div>
-                <Link to="/Courses">Courses</Link>
-                <Link to="/Disorder">Disorder</Link>
-                <Link to="/Parent">Parent</Link>
-                <Link to="/Profile">Profile</Link>
+                <Link to="/courses">Courses</Link>
+                <Link to="/disorder">Disorder</Link>
+                <Link to="/parent">Parent</Link>
+                <Link to="/profile">Profile</Link>
             </div>
         </nav>
     );

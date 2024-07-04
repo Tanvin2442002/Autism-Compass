@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
-import Navbar from '../Navbar';
 
 const Profile = () => {
    const [profileData, setProfileData] = useState({
+      TYPE: '',
+      ID: '',
       NAME: '',
       DOB: '',
       AGE: '',
@@ -20,22 +21,15 @@ const Profile = () => {
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
    const [gender, setGender] = useState('boy');
-   const [userType, setUserType] = useState('');
+   const userData = JSON.parse(localStorage.getItem('USER'));
 
    useEffect(() => {
       const fetchData = async () => {
-         const userDataString = localStorage.getItem('USER');
-         if (!userDataString) {
+         if (!userData) {
             setError('USER not found in local storage');
             setLoading(false);
             return;
          }
-
-
-         const userData = JSON.parse(userDataString);
-         setUserType(userData.TYPE); // Set the user type
-         console.log('User Data:', userData.TYPE);
-         console.log(userType);
          try {
             const response = await fetch('http://localhost:5000/reg/user-info', {
                method: 'POST',
@@ -51,6 +45,8 @@ const Profile = () => {
 
             const data = await response.json();
             setProfileData({
+               TYPE: userData.TYPE,
+               ID: userData.ID,
                NAME: data[0].NAME,
                DOB: data[0].DOB,
                AGE: data[0].AGE,
@@ -92,47 +88,71 @@ const Profile = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+      let newUserData = {
+         ID: userData.ID,
+         TYPE: userData.TYPE,
+         NAME: profileData.NAME,
+         EMAIL: profileData.EMAIL,
+         CONTACT_NO: profileData.CONTACT_NO
+      };
+      if (userData.TYPE === 'CHILD') {
+         // add new thing with newUserData
+         newUserData = {
+            ...newUserData,
+            P_EMAIL: profileData.P_EMAIL,
+            STREET: profileData.STREET,
+            CITY: profileData.CITY,
+            POSTAL_CODE: profileData.POSTAL_CODE
+         };
+      }
+      else if (userData.TYPE === 'PARENT') {
+         newUserData = {
+            ...newUserData,
+            STREET: profileData.STREET,
+            CITY: profileData.CITY,
+            POSTAL_CODE: profileData.POSTAL_CODE
+         };
+      }
+      else if (userData.TYPE === 'TEACHER') {
+         newUserData = {
+            ...newUserData,
+            INSTITUTION: profileData.INSTITUTION
+         };
+      }
+      else if (userData.TYPE === 'HEALTH_PROFESSIONAL') {
+         newUserData = {
+            ...newUserData,
+            DEGREE: profileData.DEGREE,
+            FIELD_OF_SPEC: profileData.FIELD_OF_SPEC,
+            STREET: profileData.STREET,
+            CITY: profileData.CITY,
+            POSTAL_CODE: profileData.POSTAL_CODE
+         };
+      }
 
-      // const newUserDate = {
-      //    NAME: profileData.NAME,
-      //    DOB: profileData.DOB,
-      //    AGE: profileData.AGE,
-      //    CONTACT_NO: profileData.CONTACT_NO,
-      //    EMAIL: profileData.EMAIL,
-      //    P_EMAIL: profileData.P_EMAIL,
-      //    STREET: profileData.STREET,
-      //    CITY: profileData.CITY,
-      //    POSTAL_CODE: profileData.POSTAL_CODE,
-      //    DEGREE: profileData.DEGREE,
-      //    FIELD_OF_SPEC: profileData.FIELD_OF_SPEC,
-      //    INSTITUTION: profileData.INSTITUTION,
-      // };
-      console.log('Profile Data:', profileData);
-      const response = await fetch('http://localhost:5000/reg/update-child-info', {
+      console.log('New Data:', newUserData);
+      const response = await fetch('http://localhost:5000/reg/update-user-info', {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json'
          },
-         body: JSON.stringify(profileData)
+         body: JSON.stringify(newUserData)
       });
-      // console.log('New User Data:', newUserData);
 
       await fetchGenderData();
-      // Add code here to handle form submission, e.g., send data to the server
    };
 
    const handleDelete = () => {
       console.log('Delete Account');
-      // Add code here to handle account deletion
    };
 
    if (loading) return <p>Loading...</p>;
    if (error) return <p>Error: {error}</p>;
 
-// child user              : name, contact number, email, parent email, street, city, postal code, age
-// parent user             : name, contact number, email, street, city, postal code, age
-// teacher user            : name, contact number, email, institution
-// healthprofessional user : name, contact number, email, degree, field of specilaization, street, city, postal code
+   // child user              : name, contact number, email, parent email, street, city, postal code, age
+   // parent user             : name, contact number, email, street, city, postal code, age
+   // teacher user            : name, contact number, email, institution
+   // healthprofessional user : name, contact number, email, degree, field of specilaization, street, city, postal code
 
    return (
       <div className="user-profile">
@@ -174,7 +194,7 @@ const Profile = () => {
                   onChange={handleChange}
                />
             </div>
-            {userType === 'CHILD' && (
+            {userData.TYPE === 'CHILD' && (
                <div className="profile-form-group">
                   <label>Parent Email ID</label>
                   <input
@@ -186,7 +206,7 @@ const Profile = () => {
                   />
                </div>
             )}
-            {(userType === 'CHILD' || userType === 'PARENT' || userType === 'HEALH_PROFESSIONAL') && (
+            {(userData.TYPE === 'CHILD' || userData.TYPE === 'PARENT' || userData.TYPE === 'HEALTH_PROFESSIONAL') && (
                <>
                   <div className="profile-form-group">
                      <label>Street</label>
@@ -220,7 +240,7 @@ const Profile = () => {
                   </div>
                </>
             )}
-            {userType === 'TEACHER' && (
+            {userData.TYPE === 'TEACHER' && (
                <div className="profile-form-group">
                   <label>Institution</label>
                   <input
@@ -232,7 +252,7 @@ const Profile = () => {
                   />
                </div>
             )}
-            {userType === 'HEALH_PROFESSIONAL' && (
+            {userData.TYPE === 'HEALTH_PROFESSIONAL' && (
                <>
                   <div className="profile-form-group">
                      <label>Degree</label>
@@ -256,17 +276,21 @@ const Profile = () => {
                   </div>
                </>
             )}
-            <div className="profile-form-group">
-               <label>Age</label>
-               <input
-                  type="text"
-                  name="AGE"
-                  disabled
-                  placeholder="Enter your age"
-                  value={profileData.AGE}
-                  onChange={handleChange}
-               />
-            </div>
+            {userData.TYPE === 'CHILD' || userData.TYPE == 'PARENT' && (
+               <>
+                  <div className="profile-form-group">
+                     <label>Age</label>
+                     <input
+                        type="text"
+                        name="AGE"
+                        disabled
+                        placeholder="Enter your age"
+                        value={profileData.AGE}
+                        onChange={handleChange}
+                     />
+                  </div>
+               </>
+            )}
             <div className="button-group">
                <button type="button" className="delete-account-btn" onClick={handleDelete}>Delete Account</button>
                <button type="submit" className="save-profile-btn">Save Profile</button>

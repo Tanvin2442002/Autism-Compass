@@ -192,23 +192,55 @@ router.post("/user-info", async (req, res) => {
     }
     console.log(`Query result: ${JSON.stringify(result.rows)}`);
     console.log("Request processed");
-    
+
 });
 
-router.post("/update-child-info", async (req, res) => {
+router.post("/update-user-info", async (req, res) => {
     const connection = await getConnection();
-    const { TYPE, ID, NAME, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE} = req.body;
-    const idColumn = `${TYPE[0]}_ID`;
+    const type = req.body.TYPE;
     console.log("Received data:", req.body);
-    const query = `
-            UPDATE ${TYPE}
-            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, POSTAL_CODE = :POSTAL_CODE
-            WHERE ${idColumn} = :id
+    if (type === "CHILD") {
+        const { ID, NAME, CONTACT_NO, EMAIL, P_EMAIL, CITY, STREET, POSTAL_CODE } = req.body;
+        const query = `
+            UPDATE CHILD
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, P_EMAIL = :P_EMAIL, CITY = :CITY, STREET = :STREET, POSTAL_CODE = :POSTAL_CODE
+            WHERE C_ID = :ID
         `;
-    const result = await connection.execute(query, { id: ID, NAME, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE: Number(POSTAL_CODE) },{ autoCommit: true });
-    res.status(200).send({ message: "User info updated successfully!" });
+        const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, P_EMAIL, CITY, STREET, POSTAL_CODE: Number(POSTAL_CODE) }, { autoCommit: true });
+        res.status(200).send({ message: "User info updated successfully!" });
+    }
+    else if(type === "PARENT") {
+        const { ID, NAME, DOB, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE } = req.body;
+        const query = `
+            UPDATE PARENT
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, POSTAL_CODE = :POSTAL_CODE
+            WHERE P_ID = :ID
+        `;
+        const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE: Number(POSTAL_CODE) }, { autoCommit: true });
+        res.status(200).send({ message: "User info updated successfully!" });
+    }
+    else if(type === "TEACHER") {
+        const { ID, NAME, CONTACT_NO, EMAIL, INSTITUTION } = req.body;
+        const query = `
+            UPDATE TEACHER
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, INSTITUTION = :INSTITUTION
+            WHERE T_ID = :ID
+        `;
+        const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, INSTITUTION }, { autoCommit: true });
+        res.status(200).send({ message: "User info updated successfully!" });
+    }
+    else if(type === "HEALTH_PROFESSIONAL") {
+        const { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC, CITY, STREET, POSTAL_CODE } = req.body;
+        const query = `
+            UPDATE HEALTH_PROFESSIONAL
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, DEGREE = :DEGREE, FIELD_OF_SPEC = :FIELD_OF_SPEC, CITY = :CITY, STREET = :STREET, POSTAL_CODE = :POSTAL_CODE
+            WHERE H_ID = :ID
+        `;
+        const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC, CITY, STREET, POSTAL_CODE: Number(POSTAL_CODE) }, { autoCommit: true });
+        res.status(200).send({ message: "User info updated successfully!" });
+    }
     console.log("Request processed");
-    
+
 });
 
 module.exports = router;
