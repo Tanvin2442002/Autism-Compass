@@ -56,8 +56,8 @@ const DoctorReg = () => {
         });
         // let data = await response.json();
         // console.log(data);
-        localStorage.setItem("doctor", JSON.stringify(doctorData));
-        navigate("/dashboard");
+        // localStorage.setItem("doctor", JSON.stringify(doctorData));
+        navigate("/login");
     };
 
 

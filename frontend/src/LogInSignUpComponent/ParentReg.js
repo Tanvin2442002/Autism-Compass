@@ -50,10 +50,10 @@ const ParentReg = () => {
 				"Content-Type": "application/json",
 			},
 		});
-		let data = await response.json();
+		let data = await response.json(); 
 		console.log(data);
-		localStorage.setItem("parent", parentData.JSON.stringify(data));
-		navigate("/dashboard");
+		// localStorage.setItem("parent", parentData.JSON.stringify(data));
+		navigate("/login");
 	};
 
 	return (

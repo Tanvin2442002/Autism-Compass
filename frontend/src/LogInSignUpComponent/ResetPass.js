@@ -68,21 +68,21 @@ const ResetPass = () => {
          verification_code: code,
       };
 
-      // emailjs.send(
-      //    'service_7d9d58s', // Your EmailJS service ID
-      //    'template_zm1cokb', // Your EmailJS template ID
-      //    templateParams,
-      //    '_8DUdddBxrHErN9_P' // Your EmailJS public key
-      // )
-      //    .then(
-      //       () => {
-      //          console.log('Verification code sent successfully!');
-      //          setVerificationSent(true);
-      //       },
-      //       (error) => {
-      //          console.log('Failed to send verification code...', error.text);
-      //       }
-      //    );
+      emailjs.send(
+         'service_7d9d58s', // Your EmailJS service ID
+         'template_zm1cokb', // Your EmailJS template ID
+         templateParams,
+         '_8DUdddBxrHErN9_P' // Your EmailJS public key
+      )
+         .then(
+            () => {
+               console.log('Verification code sent successfully!');
+               setVerificationSent(true);
+            },
+            (error) => {
+               console.log('Failed to send verification code...', error.text);
+            }
+         );
       toast.success('Verification code sent!', {
          position: "top-right",
          autoClose: 2500,

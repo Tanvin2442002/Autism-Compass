@@ -20,6 +20,7 @@ const Profile = () => {
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
    const [gender, setGender] = useState('boy');
+   const [userType, setUserType] = useState('');
 
    useEffect(() => {
       const fetchData = async () => {
@@ -30,8 +31,11 @@ const Profile = () => {
             return;
          }
 
-         const userData = JSON.parse(userDataString);
 
+         const userData = JSON.parse(userDataString);
+         setUserType(userData.TYPE); // Set the user type
+         console.log('User Data:', userData.TYPE);
+         console.log(userType);
          try {
             const response = await fetch('http://localhost:5000/reg/user-info', {
                method: 'POST',
@@ -88,9 +92,32 @@ const Profile = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+
+      // const newUserDate = {
+      //    NAME: profileData.NAME,
+      //    DOB: profileData.DOB,
+      //    AGE: profileData.AGE,
+      //    CONTACT_NO: profileData.CONTACT_NO,
+      //    EMAIL: profileData.EMAIL,
+      //    P_EMAIL: profileData.P_EMAIL,
+      //    STREET: profileData.STREET,
+      //    CITY: profileData.CITY,
+      //    POSTAL_CODE: profileData.POSTAL_CODE,
+      //    DEGREE: profileData.DEGREE,
+      //    FIELD_OF_SPEC: profileData.FIELD_OF_SPEC,
+      //    INSTITUTION: profileData.INSTITUTION,
+      // };
       console.log('Profile Data:', profileData);
-      // Call fetchGenderData function
-      // await fetchGenderData();
+      const response = await fetch('http://localhost:5000/reg/update-child-info', {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         body: JSON.stringify(profileData)
+      });
+      // console.log('New User Data:', newUserData);
+
+      await fetchGenderData();
       // Add code here to handle form submission, e.g., send data to the server
    };
 
@@ -101,6 +128,11 @@ const Profile = () => {
 
    if (loading) return <p>Loading...</p>;
    if (error) return <p>Error: {error}</p>;
+
+// child user              : name, contact number, email, parent email, street, city, postal code, age
+// parent user             : name, contact number, email, street, city, postal code, age
+// teacher user            : name, contact number, email, institution
+// healthprofessional user : name, contact number, email, degree, field of specilaization, street, city, postal code
 
    return (
       <div className="user-profile">
@@ -142,81 +174,94 @@ const Profile = () => {
                   onChange={handleChange}
                />
             </div>
-            <div className="profile-form-group">
-               <label>Parent Email ID</label>
-               <input
-                  type="email"
-                  name="P_EMAIL"
-                  disabled
-                  value={profileData.P_EMAIL}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className="profile-form-group">
-               <label>Street</label>
-               <input
-                  type="text"
-                  name="STREET"
-                  placeholder="Enter street"
-                  value={profileData.STREET}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className="profile-form-group">
-               <label>City</label>
-               <input
-                  type="text"
-                  name="CITY"
-                  placeholder="Enter city"
-                  value={profileData.CITY}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className="profile-form-group">
-               <label>Postal Code</label>
-               <input
-                  type="number"
-                  name="POSTAL_CODE"
-                  placeholder="Enter postal code"
-                  value={profileData.POSTAL_CODE}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className="profile-form-group">
-               <label>Institution</label>
-               <input
-                  type="text"
-                  name="INSTITUTION"
-                  placeholder="Institution"
-                  value={profileData.INSTITUTION}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className="profile-form-group">
-               <label>Degree</label>
-               <input
-                  type="text"
-                  name="DEGREE"
-                  placeholder="Degree"
-                  value={profileData.DEGREE}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className="profile-form-group">
-               <label>Field of Specialization</label>
-               <input
-                  type="text"
-                  name="FIELD_OF_SPEC"
-                  placeholder="Field of specialization"
-                  value={profileData.FIELD_OF_SPEC}
-                  onChange={handleChange}
-               />
-            </div>
+            {userType === 'CHILD' && (
+               <div className="profile-form-group">
+                  <label>Parent Email ID</label>
+                  <input
+                     type="email"
+                     name="P_EMAIL"
+                     disabled
+                     value={profileData.P_EMAIL}
+                     onChange={handleChange}
+                  />
+               </div>
+            )}
+            {(userType === 'CHILD' || userType === 'PARENT' || userType === 'HEALH_PROFESSIONAL') && (
+               <>
+                  <div className="profile-form-group">
+                     <label>Street</label>
+                     <input
+                        type="text"
+                        name="STREET"
+                        placeholder="Enter street"
+                        value={profileData.STREET}
+                        onChange={handleChange}
+                     />
+                  </div>
+                  <div className="profile-form-group">
+                     <label>City</label>
+                     <input
+                        type="text"
+                        name="CITY"
+                        placeholder="Enter city"
+                        value={profileData.CITY}
+                        onChange={handleChange}
+                     />
+                  </div>
+                  <div className="profile-form-group">
+                     <label>Postal Code</label>
+                     <input
+                        type="number"
+                        name="POSTAL_CODE"
+                        placeholder="Enter postal code"
+                        value={profileData.POSTAL_CODE}
+                        onChange={handleChange}
+                     />
+                  </div>
+               </>
+            )}
+            {userType === 'TEACHER' && (
+               <div className="profile-form-group">
+                  <label>Institution</label>
+                  <input
+                     type="text"
+                     name="INSTITUTION"
+                     placeholder="Institution"
+                     value={profileData.INSTITUTION}
+                     onChange={handleChange}
+                  />
+               </div>
+            )}
+            {userType === 'HEALH_PROFESSIONAL' && (
+               <>
+                  <div className="profile-form-group">
+                     <label>Degree</label>
+                     <input
+                        type="text"
+                        name="DEGREE"
+                        placeholder="Degree"
+                        value={profileData.DEGREE}
+                        onChange={handleChange}
+                     />
+                  </div>
+                  <div className="profile-form-group">
+                     <label>Field of Specialization</label>
+                     <input
+                        type="text"
+                        name="FIELD_OF_SPEC"
+                        placeholder="Field of specialization"
+                        value={profileData.FIELD_OF_SPEC}
+                        onChange={handleChange}
+                     />
+                  </div>
+               </>
+            )}
             <div className="profile-form-group">
                <label>Age</label>
                <input
                   type="text"
                   name="AGE"
+                  disabled
                   placeholder="Enter your age"
                   value={profileData.AGE}
                   onChange={handleChange}

@@ -25,7 +25,7 @@ router.post("/child", async (req, res) => {
     );
     const resultLog = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-             VALUES (:EMAIL, :PASSWORD, 'child')`,
+             VALUES (:EMAIL, :PASSWORD, 'CHILD')`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
@@ -58,7 +58,7 @@ router.post("/parent", async (req, res) => {
     );
     const resultLog = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-                 VALUES (:EMAIL, :PASSWORD, 'parent')`,
+                 VALUES (:EMAIL, :PASSWORD, 'PARENT')`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
@@ -92,7 +92,7 @@ router.post("/doctor", async (req, res) => {
     );
     const resultLog = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-                 VALUES (:EMAIL, :PASSWORD, 'doctor')`,
+                 VALUES (:EMAIL, :PASSWORD, 'HEALTH_PROFESSIONAL')`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
@@ -122,7 +122,7 @@ router.post("/teacher", async (req, res) => {
     );
     const resultLog = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-                 VALUES (:EMAIL, :PASSWORD, 'doctor')`,
+                 VALUES (:EMAIL, :PASSWORD, 'TEACHER')`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
@@ -195,5 +195,20 @@ router.post("/user-info", async (req, res) => {
     
 });
 
+router.post("/update-child-info", async (req, res) => {
+    const connection = await getConnection();
+    const { TYPE, ID, NAME, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE} = req.body;
+    const idColumn = `${TYPE[0]}_ID`;
+    console.log("Received data:", req.body);
+    const query = `
+            UPDATE ${TYPE}
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, POSTAL_CODE = :POSTAL_CODE
+            WHERE ${idColumn} = :id
+        `;
+    const result = await connection.execute(query, { id: ID, NAME, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE: Number(POSTAL_CODE) },{ autoCommit: true });
+    res.status(200).send({ message: "User info updated successfully!" });
+    console.log("Request processed");
+    
+});
 
 module.exports = router;

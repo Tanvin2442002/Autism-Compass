@@ -10,6 +10,7 @@ body {
   font-family: "Poppins", sans-serif;
   /* border: 5px solid red; */
   background: rgb(86, 153, 190);
+  /* background-image: url(./img/bg.jpg) */
 }
 
 .landingPage {

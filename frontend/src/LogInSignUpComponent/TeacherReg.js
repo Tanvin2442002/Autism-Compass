@@ -51,8 +51,8 @@ const TeacherReg = () => {
         });
         let data = await response.json();
         console.log(data);
-        localStorage.setItem("teacher", JSON.stringify(teacherData));
-        navigate("/dashboard");
+        // localStorage.setItem("teacher", JSON.stringify(teacherData));
+        navigate("/login");
     };
 
     return (

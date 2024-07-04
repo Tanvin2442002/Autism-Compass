@@ -6,8 +6,8 @@ let connection;
 async function initializeConnection() {
   try {
     connection = await oracle.getConnection({
-      user: "dbms",
-      password: "dbms",
+      user: "pencil",
+      password: "pencil",
       connectString: "localhost:1521/orclpdb",
     });
     console.log("Database connected successfully.");
