@@ -9,7 +9,8 @@ body {
   align-items: center;
   font-family: "Poppins", sans-serif;
   /* border: 5px solid red; */
-  background: rgb(86, 153, 190);
+  /* background: rgb(86, 153, 190); */
+  background-color: #676cd9;
   /* background-image: url(./img/bg.jpg) */
 }
 

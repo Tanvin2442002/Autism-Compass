@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
+import Navbar from '../Navbar.js';
 
 const Profile = () => {
    const [profileData, setProfileData] = useState({
@@ -155,147 +156,165 @@ const Profile = () => {
    // healthprofessional user : name, contact number, email, degree, field of specilaization, street, city, postal code
 
    return (
-      <div className="user-profile">
-         <div className="avatar">
-            <img src={`https://avatar.iran.liara.run/public/${gender}?username=${profileData.NAME}`} alt='Avatar' />
-         </div>
-         <div className="profile-info">
-            <h1>{profileData.NAME}</h1>
-         </div>
-         <form className="profile-form" onSubmit={handleSubmit}>
-            <div className="profile-form-group">
-               <label>Name</label>
-               <input
-                  type="text"
-                  name="NAME"
-                  placeholder="Enter your Name"
-                  value={profileData.NAME}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className="profile-form-group">
-               <label>Email Address</label>
-               <input
-                  type="text"
-                  name="EMAIL"
-                  placeholder="Email Address"
-                  disabled
-                  value={profileData.EMAIL}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className="profile-form-group">
-               <label>Contact Number</label>
-               <input
-                  type="text"
-                  name="CONTACT_NO"
-                  placeholder="Enter contact number"
-                  value={profileData.CONTACT_NO}
-                  onChange={handleChange}
-               />
-            </div>
-            {userData.TYPE === 'CHILD' && (
-               <div className="profile-form-group">
-                  <label>Parent Email ID</label>
-                  <input
-                     type="email"
-                     name="P_EMAIL"
-                     disabled
-                     value={profileData.P_EMAIL}
-                     onChange={handleChange}
-                  />
+      <div className='profile'>
+         <>
+            <Navbar />
+            <ul class="circles">
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+            </ul>
+            <div className="user-profile">
+
+               <div className="avatar">
+                  <img src={`https://avatar.iran.liara.run/public/${gender}?username=${profileData.NAME}`} alt='Avatar' />
                </div>
-            )}
-            {(userData.TYPE === 'CHILD' || userData.TYPE === 'PARENT' || userData.TYPE === 'HEALTH_PROFESSIONAL') && (
-               <>
-                  <div className="profile-form-group">
-                     <label>Street</label>
-                     <input
-                        type="text"
-                        name="STREET"
-                        placeholder="Enter street"
-                        value={profileData.STREET}
-                        onChange={handleChange}
-                     />
-                  </div>
-                  <div className="profile-form-group">
-                     <label>City</label>
-                     <input
-                        type="text"
-                        name="CITY"
-                        placeholder="Enter city"
-                        value={profileData.CITY}
-                        onChange={handleChange}
-                     />
-                  </div>
-                  <div className="profile-form-group">
-                     <label>Postal Code</label>
-                     <input
-                        type="number"
-                        name="POSTAL_CODE"
-                        placeholder="Enter postal code"
-                        value={profileData.POSTAL_CODE}
-                        onChange={handleChange}
-                     />
-                  </div>
-               </>
-            )}
-            {userData.TYPE === 'TEACHER' && (
-               <div className="profile-form-group">
-                  <label>Institution</label>
-                  <input
-                     type="text"
-                     name="INSTITUTION"
-                     placeholder="Institution"
-                     value={profileData.INSTITUTION}
-                     onChange={handleChange}
-                  />
+               <div className="profile-info">
+                  <h1>{profileData.NAME}</h1>
                </div>
-            )}
-            {userData.TYPE === 'HEALTH_PROFESSIONAL' && (
-               <>
+               <form className="profile-form" onSubmit={handleSubmit}>
                   <div className="profile-form-group">
-                     <label>Degree</label>
+                     <label>Name</label>
                      <input
                         type="text"
-                        name="DEGREE"
-                        placeholder="Degree"
-                        value={profileData.DEGREE}
+                        name="NAME"
+                        placeholder="Enter your Name"
+                        value={profileData.NAME}
                         onChange={handleChange}
                      />
                   </div>
                   <div className="profile-form-group">
-                     <label>Field of Specialization</label>
+                     <label>Email Address</label>
                      <input
                         type="text"
-                        name="FIELD_OF_SPEC"
-                        placeholder="Field of specialization"
-                        value={profileData.FIELD_OF_SPEC}
-                        onChange={handleChange}
-                     />
-                  </div>
-               </>
-            )}
-            {userData.TYPE === 'CHILD' || userData.TYPE == 'PARENT' && (
-               <>
-                  <div className="profile-form-group">
-                     <label>Age</label>
-                     <input
-                        type="text"
-                        name="AGE"
+                        name="EMAIL"
+                        placeholder="Email Address"
                         disabled
-                        placeholder="Enter your age"
-                        value={profileData.AGE}
+                        value={profileData.EMAIL}
                         onChange={handleChange}
                      />
                   </div>
-               </>
-            )}
-            <div className="button-group">
-               <button type="button" className="delete-account-btn" onClick={handleDelete}>Delete Account</button>
-               <button type="submit" className="save-profile-btn">Save Profile</button>
+                  <div className="profile-form-group">
+                     <label>Contact Number</label>
+                     <input
+                        type="text"
+                        name="CONTACT_NO"
+                        placeholder="Enter contact number"
+                        value={profileData.CONTACT_NO}
+                        onChange={handleChange}
+                     />
+                  </div>
+                  {userData.TYPE === 'CHILD' && (
+                     <div className="profile-form-group">
+                        <label>Parent Email ID</label>
+                        <input
+                           type="email"
+                           name="P_EMAIL"
+                           disabled
+                           value={profileData.P_EMAIL}
+                           onChange={handleChange}
+                        />
+                     </div>
+                  )}
+                  {(userData.TYPE === 'CHILD' || userData.TYPE === 'PARENT' || userData.TYPE === 'HEALTH_PROFESSIONAL') && (
+                     <>
+                        <div className="profile-form-group">
+                           <label>Street</label>
+                           <input
+                              type="text"
+                              name="STREET"
+                              placeholder="Enter street"
+                              value={profileData.STREET}
+                              onChange={handleChange}
+                           />
+                        </div>
+                        <div className="profile-form-group">
+                           <label>City</label>
+                           <input
+                              type="text"
+                              name="CITY"
+                              placeholder="Enter city"
+                              value={profileData.CITY}
+                              onChange={handleChange}
+                           />
+                        </div>
+                        <div className="profile-form-group">
+                           <label>Postal Code</label>
+                           <input
+                              type="number"
+                              name="POSTAL_CODE"
+                              placeholder="Enter postal code"
+                              value={profileData.POSTAL_CODE}
+                              onChange={handleChange}
+                           />
+                        </div>
+                     </>
+                  )}
+                  {userData.TYPE === 'TEACHER' && (
+                     <div className="profile-form-group">
+                        <label>Institution</label>
+                        <input
+                           type="text"
+                           name="INSTITUTION"
+                           placeholder="Institution"
+                           value={profileData.INSTITUTION}
+                           onChange={handleChange}
+                        />
+                     </div>
+                  )}
+                  {userData.TYPE === 'HEALTH_PROFESSIONAL' && (
+                     <>
+                        <div className="profile-form-group">
+                           <label>Degree</label>
+                           <input
+                              type="text"
+                              name="DEGREE"
+                              placeholder="Degree"
+                              value={profileData.DEGREE}
+                              onChange={handleChange}
+                           />
+                        </div>
+                        <div className="profile-form-group">
+                           <label>Field of Specialization</label>
+                           <input
+                              type="text"
+                              name="FIELD_OF_SPEC"
+                              placeholder="Field of specialization"
+                              value={profileData.FIELD_OF_SPEC}
+                              onChange={handleChange}
+                           />
+                        </div>
+                     </>
+                  )}
+                  {userData.TYPE === 'CHILD' || userData.TYPE == 'PARENT' && (
+                     <>
+                        <div className="profile-form-group">
+                           <label>Age</label>
+                           <input
+                              type="text"
+                              name="AGE"
+                              disabled
+                              placeholder="Enter your age"
+                              value={profileData.AGE}
+                              onChange={handleChange}
+                           />
+                        </div>
+                     </>
+                  )}
+                  <div className="button-group">
+                     <button type="button" className="delete-account-btn" onClick={handleDelete}>Delete Account</button>
+                     <button type="submit" className="save-profile-btn">Save Profile</button>
+                  </div>
+               </form>
             </div>
-         </form>
+         </>
       </div>
    );
 };
