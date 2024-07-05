@@ -1,0 +1,655 @@
+/* MergedStyles.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Body styles for login page */
+body.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('../img/bg.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Body styles for registration page */
+body.registration-body-unique,
+body.parent-registration-body-unique,
+body.doctor-registration-body-unique,
+body.teacher-registration-body-unique {
+  min-height: 100vh;     
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgb(96, 133, 168) !important;
+  margin: 0;    
+  padding: 40px;
+  padding-top: 50px; /* Adjust the padding at the top */
+  padding-bottom: 50px; /* Adjust the padding at the bottom */
+  overflow-y: auto;
+}
+
+
+/* Login Styles */
+.login-wrapper-unique {
+  width: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(9px);
+  color: #fff;
+  border-radius: 12px;
+  padding: 30px 40px;
+}
+
+.login-wrapper-unique h1 {
+  font-size: 36px;
+  text-align: center;
+}
+
+.login-input-box-unique {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.login-input-box-unique input,
+.login-input-box-unique select {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(247, 238, 238, 0.2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 0 45px 0 20px;
+  transition: all 0.5s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.login-input-box-unique input::placeholder,
+.login-input-box-unique select option {
+  color: #ffffff;
+}
+
+.login-input-box-unique select {
+  color: #fff;
+  padding-right: 20px;
+}
+
+.login-input-box-unique select option {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+.login-input-box-unique input:hover,
+.login-input-box-unique input:focus,
+.login-input-box-unique select:hover,
+.login-input-box-unique select:focus {
+  border-color: #ffffff;
+  box-shadow: 0 0 20px rgba(239, 234, 234, 0.8);
+}
+
+.login-input-box-unique i {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  pointer-events: none;
+  color: #fff;
+}
+
+.login-remember-forgot-unique {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: -15px 0 15px;
+}
+
+.login-remember-forgot-unique label input {
+  accent-color: #fff;
+  margin-right: 3px;
+}
+
+.login-remember-forgot-unique a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.login-remember-forgot-unique a:hover {
+  text-decoration: underline;
+}
+
+.login-btn-unique {
+  width: 100%;
+  height: 45px;
+  background: #39729de2;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgb(255, 254, 254);
+  cursor: pointer;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 600;
+  transition: all 0.5s ease;
+}
+
+.login-btn-unique:hover {
+  background: #305c7d;
+  box-shadow: 0 0 20px rgba(157, 207, 229, 0.8);
+}
+
+.login-register-link-unique {
+  font-size: 14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
+}
+
+.login-register-link-unique p a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-register-link-unique p a:hover {
+  text-decoration: underline;
+}
+
+/* Registration Styles */
+.registration-container-unique {
+  margin-top: 450px;
+  position: relative;
+  width: 120%;
+  max-width: 700px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.registration-container-unique header {
+  font-size: 1.8rem;
+  color: #102a4e;
+  font-weight: 500;
+  text-align: center;
+}
+
+.registration-form-unique {
+  margin-top: 30px;
+}
+
+.registration-input-box-unique {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.registration-input-box-unique label {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.registration-input-box-unique input,
+.registration-select-box-unique {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #000000;
+  margin-top: 8px;
+  border: 1px solid #031f4763;
+  border-radius: 6px;
+  padding: 0 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.registration-input-box-unique input::placeholder,
+.registration-input-box-unique .date-input,
+.registration-input-box-unique .select-box option {
+  color: #000000;
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.registration-input-box-unique input:focus,
+.registration-select-box-unique:focus {
+  box-shadow: 0 0 10px rgba(37, 77, 121, 0.422);
+}
+
+.registration-input-box-unique input:hover,
+.registration-select-box-unique:hover {
+  box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
+}
+
+.registration-column-unique {
+  display: flex;
+  column-gap: 15px;
+}
+
+.registration-address-unique .registration-input-box-unique input,
+.registration-address-unique .registration-select-box-unique {
+  margin-top: 15px;
+}
+
+.registration-password-container-unique {
+  position: relative;
+}
+
+.registration-password-container-unique input {
+  padding-right: 30px;
+}
+
+.registration-password-icon-unique {
+  position: absolute;
+  opacity: 50%;
+  color: rgb(24, 23, 23);
+  right: 10px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.registration-form-unique button {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-top: 8px;
+  background: #39729de2;
+  border: 1px solid #3b547863;
+  border-radius: 6px;
+  padding: 0 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.registration-form-unique button:hover {
+  background: rgb(23, 60, 97);
+}
+
+/* Parent Registration Styles */
+.parent-registration-container-unique {
+  margin-top: 240px;
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.parent-registration-container-unique header {
+  font-size: 1.8rem;
+  color: #102a4e;
+  font-weight: 500;
+  text-align: center;
+}
+
+.parent-registration-form-unique {
+  margin-top: 30px;
+}
+
+.parent-registration-input-box-unique {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.parent-registration-input-box-unique label {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.parent-registration-input-box-unique input,
+.parent-registration-select-box-unique {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #000000;
+  margin-top: 8px;
+  border: 1px solid #031f4763;
+  border-radius: 6px;
+  padding: 0 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.parent-registration-input-box-unique input::placeholder,
+.parent-registration-input-box-unique .date-input,
+.parent-registration-input-box-unique .select-box option {
+  color: #000000;
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.parent-registration-input-box-unique input:focus,
+.parent-registration-select-box-unique:focus {
+  box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
+}
+
+.parent-registration-input-box-unique input:hover,
+.parent-registration-select-box-unique:hover {
+  box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
+}
+
+.parent-registration-column-unique {
+  display: flex;
+  column-gap: 15px;
+}
+
+.parent-registration-address-unique .parent-registration-input-box-unique input,
+.parent-registration-address-unique .parent-registration-select-box-unique {
+  margin-top: 15px;
+}
+
+.parent-registration-password-container-unique {
+  position: relative;
+}
+
+.parent-registration-password-container-unique input {
+  padding-right: 30px;
+}
+
+.parent-registration-password-icon-unique {
+  position: absolute;
+  opacity: 50%;
+  color: rgb(24, 23, 23);
+  right: 10px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.parent-registration-form-unique button {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-top: 8px;
+  background: #39729de2;
+  border: 1px solid #3b547863;
+  border-radius: 6px;
+  padding: 0 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.parent-registration-form-unique button:hover {
+  background: rgb(23, 60, 97);
+}
+
+/* Doctor Registration Styles */
+.doctor-registration-container-unique {
+  margin-top: 350px;
+  position: relative;
+  width: 120%;
+  max-width: 700px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-registration-container-unique header {
+  font-size: 1.8rem;
+  color: #102a4e;
+  font-weight: 500;
+  text-align: center;
+}
+
+.doctor-registration-form-unique {
+  margin-top: 30px;
+}
+
+.doctor-registration-input-box-unique {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.doctor-registration-input-box-unique label {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.doctor-registration-input-box-unique input,
+.doctor-registration-select-box-unique {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #000000;
+  margin-top: 8px;
+  border: 1px solid #031f4763;
+  border-radius: 6px;
+  padding: 0 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.doctor-registration-input-box-unique input::placeholder,
+.doctor-registration-input-box-unique .date-input,
+.doctor-registration-input-box-unique .select-box option {
+  color: #000000;
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.doctor-registration-input-box-unique input:focus,
+.doctor-registration-select-box-unique:focus {
+  box-shadow: 0 0 10px rgba(37, 77, 121, 0.422);
+}
+
+.doctor-registration-input-box-unique input:hover,
+.doctor-registration-select-box-unique:hover {
+  box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
+}
+
+.doctor-registration-column-unique {
+  display: flex;
+  column-gap: 15px;
+}
+
+.doctor-registration-address-unique .doctor-registration-input-box-unique input,
+.doctor-registration-address-unique .doctor-registration-select-box-unique {
+  margin-top: 15px;
+}
+
+.doctor-registration-password-container-unique {
+  position: relative;
+}
+
+.doctor-registration-password-container-unique input {
+  padding-right: 30px;
+}
+
+.doctor-registration-password-icon-unique {
+  position: absolute;
+  opacity: 50%;
+  color: rgb(24, 23, 23);
+  right: 10px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.doctor-registration-form-unique button {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-top: 8px;
+  background: #39729de2;
+  border: 1px solid #3b547863;
+  border-radius: 6px;
+  padding: 0 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.doctor-registration-form-unique button:hover {
+  background: rgb(23, 60, 97);
+}
+
+/* Teacher Registration Styles */
+.teacher-registration-container-unique {
+  margin-top: 95px;
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.teacher-registration-container-unique header {
+  font-size: 1.8rem;
+  color: #102a4e;
+  font-weight: 500;
+  text-align: center;
+}
+
+.teacher-registration-form-unique {
+  margin-top: 30px;
+}
+
+.teacher-registration-input-box-unique {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.teacher-registration-input-box-unique label {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.teacher-registration-input-box-unique input,
+.teacher-registration-select-box-unique {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #000000;
+  margin-top: 8px;
+  border: 1px solid #031f4763;
+  border-radius: 6px;
+  padding: 0 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.teacher-registration-input-box-unique input::placeholder,
+.teacher-registration-input-box-unique .date-input,
+.teacher-registration-input-box-unique .select-box option {
+  color: #000000;
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.teacher-registration-input-box-unique input:focus,
+.teacher-registration-select-box-unique:focus {
+  box-shadow: 0 0 10px rgba(37, 77, 121, 0.422);
+}
+
+.teacher-registration-input-box-unique input:hover,
+.teacher-registration-select-box-unique:hover {
+  box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
+}
+
+.teacher-registration-column-unique {
+  display: flex;
+  column-gap: 15px;
+}
+
+.teacher-registration-address-unique .teacher-registration-input-box-unique input,
+.teacher-registration-address-unique .teacher-registration-select-box-unique {
+  margin-top: 15px;
+}
+
+.teacher-registration-password-container-unique {
+  position: relative;
+}
+
+.teacher-registration-password-container-unique input {
+  padding-right: 30px;
+}
+
+.teacher-registration-password-icon-unique {
+  position: absolute;
+  opacity: 50%;
+  color: rgb(24, 23, 23);
+  right: 10px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.teacher-registration-form-unique button {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-top: 8px;
+  background: #39729de2;
+  border: 1px solid #3b547863;
+  border-radius: 6px;
+  padding: 0 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.teacher-registration-form-unique button:hover {
+  background: rgb(23, 60, 97);
+}
+
+@media screen and (max-width: 500px) {
+  .registration-column-unique {
+    flex-wrap: wrap;
+  }
+}
