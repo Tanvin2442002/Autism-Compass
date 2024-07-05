@@ -5,9 +5,9 @@ import Navbar from '../Navbar';
 
 const TherapyDetails = () => {
     return (
-        <div>
-            <div className="twrapper">
-                <Navbar />
+        <div className="therapy-details">
+            <Navbar />
+            <div className="therapy-details-content">
                 <h1>Therapy Details</h1>
                 <div className="search-box">
                     <input type="text" placeholder="Search therapies..." required />
@@ -42,7 +42,7 @@ const TherapyDetails = () => {
                         </div>
                     </div>
                 </div>
-                <button className="btn">Back</button>
+                {/* <button className="btn">Back</button> */}
             </div>
         </div>
     );

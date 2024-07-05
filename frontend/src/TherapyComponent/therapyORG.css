@@ -1,7 +1,18 @@
+.therapy-org {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: auto;
+    background: url(../img/bg.jpg);
+}
 
-.wrapper2 {
-    margin-top: 600px;
-    width: calc(100% - 40px);
+.therapy-org .therapy-org-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    width: 85%;
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(5px);
@@ -18,14 +29,14 @@
     to { opacity: 1; }
 }
 
-.wrapper2 h1 {
+.therapy-org-content h1 {
     font-size: 36px;
     margin-bottom: 20px;
 }
 
 .search-box {
     position: relative;
-    width: 100%;
+    width: 80%;
     margin-bottom: 30px;
 }
 
@@ -73,7 +84,7 @@
 
 .details {
     width: 100%;
-    text-align: left;
+    text-align: center;
 }
 
 .details h2 {
@@ -87,7 +98,6 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    gap: 20px; /* Added gap for better spacing */
 }
 
 .org-box {
@@ -96,14 +106,14 @@
     border: none;
     outline: none;
     border-radius: 20px;
-    padding: 20px 20px;
+    padding: 5px 5px;
     width: 300px; /* Adjusted width for better visibility */
     height: auto; /* Fixed height to ensure uniformity */
     text-align: center; /* Center-align text */
     color: #333;
     transition: all 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
+    /* margin: 20px 0; */
     display: flex; /* Added to center content vertically */
     flex-direction: column; /* Added to center content vertically */
     justify-content: center; /* Added to center content vertically */
@@ -122,14 +132,13 @@
 }
 
 .org-box h3 {
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     font-size: 24px; /* Adjusted font size */
     font-weight: bold; /* Made text bold */
     color: #000;
 }
 
 .org-box p {
-    margin-bottom: 10px;
     font-size: 18px; /* Adjusted font size */
     font-weight: normal; /* Normal weight for details */
     text-align: center; /* Center-align text */

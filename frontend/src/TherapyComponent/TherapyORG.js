@@ -6,9 +6,9 @@ import Navbar from '../Navbar';
 
 const TherapyOrganizations = () => {
     return (
-        <div>
-            <div className="wrapper2">
+        <div className='therapy-org'>
             <Navbar />
+            <div className="therapy-org-content">
                 <h1>Therapy Organizations</h1>
                 <div className="search-box">
                     <input type="text" placeholder="Search organizations..." required />
