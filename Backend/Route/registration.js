@@ -6,10 +6,9 @@ const router = express.Router();
 router.post("/child", async (req, res) => {
     const connection = await getConnection();
     console.log("Received data:", req.body);
-    // Insert statement with autoCommit option
     const resultReg = await connection.execute(
         `INSERT INTO CHILD (C_ID, NAME, DOB, CONTACT_NO, EMAIL, P_EMAIL, CITY, STREET, POSTAL_CODE)
-             VALUES (:C_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, :EMAIL, :P_EMAIL, :CITY, :STREET, :POSTAL_CODE)`,
+            VALUES (:C_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, :EMAIL, :P_EMAIL, :CITY, :STREET, :POSTAL_CODE)`,
         {
             C_ID: req.body.C_ID,
             NAME: req.body.NAME,
@@ -25,10 +24,27 @@ router.post("/child", async (req, res) => {
     );
     const resultLog = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-             VALUES (:EMAIL, :PASSWORD, 'CHILD')`,
+            VALUES (:EMAIL, :PASSWORD, 'CHILD')`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
+        },
+        { autoCommit: true }
+    );
+    // FIND D0_ID
+    const resultDisability = await connection.execute(
+        `SELECT D0_ID FROM DISORDER WHERE TYPE = :TYPE`,
+        {
+            TYPE: req.body.DISORDER_TYPE,
+        },
+        { autoCommit: true }
+    );
+    const resultDisorder = await connection.execute(
+        `INSERT INTO CHILD_HAS_DISORDER (C_ID, D0_ID)
+            VALUES (:C_ID, :D0_ID)`,
+        {
+            C_ID: req.body.C_ID,
+            D0_ID: resultDisability.rows[0].D0_ID,
         },
         { autoCommit: true }
     );
