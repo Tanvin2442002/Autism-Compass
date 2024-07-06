@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Therapy.css';
 import 'boxicons/css/boxicons.min.css';
 import Navbar from '../Navbar';
@@ -7,6 +8,7 @@ const AvailableTherapies = () => {
     const [therapies, setTherapies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTherapies = async () => {
@@ -46,6 +48,10 @@ const AvailableTherapies = () => {
         }
     };
 
+    const handleEventClick = (therapyId) => {
+        navigate(`/therapy/detail?type=${therapyId}`);
+    };
+
     return (
         <div className="availableTherapy">
             <Navbar />
@@ -66,7 +72,7 @@ const AvailableTherapies = () => {
                         <div key={therapy.TH_ID} className='therapy-item'>
                             <h2>{therapy.THERAPY_TYPE}</h2>
                             <p>{therapy.THERAPY_DESCRIPTION}</p>
-                            <button className="btn">View Details</button>
+                            <button className="btn" onClick={() => handleEventClick(therapy.TH_ID)}>View Details</button>
                         </div>
                     ))}
                 </div>
