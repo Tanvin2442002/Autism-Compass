@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import product_card from "../productCardAll";
-import "./mainContent.css";
-import "./Button.css";
+import './temp.css';
 
-const MainContent = () => {
+const Testproductlist = () => {
     const [productCards, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -28,35 +26,31 @@ const MainContent = () => {
         fetchProduct();
     }, []);
 
-    console.log(product_card);
-
-    const listItems = productCards.map((item) =>
-        <div className="card" key={item.P_ID}>
-            <div className="card-img">
-                <img src={item.SRC} alt={item.NAME}/>
-            </div>
-            <div className="card_header">
-                <h2>{item.NAME}</h2>
-                <p>{item.DESCRIPTION}</p>
-                <p className="price"> {item.PRICE}<span> BDT</span></p>
-                <button className="button-57" role="button">
-                    <span className="text">Buy Now</span>
-                    <span>Add To Cart</span>
-                </button>
-            </div>
-        </div>
-    );
-
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
     if (!productCards.length) return <div>No products found</div>;
+    console.log(productCards);
 
     return (
-        <div className="main_content">
-            <h3>Autism Products</h3>
-            {listItems}
+        <div className="container">
+            {productCards.map((item) => (
+                <div key={item.P_ID} className="card">
+                    <div className="imgBx">
+                        <img
+                            src={item.SRC}
+                            alt={item.NAME}
+                        />
+                    </div>
+                    <div className="contentBx">
+                        <h2>{item.NAME}</h2>
+                        <p>{item.DESCRIPTION}</p>
+                        <p>Quantity: {item.QUANTITY}</p>
+                        <a href="#">Buy Now</a>
+                    </div>
+                </div>
+            ))}
         </div>
     );
-}
+};
 
-export default MainContent;
+export default Testproductlist;
