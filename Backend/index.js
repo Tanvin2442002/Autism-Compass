@@ -9,6 +9,7 @@ app.use(express.json());
 const registrationRouter = require("./Route/registration");
 app.use("/reg", registrationRouter);
 app.use(routerProduct);
+app.use("/child", require("./Route/childThings"));
 
 
 app.post("/login", async (req, res) => {     
@@ -36,19 +37,6 @@ app.post("/login", async (req, res) => {
     console.log("Request processed");
 });
 
-// app.post("/info", async (req, res) => {
-//     const email = req.body.email;
-//     const connection = await getConnection();
-//     console.log(`Email: ${email}`);
-//     let result = await connection.execute(
-//         `SELECT *
-//            FROM CHILD
-//            WHERE EMAIL = :email`,
-//         { email }
-//     );
-//     res.send(result.rows);
-//     console.log(`Query result: ${JSON.stringify(result.rows)}`);
-// });
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000...");
