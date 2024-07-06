@@ -1,0 +1,68 @@
+.slider-container {
+    /* margin-top: 0px; */
+    width: 80%;
+    margin: auto;
+       
+}
+
+h1{
+    text-align: center;
+    margin-top: 90px;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: whitesmoke;
+}
+.cardslick {
+    padding: 10px;
+    width: 250px; /* Fixed width for the card */
+    height: 350px; /* Fixed height for the card */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.174); /* Adjust as necessary */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some shadow for better visuals */
+    border-radius: 8px; /* Rounded corners */
+}
+
+.cardslick-img {
+    width: 100%;
+    height: 45%; /* Set the image container to take up 70% of the card height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.cardslick-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardslick-content {
+    width: 100%;
+    height: 55%; /* Set the content container to take up 30% of the card height */
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+
+.slick-dots {
+    bottom: -30px;
+}
+
+.slick-dots li button:before {
+    color: #000;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: #000;
+}
+
+.slick-slide > div {
+    margin: 0 10px;
+}

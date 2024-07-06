@@ -9,7 +9,7 @@ routerProduct.get('/products/:id', async (req, res) => {
         connection = await getConnection();
 
         const result = await connection.execute(
-            `SELECT * FROM product WHERE id = :id`, { id: req.params.id }
+            `SELECT * FROM product WHERE P_Id = :id`, { id: req.params.id }
         );
 
         if (result.rows.length === 0) {

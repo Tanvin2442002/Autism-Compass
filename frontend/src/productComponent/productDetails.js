@@ -44,18 +44,17 @@ const ProductDetails = () => {
             <div className="product-image">
                 <img 
                     src={product.SRC || "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg"} 
-                    alt={product.TITLE} 
+                    alt={product.NAME} 
                 />
             </div>
             <div className="product-info">
-                <h1>{product.TITLE}</h1>
+                <h1>{product.NAME}</h1>
                 <div className="product-meta">
                     <span>Price: ${product.PRICE}</span>
                     <span>Total: ${totalPrice}</span>
                 </div>
                 <div className="product-description">
                     <p>{product.DESCRIPTION}</p>
-                    <p>{product.CONTENT}</p>
                 </div>
                 <div className="quantity-selector">
                     <label htmlFor="quantity">Quantity:</label>
@@ -68,7 +67,7 @@ const ProductDetails = () => {
                         onChange={(e) => setQuantity(parseInt(e.target.value))}
                     />
                 </div>
-                <button className="cart-button" onClick={() => addCart(product.ID)}>
+                <button className="cart-button" onClick={() => addCart(product.P_ID)}>
                     Add to cart
                 </button>
             </div>
