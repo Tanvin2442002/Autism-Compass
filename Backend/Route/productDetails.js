@@ -26,4 +26,27 @@ routerProduct.get('/products/:id', async (req, res) => {
     } 
 });
 
+routerProduct.get('/products', async (req, res) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        const result = await connection.execute(
+            `SELECT * FROM product `
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        
+       
+        res.json(result.rows);
+
+    } catch (err) {
+        console.error('Database query error:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    } 
+});
+
 module.exports = routerProduct;

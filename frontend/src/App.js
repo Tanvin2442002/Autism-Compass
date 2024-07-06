@@ -13,6 +13,7 @@ import Profile from "./LogInSignUpComponent/Profile";
 import Therapy from "./TherapyComponent/Therapy";
 import TherapyDetails from "./TherapyComponent/TherapyDetails";
 import TherapyOrganizations from "./TherapyComponent/TherapyORG";
+import ProductList from "./productComponent/ProductList/productList";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
         <Route path='/therapy' element={<Therapy />} />
         <Route path='/therapy/details' element={<TherapyDetails />} />
         <Route path='/therapy/org' element={<TherapyOrganizations />} />
+        <Route path='/products' element={<ProductList />}/>
       </Routes>
     </Router>
   );

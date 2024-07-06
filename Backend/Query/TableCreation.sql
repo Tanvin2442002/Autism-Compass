@@ -160,3 +160,18 @@ CREATE TABLE PRODUCT (
 );
 INSERT INTO PRODUCT (ID, TITLE, SRC, DESCRIPTION, CONTENT, PRICE, COUNT)
 VALUES ('1', 'Product 1', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'Quick example text to build on the card title.', 'Detailed content for Product 1.', 23.00, 10);
+INSERT INTO PRODUCT (id, src, title, price, description, content)
+VALUES (2, 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg', 'Product 2', 200, 'This is a description', 'This is the content');
+
+INSERT INTO PRODUCT (id, src, title, price, description, content)
+VALUES (3, 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg', 'Product 3', 300, 'This is a description', 'This is the content');
+
+INSERT INTO PRODUCT (id, src, title, price, description, content)
+VALUES (4, 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg', 'Product 4', 400, 'This is a description', 'This is the content');
+
+INSERT INTO PRODUCT (id, src, title, price, description, content)
+VALUES (5, 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg', 'Product 5', 500, 'This is a description', 'This is the content');
+
+INSERT INTO PRODUCT (id, src, title, price, description, content)
+VALUES (6, 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg', 'Product 6', 600, 'This is a description', 'This is the content');
+commit;
