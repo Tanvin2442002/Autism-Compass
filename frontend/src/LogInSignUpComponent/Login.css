@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 
 .login{
@@ -148,7 +148,7 @@ form .input-box input::placeholder,
     text-decoration: underline;
 }
 
-/*----------------- reset password------------- */
+----------------- reset password-------------
 
 .resetpass {
     margin: 0 auto;
@@ -187,9 +187,8 @@ form .input-box input::placeholder,
 .input-box-in-resetpass:focus,
 .input-box-in-resetpass:hover {
     border-color: #007bff;
-    /* Change border color on focus/hover */
     box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
-}
+} 
 
 .input-box-in-resetpass.invalid {
     border-color: rgba(255, 0, 0, 0.63);
@@ -198,7 +197,6 @@ form .input-box input::placeholder,
 
 .input-box-in-resetpass.valid {
     border-color: #2B831A;
-    /* Green border color for valid input */
 }
 
 .VerifyBtn {
@@ -218,7 +216,6 @@ form .input-box input::placeholder,
 
 .VerifyBtn.sent {
     background-color: #2B831A;
-    /* Green background color for sent verification button */
 }
 
 .VerifyBtn:hover {
@@ -268,4 +265,4 @@ form .input-box input::placeholder,
         padding: 8px;
         font-size: 14px;
     }
-}
+}  */

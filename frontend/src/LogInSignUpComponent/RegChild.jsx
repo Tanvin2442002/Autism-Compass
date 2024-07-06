@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./MergedStyles.css";
+// import "./Registration.css";
 
 const ChildReg = () => {
   const navigate = useNavigate();
@@ -84,6 +85,7 @@ const ChildReg = () => {
   };
 
   return (
+    <div className="registration-contents">
     <section className="registration-container-unique">
       <ToastContainer />
       <header className="registration-header-unique">Child Registration Form</header>
@@ -217,7 +219,8 @@ const ChildReg = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
-    </section>
+      </section>
+    </div>
   );
 };
 
