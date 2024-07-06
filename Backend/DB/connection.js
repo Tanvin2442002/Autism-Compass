@@ -14,7 +14,7 @@ async function initializeConnection() {
   } catch (err) {
     console.error("Error connecting to the database:", err);
   }
-}
+}   
 
 async function getConnection() {
   if (!connection) {

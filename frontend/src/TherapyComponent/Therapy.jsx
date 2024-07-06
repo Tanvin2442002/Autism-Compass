@@ -1,13 +1,13 @@
 import React from 'react';
-import './availableTherapy.css';
+import './Therapy.css';
 import 'boxicons/css/boxicons.min.css';
 import Navbar from '../Navbar';
 
 const AvailableTherapies = () => {
     return (
-        <div className="container1">
-            <div className="wrapper">
-                <Navbar />
+        <div className="availableTherapy">
+            <Navbar />
+            <div className="avaiableTherapyContents">
                 <h1>Available Therapies</h1>
                 <div className="search-box">
                     <input type="text" placeholder="Search therapies..." required />
