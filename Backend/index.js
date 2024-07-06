@@ -10,6 +10,7 @@ const registrationRouter = require("./Route/registration");
 app.use("/reg", registrationRouter);
 app.use(routerProduct);
 app.use("/child", require("./Route/childThings"));
+app.use("", require("./Route/TherapyThings"));
 
 
 app.post("/login", async (req, res) => {     
