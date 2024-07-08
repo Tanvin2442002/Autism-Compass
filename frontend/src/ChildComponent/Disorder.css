@@ -1,0 +1,35 @@
+.disorder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.disorder-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 340px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+
+.disorder-item:hover {
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 20px rgba(239, 234, 234, 0.8);
+}
+
+.disorder-item h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.disorder-item p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}

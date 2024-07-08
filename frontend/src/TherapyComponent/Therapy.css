@@ -6,8 +6,9 @@
    display: flex;
    justify-content: center;
    align-items: center;
-   background-color: #676cd9;
-   width: 100vw;
+   background-color: #676dd990;
+   /* width: 100vw;
+   height: 100vh; */
 }
 
 .avaiableTherapyContents {
@@ -88,7 +89,7 @@
 }
 
 .therapy-item {
-   background: #f8f8f8;
+   background: #f8f8f886;
    border: 2px solid rgba(255, 255, 255, 0.2);
    border-radius: 12px;
    padding: 20px;

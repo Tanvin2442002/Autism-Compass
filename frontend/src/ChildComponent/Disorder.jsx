@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Navbar from '../Navbar';
+import './Disorder.css';
 
 const Disorder = () => {
    const [DisorderDetails, setDisorderDetails] = useState({
@@ -43,10 +44,12 @@ const Disorder = () => {
    }, []);
 
    return (
-      <div>
+      <div className='disorder'>
          <Navbar />
-         <h1>{DisorderDetails.Name}</h1>
-         <p>{DisorderDetails.Description}</p>
+         <div className='disorder-item'>
+            <h1>{DisorderDetails.Name}</h1>
+            <p>{DisorderDetails.Description}</p>
+         </div>
       </div>
    );
 };
