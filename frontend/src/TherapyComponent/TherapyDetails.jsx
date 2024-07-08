@@ -8,8 +8,9 @@ const TherapyDetail = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const therapyType = params.get('type');
-  
+
   const [therapyData, setTherapyData] = useState(null);
+  const [therapyOrgData, setTherapyOrgData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -27,10 +28,27 @@ const TherapyDetail = () => {
       }
     };
 
+    console.log(therapyType);
+
+    const fetchTherapyOrgData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/therapy/org?type=${therapyType}`);
+        const data = await response.json();
+        setTherapyOrgData(data);
+      } catch (error) {
+        console.error('Error fetching therapy data:', error);
+        setError('Failed to fetch therapy data.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     if (therapyType) {
       fetchTherapyData();
+      fetchTherapyOrgData();
     }
   }, [therapyType]);
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -57,29 +75,24 @@ const TherapyDetail = () => {
         ) : (
           <p>Therapy details not found.</p>
         )}
-        <div className="availability">
-          <h3>Currently available in:</h3>
-          <div className="org-container">
-            <div className="org-wrapper">
-              <div className="org-box">
-                <p>Bangladesh ABA Centre for Autism</p>
+        {therapyOrgData.map((org) => (
+          <div className="availability">
+            <h3>Currently available in:</h3>
+            <div className="org-container">
+              <div key={org.ORG_ID} className="org-wrapper">
+                <div className="org-box">
+                  <p>NAME: {org.NAME}</p>
+                  <p>CONTACT NO: {org.CONTACT_NO}</p>
+                  <p>EMAIL: {org.EMAIL}</p>
+                  <p>CITY: {org.CITY}</p>
+                  <p>STREET: {org.STREET}</p>
+                  <p>POSTAL_CODE: {org.POSTAL_CODE}</p>
+                </div>
+                <button className="book-now">Book now</button>
               </div>
-              <button className="book-now">Book now</button>
-            </div>
-            <div className="org-wrapper">
-              <div className="org-box">
-                <p>Autistic Childrens' Welfare Foundation (ACWF)</p>
-              </div>
-              <button className="book-now">Book now</button>
-            </div>
-            <div className="org-wrapper">
-              <div className="org-box">
-                <p>Beautiful Mind</p>
-              </div>
-              <button className="book-now">Book now</button>
             </div>
           </div>
-        </div>
+        ))}
         {/* <button className="btn">Back</button> */}
       </div>
     </div>

@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     width: 80%;
+    margin: auto;
 }
 
 .disorder-item {
@@ -12,11 +13,11 @@
     justify-content: center;
     align-items: center;
     width: 60%;
-    height: 340px;
     padding: 20px;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     transition: all 0.5s ease;
+    margin-bottom: 20px;
 }
 
 .disorder-item:hover {
@@ -32,4 +33,40 @@
 .disorder-item p {
     font-size: 20px;
     margin-bottom: 20px;
+    text-align: center;
 }
+
+.disorder-item-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    background-color: rgba(127, 255, 212, 0.303);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.disorder-item-details button {
+    background-color: #0cb011;
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.disorder-item-details button:hover {
+    background-color: #45a049;
+}
+
+.disorder-item-details .answer {
+    width: 100%;
+    font-size: large;
+    background: rgba(255, 255, 255, 0.442);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
