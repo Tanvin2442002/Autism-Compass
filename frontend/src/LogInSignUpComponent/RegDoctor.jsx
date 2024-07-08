@@ -49,14 +49,29 @@ const DoctorReg = () => {
       return;
     }
     console.log(doctorData);
-    fetch("http://localhost:5000/reg/doctor", {
+    const response = await fetch("http://localhost:5000/reg/doctor", {
       method: "POST",
       body: JSON.stringify(doctorData),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    navigate("/login");
+    const data = await response.json();
+    console.log(data);
+    if (data.message === "Doctor registered successfully!")
+      navigate("/login");
+    else {
+      toast.error(data.message, {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   return (

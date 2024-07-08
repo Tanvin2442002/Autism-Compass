@@ -58,7 +58,7 @@ const Profile = () => {
                CITY: data[0].CITY,
                POSTAL_CODE: data[0].POSTAL_CODE,
                DEGREE: data[0].DEGREE,
-               FIELD_OF_SPEC: data[0].FIELD_OF_SPEC,
+               FIELD_OF_SPEC: data[0].FEILD_0F_SPEC,
                INSTITUTION: data[0].INSTITUTION,
             });
          } catch (err) {
@@ -223,7 +223,7 @@ const Profile = () => {
                         />
                      </div>
                   )}
-                  {(userData.TYPE === 'CHILD' || userData.TYPE === 'PARENT' || userData.TYPE === 'HEALTH_PROFESSIONAL') && (
+                  {(userData.TYPE === 'CHILD' || userData.TYPE === 'PARENT') && (
                      <>
                         <div className="profile-form-group">
                            <label>Street</label>

@@ -68,7 +68,7 @@ const ChildReg = () => {
     let data = await response.json();
     console.log(data);
 
-    if (data.message === "Child Registered Successfully") {
+    if (data.message === "Child registered successfully!") {
       navigate("/login");
     } else {
       toast.error(data.message, {

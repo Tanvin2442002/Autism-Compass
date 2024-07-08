@@ -55,44 +55,62 @@ router.post("/child", async (req, res) => {
 });
 
 router.post("/parent", async (req, res) => {
-    const connection = await getConnection();
-    console.log("Received data:", req.body);
-    const resultReg = await connection.execute(
-        `INSERT INTO PARENT (P_ID, NAME, DOB, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE)
-                 VALUES (:P_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, :EMAIL, :CITY, :STREET, :POSTAL_CODE)`,
-        {
-            P_ID: req.body.P_ID,
-            NAME: req.body.NAME,
-            DOB: req.body.DOB,
-            CONTACT_NO: req.body.CONTACT_NO,
-            EMAIL: req.body.EMAIL,
-            CITY: req.body.CITY,
-            STREET: req.body.STREET,
-            POSTAL_CODE: req.body.POSTAL_CODE,
-        },
-        { autoCommit: true }
-    );
-    const resultLog = await connection.execute(
-        `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-                 VALUES (:EMAIL, :PASSWORD, 'PARENT')`,
-        {
-            EMAIL: req.body.EMAIL,
-            PASSWORD: req.body.PASSWORD,
-        },
-        { autoCommit: true }
-    );
-    res
-        .status(201)
-        .send({ message: "Parent registered successfully!", resultReg });
-    console.log("Request processed");
+    let connection;
+    try {
+        connection = await getConnection();
+        console.log("Received data:", req.body);
+
+        // Insert into PARENT table
+        const resultReg = await connection.execute(
+            `INSERT INTO PARENT (P_ID, NAME, DOB, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE)
+             VALUES (:P_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, :EMAIL, :CITY, :STREET, :POSTAL_CODE)`,
+            {
+                P_ID: req.body.P_ID,
+                NAME: req.body.NAME,
+                DOB: req.body.DOB,
+                CONTACT_NO: req.body.CONTACT_NO,
+                EMAIL: req.body.EMAIL,
+                CITY: req.body.CITY,
+                STREET: req.body.STREET,
+                POSTAL_CODE: req.body.POSTAL_CODE,
+            },
+            { autoCommit: true }
+        );
+
+        // Insert into LOG_IN table
+        const resultLog = await connection.execute(
+            `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
+             VALUES (:EMAIL, :PASSWORD, 'PARENT')`,
+            {
+                EMAIL: req.body.EMAIL,
+                PASSWORD: req.body.PASSWORD,
+            },
+            { autoCommit: true }
+        );
+
+        res.status(201).send({ message: "Parent registered successfully!", resultReg });
+        console.log("Request processed");
+
+    } catch (err) {
+        console.error("Error during parent registration:", err);
+        res.status(500).send({ message: "Error during parent registration", error: err.message });
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error("Error closing connection:", err);
+            }
+        }
+    }
 });
 
 router.post("/doctor", async (req, res) => {
     const connection = await getConnection();
     console.log("Received data:", req.body);
     const resultReg = await connection.execute(
-        `INSERT INTO HEALTH_PROFESSIONAL (H_ID, NAME, CONTACT_NO, EMAIL, DEGREE , FIELD_OF_SPEC, CITY, STREET, POSTAL_CODE)
-                 VALUES (:H_ID, :NAME, :CONTACT_NO, :EMAIL, :DEGREE, :FIELD_OF_SPEC, :CITY, :STREET, :POSTAL_CODE)`,
+        `INSERT INTO HEALTH_PROFESSIONAL (H_ID, NAME, CONTACT_NO, EMAIL, DEGREE , FEILD_0F_SPEC)
+                 VALUES (:H_ID, :NAME, :CONTACT_NO, :EMAIL, :DEGREE, :FIELD_OF_SPEC)`,
         {
             H_ID: req.body.H_ID,
             NAME: req.body.NAME,
@@ -100,9 +118,6 @@ router.post("/doctor", async (req, res) => {
             EMAIL: req.body.EMAIL,
             DEGREE: req.body.DEGREE,
             FIELD_OF_SPEC: req.body.FIELD_OF_SPEC,
-            CITY: req.body.CITY,
-            STREET: req.body.STREET,
-            POSTAL_CODE: req.body.POSTAL_CODE,
         },
         { autoCommit: true }
     );
@@ -188,19 +203,14 @@ router.post("/update-password", async (req, res) => {
 
 router.post("/user-info", async (req, res) => {
     const connection = await getConnection();
-
     const { TYPE, ID } = req.body;
-
     const idColumn = `${TYPE[0]}_ID`;
-
     const query = `
             SELECT *
             FROM ${TYPE}
             WHERE ${idColumn} = :id
         `;
-
     const result = await connection.execute(query, { id: ID });
-
     if (result.rows.length > 0) {
         res.status(200).send(result.rows);
     } else {
@@ -246,13 +256,13 @@ router.post("/update-user-info", async (req, res) => {
         res.status(200).send({ message: "User info updated successfully!" });
     }
     else if(type === "HEALTH_PROFESSIONAL") {
-        const { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC, CITY, STREET, POSTAL_CODE } = req.body;
+        const { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC} = req.body;
         const query = `
             UPDATE HEALTH_PROFESSIONAL
-            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, DEGREE = :DEGREE, FIELD_OF_SPEC = :FIELD_OF_SPEC, CITY = :CITY, STREET = :STREET, POSTAL_CODE = :POSTAL_CODE
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, DEGREE = :DEGREE, FEILD_0F_SPEC = :FIELD_OF_SPEC
             WHERE H_ID = :ID
         `;
-        const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC, CITY, STREET, POSTAL_CODE: Number(POSTAL_CODE) }, { autoCommit: true });
+        const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC}, { autoCommit: true });
         res.status(200).send({ message: "User info updated successfully!" });
     }
     console.log("Request processed");
