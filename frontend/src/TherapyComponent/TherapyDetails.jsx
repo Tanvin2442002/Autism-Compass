@@ -75,10 +75,10 @@ const TherapyDetail = () => {
         ) : (
           <p>Therapy details not found.</p>
         )}
-        {therapyOrgData.map((org) => (
-          <div className="availability">
-            <h3>Currently available in:</h3>
-            <div className="org-container">
+        <div className="availability">
+          <h3>Currently available in:</h3>
+          <div className="org-container">
+            {therapyOrgData.map((org) => (
               <div key={org.ORG_ID} className="org-wrapper">
                 <div className="org-box">
                   <p>NAME: {org.NAME}</p>
@@ -87,12 +87,12 @@ const TherapyDetail = () => {
                   <p>CITY: {org.CITY}</p>
                   <p>STREET: {org.STREET}</p>
                   <p>POSTAL_CODE: {org.POSTAL_CODE}</p>
+                  <button className="book-now">Book now</button>
                 </div>
-                <button className="book-now">Book now</button>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
         {/* <button className="btn">Back</button> */}
       </div>
     </div>

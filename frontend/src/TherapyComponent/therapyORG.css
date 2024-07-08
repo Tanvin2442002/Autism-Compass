@@ -1,11 +1,11 @@
 .therapy-org {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: auto;
-    background: url(../img/bg.jpg);
+    /* background: url(../img/bg.jpg); */
 }
 
 .therapy-org .therapy-org-content {
@@ -26,8 +26,13 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .therapy-org-content h1 {
@@ -86,6 +91,9 @@
 .details {
     width: 100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .details h2 {
@@ -97,52 +105,70 @@
 
 .org-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.org-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    box-sizing: border-box;
 }
 
 .org-box {
-    position: relative;
     background-color: #add8e6;
     border: none;
     outline: none;
     border-radius: 20px;
-    padding: 5px 5px;
-    width: 300px; /* Adjusted width for better visibility */
-    height: auto; /* Fixed height to ensure uniformity */
-    text-align: center; /* Center-align text */
+    padding: 20px;
+    width: 100%;
+    /* Adjusted width for better visibility */
+    text-align: center;
+    /* Center-align text */
     color: #333;
     transition: all 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* margin: 20px 0; */
-    display: flex; /* Added to center content vertically */
-    flex-direction: column; /* Added to center content vertically */
-    justify-content: center; /* Added to center content vertically */
     animation: slideIn 1s ease-in-out;
 }
 
 @keyframes slideIn {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .org-box:hover {
-    background-color: #87CEEB; 
+    background-color: #87CEEB;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
 }
 
 .org-box h3 {
-    margin-bottom: 0px;
-    font-size: 24px; /* Adjusted font size */
-    font-weight: bold; /* Made text bold */
-    color: #000;
+    margin-bottom: 50px;
+    font-size: 24px;
+    /* Adjusted font size */
+    font-weight: bold;
+    /* Made text bold */
+    color: #000000;
+
 }
 
 .org-box p {
-    font-size: 18px; /* Adjusted font size */
-    font-weight: normal; /* Normal weight for details */
-    text-align: center; /* Center-align text */
+    font-size: 18px;
+    /* Adjusted font size */
+    font-weight: normal;
+    /* Normal weight for details */
+    text-align: center;
+    /* Center-align text */
     color: #000;
 }
 

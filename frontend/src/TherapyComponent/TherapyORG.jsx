@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './therapyORG.css';
 import 'boxicons/css/boxicons.min.css';
 import Navbar from '../Navbar';
 
-
 const TherapyOrganizations = () => {
+    const [therapyOrgData, setTherapyOrgData] = useState([]);
+
+    useEffect(() => {
+        const fetchTherapyOrgData = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/therapy/orgdata', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                console.log("Data received");
+                console.log(data);
+                setTherapyOrgData(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchTherapyOrgData();
+    }, []);
+
     return (
         <div className='therapy-org'>
             <Navbar />
@@ -17,30 +38,18 @@ const TherapyOrganizations = () => {
                 <div className="details">
                     <h2>Our Partner Organizations</h2>
                     <div className="org-container">
-                        <div className="org-box">
-                            <h3>Bangladesh ABA Centre for Autism</h3>
-                            <p><span className="attribute">Contact No.:</span> +880123456789</p>
-                            <p><span className="attribute">Email:</span> info@abacentre.org</p>
-                            <p><span className="attribute">City:</span> Dhaka</p>
-                            <p><span className="attribute">Street:</span> 123 Autism Lane</p>
-                            <p><span className="attribute">Postal Code:</span> 1207</p>
-                        </div>
-                        <div className="org-box">
-                            <h3>Autistic Childrens' Welfare Foundation (ACWF)</h3>
-                            <p><span className="attribute">Contact No.:</span> +880987654321</p>
-                            <p><span className="attribute">Email:</span> contact@acwf.org</p>
-                            <p><span className="attribute">City:</span> Chittagong</p>
-                            <p><span className="attribute">Street:</span> 456 Welfare Street</p>
-                            <p><span className="attribute">Postal Code:</span> 4100</p>
-                        </div>
-                        <div className="org-box">
-                            <h3>Beautiful Mind</h3>
-                            <p><span className="attribute">Contact No.:</span> +880112233445</p>
-                            <p><span className="attribute">Email:</span> support@beautifulmind.org</p>
-                            <p><span className="attribute">City:</span> Sylhet</p>
-                            <p><span className="attribute">Street:</span> 789 Mind Avenue</p>
-                            <p><span className="attribute">Postal Code:</span> 3100</p>
-                        </div>
+                        {therapyOrgData.map((org) => (
+                            <div key={org.ORG_ID} className="org-wrapper">
+                                <div className="org-box">
+                                    <h3>{org.NAME}</h3>
+                                    <p><span className="attribute">Contact No.:</span> {org.CONTACT_NO}</p>
+                                    <p><span className="attribute">Email:</span> {org.EMAIL}</p>
+                                    <p><span className="attribute">City:</span> {org.CITY}</p>
+                                    <p><span className="attribute">Street:</span> {org.STREET}</p>
+                                    <p><span className="attribute">Postal Code:</span> {org.POSTAL_CODE}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

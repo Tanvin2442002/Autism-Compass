@@ -55,6 +55,17 @@ router.get('/therapy/Detail', async (req, res) => {
 });
 
 
+router.get('/therapy/orgdata', async (req, res) => {
+    const connection = await getConnection();
+    console.log("Request received");
+    console.log(req.query);
+    const result = await connection.execute(
+        `SELECT * FROM THERAPY_ORG`
+    );
+    res.status(200).send(result.rows);
+    console.log("Request processed");
+});
+
 router.get('/therapy/org', async (req, res) => {
     const connection = await getConnection();
     console.log("Request received");

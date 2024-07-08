@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const [isProductsHovered, setIsProductsHovered] = useState(false);
@@ -10,6 +11,9 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userType, setUserType] = useState(null);
     
+    const navigate = useNavigate();
+
+
     useEffect(() => {
         // Fetch the user type from localStorage or API
         const userDataString = localStorage.getItem('USER');
@@ -19,6 +23,13 @@ const Navbar = () => {
         }
     }, []);
     
+    const handleLogOut = () => {
+        // Clear the user data from localStorage
+        localStorage.removeItem('USER');
+        // Redirect to the login page
+        navigate('/login');
+    };
+
     return (
         <nav className="navbar">
             <div className="navbar-container">
@@ -120,7 +131,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-buttons">
-                    <button className="navbar-button">Log Out</button>
+                    <button className="navbar-button" onClick={handleLogOut}>Log Out</button>
                 </div>
             </div>
         </nav>
