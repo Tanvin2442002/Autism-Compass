@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import './ProductDetails.css'; // Import the CSS file
+import { useLocation } from "react-router-dom";
 
 const ProductDetails = () => {
-    const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [quantity, setQuantity] = useState(1);
 
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const productType = params.get('ID');
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/products/${id}`);
+                const response = await fetch(`http://localhost:5000/products/detail?ID=${productType}`);
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
@@ -27,10 +31,10 @@ const ProductDetails = () => {
         };
 
         fetchProduct();
-    }, [id]);
+    }, [productType]);
 
-    const addCart = (id) => {
-        console.log(`Product ${id} with quantity ${quantity} added to cart`);
+    const addCart = (productType) => {
+        console.log(`Product ${productType} with quantity ${quantity} added to cart`);
     };
 
     if (loading) return <div>Loading...</div>;
@@ -67,7 +71,7 @@ const ProductDetails = () => {
                         onChange={(e) => setQuantity(parseInt(e.target.value))}
                     />
                 </div>
-                <button className="cart-button" onClick={() => addCart(product.P_ID)}>
+                <button className="cart-button" onClick={() => addCart(product.PR_ID)}>
                     Add to cart
                 </button>
             </div>

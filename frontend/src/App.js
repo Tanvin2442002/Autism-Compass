@@ -11,10 +11,11 @@ import ResetPass from "./LogInSignUpComponent/ResetPass";
 import ProductDetails from "./productComponent/productDetails";
 import Profile from "./LogInSignUpComponent/Profile";
 import Therapy from "./TherapyComponent/Therapy";
-import TherapyDetails from "./TherapyComponent/TherapyDetails";
+import TherapyDetail from "./TherapyComponent/TherapyDetails";
 import TherapyOrganizations from "./TherapyComponent/TherapyORG";
 import ProductList from "./productComponent/ProductList/productList";
 import Disorder from "./ChildComponent/Disorder";
+
 
 function App() {
 
@@ -30,10 +31,10 @@ function App() {
                <Route path="/signup/teacher" element={<TeacherReg />} />
                <Route path="/dashboard" element={<Dashboard />} />
                <Route path='/reset-password' element={<ResetPass />} />
-               <Route path="/product/:id" element={<ProductDetails />} />
+               <Route path="/products/detail" element={<ProductDetails />} />
                <Route path='/profile' element={<Profile />} />
                <Route path='/therapy' element={<Therapy />} />
-               <Route path='/therapy/details' element={<TherapyDetails />} />
+               <Route path='/therapy/detail' element={<TherapyDetail />} />
                <Route path='/therapy/org' element={<TherapyOrganizations />} />
                <Route path='/products' element={<ProductList />} />
                <Route path='/disorder' element={<Disorder />} />

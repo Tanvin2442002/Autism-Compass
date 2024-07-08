@@ -1,51 +1,89 @@
-import React from 'react';
 import './TherapyDetails.css';
 import 'boxicons/css/boxicons.min.css';
 import Navbar from '../Navbar';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-const TherapyDetails = () => {
-    return (
-        <div className="therapy-details">
-            <Navbar />
-            <div className="therapy-details-content">
-                <h1>Therapy Details</h1>
-                <div className="search-box">
-                    <input type="text" placeholder="Search therapies..." required />
-                    <i className='bx bx-search'></i>
-                </div>
-                <div className="details">
-                    <h2>Name: Applied Behavior Analysis (ABA)</h2>
-                    <p>
-                        Applied Behavior Analysis (ABA) therapy helps autistic children by enhancing their social, communication, and learning skills through positive reinforcement. It is applied using structured techniques tailored to each child's unique needs, focusing on reinforcing desirable behaviors and reducing challenging ones. ABA therapy involves consistent, data-driven approaches to foster independence and improve overall quality of life. Therapists work one-on-one or in group sessions, using rewards to motivate and encourage progress. By breaking down complex tasks into manageable steps, ABA therapy makes learning more accessible and effective. Continuous monitoring and adjustment ensure the therapy remains effective, promoting meaningful development. Overall, ABA therapy supports autistic children in achieving their fullest potential.
-                    </p>
-                </div>
-                <div className="availability">
-                    <h3>Currently available in:</h3>
-                    <div className="org-container">
-                        <div className="org-wrapper">
-                            <div className="org-box">
-                                <p>Bangladesh ABA Centre for Autism</p>
-                            </div>
-                            <button className="book-now">Book now</button>
-                        </div>
-                        <div className="org-wrapper">
-                            <div className="org-box">
-                                <p>Autistic Childrens' Welfare Foundation (ACWF)</p>
-                            </div>
-                            <button className="book-now">Book now</button>
-                        </div>
-                        <div className="org-wrapper">
-                            <div className="org-box">
-                                <p>Beautiful Mind</p>
-                            </div>
-                            <button className="book-now">Book now</button>
-                        </div>
-                    </div>
-                </div>
-                {/* <button className="btn">Back</button> */}
-            </div>
+const TherapyDetail = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const therapyType = params.get('type');
+  
+  const [therapyData, setTherapyData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchTherapyData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/therapy/Detail?type=${therapyType}`);
+        const data = await response.json();
+        setTherapyData(data[0]); // Assuming the API returns an array
+      } catch (error) {
+        console.error('Error fetching therapy data:', error);
+        setError('Failed to fetch therapy data.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (therapyType) {
+      fetchTherapyData();
+    }
+  }, [therapyType]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  return (
+    <div className="therapy-details">
+      <Navbar />
+      <div className="therapy-details-content">
+        <h1>Therapy Details</h1>
+        <div className="search-box">
+          <input type="text" placeholder="Search therapies..." required />
+          <i className='bx bx-search'></i>
         </div>
-    );
+        {therapyData ? (
+          <div className="details">
+            <h2>{therapyData.THERAPY_TYPE}</h2>
+            <p>{therapyData.THERAPY_DESCRIPTION}</p>
+          </div>
+        ) : (
+          <p>Therapy details not found.</p>
+        )}
+        <div className="availability">
+          <h3>Currently available in:</h3>
+          <div className="org-container">
+            <div className="org-wrapper">
+              <div className="org-box">
+                <p>Bangladesh ABA Centre for Autism</p>
+              </div>
+              <button className="book-now">Book now</button>
+            </div>
+            <div className="org-wrapper">
+              <div className="org-box">
+                <p>Autistic Childrens' Welfare Foundation (ACWF)</p>
+              </div>
+              <button className="book-now">Book now</button>
+            </div>
+            <div className="org-wrapper">
+              <div className="org-box">
+                <p>Beautiful Mind</p>
+              </div>
+              <button className="book-now">Book now</button>
+            </div>
+          </div>
+        </div>
+        {/* <button className="btn">Back</button> */}
+      </div>
+    </div>
+  );
 };
 
-export default TherapyDetails;
+export default TherapyDetail;

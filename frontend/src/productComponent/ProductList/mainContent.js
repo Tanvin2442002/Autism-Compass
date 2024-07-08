@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import product_card from "../productCardAll";
+import { useNavigate } from "react-router-dom";
 import "./mainContent.css";
 import "./Button.css";
 
@@ -7,6 +7,8 @@ const MainContent = () => {
     const [productCards, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+ 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -28,10 +30,12 @@ const MainContent = () => {
         fetchProduct();
     }, []);
 
-    console.log(product_card);
+    const handleClick = (productID) => {
+        navigate(`/products/detail?ID=${productID}`);
+    };
 
     const listItems = productCards.map((item) =>
-        <div className="card" key={item.P_ID}>
+        <div className="card" key={item.PR_ID}>
             <div className="card-img">
                 <img src={item.SRC} alt={item.NAME}/>
             </div>
@@ -39,8 +43,8 @@ const MainContent = () => {
                 <h2>{item.NAME}</h2>
                 <p>{item.DESCRIPTION}</p>
                 <p className="price"> {item.PRICE}<span> BDT</span></p>
-                <button className="button-57" role="button">
-                    <span className="text">Buy Now</span>
+                <button className="button-57" role="button" onClick={()=>{handleClick(item.PR_ID)}}>
+                    <span className="text" >Buy Now</span>
                     <span>Add To Cart</span>
                 </button>
             </div>

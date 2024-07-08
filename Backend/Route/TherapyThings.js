@@ -10,7 +10,7 @@ router.get('/therapies', async (req, res) => {
         `SELECT *
         FROM THERAPY`
     );
-    console.log(`Query result: ${JSON.stringify(result.rows)}`);
+    // console.log(`Query result: ${JSON.stringify(result.rows)}`);
     res.status(200).send(result.rows);
     console.log("Request processed");
 });
@@ -26,6 +26,26 @@ router.get('/therapy/search', async (req, res) => {
             `SELECT * FROM THERAPY WHERE LOWER(THERAPY_TYPE) LIKE :search`,
             { search }
         );
+        // console.log(`Query result: ${JSON.stringify(result.rows)}`);
+        res.status(200).send(result.rows);
+    } catch (error) {
+        console.error('Error executing query:', error);
+        res.status(500).send({ error: 'Database query failed' });
+    } finally {
+        console.log("Request processed");
+    }
+});
+
+router.get('/therapy/Detail', async (req, res) => {
+    const connection = await getConnection();
+    const therapyType = req.query.type;
+    console.log("Request received");
+    console.log(req.query); // Use req.query instead of req.body
+    try {
+        const result = await connection.execute(
+            `SELECT * FROM THERAPY WHERE TH_ID = :therapyType`,
+            { therapyType }
+        );
         console.log(`Query result: ${JSON.stringify(result.rows)}`);
         res.status(200).send(result.rows);
     } catch (error) {
@@ -35,5 +55,6 @@ router.get('/therapy/search', async (req, res) => {
         console.log("Request processed");
     }
 });
+
 
 module.exports = router;
