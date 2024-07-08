@@ -9,7 +9,7 @@ routerProduct.get('/products/detail', async (req, res) => {
     console.log(req.query); // Use req.query instead of req.body
     try {
         const result = await connection.execute(
-            `SELECT * FROM PRODUCT WHERE P_ID = :productID`,
+            `SELECT * FROM PRODUCT WHERE PR_ID = :productID`,
             { productID }
         );
         console.log(`Query result: ${JSON.stringify(result.rows)}`);

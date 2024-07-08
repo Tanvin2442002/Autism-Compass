@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import "./mainContent.css";
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
@@ -8,6 +9,8 @@ const SlickComponent = () => {
     const [productCards, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -28,6 +31,10 @@ const SlickComponent = () => {
 
         fetchProduct();
     }, []);
+    
+    const handleClick = (productID) => {
+        navigate(`/products/detail?ID=${productID}`);
+    };
 
     const settings = {
         dots: true,
@@ -66,7 +73,7 @@ const SlickComponent = () => {
     };
 
     const listItems = productCards.map((item) =>
-        <div className="cardslick" key={item.P_ID}>
+        <div className="cardslick" key={item.PR_ID} onClick={()=>{handleClick(item.PR_ID)}}>
             <div className="cardslick-img">
                 <img src={item.SRC} alt={item.NAME}/>
             </div>

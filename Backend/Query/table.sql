@@ -120,7 +120,7 @@ CREATE TABLE BILLS(
 
 -- PRODUCT TABLE START
 CREATE TABLE PRODUCT(
-    P_ID VARCHAR2(255) PRIMARY KEY,
+    PR_ID VARCHAR2(255) PRIMARY KEY,
     NAME VARCHAR2(255) NOT NULL,
     SRC VARCHAR2(255) NOT NULL,
     PRICE NUMBER NOT NULL,
@@ -258,7 +258,7 @@ CREATE TABLE PURCHASES(
     PURCHASE_DATE DATE NOT NULL,
     PRIMARY KEY(P_ID, PR_ID),
     FOREIGN KEY(P_ID) REFERENCES PARENT(P_ID),
-    FOREIGN KEY(PR_ID) REFERENCES PRODUCT(P_ID)
+    FOREIGN KEY(PR_ID) REFERENCES PRODUCT(PR_ID)
 );
 
 -- PURCHASES TABLE END
@@ -280,7 +280,7 @@ CREATE TABLE BILLS_FOR_PRODUCT(
     PR_ID VARCHAR2(255) NOT NULL,
     PRIMARY KEY(B_ID, PR_ID),
     FOREIGN KEY(B_ID) REFERENCES BILLS(B_ID),
-    FOREIGN KEY(PR_ID) REFERENCES PRODUCT(P_ID)
+    FOREIGN KEY(PR_ID) REFERENCES PRODUCT(PR_ID)
 );
 -- BILLS_FOR_PRODUCT TABLE END
 
@@ -412,22 +412,22 @@ COMMIT;
 
 --INSERT DATA INTO PRODUCT TABLE START --
 
-INSERT INTO PRODUCT (P_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
+INSERT INTO PRODUCT (PR_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
 VALUES ('P_01','Nike Shoe', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 2000, 10, 'Nike Shoes for Kid> one of the best one out there!');
 
-INSERT INTO PRODUCT (P_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
+INSERT INTO PRODUCT (PR_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
 VALUES ('P_02','Sensory Massage Puzzle Mat – Happy Path', 'https://www.autism-products.com/wp-content/uploads/set-happy-path-ortoto.lv_-1-1.jpg', 200, 10, 'Set of 8 Large Tiles!  Each Tile is about 10″ x 10″ and 1″ Thick');
 
-INSERT INTO PRODUCT (P_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
+INSERT INTO PRODUCT (PR_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
 VALUES ('P_03','Trend Enterprises Easy Words Puzzle Set', 'https://www.autism-products.com/wp-content/uploads/Easy-Words-Puzzle-Set.jpg', 20, 10, 'Build early language, reading, and vocabulary skills with two-piece learning puzzles featuring 40 beginner words');
 
-INSERT INTO PRODUCT (P_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
+INSERT INTO PRODUCT (PR_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
 VALUES ('P_04','Bouncy Board', 'https://www.autism-products.com/wp-content/uploads/Bouncy-Board-by-Bouncyband-with-Girl-scaled-e1715409298856.webp', 100, 10, 'Relieves anxiety, and hyperactivity, and stress.');
 
-INSERT INTO PRODUCT (P_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
+INSERT INTO PRODUCT (PR_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
 VALUES ('P_05','Magna-Tiles Clear Colors 100-Piece Set – Classroom Pack', 'https://www.autism-products.com/wp-content/uploads/Magna-Tiles-Clear-Colors-100-Piece-Set.jpg', 150, 10, '100 Translucent, Colorful Shapes');
 
-INSERT INTO PRODUCT (P_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
+INSERT INTO PRODUCT (PR_ID,NAME, SRC,PRICE,QUANTITY,DESCRIPTION )
 VALUES ('P_06','Sensory Ball Pack', 'https://www.autism-products.com/wp-content/uploads/Sensory-Ball-Pack.jpg', 110, 10, '7 Easier to Catch Balls!');
 
 commit;

@@ -35,7 +35,7 @@ const MainContent = () => {
     };
 
     const listItems = productCards.map((item) =>
-        <div className="card" key={item.P_ID}>
+        <div className="card" key={item.PR_ID}>
             <div className="card-img">
                 <img src={item.SRC} alt={item.NAME}/>
             </div>
@@ -43,7 +43,7 @@ const MainContent = () => {
                 <h2>{item.NAME}</h2>
                 <p>{item.DESCRIPTION}</p>
                 <p className="price"> {item.PRICE}<span> BDT</span></p>
-                <button className="button-57" role="button" onClick={()=>{handleClick(item.P_ID)}}>
+                <button className="button-57" role="button" onClick={()=>{handleClick(item.PR_ID)}}>
                     <span className="text" >Buy Now</span>
                     <span>Add To Cart</span>
                 </button>
