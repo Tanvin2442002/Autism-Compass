@@ -32,8 +32,7 @@ const Landing = () => {
                 </div>
             </ul>
             <div className="introduction">
-                <h2>Welcome to</h2>
-                <h1>AUTISM COMPASS</h1>
+                
             </div>
             <div className="google-login">
             </div>
