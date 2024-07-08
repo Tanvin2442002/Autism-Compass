@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./MergedStyles.css";
-// import "./Registration.css";
 
 const ChildReg = () => {
   const navigate = useNavigate();
@@ -20,9 +19,9 @@ const ChildReg = () => {
   };
 
   useEffect(() => {
-    document.body.classList.add('registration-body-unique');
+    document.body.classList.add('child-registration-body');
     return () => {
-      document.body.classList.remove('registration-body-unique');
+      document.body.classList.remove('child-registration-body');
     };
   }, []);
 
@@ -85,140 +84,140 @@ const ChildReg = () => {
   };
 
   return (
-    <div className="registration-contents">
-    <section className="registration-container-unique">
+    <div className="registration-contents child-registration-contents">
       <ToastContainer />
-      <header className="registration-header-unique">Child Registration Form</header>
-      <form onSubmit={handleChildRegForm} className="registration-form-unique">
-        <div className="registration-input-box-unique">
-          <label htmlFor="full-name">Full Name</label>
-          <input
-            type="text"
-            id="full-name"
-            placeholder="Enter Full Name"
-            required
-          />
-        </div>
-        <div className="registration-column-unique">
+      <section className="registration-container-unique">
+        <header className="registration-header-unique">Child Registration Form</header>
+        <form onSubmit={handleChildRegForm} className="registration-form-unique">
           <div className="registration-input-box-unique">
-            <label htmlFor="birth-date">Birth Date</label>
+            <label htmlFor="full-name">Full Name</label>
             <input
-              type="date"
-              id="birth-date"
-              placeholder="Enter Birth Date"
+              type="text"
+              id="full-name"
+              placeholder="Enter Full Name"
               required
             />
           </div>
-        </div>
-        <div className="registration-input-box-unique">
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter Email Address"
-            required
-          />
-        </div>
-        <div className="registration-input-box-unique">
-          <label htmlFor="phone">Phone Number</label>
-          <input
-            type="text"
-            id="phone"
-            placeholder="Enter Phone Number"
-            required
-          />
-        </div>
-        <div className="registration-input-box-unique">
-          <label htmlFor="parent-email">Parent's Email Address</label>
-          <input
-            type="email"
-            id="parent-email"
-            placeholder="Enter Your Parent's Email Address"
-            required
-          />
-        </div>
-        <div className="registration-input-box-unique registration-address-unique">
-          <label htmlFor="address-line1">Address</label>
           <div className="registration-column-unique">
             <div className="registration-input-box-unique">
-              <label htmlFor="street">Street</label>
+              <label htmlFor="birth-date">Birth Date</label>
               <input
-                type="text"
-                id="street"
-                placeholder="Enter your street"
-                required
-              />
-            </div>
-            <div className="registration-input-box-unique">
-              <label htmlFor="city">City</label>
-              <input
-                type="text"
-                id="city"
-                placeholder="Enter your city"
-                required
-              />
-            </div>
-            <div className="registration-input-box-unique">
-              <label htmlFor="postal-code">Postal Code</label>
-              <input
-                type="text"
-                id="postal-code"
-                placeholder="Enter postal code"
+                type="date"
+                id="birth-date"
+                placeholder="Enter Birth Date"
                 required
               />
             </div>
           </div>
-        </div>
-        <div className="registration-input-box-unique">
-          <label htmlFor="disability-type">Disability Type</label>
-          <select id="disability-type" className="registration-select-box-unique">
-            <option hidden>Select one-</option>
-            <option>Social Communication Disorder (SCD)</option>
-            <option>Expressive Language Disorder (ELD)</option>
-            <option>Pragmatic Language Impairment Disorder (PLID)</option>
-            <option>Intellectual Disability (ID)</option>
-            <option>Attention-Deficit/Hyperactivity Disorder (ADHD)</option>
-            <option>Sensory Processing Disorder (SPD)</option>
-            <option>Developmental Coordination Disorder (DCD)</option>
-            <option>Generalized Anxiety Disorder (GAD)</option>
-            <option>Specific Learning Disorder (SLD)</option>
-            <option>Nonverbal Learning Disability (NVLD)</option>
-          </select>
-        </div>
-        <div className="registration-input-box-unique">
-          <label>Password</label>
-          <div className="registration-password-container-unique">
+          <div className="registration-input-box-unique">
+            <label htmlFor="email">Email Address</label>
             <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              placeholder="Enter password"
+              type="email"
+              id="email"
+              placeholder="Enter Email Address"
               required
             />
-            <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
-              onClick={toggleShowPassword}
-              className="registration-password-icon-unique"
-            />
           </div>
-        </div>
-        <div className="registration-input-box-unique">
-          <label>Confirm Password</label>
-          <div className="registration-password-container-unique">
+          <div className="registration-input-box-unique">
+            <label htmlFor="phone">Phone Number</label>
             <input
-              type={showConfirmPassword ? "text" : "password"}
-              id="confirm-password"
-              placeholder="Confirm password"
+              type="text"
+              id="phone"
+              placeholder="Enter Phone Number"
               required
             />
-            <FontAwesomeIcon
-              icon={showConfirmPassword ? faEyeSlash : faEye}
-              onClick={toggleShowConfirmPassword}
-              className="registration-password-icon-unique"
+          </div>
+          <div className="registration-input-box-unique">
+            <label htmlFor="parent-email">Parent's Email Address</label>
+            <input
+              type="email"
+              id="parent-email"
+              placeholder="Enter Your Parent's Email Address"
+              required
             />
           </div>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+          <div className="registration-input-box-unique registration-address-unique">
+            <label htmlFor="address-line1">Address</label>
+            <div className="registration-column-unique">
+              <div className="registration-input-box-unique">
+                <label htmlFor="street">Street</label>
+                <input
+                  type="text"
+                  id="street"
+                  placeholder="Enter your street"
+                  required
+                />
+              </div>
+              <div className="registration-input-box-unique">
+                <label htmlFor="city">City</label>
+                <input
+                  type="text"
+                  id="city"
+                  placeholder="Enter your city"
+                  required
+                />
+              </div>
+              <div className="registration-input-box-unique">
+                <label htmlFor="postal-code">Postal Code</label>
+                <input
+                  type="text"
+                  id="postal-code"
+                  placeholder="Enter postal code"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div className="registration-input-box-unique">
+            <label htmlFor="disability-type">Disability Type</label>
+            <select id="disability-type" className="registration-select-box-unique">
+              <option hidden>Select one-</option>
+              <option>Social Communication Disorder (SCD)</option>
+              <option>Expressive Language Disorder (ELD)</option>
+              <option>Pragmatic Language Impairment Disorder (PLID)</option>
+              <option>Intellectual Disability (ID)</option>
+              <option>Attention-Deficit/Hyperactivity Disorder (ADHD)</option>
+              <option>Sensory Processing Disorder (SPD)</option>
+              <option>Developmental Coordination Disorder (DCD)</option>
+              <option>Generalized Anxiety Disorder (GAD)</option>
+              <option>Specific Learning Disorder (SLD)</option>
+              <option>Nonverbal Learning Disability (NVLD)</option>
+            </select>
+          </div>
+          <div className="registration-input-box-unique">
+            <label>Password</label>
+            <div className="registration-password-container-unique">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                placeholder="Enter password"
+                required
+              />
+              <FontAwesomeIcon
+                icon={showPassword ? faEyeSlash : faEye}
+                onClick={toggleShowPassword}
+                className="registration-password-icon-unique"
+              />
+            </div>
+          </div>
+          <div className="registration-input-box-unique">
+            <label>Confirm Password</label>
+            <div className="registration-password-container-unique">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                id="confirm-password"
+                placeholder="Confirm password"
+                required
+              />
+              <FontAwesomeIcon
+                icon={showConfirmPassword ? faEyeSlash : faEye}
+                onClick={toggleShowConfirmPassword}
+                className="registration-password-icon-unique"
+              />
+            </div>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
       </section>
     </div>
   );
