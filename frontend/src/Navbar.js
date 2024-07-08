@@ -45,7 +45,7 @@ const Navbar = () => {
                                     {isHovered && (
                                         <div className="products-dropdown">
                                             <Link to="/therapy" className="navbar-link">Available Therapy</Link>
-                                            <Link to="/therapy/details" className="navbar-link">Therapy Details</Link>
+                                            <Link to="/therapy/booked" className="navbar-link">Booked Therapy</Link>
                                             <Link to="/therapy/org" className="navbar-link">Therapy Organizations</Link>
                                         </div>
                                     )}
@@ -78,7 +78,7 @@ const Navbar = () => {
                                     {isHovered && (
                                         <div className="products-dropdown">
                                             <Link to="/therapy" className="navbar-link">Available Therapy</Link>
-                                            <Link to="/therapy/details" className="navbar-link">Therapy Details</Link>
+                                            <Link to="/therapy/booked" className="navbar-link">Booked Therapy</Link>
                                             <Link to="/therapy/org" className="navbar-link">Therapy Organizations</Link>
                                         </div>
                                     )}
