@@ -8,8 +8,9 @@ import "slick-carousel/slick/slick-theme.css";
 import SlickComponent from "./slickComponent";
 import "./slickComponent.css";
 
+
 const ProductList = () => {
-  return (
+  return ( 
     <div className="container1">
       <Navbar />
       <div className="posSlick">
