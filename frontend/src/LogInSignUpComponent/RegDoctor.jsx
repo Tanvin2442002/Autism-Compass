@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import "./MergedStyles.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./Registration.css";
 
 const DoctorReg = () => {
   const navigate = useNavigate();
@@ -75,122 +75,126 @@ const DoctorReg = () => {
   };
 
   return (
-    <section className="doctor-registration-container-unique">
-      <ToastContainer />
-      <header>Doctor Registration Form</header>
-      <form onSubmit={handleDoctorRegForm} className="doctor-registration-form-unique">
-        <div className="doctor-registration-input-box-unique">
-          <label>Full Name</label>
-          <input
-            type="text"
-            id="full-name"
-            placeholder="Enter Full Name"
-            required
-          />
-        </div>
-        <div className="doctor-registration-input-box-unique">
-          <label>Email Address</label>
-          <input
-            type="text"
-            id="email"
-            placeholder="Enter Email Address"
-            required
-          />
-        </div>
-        <div className="doctor-registration-input-box-unique">
-          <label>Phone Number</label>
-          <input
-            type="text"
-            id="phone"
-            placeholder="Enter Phone Number"
-            required
-          />
-        </div>
-        <div className="doctor-registration-input-box-unique">
-          <label>Degree</label>
-          <input
-            type="text"
-            id="degree"
-            placeholder="Enter Your Degree"
-            required
-          />
-        </div>
-        <div className="doctor-registration-input-box-unique">
-          <label>Field of Specialization</label>
-          <input
-            type="text"
-            id="field-of-specialization"
-            placeholder="Enter Your Field of Specialization"
-            required
-          />
-        </div>
-        <div className="doctor-registration-input-box-unique address">
-          <label>Address</label>
-          <div className="doctor-registration-column-unique">
-            <div className="doctor-registration-input-box-unique">
-              <label>Street</label>
+    <div className="registration-contents">
+      <section className="registration-section">
+        <ToastContainer />
+        <div className="registration-main-part">
+          <header>Doctor Registration Form</header>
+          <form onSubmit={handleDoctorRegForm} className="registration-form">
+            <div className="registration-input-box">
+              <label>Full Name</label>
               <input
                 type="text"
-                id="street"
-                placeholder="Enter your street"
+                id="full-name"
+                placeholder="Enter Full Name"
                 required
               />
             </div>
-            <div className="doctor-registration-input-box-unique">
-              <label>City</label>
+            <div className="registration-input-box">
+              <label>Email Address</label>
               <input
                 type="text"
-                id="city"
-                placeholder="Enter your city"
+                id="email"
+                placeholder="Enter Email Address"
                 required
               />
             </div>
-            <div className="doctor-registration-input-box-unique">
-              <label>Postal Code</label>
+            <div className="registration-input-box">
+              <label>Phone Number</label>
               <input
                 type="text"
-                id="postal-code"
-                placeholder="Enter postal code"
+                id="phone"
+                placeholder="Enter Phone Number"
                 required
               />
             </div>
-          </div>
+            <div className="registration-input-box">
+              <label>Degree</label>
+              <input
+                type="text"
+                id="degree"
+                placeholder="Enter Your Degree"
+                required
+              />
+            </div>
+            <div className="registration-input-box">
+              <label>Field of Specialization</label>
+              <input
+                type="text"
+                id="field-of-specialization"
+                placeholder="Enter Your Field of Specialization"
+                required
+              />
+            </div>
+            <div className="registration-address">
+              <div className="registration-input-box">
+                <label>Street</label>
+                <input
+                  type="text"
+                  id="street"
+                  placeholder="Enter your street"
+                  required
+                />
+              </div>
+              <div className="registration-input-box">
+                <label>City</label>
+                <input
+                  type="text"
+                  id="city"
+                  placeholder="Enter your city"
+                  required
+                />
+              </div>
+              <div className="registration-input-box">
+                <label>Postal Code</label>
+                <input
+                  type="text"
+                  id="postal-code"
+                  placeholder="Enter postal code"
+                  required
+                />
+              </div>
+            </div>
+            <div className="registration-input-box">
+              <label>Password</label>
+              <div className="registration-password">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Enter password"
+                  required
+                />
+                <FontAwesomeIcon
+                  icon={showPassword ? faEyeSlash : faEye}
+                  onClick={toggleShowPassword}
+                  className="password-icon"
+                />
+              </div>
+            </div>
+            <div className="registration-input-box">
+              <label>Confirm Password</label>
+              <div className="registration-password">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirm-password"
+                  placeholder="Confirm password"
+                  required
+                />
+                <FontAwesomeIcon
+                  icon={showConfirmPassword ? faEyeSlash : faEye}
+                  onClick={toggleShowConfirmPassword}
+                  className="password-icon"
+                />
+              </div>
+            </div>
+            <button type="submit"
+              className="registration-submit-button">
+              Submit
+            </button>
+          </form>
         </div>
-        <div className="doctor-registration-input-box-unique">
-          <label>Password</label>
-          <div className="doctor-registration-password-container-unique">
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              placeholder="Enter password"
-              required
-            />
-            <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
-              onClick={toggleShowPassword}
-              className="doctor-registration-password-icon-unique"
-            />
-          </div>
-        </div>
-        <div className="doctor-registration-input-box-unique">
-          <label>Confirm Password</label>
-          <div className="doctor-registration-password-container-unique">
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              id="confirm-password"
-              placeholder="Confirm password"
-              required
-            />
-            <FontAwesomeIcon
-              icon={showConfirmPassword ? faEyeSlash : faEye}
-              onClick={toggleShowConfirmPassword}
-              className="doctor-registration-password-icon-unique"
-            />
-          </div>
-        </div>
-        <button className="doctor-registration-form-unique">Submit</button>
-      </form>
-    </section>
+      </section>
+    </div>
   );
 };
 

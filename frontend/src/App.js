@@ -16,6 +16,7 @@ import TherapyOrganizations from "./TherapyComponent/TherapyORG";
 import ProductList from "./productComponent/ProductList/productList";
 import Disorder from "./ChildComponent/Disorder";
 import ProductCart from "./productComponent/productCart";
+import Cart from "./productComponent/Cart";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
                <Route path="/dashboard" element={<Dashboard />} />
                <Route path='/reset-password' element={<ResetPass />} />
                <Route path="/products/detail" element={<ProductDetails />} />
-               <Route path='/products/detail/checkout' element={<ProductCart />} />
+               <Route path='/products/detail/checkout' element={<Cart />} />
                <Route path='/profile' element={<Profile />} />
                <Route path='/therapy' element={<Therapy />} />
                <Route path='/therapy/detail' element={<TherapyDetail />} />

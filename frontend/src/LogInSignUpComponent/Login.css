@@ -1,46 +1,47 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-
-.login{
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url(../img/bg.jpg);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
 .login-contents {
-    width: 25vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    background: url('../img/bg.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.login-wrapper-unique {
+    width: 500px;
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(9px);
     color: #fff;
     border-radius: 12px;
     padding: 30px 40px;
-    display: flex;
-    align-items: center;
 }
 
-.login-form{
-    width: 100%;
-}
-
-.login-form h1 {
+.login-wrapper-unique h1 {
     font-size: 36px;
     text-align: center;
 }
 
-.input-box {
+.login-input-box-unique {
     position: relative;
     width: 100%;
     height: 50px;
     margin: 30px 0;
-    display: flex;
 }
 
-.input-box input,
-.input-box select {
+.login-input-box-unique input,
+.login-input-box-unique select {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -57,31 +58,30 @@
     appearance: none;
 }
 
-form .input-box input::placeholder,
-.input-box select option {
+.login-input-box-unique input::placeholder,
+.login-input-box-unique select option {
     color: #ffffff;
-    opacity: 1;
 }
 
-.input-box select {
+.login-input-box-unique select {
     color: #fff;
     padding-right: 20px;
 }
 
-.input-box select option {
+.login-input-box-unique select option {
     background: rgba(0, 0, 0, 0.7);
     color: #fff;
 }
 
-.input-box input:hover,
-.input-box input:focus,
-.input-box select:hover,
-.input-box select:focus {
+.login-input-box-unique input:hover,
+.login-input-box-unique input:focus,
+.login-input-box-unique select:hover,
+.login-input-box-unique select:focus {
     border-color: #ffffff;
     box-shadow: 0 0 20px rgba(239, 234, 234, 0.8);
 }
 
-.input-box i {
+.login-input-box-unique i {
     position: absolute;
     right: 20px;
     top: 50%;
@@ -91,28 +91,28 @@ form .input-box input::placeholder,
     color: #fff;
 }
 
-.login .remember-forgot {
+.login-remember-forgot-unique {
     display: flex;
     justify-content: space-between;
     font-size: 14.5px;
     margin: -15px 0 15px;
 }
 
-.remember-forgot label input {
+.login-remember-forgot-unique label input {
     accent-color: #fff;
     margin-right: 3px;
 }
 
-.remember-forgot a {
+.login-remember-forgot-unique a {
     color: #fff;
     text-decoration: none;
 }
 
-.remember-forgot a:hover {
+.login-remember-forgot-unique a:hover {
     text-decoration: underline;
 }
 
-.login .btn {
+.login-btn-unique {
     width: 100%;
     height: 45px;
     background: #39729de2;
@@ -127,28 +127,29 @@ form .input-box input::placeholder,
     transition: all 0.5s ease;
 }
 
-.login .btn:hover {
+.login-btn-unique:hover {
     background: #305c7d;
     box-shadow: 0 0 20px rgba(157, 207, 229, 0.8);
 }
 
-.login .register-link {
+.login-register-link-unique {
     font-size: 14.5px;
     text-align: center;
     margin: 20px 0 15px;
 }
 
-.register-link p a {
+.login-register-link-unique p a {
     color: #fff;
     text-decoration: none;
     font-weight: 600;
 }
 
-.register-link p a:hover {
+.login-register-link-unique p a:hover {
     text-decoration: underline;
 }
 
------------------ reset password-------------
+
+
 
 .resetpass {
     margin: 0 auto;
@@ -188,7 +189,7 @@ form .input-box input::placeholder,
 .input-box-in-resetpass:hover {
     border-color: #007bff;
     box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
-} 
+}
 
 .input-box-in-resetpass.invalid {
     border-color: rgba(255, 0, 0, 0.63);
@@ -265,4 +266,4 @@ form .input-box input::placeholder,
         padding: 8px;
         font-size: 14px;
     }
-}  */
+}

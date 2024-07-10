@@ -23,7 +23,7 @@ app.post("/login", async (req, res) => {
     const result = await connection.execute(
         `SELECT *
             FROM LOG_IN, ${type}
-            WHERE LOG_IN.EMAIL = :email
+            WHERE LOG_IN.EMAIL = LOWER(:email)
             AND LOG_IN.PASSWORD = :password
             AND LOG_IN.TYPE = :type
             AND LOG_IN.EMAIL = ${type}.EMAIL`,
@@ -41,5 +41,7 @@ app.post("/login", async (req, res) => {
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000...");
+    console.log(`Database connect with '${process.env.USER}' user and '${process.env.PASS}' password.`);
+
 });
 

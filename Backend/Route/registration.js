@@ -8,7 +8,7 @@ router.post("/child", async (req, res) => {
     console.log("Received data:", req.body);
     const resultReg = await connection.execute(
         `INSERT INTO CHILD (C_ID, NAME, DOB, CONTACT_NO, EMAIL, P_EMAIL, CITY, STREET, POSTAL_CODE)
-            VALUES (:C_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, :EMAIL, :P_EMAIL, :CITY, :STREET, :POSTAL_CODE)`,
+            VALUES (:C_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, LOWER(:EMAIL), LOWER(:P_EMAIL), :CITY, :STREET, :POSTAL_CODE)`,
         {
             C_ID: req.body.C_ID,
             NAME: req.body.NAME,
@@ -24,7 +24,7 @@ router.post("/child", async (req, res) => {
     );
     const resultLog = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-            VALUES (:EMAIL, :PASSWORD, 'CHILD')`,
+            VALUES (LOWER(:EMAIL), :PASSWORD, 'CHILD')`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
@@ -63,7 +63,7 @@ router.post("/parent", async (req, res) => {
         // Insert into PARENT table
         const resultReg = await connection.execute(
             `INSERT INTO PARENT (P_ID, NAME, DOB, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE)
-             VALUES (:P_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, :EMAIL, :CITY, :STREET, :POSTAL_CODE)`,
+             VALUES (:P_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, LOWER(:EMAIL), :CITY, :STREET, :POSTAL_CODE)`,
             {
                 P_ID: req.body.P_ID,
                 NAME: req.body.NAME,
@@ -80,7 +80,7 @@ router.post("/parent", async (req, res) => {
         // Insert into LOG_IN table
         const resultLog = await connection.execute(
             `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-             VALUES (:EMAIL, :PASSWORD, 'PARENT')`,
+             VALUES (LOWER(:EMAIL), :PASSWORD, 'PARENT')`,
             {
                 EMAIL: req.body.EMAIL,
                 PASSWORD: req.body.PASSWORD,
@@ -110,7 +110,7 @@ router.post("/doctor", async (req, res) => {
     console.log("Received data:", req.body);
     const resultReg = await connection.execute(
         `INSERT INTO HEALTH_PROFESSIONAL (H_ID, NAME, CONTACT_NO, EMAIL, DEGREE , FEILD_0F_SPEC)
-                 VALUES (:H_ID, :NAME, :CONTACT_NO, :EMAIL, :DEGREE, :FIELD_OF_SPEC)`,
+                 VALUES (:H_ID, :NAME, :CONTACT_NO, LOWER(:EMAIL), :DEGREE, :FIELD_OF_SPEC)`,
         {
             H_ID: req.body.H_ID,
             NAME: req.body.NAME,
@@ -123,7 +123,7 @@ router.post("/doctor", async (req, res) => {
     );
     const resultLog = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-                 VALUES (:EMAIL, :PASSWORD, 'HEALTH_PROFESSIONAL')`,
+                 VALUES (LOWER(:EMAIL), :PASSWORD, 'HEALTH_PROFESSIONAL')`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
@@ -141,7 +141,7 @@ router.post("/teacher", async (req, res) => {
     console.log("Received data:", req.body);
     const resultReg = await connection.execute(
         `INSERT INTO TEACHER (T_ID, NAME, CONTACT_NO, EMAIL,INSTITUTION)
-                 VALUES (:T_ID, :NAME, :CONTACT_NO, :EMAIL, :INSTITUTION)`,
+                 VALUES (:T_ID, :NAME, :CONTACT_NO, LOWER(:EMAIL), :INSTITUTION)`,
         {
             T_ID: req.body.T_ID,
             NAME: req.body.NAME,
@@ -153,7 +153,7 @@ router.post("/teacher", async (req, res) => {
     );
     const resultLog = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-                 VALUES (:EMAIL, :PASSWORD, 'TEACHER')`,
+                 VALUES (LOWER(:EMAIL), :PASSWORD, 'TEACHER')`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
@@ -170,7 +170,7 @@ router.post("/check-email", async (req, res) => {
     const connection = await getConnection();
     console.log("Received data:", req.body);
     const result = await connection.execute(
-        `SELECT EMAIL FROM LOG_IN WHERE EMAIL = :EMAIL`,
+        `SELECT EMAIL FROM LOG_IN WHERE EMAIL = LOWER(:EMAIL)`,
         {
             EMAIL: req.body.EMAIL,
         },
@@ -189,7 +189,7 @@ router.post("/update-password", async (req, res) => {
     const connection = await getConnection();
     console.log("Received data:", req.body);
     const result = await connection.execute(
-        `UPDATE LOG_IN SET PASSWORD = :PASSWORD WHERE EMAIL = :EMAIL`,
+        `UPDATE LOG_IN SET PASSWORD = :PASSWORD WHERE EMAIL = LOWER(:EMAIL)`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
@@ -229,7 +229,7 @@ router.post("/update-user-info", async (req, res) => {
         const { ID, NAME, CONTACT_NO, EMAIL, P_EMAIL, CITY, STREET, POSTAL_CODE } = req.body;
         const query = `
             UPDATE CHILD
-            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, P_EMAIL = :P_EMAIL, CITY = :CITY, STREET = :STREET, POSTAL_CODE = :POSTAL_CODE
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = LOWER(:EMAIL), P_EMAIL = LOWER(:P_EMAIL), CITY = :CITY, STREET = :STREET, POSTAL_CODE = :POSTAL_CODE
             WHERE C_ID = :ID
         `;
         const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, P_EMAIL, CITY, STREET, POSTAL_CODE: Number(POSTAL_CODE) }, { autoCommit: true });
@@ -239,7 +239,7 @@ router.post("/update-user-info", async (req, res) => {
         const { ID, NAME, DOB, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE } = req.body;
         const query = `
             UPDATE PARENT
-            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, POSTAL_CODE = :POSTAL_CODE
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = LOWER(:EMAIL), CITY = :CITY, STREET = :STREET, POSTAL_CODE = :POSTAL_CODE
             WHERE P_ID = :ID
         `;
         const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE: Number(POSTAL_CODE) }, { autoCommit: true });
@@ -249,7 +249,7 @@ router.post("/update-user-info", async (req, res) => {
         const { ID, NAME, CONTACT_NO, EMAIL, INSTITUTION } = req.body;
         const query = `
             UPDATE TEACHER
-            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, INSTITUTION = :INSTITUTION
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = LOWER(:EMAIL), INSTITUTION = :INSTITUTION
             WHERE T_ID = :ID
         `;
         const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, INSTITUTION }, { autoCommit: true });
@@ -259,7 +259,7 @@ router.post("/update-user-info", async (req, res) => {
         const { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC} = req.body;
         const query = `
             UPDATE HEALTH_PROFESSIONAL
-            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = :EMAIL, DEGREE = :DEGREE, FEILD_0F_SPEC = :FIELD_OF_SPEC
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = LOWER(:EMAIL), DEGREE = :DEGREE, FEILD_0F_SPEC = :FIELD_OF_SPEC
             WHERE H_ID = :ID
         `;
         const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC}, { autoCommit: true });

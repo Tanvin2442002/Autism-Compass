@@ -1,37 +1,58 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-.registration-container-unique {
+
+.registration-contents {
+    /* border: 5px solid red; */
     width: 100vw;
-    background: #fff;
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
 }
 
-.registration-container-unique header {
+.registration-section {
+    background-color: rgba(255, 255, 255, 0.445);
+    width: 60vw;
+    border-radius: 20px;
+}
+
+.registration-main-part {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.registration-main-part header {
     font-size: 1.8rem;
     color: #062248;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
+    margin-bottom: 15px;
 }
 
-.registration-container-unique form {
-    margin-top: 30px;
-}
-
-form .input-box {
+.registration-form {
     width: 100%;
-    margin-top: 20px;
-    /* border: 5px solid red; */
-/* } */
-
-/* .registration-container-unique form .input-box label {
-    font-size: 1.1rem;
-    color: #333;
+    background: transparent;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.registration-container-unique form .input-box input,
-.registration-container-unique form .select-box {
+.registration-form .registration-input-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.registration-form .registration-input-box input,
+.registration-form .registration-input-box select {
     position: relative;
     height: 50px;
     width: 100%;
@@ -48,36 +69,29 @@ form .input-box {
     transition: box-shadow 0.3s ease;
 }
 
-.registration-container-unique form .input-box input::placeholder,
-.registration-container-unique form .input-box .date-input,
-.registration-container-unique form .input-box .select-box option {
-    color: #000000;
-    font-size: 1rem;
-    opacity: 0.6;
-}
-
-
-.registration-container-unique form .input-box input:focus,
-.registration-container-unique form .select-box:focus {
-    box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
-}
-
-.registration-container-unique form .input-box input:hover,
-.registration-container-unique form .select-box:hover {
-    box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
-}
-
-.registration-container-unique form .column {
+.registration-form .registration-address {
+    width: 100%;
     display: flex;
-    column-gap: 15px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.registration-form .registration-input-box input:focus,
+.registration-form .registration-select-box:focus {
+    box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
+}
 
-.registration-container-unique form .input-box .password-registration-container-unique {
+.registration-form .registration-input-box input:hover,
+.registration-form .registration-select-box:hover {
+    box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
+}
+
+.registration-form .registration-input-box .registration-password {
     position: relative;
 }
 
-.registration-container-unique form .input-box .password-registration-container-unique input {
+.registration-form .registration-input-box .registration-password input {
     padding-right: 30px;
 }
 
@@ -91,10 +105,12 @@ form .input-box {
     cursor: pointer;
 }
 
-.registration-container-unique form button {
+.registration-form .registration-submit-button {
     position: relative;
+    justify-content: center;
+    align-items: center;
     height: 50px;
-    width: 100%;
+    width: 30%;
     outline: none;
     font-size: 1rem;
     color: #000000;
@@ -108,7 +124,7 @@ form .input-box {
     transition: box-shadow 0.3s ease;
 }
 
-.registration-container-unique form button:hover {
+.registration-form .registration-submit-button:hover {
     background: rgb(38, 73, 109);
 }
 
@@ -117,73 +133,4 @@ form .input-box {
     form .column {
         flex-wrap: wrap;
     }
-} */
-
-
-
-/* .registration-contents {
-    width: 100vw;
-    padding: 25px;
-    border-radius: 8px;
-    border: 10px solid red;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
 }
-
-.registration-contents .registration-section {
-    background-color: white;
-    max-width: 700px;
-    border-radius: 20px;
-}
-
-.registration-contents .registration-section header {
-    font-size: 1.8rem;
-    margin-top: 10px;
-    color: #062248;
-    font-weight: 600;
-    text-align: center;
-}
-.registration-form{
-    padding: 20px;
-    margin-top: -20px;
-}
-
-.registration-input-box{
-    position: relative;
-    height: 50px;
-    width: 100%;
-    outline: none;
-    font-size: 1rem;
-    color: #000000;
-    margin-top: 8px;
-    border-radius: 6px;
-    padding: 0 15px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    transition: box-shadow 0.3s ease;
-}
-
-.registration-input-box label{
-    font-size: 1.1rem;
-    color: #333;
-    padding: auto;
-}
-
-.registration-form .registration-input-box input{
-    width: 100%;
-    height: 45px;
-    border: 3px solid #031f4763;
-    border-radius: 6px;
-    padding: auto;
-    outline: none;
-}
-
-.registration-address{
-    display: flex-start;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
- */

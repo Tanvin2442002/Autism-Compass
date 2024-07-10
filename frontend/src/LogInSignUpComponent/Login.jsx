@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './MergedStyles.css';
+import './Login.css';
 import 'boxicons/css/boxicons.min.css';
 
 const LogIn = () => {

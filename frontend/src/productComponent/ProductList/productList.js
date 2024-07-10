@@ -7,8 +7,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SlickComponent from "./slickComponent";
 import "./slickComponent.css";
-import "./productlist.css";
-import Testproductlist from "./testproductlist";
 
 const ProductList = () => {
   return (

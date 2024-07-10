@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./MergedStyles.css";
+import "./Registration.css";
 
 const TeacherReg = () => {
   const navigate = useNavigate();
@@ -59,83 +59,88 @@ const TeacherReg = () => {
   };
 
   return (
-    <>
-      <section className="teacher-registration-container-unique">
+    <div className="registration-contents">
+      <section className="registration-section">
         <ToastContainer />
-        <header>Teacher Registration Form</header>
-        <form onSubmit={handleTeacherRegForm} className="teacher-registration-form-unique">
-          <div className="teacher-registration-input-box-unique">
-            <label htmlFor="full-name">Full Name</label>
-            <input
-              type="text"
-              id="full-name"
-              placeholder="Enter Full Name"
-              required
-            />
-          </div>
-          <div className="teacher-registration-input-box-unique">
-            <label htmlFor="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Enter Email Address"
-              required
-            />
-          </div>
-          <div className="teacher-registration-input-box-unique">
-            <label htmlFor="phone">Phone Number</label>
-            <input
-              type="text"
-              id="phone"
-              placeholder="Enter Phone Number"
-              required
-            />
-          </div>
-          <div className="teacher-registration-input-box-unique">
-            <label htmlFor="institution-name">Institution Name</label>
-            <input
-              type="text"
-              id="institution-name"
-              placeholder="Enter Name of your School"
-              required
-            />
-          </div>
-          <div className="teacher-registration-input-box-unique">
-            <label>Password</label>
-            <div className="teacher-registration-password-container-unique">
+        <div className="registration-main-part">
+          <header>Teacher Registration Form</header>
+          <form onSubmit={handleTeacherRegForm} className="registration-form">
+            <div className="registration-input-box">
+              <label htmlFor="full-name">Full Name</label>
               <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                placeholder="Enter password"
+                type="text"
+                id="full-name"
+                placeholder="Enter Full Name"
                 required
               />
-              <FontAwesomeIcon
-                icon={showPassword ? faEyeSlash : faEye}
-                onClick={toggleShowPassword}
-                className="teacher-registration-password-icon-unique"
-              />
             </div>
-          </div>
-          <div className="teacher-registration-input-box-unique">
-            <label>Confirm Password</label>
-            <div className="teacher-registration-password-container-unique">
+            <div className="registration-input-box">
+              <label htmlFor="email">Email Address</label>
               <input
-                type={showConfirmPassword ? "text" : "password"}
-                id="confirm-password"
-                placeholder="Confirm password"
+                type="email"
+                id="email"
+                placeholder="Enter Email Address"
                 required
               />
-              <FontAwesomeIcon
-                icon={showConfirmPassword ? faEyeSlash : faEye}
-                onClick={toggleShowConfirmPassword}
-                className="teacher-registration-password-icon-unique"
+            </div>
+            <div className="registration-input-box">
+              <label htmlFor="phone">Phone Number</label>
+              <input
+                type="text"
+                id="phone"
+                placeholder="Enter Phone Number"
+                required
               />
             </div>
-          </div>
-          <button type="submit" className="teacher-registration-form-unique-button">Submit</button>
-        </form>
+            <div className="registration-input-box">
+              <label htmlFor="institution-name">Institution Name</label>
+              <input
+                type="text"
+                id="institution-name"
+                placeholder="Enter Name of your School"
+                required
+              />
+            </div>
+            <div className="registration-input-box">
+              <label>Password</label>
+              <div className="registration-password">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Enter password"
+                  required
+                />
+                <FontAwesomeIcon
+                  icon={showPassword ? faEyeSlash : faEye}
+                  onClick={toggleShowPassword}
+                  className="password-icon"
+                />
+              </div>
+            </div>
+            <div className="registration-input-box">
+              <label>Confirm Password</label>
+              <div className="registration-password">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirm-password"
+                  placeholder="Confirm password"
+                  required
+                />
+                <FontAwesomeIcon
+                  icon={showConfirmPassword ? faEyeSlash : faEye}
+                  onClick={toggleShowConfirmPassword}
+                  className="password-icon"
+                />
+              </div>
+            </div>
+            <button type="submit"
+              className="registration-submit-button">
+              Submit
+            </button>
+          </form>
+        </div>
       </section>
-    </>
+    </div>
   );
 };
 

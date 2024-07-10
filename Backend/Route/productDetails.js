@@ -1,5 +1,6 @@
 const express = require("express");
 const { getConnection } = require("../DB/connection");
+const { autoCommit } = require("oracledb");
 const routerProduct = express.Router();
 
 routerProduct.get("/products/detail", async (req, res) => {
@@ -105,7 +106,7 @@ routerProduct.delete('/products/detail/checkout', async (req, res) => {
             DELETE FROM PURCHASES
             WHERE p_id = :userID
             AND pr_id = :PR_ID
-        `, { userID, PR_ID });
+        `, { userID, PR_ID },{autoCommit: true});
 
         const updatedCart = await connection.execute(`
             SELECT PURCHASES.PR_ID, NAME, SRC, AMOUNT, PURCHASES.quantity
