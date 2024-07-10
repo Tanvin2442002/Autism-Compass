@@ -56,7 +56,7 @@ const ProductCart = () => {
   if (!cartItems.length) return <div>Product not found</div>;
 
   const handleproceedtopay = () => {
-    alert("Payment Successful");
+    console.log("Payment Successful");
   };
 
   const handleRemoveItem = async (PR_ID) => {
@@ -112,13 +112,13 @@ const ProductCart = () => {
         </div>
         <div className="right-bar">
           <p>
-            <span>Subtotal</span> <span>${subtotal.TOTAL}</span>
+            <span>Subtotal:</span> <span>${subtotal.TOTAL}</span>
           </p>
           <p>
-            <span>Total</span> <span>${subtotal.TOTAL}</span>
+            <span>Total:</span> <span>${subtotal.TOTAL}</span>
           </p>
-          <a href="#">
-            <i className="fa fa-shopping-cart" onClick={handleproceedtopay}></i>
+          <a href="#" onClick={handleproceedtopay}>
+            <i className="fa fa-shopping-cart" ></i>
             Proceed to pay
           </a>
         </div>

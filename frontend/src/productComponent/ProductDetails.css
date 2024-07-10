@@ -1,5 +1,6 @@
 /* ProductDetails.css */
 .product-details {
+  position: fixed;
   display: flex;
   justify-content: center;
   padding: 20px;

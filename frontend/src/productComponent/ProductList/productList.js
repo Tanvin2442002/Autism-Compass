@@ -10,8 +10,9 @@ import "./slickComponent.css";
 import "./productlist.css";
 import Testproductlist from "./testproductlist";
 
+
 const ProductList = () => {
-  return (
+  return ( 
     <div className="container1">
       <Navbar />
       <div className="posSlick">

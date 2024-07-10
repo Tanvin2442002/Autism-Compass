@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./mainContent.css";
-import "./Button.css";
+// import "./Button.css";
 
 const MainContent = () => {
     const [productCards, setProduct] = useState([]);
@@ -43,9 +43,9 @@ const MainContent = () => {
                 <h2>{item.NAME}</h2>
                 <p>{item.DESCRIPTION}</p>
                 <p className="price"> {item.PRICE}<span> BDT</span></p>
-                <button className="button-57" role="button" onClick={()=>{handleClick(item.PR_ID)}}>
+                <button className="button-57" onClick={()=>{handleClick(item.PR_ID)}}>
                     <span className="text" >Buy Now</span>
-                    <span>Add To Cart</span>
+                    <span>check product</span>
                 </button>
             </div>
         </div>
