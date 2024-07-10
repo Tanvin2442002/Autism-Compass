@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Nabvar from '../Navbar';
 import Button from "./Button";
 import './Cart.css';
+// import '../App.css';
 
 const Cart = () => {
    const [cart, setCart] = useState([
@@ -28,8 +29,8 @@ const Cart = () => {
 
    return (
       <div className='main-app'>
+         <Nabvar />
          <div className="cart-container">
-            <Nabvar />
             <div className="cart-header">
                <h2>Shopping Cart</h2>
             </div>

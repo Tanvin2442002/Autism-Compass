@@ -62,11 +62,12 @@ const LogIn = () => {
 
    return (
       <div className='login-contents'>
-         <div className="login-wrapper-unique">
+         <div className="login-wrapper">
             <form onSubmit={handleLogIn}>
                <h1>WELCOME!</h1>
-               <div className="login-input-box-unique">
+               <div className="login-input-box">
                   <input
+                     className='login-input'
                      type="text"
                      placeholder="Username"
                      onChange={(e) => setEmail(e.target.value)}
@@ -75,8 +76,9 @@ const LogIn = () => {
                   />
                   <i className="bx bxs-user"></i>
                </div>
-               <div className="login-input-box-unique">
+               <div className="login-input-box">
                   <input
+                     className='login-input'
                      type="password"
                      placeholder="Password"
                      onChange={(e) => setPassword(e.target.value)}
@@ -85,7 +87,7 @@ const LogIn = () => {
                   />
                   <i className="bx bxs-lock-alt"></i>
                </div>
-               <div className="login-input-box-unique">
+               <div className="login-input-box">
                   <select
                      value={userType}
                      onChange={(e) => setUserType(e.target.value)}
@@ -101,8 +103,8 @@ const LogIn = () => {
                   </select>
                   <i className="bx bxs-down-arrow"></i>
                </div>
-               <div className="login-remember-forgot-unique">
-                  <label>
+               <div className="login-remember-forgot">
+                  <label className='login-text'>
                      <input
                         type="checkbox"
                         checked={rememberMe}
@@ -110,13 +112,13 @@ const LogIn = () => {
                      />
                      Remember me
                   </label>
-                  <Link to='/reset-password'> Forgot Password</Link>
+                  <Link to='/reset-password' className='login-text'> Forgot Password</Link>
                </div>
-               <button type="submit" className="login-btn-unique">
+               <button type="submit" className="login-btn">
                   LOGIN
                </button>
-               <div className="login-register-link-unique">
-                  <p>
+               <div className="login-register-link">
+                  <p className='login-text'>
                      Don't have an account? <Link to="/">Register</Link>
                   </p>
                </div>

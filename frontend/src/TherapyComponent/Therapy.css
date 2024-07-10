@@ -2,18 +2,17 @@
 @import url('https://fonts.googleapis.com/css?family=Exo:400,700');
 
 .availableTherapy {
-   display: flex;
    justify-content: center;
    align-items: center;
    background-color: #676dd990;
    background-image: url('../img/bg.jpg');
    width: 100vw;
-   /* height: 100vh;  */
+   display: flex;
+   flex-direction: column;
 }
 
 .avaiableTherapyContents {
-   width: 100vw;
-   max-width: 1200px;
+   width: 80vw;
    background: rgba(255, 255, 255, 0.2);
    backdrop-filter: blur(5px);
    color: #fff;
