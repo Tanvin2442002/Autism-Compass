@@ -148,5 +148,47 @@ routerProduct.get('/products/detail/checkout/total', async (req, res) => {
         res.status(500).send({ error: 'Internal server error' });
     } 
 });
+routerProduct.post('/products/detail/checkout/updateQuantity', async (req, res) => {
+  const { userID, id, quantity } = req.body;
+
+  if (!userID || !id || !quantity) {
+    return res.status(400).send({ error: 'User ID, Product ID, and Quantity are required' });
+  }
+
+  let connection;
+
+  try {
+    connection = await getConnection();
+
+    // Update the quantity in the PURCHASES table
+    const result = await connection.execute(
+      `
+      UPDATE PURCHASES
+      SET QUANTITY = :quantity,
+      AMOUNT = (SELECT PRICE FROM PRODUCT WHERE PR_ID = :id) * :quantity
+      WHERE P_ID = :userID
+      AND PR_ID = :id
+      `,
+      { userID, id, quantity },
+      { autoCommit: true }
+    );
+
+    // Fetch the updated cart items
+    const updatedCartItems = await connection.execute(
+      `
+      SELECT PURCHASES.PR_ID, NAME, SRC, AMOUNT, PURCHASES.quantity
+      FROM PRODUCT, PURCHASES
+      WHERE PRODUCT.PR_ID = PURCHASES.PR_ID
+      AND P_ID = :userID
+      `,
+      { userID }
+    );
+
+    res.json(updatedCartItems.rows);
+  } catch (error) {
+    console.error('Error executing query:', error);
+    res.status(500).send({ error: 'Internal server error' });
+  } 
+});
 
 module.exports = routerProduct;
