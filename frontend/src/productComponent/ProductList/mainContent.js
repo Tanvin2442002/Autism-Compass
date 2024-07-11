@@ -36,13 +36,13 @@ const MainContent = () => {
     const listItems = productCards.map((item) =>
         <div className="card" key={item.PR_ID}>
             <div className="card-img">
-                <img src={item.SRC} alt={item.NAME}/>
+                <img src={item.SRC} alt={item.NAME} />
             </div>
             <div className="card_header">
                 <h2>{item.NAME}</h2>
                 <p>{item.DESCRIPTION}</p>
                 <p className="price"> {item.PRICE}<span> BDT</span></p>
-                <button className="button-57" onClick={()=>{handleClick(item.PR_ID)}}>
+                <button className="button-57" onClick={() => { handleClick(item.PR_ID) }}>
                     <span className="text" >Buy Now</span>
                     <span>check product</span>
                 </button>
@@ -58,8 +58,7 @@ const MainContent = () => {
         <div className="main_content">
             <h3>Autism Products</h3>
             {listItems}
-        </div>
+        </div >
     );
 }
-
 export default MainContent;

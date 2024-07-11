@@ -55,7 +55,7 @@ const LogIn = () => {
             pauseOnHover: false,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: "colored",
          });
       }
    };

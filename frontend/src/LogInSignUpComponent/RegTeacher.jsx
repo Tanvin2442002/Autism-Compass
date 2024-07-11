@@ -40,7 +40,7 @@ const TeacherReg = () => {
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "colored",
       });
       return;
     }

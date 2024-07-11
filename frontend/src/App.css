@@ -8,7 +8,7 @@ html{
    align-items: center;
    width: 100vw;
    height: 100vh;
-   border: 3px solid rgb(13, 255, 0);
+   border: 5px solid rgb(13, 255, 0);
    background-color: #676dd9;
    overflow-x: hidden;
 }

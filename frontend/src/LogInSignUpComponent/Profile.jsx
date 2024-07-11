@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar.js';
 import './Profile.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Profile = () => {
    const [profileData, setProfileData] = useState({
@@ -67,10 +68,10 @@ const Profile = () => {
             setLoading(false);
          }
       };
-
+      
       fetchData();
    }, []);
-
+   
    const fetchGenderData = async () => {
       const genderResponse = await fetch(`https://api.genderapi.io/api/?name=${encodeURIComponent(profileData.NAME)}&key=667faf277a781c44944e8b13`);
       const genderData = await genderResponse.json();
@@ -78,7 +79,7 @@ const Profile = () => {
          setGender(genderData.gender === 'female' ? 'girl' : 'boy');
       }
    };
-
+   
    const handleChange = (e) => {
       const { name, value } = e.target;
       setProfileData({
@@ -86,7 +87,7 @@ const Profile = () => {
          [name]: value
       });
    };
-
+   
    const handleSubmit = async (e) => {
       e.preventDefault();
       let newUserData = {
@@ -130,7 +131,7 @@ const Profile = () => {
             POSTAL_CODE: profileData.POSTAL_CODE
          };
       }
-
+      
       console.log('New Data:', newUserData);
       const response = await fetch('http://localhost:5000/reg/update-user-info', {
          method: 'POST',
@@ -139,10 +140,20 @@ const Profile = () => {
          },
          body: JSON.stringify(newUserData)
       });
-
+      
+      toast.success("Pofile Updated", {
+         position: "top-right",
+         autoClose: 2500,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: false,
+         draggable: true,
+         progress: undefined,
+         theme: "dark",
+      });
       await fetchGenderData();
    };
-
+   
    const handleDelete = () => {
       console.log('Delete Account');
    };
@@ -157,6 +168,7 @@ const Profile = () => {
 
    return (
       <div className='profile'>
+         <ToastContainer />
          <>
             <Navbar />
             <ul class="circles">
