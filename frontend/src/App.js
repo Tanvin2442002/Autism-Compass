@@ -17,6 +17,8 @@ import ProductList from "./productComponent/ProductList/productList";
 import Disorder from "./ChildComponent/Disorder";
 import ProductCart from "./productComponent/productCart";
 import Cart from "./productComponent/Cart";
+import DoctorsList from "./DoctorComponent/DocList";
+import DoctorProfile from "./DoctorComponent/DoctorProfile";
 
 
 function App() {
@@ -25,7 +27,7 @@ function App() {
       <div className="main-app">
          <Router>
             <Routes>
-               <Route path="/" element={<Landing/>} />
+               <Route path="/" element={<DoctorProfile/>} />
                <Route path="/login" element={<LogIn />} />
                <Route path="/signup/parent" element={<ParentReg />} />
                <Route path="/signup/child" element={<ChildReg />} />
