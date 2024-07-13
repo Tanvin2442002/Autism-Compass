@@ -31,7 +31,6 @@ const ResetPass = () => {
             },
             body: JSON.stringify({ EMAIL: inputEmail }),
          });
-
          const data = await response.json();
          return data.valid;
       } catch (error) {

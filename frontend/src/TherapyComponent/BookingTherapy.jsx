@@ -12,6 +12,9 @@ const BookingTherapy = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [therapyType, setTherapyType] = useState(null);
+  const [childEmail, setChildEmail] = useState('');
+  const [childName, setChildName] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -62,7 +65,6 @@ const BookingTherapy = () => {
         } else {
           response = await fetch(`http://localhost:5000/booking/therapy/parent/data?C_ID=${localData.ID}`);
         }
-
         const data = await response.json();
         console.log('User data:', data[0]);
         setUserDetails(data[0]);
@@ -98,7 +100,7 @@ const BookingTherapy = () => {
     console.log('Booking response:', data);
     console.log('Booking status:', response.status);
     if (response.status === 200) {
-      toast.success("Booking Successfull", {
+      toast.success("Booking Successful", {
         position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,
@@ -122,6 +124,38 @@ const BookingTherapy = () => {
     }
   };
 
+  const handleChildEmailChange = async (e) => {
+    const email = e.target.value;
+    setChildEmail(email);
+
+    if (email) {
+      try {
+        const response = await fetch(`http://localhost:5000/booking/therapy/child/check?email=${email}&P_ID=${userDetails.P_ID}`);
+        const data = await response.json();
+        console.log('Email data:', data[0].NAME);
+        if (data[0].NAME) {
+          setChildName(data[0].NAME);
+          console.log('------', childName);
+          setIsEmailValid(true);
+          const tempData = { ...userDetails, C_ID: data[0].C_ID };
+          setUserDetails(tempData);
+        } else {
+          setChildName('');
+          setIsEmailValid(false);
+        }
+      } catch (error) {
+        console.error('Error checking child email:', error);
+        setIsEmailValid(false);
+        setChildName('');
+      }
+    } else {
+      setChildName('');
+      setIsEmailValid(false);
+    }
+    console.log('Child email:', email);
+    console.log('Child name:', childName);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -132,7 +166,6 @@ const BookingTherapy = () => {
 
   const currentDate = new Date().toISOString().split('T')[0];
   const currentTime = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-
 
   return (
     <div className='booking'>
@@ -174,19 +207,19 @@ const BookingTherapy = () => {
                       <input
                         required
                         autoComplete="off"
-                        type="name"
-                        value={userDetails.PARENT_NAME || ''}
+                        type="email"
+                        value={userDetails.PARENT_EMAIL || ''}
                       />
-                      <label htmlFor="name">Parent Name</label>
+                      <label htmlFor="email">Parent Email</label>
                     </div>
                     <div className="user-info">
                       <input
                         required
                         autoComplete="off"
-                        type="email"
-                        value={userDetails.PARENT_EMAIL || ''}
+                        type="name"
+                        value={userDetails.PARENT_NAME || ''}
                       />
-                      <label htmlFor="email">Parent Email</label>
+                      <label htmlFor="name">Parent Name</label>
                     </div>
                   </div>
                   {localData.TYPE === 'PARENT' && (
@@ -195,17 +228,21 @@ const BookingTherapy = () => {
                         <input
                           required
                           autoComplete="off"
-                          type="name"
+                          type="email"
+                          value={childEmail}
+                          onChange={handleChildEmailChange}
+                          className={isEmailValid ? 'valid' : ''}
                         />
-                        <label htmlFor="name">Child Name</label>
+                        <label htmlFor="email">Child Email</label>
                       </div>
                       <div className="user-info">
                         <input
                           required
                           autoComplete="off"
-                          type="email"
+                          type="name"
+                          value={childName}
                         />
-                        <label htmlFor="email">Child Email</label>
+                        <label htmlFor="name">Child Name</label>
                       </div>
                     </div>
                   )}
@@ -215,19 +252,19 @@ const BookingTherapy = () => {
                         <input
                           required
                           autoComplete="off"
-                          type="name"
-                          value={userDetails.CHILD_NAME || ''}
+                          type="email"
+                          value={userDetails.CHILD_EMAIL || ''}
                         />
-                        <label htmlFor="name">Child Name</label>
+                        <label htmlFor="email">Child Email</label>
                       </div>
                       <div className="user-info">
                         <input
                           required
                           autoComplete="off"
-                          type="email"
-                          value={userDetails.CHILD_EMAIL || ''}
+                          type="name"
+                          value={userDetails.CHILD_NAME || ''}
                         />
-                        <label htmlFor="email">Child Email</label>
+                        <label htmlFor="name">Child Name</label>
                       </div>
                     </div>
                   )}
