@@ -56,7 +56,7 @@ const TherapyDetail = () => {
     console.log('Book now clicked');
     console.log('ORG_ID:', ORG_ID);
     console.log('Therapy ID:', therapyId);
-    navigate(`/therapy/book?TH_ID=${therapyId}&THO_ID=${ORG_ID}`);
+    navigate(`/therapy/booking?TH_ID=${therapyId}&THO_ID=${ORG_ID}`);
     // Handle booking logic here
     // const userData = JSON.parse(localStorage.getItem('USER'));
 

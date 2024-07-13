@@ -108,4 +108,61 @@ router.get('/therapy/child/check', async (req, res) => {
    console.log("Request processed");
 });
 
+router.get('/data', async (req, res) => {
+   const connection = await getConnection();
+   console.log("Request received");
+   const receivedID = req.query.id;
+   const receivedType = req.query.type;
+   if (receivedType === "CHILD") {
+
+      const parentId = await connection.execute(
+         `SELECT P_ID FROM PARENT_HAS_CHILD WHERE C_ID = :receivedID`,
+         { receivedID }
+      );
+
+      console.log("Parent ID:", parentId.rows[0].P_ID);
+
+      const findPID = parentId.rows[0].P_ID;
+
+      const result = await connection.execute(
+         `SELECT UNIQUE C.NAME AS CHILD_NAME, C.EMAIL AS CHILD_EMAIL, P.NAME AS PARENT_NAME,
+         P.EMAIL AS PARENT_EMAIL, B.BOOKING_DATE AS BOOKING_DATE, TH.THERAPY_TYPE AS THERAPY_TYPE,
+         THO.NAME AS ORG_NAME, THO.CONTACT_NO AS ORG_CONTACT_NO, THO.EMAIL AS ORG_EMAIL,
+         THO.CITY AS ORG_CITY, THO.STREET AS ORG_STREET, THO.POSTAL_CODE AS ORG_POSTAL_CODE
+         FROM CHILD C, PARENT P, PARENT_HAS_CHILD PHC, BOOKS B,
+         THERAPY TH, THERAPY_HAS_THEAPYORG THTHO, THERAPY_ORG THO
+         WHERE C.C_ID = PHC.C_ID
+         AND P.P_ID = PHC.P_ID
+         AND C.C_ID = B.C_ID
+         AND P.P_ID = B.P_ID
+         AND TH.TH_ID = B.TH_ID
+         AND THO.THO_ID = B.THO_ID
+         AND B.C_ID = :receivedID
+         AND B.P_ID = :findPID`,
+         { receivedID, findPID }
+      );
+      res.status(200).send(result.rows);
+   }
+   else if (receivedType === "PARENT") {
+      const result = await connection.execute(
+         `SELECT UNIQUE C.NAME AS CHILD_NAME, C.EMAIL AS CHILD_EMAIL, P.NAME AS PARENT_NAME,
+         P.EMAIL AS PARENT_EMAIL, B.BOOKING_DATE AS BOOKING_DATE, TH.THERAPY_TYPE AS THERAPY_TYPE,
+         THO.NAME AS ORG_NAME, THO.CONTACT_NO AS ORG_CONTACT_NO, THO.EMAIL AS ORG_EMAIL,
+         THO.CITY AS ORG_CITY, THO.STREET AS ORG_STREET, THO.POSTAL_CODE AS ORG_POSTAL_CODE
+         FROM CHILD C, PARENT P, PARENT_HAS_CHILD PHC, BOOKS B,
+         THERAPY TH, THERAPY_HAS_THEAPYORG THTHO, THERAPY_ORG THO
+         WHERE C.C_ID = PHC.C_ID
+         AND P.P_ID = PHC.P_ID
+         AND C.C_ID = B.C_ID
+         AND P.P_ID = B.P_ID
+         AND TH.TH_ID = B.TH_ID
+         AND THO.THO_ID = B.THO_ID
+         AND B.P_ID = :receivedID`,
+         { receivedID }
+      );
+      
+      res.status(200).send(result.rows);
+   }
+});
+
 module.exports = router;
