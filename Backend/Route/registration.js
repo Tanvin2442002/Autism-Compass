@@ -22,7 +22,7 @@ router.post("/child", async (req, res) => {
         },
         { autoCommit: true }
     );
-    const resultLog = await connection.execute(
+    const resultLogIn = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
             VALUES (LOWER(:EMAIL), :PASSWORD, 'CHILD')`,
         {
@@ -31,7 +31,27 @@ router.post("/child", async (req, res) => {
         },
         { autoCommit: true }
     );
+
+    const findParent = await connection.execute(
+        `SELECT P_ID FROM PARENT WHERE EMAIL = LOWER(:EMAIL)`,
+        {
+            EMAIL: req.body.P_EMAIL,
+        },
+        { autoCommit: true }
+    );
+    console.log(findParent.rows[0].P_ID);
+    const resultParent = await connection.execute(
+        `INSERT INTO PARENT_HAS_CHILD (C_ID, P_ID)
+            VALUES (:C_ID, :P_ID)`,
+        {
+            C_ID: req.body.C_ID,
+            P_ID: findParent.rows[0].P_ID,
+        },
+        { autoCommit: true }
+    );
+    console.log(resultParent, "Parent added");
     // FIND D0_ID
+
     const resultDisability = await connection.execute(
         `SELECT D0_ID FROM DISORDER WHERE TYPE = :TYPE`,
         {
@@ -39,6 +59,7 @@ router.post("/child", async (req, res) => {
         },
         { autoCommit: true }
     );
+    console.log(resultDisability.rows[0].D0_ID);
     const resultDisorder = await connection.execute(
         `INSERT INTO CHILD_HAS_DISORDER (C_ID, D0_ID)
             VALUES (:C_ID, :D0_ID)`,

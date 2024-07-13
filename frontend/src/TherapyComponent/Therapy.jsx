@@ -47,6 +47,7 @@ const AvailableTherapies = () => {
             setLoading(false);
         }
     };
+    
 
     const handleEventClick = (therapyId) => {
         navigate(`/therapy/detail?type=${therapyId}`);

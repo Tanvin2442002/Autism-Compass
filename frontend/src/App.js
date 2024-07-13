@@ -1,22 +1,22 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Disorder from "./ChildComponent/Disorder";
 import Dashboard from "./Dashboard";
 import Landing from "./Landing";
+import LogIn from "./LogInSignUpComponent/Login";
+import Profile from "./LogInSignUpComponent/Profile";
 import ChildReg from "./LogInSignUpComponent/RegChild";
 import DoctorReg from "./LogInSignUpComponent/RegDoctor";
-import LogIn from "./LogInSignUpComponent/Login";
 import ParentReg from "./LogInSignUpComponent/RegParent";
 import TeacherReg from "./LogInSignUpComponent/RegTeacher";
 import ResetPass from "./LogInSignUpComponent/ResetPass";
+import Cart from "./productComponent/Cart";
 import ProductDetails from "./productComponent/productDetails";
-import Profile from "./LogInSignUpComponent/Profile";
+import ProductList from "./productComponent/ProductList/productList";
+import BookingTherapy from "./TherapyComponent/BookingTherapy";
 import Therapy from "./TherapyComponent/Therapy";
 import TherapyDetail from "./TherapyComponent/TherapyDetails";
 import TherapyOrganizations from "./TherapyComponent/TherapyORG";
-import ProductList from "./productComponent/ProductList/productList";
-import Disorder from "./ChildComponent/Disorder";
-import ProductCart from "./productComponent/productCart";
-import Cart from "./productComponent/Cart";
 
 
 function App() {
@@ -41,6 +41,7 @@ function App() {
                <Route path='/therapy/org' element={<TherapyOrganizations />} />
                <Route path='/products' element={<ProductList />} />
                <Route path='/disorder' element={<Disorder />} />
+               <Route path='/therapy/book' element={<BookingTherapy />} />
             </Routes>
          </Router>
       </div>

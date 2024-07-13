@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Nabvar from '../Navbar';
 import Button from "./Button";
 import './Cart.css';
-import {toast, ToastContainer} from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -58,43 +58,43 @@ const Cart = () => {
   if (!cartItems.length) return <div>Product not found</div>;
 
   const handleQuantityChange = async (id, quantity) => {
-   
-   if (quantity < 1 || isNaN(quantity)){
+
+    if (quantity < 1 || isNaN(quantity)) {
       console.log('Invalid credentials');
       toast.error('Item count can not be null', {
-         position: "top-right",
-         autoClose: 2500,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: false,
-         draggable: true,
-         progress: undefined,
-         theme: "dark",
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
       });
       return;
-   } 
+    }
 
-   try {
-     const response = await fetch(
-       `http://localhost:5000/products/detail/checkout/updateQuantity`,
-       {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify({ userID, id, quantity }),
-       }
-     );
-     if (!response.ok) {
-       throw new Error("Network response was not ok");
-     }
-     const updatedCartItems = await response.json();
-     setCartItems(updatedCartItems);
-     fetchSubtotal(); // Update the subtotal after quantity change
-   } catch (err) {
-     setError(err.message);
-   }
- };
+    try {
+      const response = await fetch(
+        `http://localhost:5000/products/detail/checkout/updateQuantity`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userID, id, quantity }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const updatedCartItems = await response.json();
+      setCartItems(updatedCartItems);
+      fetchSubtotal(); // Update the subtotal after quantity change
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   const handleRemoveItem = async (PR_ID) => {
     setLoading(true); // Set loading state when removing an item
@@ -121,7 +121,7 @@ const Cart = () => {
 
   return (
     <div className='main-app'>
-        <ToastContainer />
+      <ToastContainer />
       <div className="cart-container">
         <Nabvar />
         <div className="cart-header">
@@ -136,15 +136,15 @@ const Cart = () => {
                   <div className="item-details">
                     <p>{item.NAME}</p>
                     <p>{item.NAME}</p>
-                    <p>€ {item.AMOUNT/item.QUANTITY}</p>
+                    <p>€ {item.AMOUNT / item.QUANTITY}</p>
                     <div className="quantity">
                       <button
                         onClick={() => handleQuantityChange(item.PR_ID, item.QUANTITY - 1)}>
                         -
                       </button>
-                      <input type="number" 
-                      required defaultValue={item.QUANTITY} min={1} 
-                      value={item.QUANTITY} onChange={(e) => handleQuantityChange(item.PR_ID, parseInt(e.target.value))} />
+                      <input type="number"
+                        required defaultValue={item.QUANTITY} min={1}
+                        value={item.QUANTITY} onChange={(e) => handleQuantityChange(item.PR_ID, parseInt(e.target.value))} />
                       <button
                         onClick={() => handleQuantityChange(item.PR_ID, item.QUANTITY + 1)}>
                         +
