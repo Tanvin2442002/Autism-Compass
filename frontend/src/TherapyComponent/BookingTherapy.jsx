@@ -25,7 +25,7 @@ const BookingTherapy = () => {
 
     const fetchOrgDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/therapy/booking/orgdata?THO_ID=${orgId}`);
+        const response = await fetch(`http://localhost:5000/booking/therapy/orgdata?THO_ID=${orgId}`);
         console.log('Response:', response);
         const data = await response.json();
         console.log('Data:', data);
@@ -40,7 +40,7 @@ const BookingTherapy = () => {
 
     const fetchTherapyDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/therapy/booking/therapydata?TH_ID=${therapyId}`);
+        const response = await fetch(`http://localhost:5000/booking/therapy/therapydata?TH_ID=${therapyId}`);
         const data = await response.json();
         console.log("Therapy data:", data[0].THERAPY_TYPE);
         setTherapyType(data[0].THERAPY_TYPE);
@@ -58,9 +58,9 @@ const BookingTherapy = () => {
       try {
         let response;
         if (localData.TYPE === 'PARENT') {
-          response = await fetch(`http://localhost:5000/therapy/booking/child/data?P_ID=${localData.ID}`);
+          response = await fetch(`http://localhost:5000/booking/therapy/child/data?P_ID=${localData.ID}`);
         } else {
-          response = await fetch(`http://localhost:5000/therapy/booking/parent/data?C_ID=${localData.ID}`);
+          response = await fetch(`http://localhost:5000/booking/therapy/parent/data?C_ID=${localData.ID}`);
         }
 
         const data = await response.json();
@@ -87,7 +87,7 @@ const BookingTherapy = () => {
       BOOKING_DATE: `${e.target[5].value} ${new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`,
     }
     console.log('Booking data:', bookingData);
-    const response = await fetch('http://localhost:5000/therapy/booking', {
+    const response = await fetch('http://localhost:5000/booking/therapy', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
