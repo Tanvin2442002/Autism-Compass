@@ -9,6 +9,8 @@ const routerProduct = require('./Route/productDetails');
 app.use(routerProduct);
 app.use("/reg", require("./Route/registration"));
 app.use("/child", require("./Route/childThings"));
+app.use("", require("./Route/TherapyThings"));
+app.use("", require("./Route/DocThings"));
 app.use("/therapy", require("./Route/TherapyThings"));
 app.use("/booking", require("./Route/BookingTherapy"));
 
