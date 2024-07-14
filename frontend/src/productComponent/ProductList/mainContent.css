@@ -1,26 +1,21 @@
 
-.container1 {
-    width: 100%;
-    margin: auto;
-    overflow: hidden;
-}
+
 
 .main_content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 50px;
+    /* border: 5px solid #ddd; */
 }
 
-h3 {
+.main_content h3 {
     width: 100%;
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Card Styles */
 .card {
-    background: rgb(39, 40, 41);
+    background: rgba(2, 14, 39, 0.918);
     border: 2px solid #ddd;
     border-radius: 5px;
     width: 300px;  /* Ensure all cards have the same width */
@@ -33,7 +28,7 @@ h3 {
 }
 
 .card:hover {
-    background: rgb(8, 68, 100);
+    background: rgb(4, 10, 68);
     transform: scale(1.1);
     border: #ddd;
 }

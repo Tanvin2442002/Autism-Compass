@@ -1,14 +1,12 @@
 
 
 .cart-container {
-    margin-top: 65px;
-    width: 100vw;
-    height: 91vh;
-    padding-left: 6%;
-    padding-right: 6%;
     background-color: #DDE6ED;
-    /* border: 5px solid red; */
-    display: fixed;
+    border: 5px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .cart {
@@ -18,6 +16,7 @@
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     height: 78vh;
+    width: 75vw;
     border-radius: 10px;
 }
 
@@ -46,6 +45,7 @@
     margin-bottom: 10px;
     padding: 5px;
     z-index: 1;
+    width: 80%;
 }
 
 .cart-header h2 {

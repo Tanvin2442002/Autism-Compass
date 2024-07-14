@@ -31,7 +31,7 @@ const SlickComponent = () => {
 
         fetchProduct();
     }, []);
-    
+
     const handleClick = (productID) => {
         navigate(`/products/detail?ID=${productID}`);
     };
@@ -73,9 +73,9 @@ const SlickComponent = () => {
     };
 
     const listItems = productCards.map((item) =>
-        <div className="cardslick" key={item.PR_ID} onClick={()=>{handleClick(item.PR_ID)}}>
+        <div className="cardslick" key={item.PR_ID} onClick={() => { handleClick(item.PR_ID) }}>
             <div className="cardslick-img">
-                <img src={item.SRC} alt={item.NAME}/>
+                <img src={item.SRC} alt={item.NAME} />
             </div>
             <div className="cardslick-content">
                 <h3>{item.NAME}</h3>

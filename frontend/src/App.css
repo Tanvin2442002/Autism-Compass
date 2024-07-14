@@ -1,12 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
+html{
+   overflow: hidden;
+}
 
 .main-app {
    align-items: center;
    width: 100vw;
    height: 100vh;
-   /* border: 3px solid blue; */
-   background-color: #676cd9;
+   border: 5px solid rgb(13, 255, 0);
+   background-color: #676dd9;
    overflow-x: hidden;
 }
 

@@ -4,7 +4,7 @@
 .registration-contents {
     /* border: 5px solid red; */
     width: 100vw;
-    padding: 25px;
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -15,6 +15,7 @@
     background-color: rgba(255, 255, 255, 0.445);
     width: 60vw;
     border-radius: 20px;
+    /* border: 5px solid purple; */
 }
 
 .registration-main-part {
@@ -36,16 +37,16 @@
 .registration-form {
     width: 100%;
     background: transparent;
-    padding: 25px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* border: 5px solid aqua; */
 }
 
 .registration-form .registration-input-box {
-    width: 100%;
+    width: 95%;
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -55,7 +56,7 @@
 .registration-form .registration-input-box select {
     position: relative;
     height: 50px;
-    width: 100%;
+    width: 97%;
     outline: none;
     font-size: 1rem;
     color: #000000;
@@ -70,11 +71,17 @@
 }
 
 .registration-form .registration-address {
-    width: 100%;
+    width: 95%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+}
+.registration-form .registration-address .registration-input-box {
+    /* border: 5px solid green; */
+    width: 100%;
+}
+
+.registration-form .registration-address .registration-input-box input {
+    /* border: 5px solid green; */
+    width: 90%;
 }
 
 .registration-form .registration-input-box input:focus,
@@ -93,6 +100,7 @@
 
 .registration-form .registration-input-box .registration-password input {
     padding-right: 30px;
+    width: 95%;
 }
 
 .password-icon {

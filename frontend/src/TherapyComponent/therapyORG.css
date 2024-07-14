@@ -12,14 +12,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top:5px;
     width: 85%;
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(5px);
     color: #fff;
     border-radius: 12px;
-    padding: 30px 40px;
+    padding: 0px 40px;
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     animation: fadeIn 2s ease-in;
