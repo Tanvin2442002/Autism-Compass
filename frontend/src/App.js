@@ -1,15 +1,20 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Disorder from "./ChildComponent/Disorder";
 import Dashboard from "./Dashboard";
 import Landing from "./Landing";
+import LogIn from "./LogInSignUpComponent/Login";
+import Profile from "./LogInSignUpComponent/Profile";
 import ChildReg from "./LogInSignUpComponent/RegChild";
 import DoctorReg from "./LogInSignUpComponent/RegDoctor";
-import LogIn from "./LogInSignUpComponent/Login";
 import ParentReg from "./LogInSignUpComponent/RegParent";
 import TeacherReg from "./LogInSignUpComponent/RegTeacher";
 import ResetPass from "./LogInSignUpComponent/ResetPass";
+import Cart from "./productComponent/Cart";
 import ProductDetails from "./productComponent/productDetails";
-import Profile from "./LogInSignUpComponent/Profile";
+import ProductList from "./productComponent/ProductList/productList";
+import BookingTherapy from "./TherapyComponent/BookingTherapy";
+import BookedTherapy from "./TherapyComponent/BookedTherapy";
 import Therapy from "./TherapyComponent/Therapy";
 import TherapyDetail from "./TherapyComponent/TherapyDetails";
 import TherapyOrganizations from "./TherapyComponent/TherapyORG";
@@ -17,6 +22,8 @@ import ProductList from "./productComponent/ProductList/productList";
 import Disorder from "./ChildComponent/Disorder";
 import ProductCart from "./productComponent/productCart";
 import Cart from "./productComponent/Cart";
+import DoctorsList from "./DoctorComponent/DocList";
+import DoctorProfile from "./DoctorComponent/DoctorProfile";
 
 
 function App() {
@@ -25,7 +32,7 @@ function App() {
       <div className="main-app">
          <Router>
             <Routes>
-               <Route path="/" element={<Landing/>} />
+               <Route path="/" element={<DoctorProfile/>} />
                <Route path="/login" element={<LogIn />} />
                <Route path="/signup/parent" element={<ParentReg />} />
                <Route path="/signup/child" element={<ChildReg />} />
@@ -41,6 +48,8 @@ function App() {
                <Route path='/therapy/org' element={<TherapyOrganizations />} />
                <Route path='/products' element={<ProductList />} />
                <Route path='/disorder' element={<Disorder />} />
+               <Route path='/therapy/booking' element={<BookingTherapy />} />
+               <Route path='/therapy/booked' element={<BookedTherapy />} />
             </Routes>
          </Router>
       </div>

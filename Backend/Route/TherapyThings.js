@@ -2,7 +2,7 @@ const express = require("express");
 const { getConnection } = require("../DB/connection");
 const router = express.Router();
 
-router.get('/therapies', async (req, res) => {
+router.get('/all', async (req, res) => {
     const connection = await getConnection();
     console.log("Request received");
     console.log(req.query);
@@ -15,7 +15,7 @@ router.get('/therapies', async (req, res) => {
 });
 
 
-router.get('/therapy/search', async (req, res) => {
+router.get('/search', async (req, res) => {
     const connection = await getConnection();
     const search = req.query.search ? `%${req.query.search.toLowerCase()}%` : '%';
     console.log("Request received");
@@ -34,7 +34,7 @@ router.get('/therapy/search', async (req, res) => {
     }
 });
 
-router.get('/therapy/Detail', async (req, res) => {
+router.get('/Detail', async (req, res) => {
     const connection = await getConnection();
     const therapyType = req.query.type;
     console.log("Request received");
@@ -55,7 +55,7 @@ router.get('/therapy/Detail', async (req, res) => {
 });
 
 
-router.get('/therapy/orgdata', async (req, res) => {
+router.get('/orgdata', async (req, res) => {
     const connection = await getConnection();
     console.log("Request received");
     console.log(req.query);
@@ -66,13 +66,13 @@ router.get('/therapy/orgdata', async (req, res) => {
     console.log("Request processed");
 });
 
-router.get('/therapy/org', async (req, res) => {
+router.get('/org', async (req, res) => {
     const connection = await getConnection();
     console.log("Request received");
     console.log(req.query);
     const therapyType = req.query.type;
     const result = await connection.execute(
-        `SELECT THO.NAME, THO.CONTACT_NO, THO.EMAIL, THO.CITY, THO.STREET, THO.POSTAL_CODE
+        `SELECT THO.THO_ID, THO.NAME, THO.CONTACT_NO, THO.EMAIL, THO.CITY, THO.STREET, THO.POSTAL_CODE
         FROM THERAPY_ORG THO, THERAPY T, THERAPY_HAS_THEAPYORG THT
         WHERE T.TH_ID = THT.TH_ID
         AND THT.THO_ID = THO.THO_ID
@@ -83,5 +83,23 @@ router.get('/therapy/org', async (req, res) => {
     console.log("Request processed");
 });
 
+router.get('/org/search', async (req, res) => {
+    const connection = await getConnection();
+    const search = req.query.search ? `%${req.query.search.toLowerCase()}%` : '%';
+    console.log("Request received");
+    console.log(req.query);
+    try {
+        const result = await connection.execute(
+            `SELECT * FROM THERAPY_ORG WHERE LOWER(NAME) LIKE :search`,
+            { search }
+        );
+        res.status(200).send(result.rows);
+    } catch (error) {
+        console.error('Error executing query:', error);
+        res.status(500).send({ error: 'Database query failed' });
+    } finally {
+        console.log("Request processed");
+    }
+});
 
 module.exports = router;

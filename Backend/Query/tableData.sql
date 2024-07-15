@@ -215,6 +215,62 @@ INSERT INTO HEALTH_PROFESSIONAL (
     'HEART'
 );
 
+INSERT INTO HEALTH_PROFESSIONAL (
+    H_ID,
+    NAME,
+    CONTACT_NO,
+    EMAIL,
+    DEGREE,
+    FEILD_0F_SPEC
+) VALUES (
+    '567',
+    'Alex',
+    1234567982,
+    'docAlex@test.com',
+    'FCPS',
+    'Pediatrics'
+);
+
+INSERT INTO HEALTH_PROFESSIONAL (
+    H_ID,
+    NAME,
+    CONTACT_NO,
+    EMAIL,
+    DEGREE,
+    FEILD_0F_SPEC
+) VALUES (
+    '232',
+    'Barbie',
+    1234432982,
+    'Drbarbie@test.com',
+    'FCPS',
+    'Pediatrics'
+);
+INSERT INTO HEALTH_PROFESSIONAL (
+    H_ID,
+    NAME,
+    CONTACT_NO,
+    EMAIL,
+    DEGREE,
+    FEILD_0F_SPEC
+) VALUES (
+    '112',
+    'Hasnat',
+    1234567792,
+    'HasnatPro@test.com',
+    'MD',
+    'Cardiology'
+);
+
+UPDATE HEALTH_PROFESSIONAL
+SET NAME = 'Alice'
+WHERE NAME = 'Doctor Alice';
+
+UPDATE HEALTH_PROFESSIONAL
+SET NAME = 'Nabiha Parvez'
+WHERE NAME = 'Nabiha Pervez';
+
+
 COMMIT;
 
 --

@@ -5,6 +5,7 @@ import Navbar from '../Navbar';
 
 const TherapyOrganizations = () => {
     const [therapyOrgData, setTherapyOrgData] = useState([]);
+    // const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchTherapyOrgData = async () => {
@@ -26,13 +27,34 @@ const TherapyOrganizations = () => {
         fetchTherapyOrgData();
     }, []);
 
+    const handleSearch = async (e) => {
+        const searchValue = e.target.value;
+        try {
+            const response = await fetch(`http://localhost:5000/therapy/org/search?search=${searchValue}`);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            console.log('Search value:', searchValue);
+            console.log('Fetched data:', data);
+            setTherapyOrgData(data);
+        } catch (err) {
+            console.warn(err.message);
+        }
+    };
+
     return (
         <div className='therapy-org'>
             <Navbar />
             <div className="therapy-org-content">
                 <h1>Therapy Organizations</h1>
                 <div className="search-box">
-                    <input type="text" placeholder="Search organizations..." required />
+                    <input
+                        onChange={handleSearch}
+                        type="text"
+                        placeholder="Search organizations..."
+                        required
+                    />
                     <i className='bx bx-search'></i>
                 </div>
                 <div className="details">

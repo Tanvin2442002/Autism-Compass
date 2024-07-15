@@ -1,0 +1,225 @@
+.booking {
+    display: flex;
+    flex-direction: column;
+    background-color: #DDE6ED;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.booking-heading {
+    position: relative;
+    padding: 20px;
+    margin: 1%;
+    background: #8697c43f;
+    top: 0;
+    box-shadow: #212121b5 0px 0px 10px;
+    border-radius: 15px;
+    width: 90%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.booking-heading h1 {
+    text-align: center;
+}
+
+.booking-therapy {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+}
+
+.organization-details {
+    border: 2px solid rgba(0, 51, 128, 0.664);
+    position: relative;
+    flex: 2;
+    background-color: #3d445836;
+    border-radius: 20px;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 51, 128, 0.364);
+}
+
+.organization-details img {
+    /* width: 300px;
+    height: 180px; */
+    width: 60%;
+    height: 40%;
+    margin-left: 20%;
+    margin-top: 3%;
+    ;
+    border-radius: 5px;
+}
+
+.organization-details h2 {
+    text-align: center;
+    margin: 1%;
+}
+
+.org-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.org-info p {
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 1%;
+}
+
+.user-details {
+    position: relative;
+    background: #3d52a047;
+    flex: 3;
+    border: 2px solid green;
+    border-radius: 20px;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 128, 0, 0.218);
+}
+
+.user-details h2 {
+    text-align: center;
+    margin-top: 0px;
+}
+
+.user-details form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    margin-left: 7.5%;
+    position: relative;
+}
+
+.user-info {
+    position: relative;
+}
+
+.parent-user-info,
+.child-user-info {
+    position: relative;
+    display: flex;
+    width: 96%;
+}
+
+.parent-user-info .user-info,
+.child-user-info .user-info {
+    flex: 1;
+    padding-right: 5px;
+    display: flex;
+}
+
+.parent-user-info .user-info label,
+.child-user-info .user-info label {
+    color: #8d8d8d;
+    pointer-events: none;
+    background-color: transparent;
+    left: 15px;
+    -webkit-transform: translateY(0.6rem);
+    -ms-transform: translateY(0.6rem);
+    transform: translateY(0.6rem);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.user-info label {
+    position: absolute;
+    color: #8d8d8d;
+    pointer-events: none;
+    background-color: transparent;
+    left: 15px;
+    -webkit-transform: translateY(0.6rem);
+    -ms-transform: translateY(0.6rem);
+    transform: translateY(0.6rem);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.user-info input {
+    width: 90%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.867);
+    border: solid 1px #8d8d8d;
+    letter-spacing: 1px;
+}
+
+.user-info input:focus,
+.user-info input:valid {
+    outline: none;
+    border: solid 1px #0034de;
+}
+
+.user-info input:focus~label,
+.user-info input:valid~label {
+    -webkit-transform: translateY(-51%) translateX(-10px) scale(0.8);
+    -ms-transform: translateY(-51%) translateX(-10px) scale(0.8);
+    transform: translateY(-51%) translateX(-10px) scale(0.8);
+    background-color: #ffffff;
+    padding: 0px 5px;
+    color: #0034de;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 100px;
+}
+
+.user-info input.valid {
+    border-color: green;
+}
+
+.confirm-button {
+    width: 31%;
+    margin-left: 64%;
+    padding: 10px 20px;
+    border: unset;
+    border-radius: 15px;
+    color: #212121;
+    z-index: 1;
+    background: #e8e8e8;
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+.confirm-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 15px;
+    background-color: #212121;
+    z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms
+}
+
+.confirm-button:hover {
+    color: #e8e8e8;
+}
+
+.confirm-button:hover::before {
+    width: 100%;
+}
+

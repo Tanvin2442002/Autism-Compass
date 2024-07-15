@@ -1,0 +1,71 @@
+.booked-therapy {
+    /* border: 5px solid red; */
+    display: flex;
+    flex-direction: column;
+    background-color: #DDE6ED;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+.booked-therapy-main{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 0;
+    width: 100%;
+}
+
+.booked-therapy-details {
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 90%;
+    background-color: #3d52a047;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 51, 128, 0.364);
+}
+
+.details-info{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 95%;
+    height: inherit;
+}
+
+.details-info .parent-child-info{
+    width: 40%;
+    margin: 1%;
+}
+.details-info .parent-child-info p{
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 7px;
+    text-align: center;
+}
+
+.details-info .image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    margin: 1%;
+}
+
+.details-info .org-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    margin: 1%;
+}
+
+.booked-therapy-details .details-info .image img {
+    height: 90%;
+    width: 90%;
+    border-radius: 5px;
+}

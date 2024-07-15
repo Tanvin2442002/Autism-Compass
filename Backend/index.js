@@ -1,16 +1,18 @@
 const express = require("express");
 const cors = require("cors");
 const { getConnection } = require("./DB/connection");
-const routerProduct = require('./Route/productDetails');
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const registrationRouter = require("./Route/registration");
-app.use("/reg", registrationRouter);
+const routerProduct = require('./Route/productDetails');
 app.use(routerProduct);
+app.use("/reg", require("./Route/registration"));
 app.use("/child", require("./Route/childThings"));
 app.use("", require("./Route/TherapyThings"));
+app.use("", require("./Route/DocThings"));
+app.use("/therapy", require("./Route/TherapyThings"));
+app.use("/booking", require("./Route/BookingTherapy"));
 
 
 app.post("/login", async (req, res) => {     

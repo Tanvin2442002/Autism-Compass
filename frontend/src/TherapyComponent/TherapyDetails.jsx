@@ -3,11 +3,13 @@ import 'boxicons/css/boxicons.min.css';
 import Navbar from '../Navbar';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const TherapyDetail = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const therapyType = params.get('type');
+  const therapyId = params.get('type');
 
   const [therapyData, setTherapyData] = useState(null);
   const [therapyOrgData, setTherapyOrgData] = useState([]);
@@ -15,9 +17,10 @@ const TherapyDetail = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log('Therapy ID:', therapyId);
     const fetchTherapyData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/therapy/Detail?type=${therapyType}`);
+        const response = await fetch(`http://localhost:5000/therapy/Detail?type=${therapyId}`);
         const data = await response.json();
         setTherapyData(data[0]); // Assuming the API returns an array
       } catch (error) {
@@ -28,11 +31,11 @@ const TherapyDetail = () => {
       }
     };
 
-    console.log(therapyType);
+    console.log(therapyId);
 
     const fetchTherapyOrgData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/therapy/org?type=${therapyType}`);
+        const response = await fetch(`http://localhost:5000/therapy/org?type=${therapyId}`);
         const data = await response.json();
         setTherapyOrgData(data);
       } catch (error) {
@@ -43,11 +46,50 @@ const TherapyDetail = () => {
       }
     };
 
-    if (therapyType) {
+    if (therapyId) {
       fetchTherapyData();
       fetchTherapyOrgData();
     }
-  }, [therapyType]);
+  }, [therapyId]);
+
+  const handleBooking = (ORG_ID) => {
+    console.log('Book now clicked');
+    console.log('ORG_ID:', ORG_ID);
+    console.log('Therapy ID:', therapyId);
+    navigate(`/therapy/booking?TH_ID=${therapyId}&THO_ID=${ORG_ID}`);
+    // Handle booking logic here
+    // const userData = JSON.parse(localStorage.getItem('USER'));
+
+    // const BookingDetails = {
+    //   THO_ID: ORG_ID,
+    //   USER_ID: userData.ID,
+    //   USER_TYPE: userData.TYPE,
+    //   TH_ID: therapyId,
+    //   // today date
+    //   BOOKING_DATE: new Date().toISOString().split('T')[0],
+    // };
+
+    // const response = await fetch('http://localhost:5000/therapy/book', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(BookingDetails),
+    // });
+
+    // const data = await response.json();
+    // console.log(data);
+    // // if response is ok then show success message
+    // // else show error message
+    // if (response.ok) {
+    //   alert('Booking successful');
+    // } else {
+    //   alert('Booking failed');
+    // }
+
+    // console.log('Book now clicked');
+    // console.log('ORG_ID:', ORG_ID);
+  };
 
 
   if (loading) {
@@ -87,13 +129,17 @@ const TherapyDetail = () => {
                   <p>CITY: {org.CITY}</p>
                   <p>STREET: {org.STREET}</p>
                   <p>POSTAL_CODE: {org.POSTAL_CODE}</p>
-                  <button className="book-now">Book now</button>
+                  <button
+                    className="book-now"
+                    value={org.ORG_ID}
+                    onClick={() => handleBooking(org.THO_ID, therapyId)}>
+                    Book now
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        {/* <button className="btn">Back</button> */}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ routerProduct.get("/products/detail", async (req, res) => {
   const connection = await getConnection();
   const productID = req.query.ID;
   console.log("Request received");
-  console.log(req.query); // Use req.query instead of req.body
+  console.log(req.query); 
   try {
     const result = await connection.execute(
       `SELECT * FROM PRODUCT WHERE PR_ID = :productID`,
