@@ -134,7 +134,7 @@ routerProduct.get('/products/detail/checkout/total', async (req, res) => {
         connection = await getConnection();
 
         const result = await connection.execute(`
-            select sum(AMOUNT) as total
+            select sum(AMOUNT) as total,sum(PRICE_WITH_VAT) AS TOTAL_AMOUNT
             from PURCHASES
             GROUP BY P_ID
             HAVING P_ID = :userID`, { userID });

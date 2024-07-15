@@ -13,7 +13,24 @@ const Cart = () => {
   const userData = JSON.parse(localStorage.getItem("USER"));
   const userID = userData.ID;
 
+ 
   useEffect(() => {
+
+    // const ADDRESS = {
+    //   CITY: document.getElementById("City").value,
+    //   STREET: document.getElementById("Street").value,
+    //   HOUSE_NO: document.getElementById("House").value
+    // };
+
+    // const DeliveryData = async () => {
+    //    try{
+    //       const response = await fetch(`http://localhost:5000/products/detail/checkout?delivery=${ADDRESS.CITY}`); {
+    //    }
+    //     catch(err){
+    //       console.log(err);
+    //     }
+    // };
+
     const fetchProduct = async () => {
       try {
         const response = await fetch(
@@ -163,11 +180,11 @@ const Cart = () => {
             <h3>Summary</h3>
             <div className="shipping-things">
               <label>City</label>
-              <input type="text" placeholder="Enter City" className="shipping" />
+              <input type="text" id="City" placeholder="Enter City" className="shipping" />
               <label>Street</label>
-              <input type="text" placeholder="Enter Street" className="shipping" />
+              <input type="text" id="Street" placeholder="Enter Street" className="shipping" />
               <label>House No</label>
-              <input type="text" placeholder="Enter House No" className="shipping" />
+              <input type="text" id="House" placeholder="Enter House No" className="shipping" />
               <label>Assigned Delivery Man</label>
               <input type="text" className='shipping' placeholder='Arif Abdullah' disabled />
               <label htmlFor="shipping">Delivery Type</label>
@@ -179,11 +196,11 @@ const Cart = () => {
             <div className='total-price'>
               <div className='sub-total'>
                 <p>SUBTOTAL</p>
-                <p>TOTAL PRICE</p>
+                <p>TOTAL PRICE INCLUDING 5% VAT</p>
               </div>
               <div className='final-total'>
                 <p>: {subtotal.TOTAL}$</p>
-                <p>: {subtotal.TOTAL}$</p>
+                <p>: {subtotal.TOTAL_AMOUNT}$</p>
               </div>
             </div>
             <div className="checkout">
