@@ -162,19 +162,54 @@ const Cart = () => {
           <div className="summary">
             <h3>Summary</h3>
             <div className="shipping-things">
-              <label>City</label>
-              <input type="text" placeholder="Enter City" className="shipping" />
-              <label>Street</label>
-              <input type="text" placeholder="Enter Street" className="shipping" />
-              <label>House No</label>
-              <input type="text" placeholder="Enter House No" className="shipping" />
-              <label>Assigned Delivery Man</label>
-              <input type="text" className='shipping' placeholder='Arif Abdullah' disabled />
-              <label htmlFor="shipping">Delivery Type</label>
-              <select id='shipping' className='shipping'>
-                <option value="5" className='shipping'>Standard-Delivery - €5.00</option>
-                <option value="5" className='shipping'>Super Fast Delivery - €10.00</option>
-              </select>
+              <div>
+                <label>City</label>
+                <input
+                  type="text"
+                  placeholder="Enter City"
+                  className="shipping"
+                />
+              </div>
+              <div>
+                <label>Street</label>
+                <input
+                  type="text"
+                  placeholder="Enter Street"
+                  className="shipping"
+                />
+              </div>
+              <div>
+                <label>House No</label>
+                <input
+                  type="text"
+                  placeholder="Enter House No"
+                  className="shipping"
+                />
+              </div>
+              <div>
+                <label>Assigned Delivery Man</label>
+                <input
+                  type="text"
+                  className='shipping'
+                  placeholder='Arif Abdullah'
+                  disabled
+                />
+              </div>
+              <div>
+                <label htmlFor="shipping">Delivery Type</label>
+                <select id='shipping' className='shipping'>
+                  <option
+                    value="5"
+                    className='shipping'>
+                    Standard-Delivery - €5.00
+                  </option>
+                  <option
+                    value="5"
+                    className='shipping'>
+                    Super Fast Delivery - €10.00
+                  </option>
+                </select>
+              </div>
             </div>
             <div className='total-price'>
               <div className='sub-total'>

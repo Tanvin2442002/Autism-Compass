@@ -18,10 +18,7 @@ import BookedTherapy from "./TherapyComponent/BookedTherapy";
 import Therapy from "./TherapyComponent/Therapy";
 import TherapyDetail from "./TherapyComponent/TherapyDetails";
 import TherapyOrganizations from "./TherapyComponent/TherapyORG";
-import ProductList from "./productComponent/ProductList/productList";
-import Disorder from "./ChildComponent/Disorder";
 import ProductCart from "./productComponent/productCart";
-import Cart from "./productComponent/Cart";
 import DoctorsList from "./DoctorComponent/DocList";
 import DoctorProfile from "./DoctorComponent/DoctorProfile";
 
@@ -32,7 +29,7 @@ function App() {
       <div className="main-app">
          <Router>
             <Routes>
-               <Route path="/" element={<DoctorProfile/>} />
+               <Route path="/" element={<Landing/>} />
                <Route path="/login" element={<LogIn />} />
                <Route path="/signup/parent" element={<ParentReg />} />
                <Route path="/signup/child" element={<ChildReg />} />
@@ -50,6 +47,8 @@ function App() {
                <Route path='/disorder' element={<Disorder />} />
                <Route path='/therapy/booking' element={<BookingTherapy />} />
                <Route path='/therapy/booked' element={<BookedTherapy />} />
+               <Route path='/HealthProfessionals' element={<DoctorsList />} />
+               <Route path='/doctor/detail' element={<DoctorProfile />} />
             </Routes>
          </Router>
       </div>

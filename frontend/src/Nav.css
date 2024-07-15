@@ -1,14 +1,12 @@
 
 .navbar {
     /* background-color: rgb(246, 246, 246); */
-    background-color: #F4CE14    ;
-    border-bottom: 1px solid #ccc;
+    background-color: #315153ad;
     /* position: fixed; */
     width: 100vw;
     z-index: 20;
     top: 0;
     left: 0;
-    border-radius: 10px;
     height: 9%;
     padding: 10;
     display: block;

@@ -1,7 +1,7 @@
 .product-details-before-checkout {
   display: flex;
   flex-direction: column;
-
+  /* border: 3px solid green; */
 }
 
 .product-details {
@@ -9,10 +9,10 @@
   align-items: center;
   padding: 20px;
   border-radius: 10px;
-  max-width: 800px;
+  width: 55%;
   margin: 10px auto;
-  background-color: rgba(255, 255, 255, 0.671);
-  border: 5px solid red;
+  background-color: #3d6ba049;
+  /* border: 5px solid red; */
 }
 
 .product-image img {
@@ -50,7 +50,7 @@
 
 .product-description p {
   font-size: 16px;
-  color: #777;
+  color: rgba(0, 0, 0, 0.637);
   line-height: 1.5;
   margin-bottom: 20px;
 }

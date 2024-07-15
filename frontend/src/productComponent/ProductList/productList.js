@@ -10,14 +10,13 @@ import "./slickComponent.css";
 
 
 const ProductList = () => {
-  return ( 
+  return (
     <div className="container1">
       <Navbar />
       <div className="posSlick">
         <SlickComponent />
       </div>
       <MainContent />
-      {/* <Testproductlist/> */}
     </div>
   );
 };

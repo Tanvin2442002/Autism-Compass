@@ -38,6 +38,7 @@ const ProductDetails = () => {
          }
       };
 
+      
       fetchProduct();
    }, [productType]);
 

@@ -9,6 +9,7 @@ const DoctorsList = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
@@ -26,6 +27,7 @@ const DoctorsList = () => {
     };
     fetchDoctors();
   }, []);
+
 
   const handleBoxClick = (doctorId) => {
     navigate(`/doctor/detail?id=${doctorId}`);
@@ -51,9 +53,9 @@ const DoctorsList = () => {
   return (
     <div className="doctors-background">
       <Navbar />
-      <div className="wrapper">
+      <div className="doctor-list">
         <h1>Doctors List</h1>
-        <div className="search-box">
+        <div className="doctor-search-box">
           <input type="text" placeholder="Search doctors..." onChange={handleSearch} required />
           <i className='bx bx-search'></i>
         </div>
@@ -63,7 +65,7 @@ const DoctorsList = () => {
           <div className="doc-container">
             {doctors.map((doctor, index) => (
               <div className="doc-box" key={index} onClick={() => handleBoxClick(doctor.H_ID)}>
-                <img src={`https://avataaars.io/?avatarStyle=Circle&topType=${doctor.GENDER === 'male' ? 'ShortHairShortCurly' : 'LongHairStraight'}&accessoriesType=Blank&hairColor=${doctor.GENDER === 'male' ? 'Brown' : 'Blonde'}&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light`} alt="Profile" className="avatar" />
+                <img src={`https://avataaars.io/?avatarStyle=Circle&topType=${doctor.GENDER === 'male' ? 'ShortHairShortCurly' : 'LongHairStraight'}&accessoriesType=Blank&hairColor=${doctor.GENDER === 'male' ? 'Brown' : 'Blonde'}&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light`} alt="Profile" className="doctor-list-avatar" />
                 <h3>Dr. {doctor.NAME}, <span className="degree">{doctor.DEGREE}</span></h3>
                 <p className="hospital">{doctor.FEILD_0F_SPEC}</p>
               </div>

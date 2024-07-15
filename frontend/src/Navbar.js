@@ -30,6 +30,7 @@ const Navbar = () => {
       navigate('/login');
    };
 
+
    return (
       <nav className="navbar">
          <div className="navbar-container">
@@ -139,18 +140,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-/*
-// Child
-// Health Professional
-// Therapy
-// Products
-// Courses
-// Disorder
-// Parent
-// Profile
-// Log in as CHILD: Parent, Health Professional, Therapy, Courses, Disorder, Profile
-// Log in as PARENT: Child, Health Professional, Therapy, Products, Profile
-// Log in as HEALTH PROFESSIONAL: Profile
-// Log in as TEACHER: Courses, Profile
-*/
