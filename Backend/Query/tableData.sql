@@ -189,87 +189,138 @@ INSERT INTO HEALTH_PROFESSIONAL (
     CONTACT_NO,
     EMAIL,
     DEGREE,
-    FEILD_0F_SPEC
-) VALUES (
-    '134',
-    'Doctor Alice',
-    1234567890,
-    'doctor@test.com',
-    'MBBS',
-    'EYE'
-);
-
-INSERT INTO HEALTH_PROFESSIONAL (
-    H_ID,
-    NAME,
-    CONTACT_NO,
-    EMAIL,
-    DEGREE,
-    FEILD_0F_SPEC
-) VALUES (
-    '79',
-    'Sakif',
-    1234567890,
-    'doctor1@test.com',
-    'MBBS',
-    'HEART'
-);
-
-INSERT INTO HEALTH_PROFESSIONAL (
-    H_ID,
-    NAME,
-    CONTACT_NO,
-    EMAIL,
-    DEGREE,
-    FEILD_0F_SPEC
-) VALUES (
-    '567',
-    'Alex',
-    1234567982,
-    'docAlex@test.com',
-    'FCPS',
-    'Pediatrics'
-);
-
-INSERT INTO HEALTH_PROFESSIONAL (
-    H_ID,
-    NAME,
-    CONTACT_NO,
-    EMAIL,
-    DEGREE,
-    FEILD_0F_SPEC
-) VALUES (
-    '232',
-    'Barbie',
-    1234432982,
-    'Drbarbie@test.com',
-    'FCPS',
-    'Pediatrics'
-);
-INSERT INTO HEALTH_PROFESSIONAL (
-    H_ID,
-    NAME,
-    CONTACT_NO,
-    EMAIL,
-    DEGREE,
-    FEILD_0F_SPEC
+    FIELD_0F_SPEC,
+    NAME_OF_HOSPITAL,
+    ADDRESS
 ) VALUES (
     '112',
-    'Hasnat',
+    'Yusuf Reza',
     1234567792,
     'HasnatPro@test.com',
     'MD',
-    'Cardiology'
+    'Cardiology',
+    'Evercare Hospital',
+    ADDR('Dhaka', '2/A, Gulshan-2', 1216)
 );
 
-UPDATE HEALTH_PROFESSIONAL
-SET NAME = 'Alice'
-WHERE NAME = 'Doctor Alice';
+INSERT INTO HEALTH_PROFESSIONAL (
+    H_ID,
+    NAME,
+    CONTACT_NO,
+    EMAIL,
+    DEGREE,
+    FIELD_0F_SPEC,
+    NAME_OF_HOSPITAL,
+    ADDRESS
+) VALUES (
+    '114',
+    'Zaima Ahmed',
+    1234567785,
+    'zaiimaaa@test.com',
+    'MD',
+    'Pediatrics',
+    'United Hospital',
+    ADDR('Dhaka', '11/A, Bashundhara R/A', 1202)
+);
 
-UPDATE HEALTH_PROFESSIONAL
-SET NAME = 'Nabiha Parvez'
-WHERE NAME = 'Nabiha Pervez';
+INSERT INTO HEALTH_PROFESSIONAL (
+    H_ID,
+    NAME,
+    CONTACT_NO,
+    EMAIL,
+    DEGREE,
+    FIELD_0F_SPEC,
+    NAME_OF_HOSPITAL,
+    ADDRESS
+) VALUES (
+    '174',
+    'Nabiha Parvez',
+    1234567799,
+    'n0biha@test.com',
+    'FCPS',
+    'Pediatrics',
+    'Dhaka Medical College Hospital',
+    ADDR('Dhaka', 'Shahabag', 1245)
+);
 
+INSERT INTO HEALTH_PROFESSIONAL (
+    H_ID,
+    NAME,
+    CONTACT_NO,
+    EMAIL,
+    DEGREE,
+    FIELD_0F_SPEC,
+    NAME_OF_HOSPITAL,
+    ADDRESS
+) VALUES (
+    '162',
+    'Tanvin Sarker',
+    1234567756,
+    'Tanvin32@test.com',
+    'MD',
+    'Psychology',
+    'Shiraj Khaleda General Hospital',
+    ADDR('Dhaka', 'Post Office,Dhaka Cantonment', 1206)
+);
+INSERT INTO HEALTH_PROFESSIONAL (
+    H_ID,
+    NAME,
+    CONTACT_NO,
+    EMAIL,
+    DEGREE,
+    FIELD_0F_SPEC,
+    NAME_OF_HOSPITAL,
+    ADDRESS
+) VALUES (
+    '152',
+    'Raisul Islam',
+    1234567654,
+    'raisul45@test.com',
+    'MD',
+    'Cardiology',
+    'High-Tech Multicare Hospital',
+    ADDR('Dhaka', 'Uttar Kafrul', 1206)
+);
+
+INSERT INTO HEALTH_PROFESSIONAL (
+    H_ID,
+    NAME,
+    CONTACT_NO,
+    EMAIL,
+    DEGREE,
+    FIELD_0F_SPEC,
+    NAME_OF_HOSPITAL,
+    ADDRESS
+) VALUES (
+    '100',
+    'Mohiuddin Ahmed',
+    1234567797,
+    'drMohiuddin76@test.com',
+    'FCPS',
+    'Medicine',
+    'Comfort Hospital',
+    ADDR('Dhaka', '2/A Farmgate', 1285)
+);
+
+INSERT INTO HEALTH_PROFESSIONAL (
+    H_ID,
+    NAME,
+    CONTACT_NO,
+    EMAIL,
+    DEGREE,
+    FIELD_0F_SPEC,
+    NAME_OF_HOSPITAL,
+    ADDRESS
+) VALUES (
+    '101',
+    'Ahmed',
+    1234567700,
+    'drAhmed@test.com',
+    'FCPS',
+    'Cardiology',
+    'Enam Medical College Hospital',
+    ADDR('Savar', '2/A Kalshi', 1245)
+);
 
 COMMIT;
 
