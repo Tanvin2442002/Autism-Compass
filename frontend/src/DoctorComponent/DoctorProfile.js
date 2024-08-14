@@ -4,7 +4,6 @@ import Navbar from '../Navbar';
 import './DoctorProfile.css';
 import { useLocation } from 'react-router-dom';
 
-
 const DoctorProfile = () => {
   const { id } = useParams();
   const [doctor, setDoctor] = useState(null);
@@ -54,7 +53,7 @@ const DoctorProfile = () => {
             <h2 className="doctor-name">Dr. {doctor.NAME}</h2>
             <div className="info-group">
               <p className="attribute">Field of Specialization:</p>
-              <div className="info-box slide-in">{doctor.FEILD_0F_SPEC}</div>
+              <div className="info-box slide-in">{doctor.FIELD_OF_SPEC}</div>
             </div>
             <div className="info-group">
               <p className="attribute">Degree:</p>
@@ -67,6 +66,20 @@ const DoctorProfile = () => {
             <div className="info-group">
               <p className="attribute">Email:</p>
               <div className="info-box slide-in">{doctor.EMAIL}</div>
+            </div>
+            <div className="info-group">
+              <p className="attribute">Hospital:</p>
+              <div className="info-box slide-in">{doctor.NAME_OF_HOSPITAL}</div>
+            </div>
+            <div className="info-group">
+              <p className="attribute">Visit Time:</p>
+              <div className="info-box slide-in">{doctor.VISIT_TIME}</div>
+            </div>
+            <div className="info-group">
+              <p className="attribute">Address:</p>
+              <div className="info-box slide-in">
+                {doctor.ADDRESS.CITY}, {doctor.ADDRESS.STREET}, {doctor.ADDRESS.POSTAL_CODE}
+              </div>
             </div>
             <button 
               className={`book-now-button ${isBooked ? 'booked' : ''}`} 

@@ -130,7 +130,7 @@ router.post("/doctor", async (req, res) => {
     const connection = await getConnection();
     console.log("Received data:", req.body);
     const resultReg = await connection.execute(
-        `INSERT INTO HEALTH_PROFESSIONAL (H_ID, NAME, CONTACT_NO, EMAIL, DEGREE , FEILD_0F_SPEC)
+        `INSERT INTO HEALTH_PROFESSIONAL (H_ID, NAME, CONTACT_NO, EMAIL, DEGREE , FIELD_OF_SPEC)
                  VALUES (:H_ID, :NAME, :CONTACT_NO, LOWER(:EMAIL), :DEGREE, :FIELD_OF_SPEC)`,
         {
             H_ID: req.body.H_ID,
@@ -280,7 +280,7 @@ router.post("/update-user-info", async (req, res) => {
         const { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC} = req.body;
         const query = `
             UPDATE HEALTH_PROFESSIONAL
-            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = LOWER(:EMAIL), DEGREE = :DEGREE, FEILD_0F_SPEC = :FIELD_OF_SPEC
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = LOWER(:EMAIL), DEGREE = :DEGREE, FIELD_OF_SPEC = :FIELD_OF_SPEC
             WHERE H_ID = :ID
         `;
         const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC}, { autoCommit: true });
