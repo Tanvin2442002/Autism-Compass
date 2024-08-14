@@ -28,7 +28,7 @@ const DoctorProfile = () => {
         setDoctor(data[0]);
       } catch (err) {
         setError(err.message);
-        console.error("Error fetching doctor details:", err); // Debugging log
+        console.error("Error fetching doctor details:", err); 
       } finally {
         setLoading(false);
       }
