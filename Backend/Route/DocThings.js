@@ -25,7 +25,7 @@ router.get('/doctors/search', async (req, res) => {
     console.log("Request received for searching doctors");
     try {
         const result = await connection.execute(
-            `SELECT * FROM HEALTH_PROFESSIONAL WHERE LOWER(NAME) LIKE :search OR LOWER(FEILD_0F_SPEC) LIKE :search`,
+            `SELECT * FROM HEALTH_PROFESSIONAL WHERE LOWER(NAME) LIKE :search OR LOWER(FIELD_OF_SPEC) LIKE :search`,
             { search }
         );
         res.status(200).send(result.rows);
