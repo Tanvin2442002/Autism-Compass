@@ -28,6 +28,8 @@ const DoctorReg = () => {
       CONTACT_NO: document.getElementById("phone").value,
       DEGREE: document.getElementById("degree").value,
       FIELD_OF_SPEC: document.getElementById("field-of-specialization").value,
+      NAME_OF_HOSPITAL: document.getElementById("name-of-hospital").value,
+      VISIT_TIME: document.getElementById("visit-time").value,
       CITY: document.getElementById("city").value,
       STREET: document.getElementById("street").value,
       POSTAL_CODE: document.getElementById("postal-code").value,
@@ -126,6 +128,25 @@ const DoctorReg = () => {
                 required
               />
             </div>
+            <div className="registration-input-box">
+              <label>Name of Hospital</label>
+              <input
+                type="text"
+                id="name-of-hospital"
+                placeholder="Enter Name of Hospital"
+                required
+              />
+            </div>
+            <div className="registration-input-box">
+              <label>Visit Time</label>
+              <input
+                type="text"
+                id="visit-time"
+                placeholder="Enter Visit Time"
+                required
+              />
+            </div>
+            <label >Address of Hospital</label>
             <div className="registration-address">
               <div className="registration-input-box">
                 <label>Street</label>
