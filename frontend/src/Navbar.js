@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
@@ -15,7 +13,6 @@ const Navbar = () => {
 
 
    useEffect(() => {
-      // Fetch the user type from localStorage or API
       const userDataString = localStorage.getItem('USER');
       if (userDataString) {
          const userData = JSON.parse(userDataString);
@@ -24,9 +21,7 @@ const Navbar = () => {
    }, []);
 
    const handleLogOut = () => {
-      // Clear the user data from localStorage
       localStorage.removeItem('USER');
-      // Redirect to the login page
       navigate('/login');
    };
 
