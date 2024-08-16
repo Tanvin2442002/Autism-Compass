@@ -77,4 +77,28 @@ router.get('/parent/children', async (req, res) => {
     }
 });
 
+// Backend route to handle adding a consultation
+router.post('/consult/add', async (req, res) => {
+    const connection = await getConnection();
+    const { P_ID, H_ID, C_ID } = req.body;
+
+    console.log('Request received to add consultation:', req.body);
+
+    try {
+        // Insert into CONSULTS table
+        const result = await connection.execute(
+            `INSERT INTO CONSULTS (P_ID, H_ID, C_ID) VALUES (:P_ID, :H_ID, :C_ID)`,
+            { P_ID, H_ID, C_ID }
+        );
+
+        await connection.commit(); // Commit the transaction
+        res.status(200).send({ message: 'Consultation added successfully' });
+        console.log('Consultation successfully added:', result);
+    } catch (error) {
+        console.error('Error inserting into CONSULTS:', error);
+        res.status(500).send({ error: 'Failed to add consultation' });
+    }
+});
+
+
 module.exports = router;

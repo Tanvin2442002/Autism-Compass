@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Navbar from '../Navbar';
 import './DoctorProfile.css';
 import { useLocation } from 'react-router-dom';
@@ -38,7 +38,7 @@ const DoctorProfile = () => {
     };
 
     fetchDoctor();
-  }, []);
+  }, [doctorId]);
 
   const handleBooking = async (childId = null) => {
     // Prepare the consult details (P_ID, H_ID, C_ID)
@@ -88,6 +88,7 @@ const DoctorProfile = () => {
 
   const closePopup = () => {
     setNoChildrenMessage(false);
+    setShowChildSelection(false);
   };
 
   if (loading) return <div>Loading...</div>;
@@ -133,48 +134,39 @@ const DoctorProfile = () => {
               </div>
             </div>
 
-            {/* Pop-up message above the button */}
+            {/* No Children Popup */}
             {noChildrenMessage && (
               <div className="no-children-popup" style={{ marginBottom: '10px' }}>
+                <button className="close-btn" onClick={closePopup}>×</button>
                 <p>No child is registered.</p>
-                <button onClick={closePopup}>Close</button>
+              </div>
+            )}
+
+            {/* Child Selection Popup */}
+            {showChildSelection && (
+              <div className="child-list" style={{ marginBottom: '10px' }}>
+                <button className="close-btn" onClick={closePopup}>×</button>
+                <h4>Select a Child to Book Consultation:</h4>
+                {childList.map((childId) => (
+                  <button
+                    key={childId}
+                    onClick={() => handleBooking(childId)}
+                    className="child-id-button"
+                  >
+                    {childId}
+                  </button>
+                ))}
               </div>
             )}
 
             {/* Book Now button behavior for Parent and Child */}
-            {userData.TYPE === 'PARENT' ? (
-              <>
-                <button
-                  className={`book-now-button ${isBooked ? 'booked' : ''}`}
-                  onClick={handleParentBooking}
-                  style={{ backgroundColor: isBooked ? 'green' : 'red' }}
-                >
-                  <span className="button-text">{isBooked ? 'Booked!' : 'Book Now'}</span>
-                </button>
-                {showChildSelection && (
-                  <div className="child-list">
-                    <h4>Select a Child to Book Consultation:</h4>
-                    {childList.map((childId) => (
-                      <button
-                        key={childId}
-                        onClick={() => handleBooking(childId)}
-                        className="child-id-button"
-                      >
-                        {childId}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </>
-            ) : (
-              <button
-                className={`book-now-button ${isBooked ? 'booked' : ''}`}
-                onClick={() => handleBooking()}
-                style={{ backgroundColor: isBooked ? 'green' : 'red' }}
-              >
-                <span className="button-text">{isBooked ? 'Booked!' : 'Book Now'}</span>
-              </button>
-            )}
+            <button
+              className={`book-now-button ${isBooked ? 'booked' : ''}`}
+              onClick={userData.TYPE === 'PARENT' ? handleParentBooking : () => handleBooking()}
+              style={{ backgroundColor: isBooked ? 'green' : 'red' }}
+            >
+              <span className="button-text">{isBooked ? 'Booked!' : 'Book Now'}</span>
+            </button>
           </div>
         )}
       </div>
