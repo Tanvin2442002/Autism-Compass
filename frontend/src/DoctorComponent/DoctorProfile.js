@@ -10,33 +10,89 @@ const DoctorProfile = () => {
   const [isBooked, setIsBooked] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [childList, setChildList] = useState([]); // For holding list of children IDs
+  const [showChildSelection, setShowChildSelection] = useState(false); // For showing child ID pop-up list
+  const [noChildrenMessage, setNoChildrenMessage] = useState(false); // To show 'No child is registered' message
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const doctorId = params.get('id');
 
+  // Get user data from local storage
+  const userData = JSON.parse(localStorage.getItem('USER')); // This will get the ID and TYPE
+
   useEffect(() => {
     const fetchDoctor = async () => {
-      console.log("Fetching doctor details for ID:", id); // Debugging log
       try {
         const response = await fetch(`http://localhost:5000/doctor/detail?id=${doctorId}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("Fetched doctor data:", data); // Debugging log
         setDoctor(data[0]);
       } catch (err) {
         setError(err.message);
-        console.error("Error fetching doctor details:", err); // Debugging log
       } finally {
         setLoading(false);
       }
     };
-    fetchDoctor();
-  }, [id]);
 
-  const handleBooking = () => {
-    setIsBooked(true);
+    if (userData.TYPE === 'PARENT') {
+      // Fetch the list of children for this parent
+      const fetchChildren = async () => {
+        try {
+          const childrenResponse = await fetch(`http://localhost:5000/parent/children?id=${userData.ID}`);
+          const childrenData = await childrenResponse.json();
+          console.log("Children fetched: ", childrenData); // Debugging log
+          setChildList(childrenData); // Assuming this returns an array of child IDs
+        } catch (error) {
+          console.error("Error fetching children:", error);
+        }
+      };
+      fetchChildren();
+    }
+
+    fetchDoctor();
+  }, [id, userData]);
+
+  const handleBooking = async (childId = null) => {
+    // Prepare the consult details (P_ID, H_ID, C_ID)
+    const consultData = {
+      P_ID: userData.TYPE === 'PARENT' ? userData.ID : null, // Parent ID from localStorage
+      H_ID: doctorId,
+      C_ID: userData.TYPE === 'CHILD' ? userData.ID : childId, // Child ID from localStorage or selected
+    };
+
+    // Add consult to database
+    try {
+      const response = await fetch('http://localhost:5000/consult/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(consultData),
+      });
+      if (response.ok) {
+        setIsBooked(true); // Change button appearance to "Booked"
+        setShowChildSelection(false); // Hide child selection pop-up
+      } else {
+        throw new Error('Failed to book consultation');
+      }
+    } catch (err) {
+      console.error('Booking error:', err);
+    }
+  };
+
+  const handleParentBooking = () => {
+    console.log("Current childList: ", childList); // Debugging log
+    if (childList.length > 0) {
+      setShowChildSelection(true); // Show child ID pop-up list
+    } else {
+      setNoChildrenMessage(true); // Show "No child is registered" pop-up
+    }
+  };
+
+  const closePopup = () => {
+    setNoChildrenMessage(false);
   };
 
   if (loading) return <div>Loading...</div>;
@@ -81,12 +137,49 @@ const DoctorProfile = () => {
                 {doctor.ADDRESS.CITY}, {doctor.ADDRESS.STREET}, {doctor.ADDRESS.POSTAL_CODE}
               </div>
             </div>
-            <button 
-              className={`book-now-button ${isBooked ? 'booked' : ''}`} 
-              onClick={handleBooking}
-            >
-              <span className="button-text">{isBooked ? 'Booked!' : 'Book Now'}</span>
-            </button>
+
+            {/* Pop-up message above the button */}
+            {noChildrenMessage && (
+              <div className="no-children-popup" style={{ marginBottom: '10px' }}>
+                <p>No child is registered.</p>
+                <button onClick={closePopup}>Close</button>
+              </div>
+            )}
+
+            {/* Book Now button behavior for Parent and Child */}
+            {userData.TYPE === 'PARENT' ? (
+              <>
+                <button
+                  className={`book-now-button ${isBooked ? 'booked' : ''}`}
+                  onClick={handleParentBooking}
+                  style={{ backgroundColor: isBooked ? 'green' : 'red' }}
+                >
+                  <span className="button-text">{isBooked ? 'Booked!' : 'Book Now'}</span>
+                </button>
+                {showChildSelection && (
+                  <div className="child-list">
+                    <h4>Select a Child to Book Consultation:</h4>
+                    {childList.map((childId) => (
+                      <button
+                        key={childId}
+                        onClick={() => handleBooking(childId)}
+                        className="child-id-button"
+                      >
+                        {childId}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              <button
+                className={`book-now-button ${isBooked ? 'booked' : ''}`}
+                onClick={() => handleBooking()}
+                style={{ backgroundColor: isBooked ? 'green' : 'red' }}
+              >
+                <span className="button-text">{isBooked ? 'Booked!' : 'Book Now'}</span>
+              </button>
+            )}
           </div>
         )}
       </div>
