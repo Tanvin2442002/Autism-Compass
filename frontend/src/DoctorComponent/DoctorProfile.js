@@ -37,21 +37,6 @@ const DoctorProfile = () => {
       }
     };
 
-    if (userData.TYPE === 'PARENT') {
-      // Fetch the list of children for this parent
-      const fetchChildren = async () => {
-        try {
-          const childrenResponse = await fetch(`http://localhost:5000/parent/children?id=${userData.ID}`);
-          const childrenData = await childrenResponse.json();
-          console.log("Children fetched: ", childrenData); // Debugging log
-          setChildList(childrenData); // Assuming this returns an array of child IDs
-        } catch (error) {
-          console.error("Error fetching children:", error);
-        }
-      };
-      fetchChildren();
-    }
-
     fetchDoctor();
   }, [id, userData]);
 
@@ -83,12 +68,21 @@ const DoctorProfile = () => {
     }
   };
 
-  const handleParentBooking = () => {
-    console.log("Current childList: ", childList); // Debugging log
-    if (childList.length > 0) {
-      setShowChildSelection(true); // Show child ID pop-up list
-    } else {
-      setNoChildrenMessage(true); // Show "No child is registered" pop-up
+  const handleParentBooking = async () => {
+    try {
+        const childrenResponse = await fetch(`http://localhost:5000/parent/children?id=${userData.ID}`);
+        const childrenData = await childrenResponse.json();
+        console.log("Children fetched on button click: ", childrenData); // Debugging log
+        
+        setChildList(childrenData); // Assuming this returns an array of child IDs
+        if (childrenData.length > 0) {
+            setShowChildSelection(true); // Show child ID pop-up list
+        } else {
+            setNoChildrenMessage(true); // Show "No child is registered" pop-up
+        }
+    } catch (error) {
+        console.error("Error fetching children on button click:", error);
+        setNoChildrenMessage(true); // Show error message if fetching fails
     }
   };
 
