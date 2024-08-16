@@ -62,7 +62,11 @@ router.get('/parent/children', async (req, res) => {
     console.log("Request received for fetching children by parent ID:", parentId);
     try {
         const result = await connection.execute(
-            `SELECT C_ID FROM CHILD WHERE P_ID = :parentId`, // Query to fetch child IDs by parent ID
+            `SELECT C.C_ID, C.NAME AS NAME
+            FROM CHILD C, PARENT P, PARENT_HAS_CHILD PHC
+            WHERE P.P_ID = PHC.P_ID
+            AND PHC.C_ID = C.C_ID
+            AND P.P_ID = :parentId`, // Query to fetch child IDs by parent ID
             { parentId }
         );
         res.status(200).send(result.rows.map(row => row.C_ID)); // Send back only the child IDs

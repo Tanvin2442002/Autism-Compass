@@ -38,7 +38,7 @@ const DoctorProfile = () => {
     };
 
     fetchDoctor();
-  }, [id, userData]);
+  }, []);
 
   const handleBooking = async (childId = null) => {
     // Prepare the consult details (P_ID, H_ID, C_ID)
