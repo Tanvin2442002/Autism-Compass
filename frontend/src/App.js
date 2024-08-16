@@ -21,7 +21,7 @@ import TherapyOrganizations from "./TherapyComponent/TherapyORG";
 import ProductCart from "./productComponent/productCart";
 import DoctorsList from "./DoctorComponent/DocList";
 import DoctorProfile from "./DoctorComponent/DoctorProfile";
-
+import ParentChildProfile from "./LogInSignUpComponent/ParentChildProfile";
 
 function App() {
 
@@ -49,6 +49,7 @@ function App() {
                <Route path='/therapy/booked' element={<BookedTherapy />} />
                <Route path='/HealthProfessionals' element={<DoctorsList />} />
                <Route path='/doctor/detail' element={<DoctorProfile />} />
+               <Route path='/parent-child' element={<ParentChildProfile />} />
             </Routes>
          </Router>
       </div>

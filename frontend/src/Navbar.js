@@ -38,7 +38,7 @@ const Navbar = () => {
                   {userType === 'CHILD' && (
                      <>
                         <li>
-                           <Link to="/parent" className="navbar-link">Parent</Link>
+                           <Link to="/parent-child" className="navbar-link">Parent</Link>
                         </li>
                         <li>
                            <Link to="/HealthProfessionals" className="navbar-link">Health Professionals</Link>
@@ -71,7 +71,7 @@ const Navbar = () => {
                   {userType === 'PARENT' && (
                      <>
                         <li>
-                           <Link to="/Childs" className="navbar-link">Child</Link>
+                           <Link to="/parent-child" className="navbar-link">Child</Link>
                         </li>
                         <li>
                            <Link to="/HealthProfessionals" className="navbar-link">Health Professionals</Link>

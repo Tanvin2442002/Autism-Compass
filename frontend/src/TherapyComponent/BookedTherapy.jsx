@@ -15,16 +15,9 @@ const BookedTherapy = () => {
          setData(res);
       };
       fetchData();
-   }, [localData]);
+   }, []);
 
    const handleDelete = async (C_ID, P_ID, TH_ID, THO_ID) => {
-      // const response = await fetch(`http://localhost:5000/booking/delete?id=${bookingId}`, {
-      //    method: 'DELETE',
-      // });
-      // const res = await response.json();
-      // if (res.success) {
-      //    setData(data.filter(item => item.ID !== bookingId));
-      // }
       console.log("C_ID:", C_ID, "P_ID:", P_ID, "TH_ID:", TH_ID, "THO_ID:", THO_ID);
       const response = await fetch(`http://localhost:5000/booking/delete?C_ID=${C_ID}&P_ID=${P_ID}&TH_ID=${TH_ID}&THO_ID=${THO_ID}`, { method: 'DELETE' });
       const res = await response.json();
