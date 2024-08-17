@@ -214,24 +214,5 @@
   color: white;
 }
 
-/* Styling for the close button */
-.close-btn {
-  position: absolute; /* Make it positioned relative to its container */
-  top: 0px; /* Position it at the top */
-  right: 7px; /* Position it to the right */
-  background-color: white; /* White background */
-  color: red; /* Red color for the 'X' */
-  border: none; /* Remove border */
-  font-size: 16px; /* Smaller size */
-  font-weight: bold; /* Bold text */
-  cursor: pointer; /* Change cursor to pointer */
-  padding: 5px; /* Padding for better spacing */
-  border-radius: 50%; /* Make the button circular */
-  transition: background-color 0.3s ease;
-}
 
-.close-btn:hover {
-  background-color: rgba(255, 0, 0, 0.8); /* Darker red on hover */
-  color: white; /* White 'X' on hover */
-}
 
