@@ -125,7 +125,8 @@ router.get('/data', async (req, res) => {
       const findPID = parentId.rows[0].P_ID;
 
       const result = await connection.execute(
-         `SELECT UNIQUE C.NAME AS CHILD_NAME, C.EMAIL AS CHILD_EMAIL, P.NAME AS PARENT_NAME,
+         `SELECT UNIQUE C.C_ID AS C_ID, P.P_ID AS P_ID, TH.TH_ID AS TH_ID, THO.THO_ID AS THO_ID,
+         C.NAME AS CHILD_NAME, C.EMAIL AS CHILD_EMAIL, P.NAME AS PARENT_NAME,
          P.EMAIL AS PARENT_EMAIL, B.BOOKING_DATE AS BOOKING_DATE, TH.THERAPY_TYPE AS THERAPY_TYPE,
          THO.NAME AS ORG_NAME, THO.CONTACT_NO AS ORG_CONTACT_NO, THO.EMAIL AS ORG_EMAIL,
          THO.CITY AS ORG_CITY, THO.STREET AS ORG_STREET, THO.POSTAL_CODE AS ORG_POSTAL_CODE
@@ -145,24 +146,52 @@ router.get('/data', async (req, res) => {
    }
    else if (receivedType === "PARENT") {
       const result = await connection.execute(
-         `SELECT UNIQUE C.NAME AS CHILD_NAME, C.EMAIL AS CHILD_EMAIL, P.NAME AS PARENT_NAME,
-         P.EMAIL AS PARENT_EMAIL, B.BOOKING_DATE AS BOOKING_DATE, TH.THERAPY_TYPE AS THERAPY_TYPE,
-         THO.NAME AS ORG_NAME, THO.CONTACT_NO AS ORG_CONTACT_NO, THO.EMAIL AS ORG_EMAIL,
-         THO.CITY AS ORG_CITY, THO.STREET AS ORG_STREET, THO.POSTAL_CODE AS ORG_POSTAL_CODE
-         FROM CHILD C, PARENT P, PARENT_HAS_CHILD PHC, BOOKS B,
-         THERAPY TH, THERAPY_HAS_THEAPYORG THTHO, THERAPY_ORG THO
-         WHERE C.C_ID = PHC.C_ID
-         AND P.P_ID = PHC.P_ID
-         AND C.C_ID = B.C_ID
-         AND P.P_ID = B.P_ID
-         AND TH.TH_ID = B.TH_ID
-         AND THO.THO_ID = B.THO_ID
-         AND B.P_ID = :receivedID`,
+         `SELECT UNIQUE C.C_ID AS C_ID, P.P_ID AS P_ID, TH.TH_ID AS TH_ID, THO.THO_ID AS THO_ID,
+            C.NAME AS CHILD_NAME, C.EMAIL AS CHILD_EMAIL, P.NAME AS PARENT_NAME,
+            P.EMAIL AS PARENT_EMAIL, B.BOOKING_DATE AS BOOKING_DATE, TH.THERAPY_TYPE AS THERAPY_TYPE,
+            THO.NAME AS ORG_NAME, THO.CONTACT_NO AS ORG_CONTACT_NO, THO.EMAIL AS ORG_EMAIL,
+            THO.CITY AS ORG_CITY, THO.STREET AS ORG_STREET, THO.POSTAL_CODE AS ORG_POSTAL_CODE
+            FROM CHILD C, PARENT P, PARENT_HAS_CHILD PHC, BOOKS B,
+            THERAPY TH, THERAPY_HAS_THEAPYORG THTHO, THERAPY_ORG THO
+            WHERE C.C_ID = PHC.C_ID
+            AND P.P_ID = PHC.P_ID
+            AND C.C_ID = B.C_ID
+            AND P.P_ID = B.P_ID
+            AND TH.TH_ID = B.TH_ID
+            AND THO.THO_ID = B.THO_ID
+            AND B.P_ID = :receivedID`,
          { receivedID }
       );
-      
+
       res.status(200).send(result.rows);
    }
 });
+
+router.delete('/delete', async (req, res) => {
+   const connection = await getConnection();
+   const { C_ID, P_ID, TH_ID, THO_ID } = req.query;
+   console.log("Request received", { C_ID, P_ID, TH_ID, THO_ID });
+
+   try {
+      const result = await connection.execute(
+         `DELETE FROM BOOKS WHERE C_ID = :C_ID AND P_ID = :P_ID AND TH_ID = :TH_ID AND THO_ID = :THO_ID`,
+         { C_ID, P_ID, TH_ID, THO_ID },
+         { autoCommit: true }
+      );
+      console.log('Rows affected:', result.rowsAffected);
+
+      if (result.rowsAffected > 0) {
+         res.status(200).send({ success: true });
+      } else {
+         res.status(404).send({ success: false, message: 'Record not found' });
+      }
+   } catch (error) {
+      console.error('Error executing query:', error);
+      res.status(500).send({ error: 'Database query failed' });
+   } finally {
+      console.log("Request processed");
+   }
+});
+
 
 module.exports = router;

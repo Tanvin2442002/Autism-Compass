@@ -60,7 +60,7 @@ const Profile = () => {
                CITY: data[0].CITY,
                POSTAL_CODE: data[0].POSTAL_CODE,
                DEGREE: data[0].DEGREE,
-               FIELD_OF_SPEC: data[0].FEILD_0F_SPEC,
+               FIELD_OF_SPEC: data[0].FIELD_OF_SPEC,
                INSTITUTION: data[0].INSTITUTION,
             });
          } catch (err) {

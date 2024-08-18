@@ -9,6 +9,7 @@ let connection;
 
 
 async function initializeConnection() {
+  
   try {
     connection = await oracle.getConnection({
       user: process.env.USER,

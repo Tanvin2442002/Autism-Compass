@@ -13,6 +13,7 @@ app.use("", require("./Route/TherapyThings"));
 app.use("", require("./Route/DocThings"));
 app.use("/therapy", require("./Route/TherapyThings"));
 app.use("/booking", require("./Route/BookingTherapy"));
+app.use("", require("./Route/BookingDoc"));
 
 
 app.post("/login", async (req, res) => {     

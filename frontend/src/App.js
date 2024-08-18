@@ -21,7 +21,8 @@ import TherapyOrganizations from "./TherapyComponent/TherapyORG";
 import ProductCart from "./productComponent/productCart";
 import DoctorsList from "./DoctorComponent/DocList";
 import DoctorProfile from "./DoctorComponent/DoctorProfile";
-
+import ParentChildProfile from "./LogInSignUpComponent/ParentChildProfile";
+import BookingDoc from "./DoctorComponent/BookingDoc";
 
 function App() {
 
@@ -47,6 +48,10 @@ function App() {
                <Route path='/disorder' element={<Disorder />} />
                <Route path='/therapy/booking' element={<BookingTherapy />} />
                <Route path='/therapy/booked' element={<BookedTherapy />} />
+               <Route path='/HealthProfessionals' element={<DoctorsList />} />
+               <Route path='/doctor/detail' element={<DoctorProfile />} />
+               <Route path='/booking/doc' element={<BookingDoc />} />
+               <Route path='/parent-child' element={<ParentChildProfile />} />
             </Routes>
          </Router>
       </div>

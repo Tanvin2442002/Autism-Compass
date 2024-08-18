@@ -1,11 +1,11 @@
 .booked-therapy {
-    /* border: 5px solid red; */
     display: flex;
     flex-direction: column;
     background-color: #DDE6ED;
     align-items: center;
     min-height: 100vh;
     position: relative;
+    border: 3px solid rebeccapurple;
 }
 
 .booked-therapy-main{
@@ -27,6 +27,68 @@
     background-color: #3d52a047;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 51, 128, 0.364);
+}
+
+.booked-therapy-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-right: 1%;
+    position: relative;
+}
+
+.booked-therapy-title h2 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+}
+
+.booked-therapy-title .delete-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    width: auto;
+    /* border: none; */
+    background: transparent;
+    height: 30px;
+    transition: width 0.3s ease;
+}
+
+.booked-therapy-title .delete-container .fa-delete-left {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.booked-therapy-title .delete-container .delete-text {
+    opacity: 0;
+    visibility: hidden;
+    margin-left: 10px;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    white-space: nowrap;
+    position: absolute;
+    color: red;
+    font-size: 15px;font-weight: 500;
+    right: -100%;
+    transform: translateX(100%);
+}
+
+.booked-therapy-title .delete-container:hover {
+    width: 150px;
+    /* Adjust this width as needed */
+}
+
+.booked-therapy-title .delete-container:hover .fa-delete-left {
+    transform: translateX(-440%);
+}
+
+.booked-therapy-title .delete-container:hover .delete-text {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    right: 0;
 }
 
 .details-info{

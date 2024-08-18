@@ -130,8 +130,7 @@ router.post("/doctor", async (req, res) => {
     const connection = await getConnection();
     console.log("Received data:", req.body);
     const resultReg = await connection.execute(
-        `INSERT INTO HEALTH_PROFESSIONAL (H_ID, NAME, CONTACT_NO, EMAIL, DEGREE , FEILD_0F_SPEC)
-                 VALUES (:H_ID, :NAME, :CONTACT_NO, LOWER(:EMAIL), :DEGREE, :FIELD_OF_SPEC)`,
+        `INSERT INTO HEALTH_PROFESSIONAL (H_ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC, NAME_OF_HOSPITAL, VISIT_TIME, ADDRESS) VALUES (:H_ID, :NAME, :CONTACT_NO, LOWER(:EMAIL), :DEGREE, :FIELD_OF_SPEC, :NAME_OF_HOSPITAL, :VISIT_TIME, ADDR(:CITY, :STREET, :POSTAL_CODE))`,
         {
             H_ID: req.body.H_ID,
             NAME: req.body.NAME,
@@ -139,12 +138,17 @@ router.post("/doctor", async (req, res) => {
             EMAIL: req.body.EMAIL,
             DEGREE: req.body.DEGREE,
             FIELD_OF_SPEC: req.body.FIELD_OF_SPEC,
+            NAME_OF_HOSPITAL: req.body.NAME_OF_HOSPITAL,
+            VISIT_TIME: req.body.VISIT_TIME,
+            CITY: req.body.CITY,
+            STREET: req.body.STREET,
+            POSTAL_CODE: req.body.POST
         },
         { autoCommit: true }
     );
     const resultLog = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-                 VALUES (LOWER(:EMAIL), :PASSWORD, 'HEALTH_PROFESSIONAL')`,
+        VALUES (LOWER(:EMAIL), :PASSWORD, 'HEALTH_PROFESSIONAL')`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
@@ -280,7 +284,7 @@ router.post("/update-user-info", async (req, res) => {
         const { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC} = req.body;
         const query = `
             UPDATE HEALTH_PROFESSIONAL
-            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = LOWER(:EMAIL), DEGREE = :DEGREE, FEILD_0F_SPEC = :FIELD_OF_SPEC
+            SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = LOWER(:EMAIL), DEGREE = :DEGREE, FIELD_OF_SPEC = :FIELD_OF_SPEC
             WHERE H_ID = :ID
         `;
         const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC}, { autoCommit: true });

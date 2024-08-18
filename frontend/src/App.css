@@ -8,18 +8,17 @@ html{
    align-items: center;
    width: 100vw;
    height: 100vh;
-   border: 5px solid rgb(13, 255, 0);
-   background-color: #676dd9;
+   /* background-color: #676dd9; */
+   background-color: #DDE6ED;
    overflow-x: hidden;
 }
 
 .landingPage {
    width: 100vw;
-   height: 100vh;
-   background-image: url('./img/land.jpg');
-   background-size: cover;
+   height: 100%;
+   overflow-y: hidden;
+   background: url('./img/land.jpg') no-repeat;
    background-position: center;
-   background-repeat: no-repeat;
 }
 
 .LogInSignUpBtn {

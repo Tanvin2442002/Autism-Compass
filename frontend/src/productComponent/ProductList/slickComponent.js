@@ -28,7 +28,6 @@ const SlickComponent = () => {
                 setLoading(false);
             }
         };
-
         fetchProduct();
     }, []);
 

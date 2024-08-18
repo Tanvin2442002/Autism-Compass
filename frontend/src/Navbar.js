@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
@@ -15,7 +13,6 @@ const Navbar = () => {
 
 
    useEffect(() => {
-      // Fetch the user type from localStorage or API
       const userDataString = localStorage.getItem('USER');
       if (userDataString) {
          const userData = JSON.parse(userDataString);
@@ -24,11 +21,10 @@ const Navbar = () => {
    }, []);
 
    const handleLogOut = () => {
-      // Clear the user data from localStorage
       localStorage.removeItem('USER');
-      // Redirect to the login page
       navigate('/login');
    };
+
 
    return (
       <nav className="navbar">
@@ -42,7 +38,7 @@ const Navbar = () => {
                   {userType === 'CHILD' && (
                      <>
                         <li>
-                           <Link to="/parent" className="navbar-link">Parent</Link>
+                           <Link to="/parent-child" className="navbar-link">Parent</Link>
                         </li>
                         <li>
                            <Link to="/HealthProfessionals" className="navbar-link">Health Professionals</Link>
@@ -75,7 +71,7 @@ const Navbar = () => {
                   {userType === 'PARENT' && (
                      <>
                         <li>
-                           <Link to="/Childs" className="navbar-link">Child</Link>
+                           <Link to="/parent-child" className="navbar-link">Child</Link>
                         </li>
                         <li>
                            <Link to="/HealthProfessionals" className="navbar-link">Health Professionals</Link>
@@ -139,18 +135,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-/*
-// Child
-// Health Professional
-// Therapy
-// Products
-// Courses
-// Disorder
-// Parent
-// Profile
-// Log in as CHILD: Parent, Health Professional, Therapy, Courses, Disorder, Profile
-// Log in as PARENT: Child, Health Professional, Therapy, Products, Profile
-// Log in as HEALTH PROFESSIONAL: Profile
-// Log in as TEACHER: Courses, Profile
-*/
