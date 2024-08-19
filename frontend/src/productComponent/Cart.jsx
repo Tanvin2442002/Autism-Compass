@@ -98,7 +98,10 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveItem = async (PR_ID) => {
+  const handleRemoveItem = async (PR_ID,event) => {
+    if (event) {
+      event.preventDefault();
+    }
     setLoading(true); // Set loading state when removing an item
     try {
       const response = await fetch(
@@ -233,7 +236,7 @@ const Cart = () => {
                     </div>
                   </div>
                   <button
-                    className="remove" onClick={() => handleRemoveItem(item.PR_ID)}>
+                    className="remove" onClick={(e) => handleRemoveItem(item.PR_ID,e)}>
                     ×
                   </button>
                 </div>
