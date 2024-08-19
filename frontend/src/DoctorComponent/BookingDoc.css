@@ -1,133 +1,89 @@
-/* 
-.child-info-container {
+/* Blurred background effect for booking container */
+.booking-container {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    background: url(../img/bg.jpg) no-repeat center center fixed; /* Background image path, with fixed position */
+    background-size: cover;
+    min-height: 100vh; /* Use min-height to allow the content to expand beyond viewport height */
+    width: 100%;
+    overflow: auto; /* Allow scrolling */
+    position: relative;
+    padding-bottom: 50px; /* Add padding to avoid content at the bottom being cut off */
+}
+
+/* Form container with a blur effect over the background */
+.booking-header {
+    width: 85%;
+    background: rgba(255, 255, 255, 0.2); /* Slightly transparent white background */
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Transparent border */
+    backdrop-filter: blur(5px); /* Blurred background effect */
+    color: #000;
+    border-radius: 12px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 2s ease-in;
+    padding: 40px;
+}
+
+/* Child Info Section */
+.child-info-wrapper {
+    display: flex;
+    justify-content: space-around; /* Align children side by side */
     align-items: center;
     width: 80%;
     margin-top: 30px;
-    background-color: #aab6c9;
+    background: rgba(255, 255, 255, 0.2); /* Blurred background with slight transparency */
+    backdrop-filter: blur(10px); /* Blurred effect for background */
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1s ease-in-out;
 }
 
-.child-info {
-    background-color: #ffffff;
+/* Style for child cards to have white background and hover effects */
+.child-card {
+    background-color: #ffffff; /* White background for cards */
     border-radius: 15px;
     padding: 10px;
     text-align: center;
     width: 150px;
     margin: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
     cursor: pointer;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.child-info:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+.child-card:hover {
+    transform: translateY(-10px); /* Hover effect */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3); /* More intense shadow on hover */
 }
 
-.child-info h2 {
+.child-card h2 {
     font-size: 1rem;
-    color: #0034de;
+    color: #285364; /* Keeping original color for the name */
 }
 
-.child-info p {
+.child-card p {
     font-size: 0.9rem;
     color: #555;
 }
 
-.person-icon {
+/* Person Icon for Child Info */
+.child-icon {
     font-size: 3rem;
     color: #333;
     margin-bottom: 10px;
     transition: color 0.3s ease;
 }
 
-.child-info:hover .person-icon {
-    color: #0072ff; 
-}
-.booking-heading {
-    position: relative;
-    padding: 40px;
-    margin: 1%;
-    background: #ffffff;
-    margin-top: 40px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    width: 85%;
-    display: flex;
-    flex-direction: column;
-    animation: slideIn 0.8s ease-in-out;
-    align-items: center;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+.child-card:hover .child-icon {
+    color: #39b7e1; /* Icon color changes on hover */
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateY(-30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.booking-heading h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 30px;
-    font-weight: bold;
-}
-
-.form-container {
-    display: flex;
-    justify-content: space-between;
-    width: 70%;
-    margin-bottom: 40px;
-}
-
-.input-container {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    background: #f8f9fa;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-}
-
-.input-container:hover {
-    transform: scale(1.05);
-}
-
-.input-container label {
-    font-size: 1.1rem;
-    color: #0034de;
-    margin-bottom: 10px;
-}
-
-input[type="date"],
-input[type="time"] {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #e8e8e8;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease-in-out;
-}
-
-input[type="date"]:focus,
-input[type="time"]:focus {
-    border-color: #0072ff;
-}
-
-.confirm-button-container {
+/* Form wrapper for Date and Time fields, aligned side by side */
+.form-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,28 +91,86 @@ input[type="time"]:focus {
     margin-top: 30px;
 }
 
-.confirm-button {
+/* Style for both date and time input boxes */
+.input-box {
+    width: 40%;
+    margin: 0 20px; /* Adds space between the boxes */
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.input-box:hover {
+    transform: scale(1.05); /* Dramatic hover effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+}
+
+.input-box label {
+    font-size: 1.1rem;
+    color: #3c607a;
+    margin-bottom: 10px;
+}
+
+/* Date and Time fields styled with white background */
+input[type="date"],
+input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e8e8e8;
+    background-color: #97b6cf; /* White background for tabs */
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Hover effect for the input fields */
+input[type="date"]:hover,
+input[type="time"]:hover {
+    background-color: #f0f0f0; /* Change to light grey on hover */
+    border-color: #265fa4; /* Change border color on hover */
+}
+
+/* Center the fields in form */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+/* Confirm Button */
+.confirm-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.confirm-btn {
     width: 25%;
     padding: 20px 35px;
     border-radius: 25px;
-    background: linear-gradient(90deg, #e98571 0%, #d71e1e 100%);
+    background: linear-gradient(90deg, #df5033 0%, #d71e1e 100%);
     color: #ffffff;
     font-weight: bold;
     font-size: 1.2rem;
-    box-shadow: 0 8px 15px #4e07074d;
+    box-shadow: 0 8px 15px #f014144d;
     transition: all 250ms ease-in-out;
     cursor: pointer;
     position: relative;
     overflow: hidden;
 }
 
-.confirm-button:hover {
+.confirm-btn:hover {
     background-color: #212121;
     color: #e8e8e8;
     transform: scale(1.05);
 }
 
-.confirm-button::before {
+.confirm-btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -167,6 +181,16 @@ input[type="time"]:focus {
     transition: 0.5s ease-in-out;
 }
 
-.confirm-button:hover::before {
+.confirm-btn:hover::before {
     left: 100%;
-} */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

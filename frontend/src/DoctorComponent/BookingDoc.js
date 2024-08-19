@@ -103,16 +103,16 @@ const BookingDoc = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className='booking'>
+    <div className='booking-container'>
       <ToastContainer />
       <Navbar />
 
       {/* Display Child Info at the top */}
       {localData.TYPE === 'PARENT' && userDetails.length > 0 && (
-        <div className='child-info-container'>
+        <div className='child-info-wrapper'>
           {userDetails.map((child) => (
-            <div className='child-info' key={child.C_ID} onClick={() => handleChildSelection(child.C_ID)}>
-              <i className="bx bx-user-circle person-icon"></i>
+            <div className='child-card' key={child.C_ID} onClick={() => handleChildSelection(child.C_ID)}>
+              <i className="bx bx-user-circle child-icon"></i>
               <h2>{child.CHILD_NAME}</h2>
               <p>Email: {child.CHILD_EMAIL}</p>
             </div>
@@ -121,23 +121,23 @@ const BookingDoc = () => {
       )}
 
       {/* Consultation form below child info */}
-      <div className='booking-heading'>
+      <div className='booking-header'>
         <h1>Book Consultation with Dr. {doctorDetails && doctorDetails.NAME}</h1>
 
-        <div className='form-container'>
-          <div className='input-container'>
+        <div className='form-wrapper'>
+          <div className='input-box'>
             <label htmlFor='consultation-date'>Select Date:</label>
             <input type='date' id='consultation-date' required />
           </div>
 
-          <div className='input-container'>
+          <div className='input-box'>
             <label htmlFor='consultation-time'>Select Time:</label>
             <input type='time' id='consultation-time' required />
           </div>
         </div>
 
-        <div className='confirm-button-container'>
-          <button type='submit' className='confirm-button' onClick={handleConfirmBooking}>
+        <div className='confirm-btn-wrapper'>
+          <button type='submit' className='confirm-btn' onClick={handleConfirmBooking}>
             Confirm Booking
           </button>
         </div>
