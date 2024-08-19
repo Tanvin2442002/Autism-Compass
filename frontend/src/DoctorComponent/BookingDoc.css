@@ -1,4 +1,4 @@
-/* Child Info Section at the top */
+/* 
 .child-info-container {
     display: flex;
     justify-content: space-evenly;
@@ -39,7 +39,6 @@
     color: #555;
 }
 
-/* Person Icon for Child Info */
 .person-icon {
     font-size: 3rem;
     color: #333;
@@ -48,9 +47,8 @@
 }
 
 .child-info:hover .person-icon {
-    color: #0072ff;  /* Hover effect for the person icon */
+    color: #0072ff; 
 }
-/* Consultation Form */
 .booking-heading {
     position: relative;
     padding: 40px;
@@ -86,7 +84,6 @@
     font-weight: bold;
 }
 
-/* Form Inputs Layout */
 .form-container {
     display: flex;
     justify-content: space-between;
@@ -172,4 +169,4 @@ input[type="time"]:focus {
 
 .confirm-button:hover::before {
     left: 100%;
-}
+} */
