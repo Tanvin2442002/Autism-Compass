@@ -85,10 +85,25 @@ router.post('/physician', async (req, res) => {
   const { P_ID, H_ID, C_ID, BOOKING_DATE, BOOKING_TIME } = req.body;
 
   try {
+    // If a child is logged in, fetch the parent ID from the parent-child relationship
+    let parentId = P_ID;
+    if (!parentId) {
+      const result = await connection.execute(
+        `SELECT P.P_ID
+         FROM PARENT_HAS_CHILD PHC
+         WHERE PHC.C_ID = :C_ID`,
+        { C_ID }
+      );
+      parentId = result.rows[0]?.P_ID;
+      if (!parentId) {
+        throw new Error('Parent ID not found for this child.');
+      }
+    }
+
     const result = await connection.execute(
       `INSERT INTO CONSULTS (P_ID, H_ID, C_ID)
        VALUES (:P_ID, :H_ID, :C_ID)`,
-      { P_ID, H_ID, C_ID },
+      { P_ID: parentId, H_ID, C_ID },
       { autoCommit: true }
     );
 

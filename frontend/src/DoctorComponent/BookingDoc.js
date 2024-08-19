@@ -61,12 +61,15 @@ const BookingDoc = () => {
   const handleConfirmBooking = async (e) => {
     e.preventDefault();
     const bookingData = {
-      P_ID: localData.TYPE === 'PARENT' ? localData.ID : userDetails.P_ID,  // Parent ID for parent login
-      C_ID: localData.TYPE === 'PARENT' ? selectedChildId : localData.ID,  // Selected Child ID or Child's ID directly
       H_ID: doctorId,  // Doctor (Health Professional) ID
+      C_ID: localData.TYPE === 'PARENT' ? selectedChildId : localData.ID,  // Selected Child ID or Child's ID directly
       BOOKING_DATE: document.getElementById('consultation-date').value,  // Selected Date
       BOOKING_TIME: document.getElementById('consultation-time').value,  // Selected Time
     };
+
+    if (localData.TYPE === 'PARENT') {
+      bookingData.P_ID = localData.ID;  // Parent ID for parent login
+    }
 
     console.log('Booking data:', bookingData);
 
