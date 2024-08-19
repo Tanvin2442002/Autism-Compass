@@ -60,6 +60,10 @@
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3); /* More intense shadow on hover */
 }
 
+.child-card.selected {
+    background-color: lightpink; /* Highlight selected child */
+}
+
 .child-card h2 {
     font-size: 1rem;
     color: #285364; /* Keeping original color for the name */
@@ -153,7 +157,7 @@ input[type="time"]:hover {
     width: 25%;
     padding: 20px 35px;
     border-radius: 25px;
-    background: linear-gradient(90deg, #df5033 0%, #d71e1e 100%);
+    background: linear-gradient(90deg, #db4b2e 0%, #880808 100%);
     color: #ffffff;
     font-weight: bold;
     font-size: 1.2rem;
@@ -183,6 +187,12 @@ input[type="time"]:hover {
 
 .confirm-btn:hover::before {
     left: 100%;
+}
+
+/* Change confirm button color to green after booking */
+.confirm-btn.success {
+    background-color: green; /* Change color after successful booking */
+    color: white; /* Keep text white */
 }
 
 /* Fade-in animation */

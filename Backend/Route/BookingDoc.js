@@ -82,7 +82,7 @@ router.post('/physician', async (req, res) => {
   const connection = await getConnection();
   console.log("Request received for booking consultation with physician");
 
-  const { P_ID, H_ID, C_ID, BOOKING_DATE } = req.body;
+  const { P_ID, H_ID, C_ID, BOOKING_DATE, BOOKING_TIME } = req.body;
 
   try {
     const result = await connection.execute(
@@ -126,7 +126,5 @@ router.get('/physician/child/check', async (req, res) => {
     res.status(500).send({ error: 'Database query failed' });
   }
 });
-
-
 
 module.exports = router;

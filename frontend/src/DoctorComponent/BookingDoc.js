@@ -35,18 +35,15 @@ const BookingDoc = () => {
     const fetchUserDetails = async () => {
       try {
         let response;
-        // If logged in as parent, fetch child data
         if (localData.TYPE === 'PARENT') {
           response = await fetch(`http://localhost:5000/physician/child/data?P_ID=${localData.ID}`);
-        }
-        // If logged in as child, fetch parent data
-        else if (localData.TYPE === 'CHILD') {
+        } else if (localData.TYPE === 'CHILD') {
           response = await fetch(`http://localhost:5000/physician/parent/data?C_ID=${localData.ID}`);
         }
 
         const data = await response.json();
         setUserDetails(data); // Store the entire array
-        setSelectedChildId(data[0]?.C_ID); // Set the first child as default
+        setSelectedChildId(data.C_ID); // Set the child ID directly for child login
       } catch (error) {
         console.error('Error fetching user data:', error);
         setError('Failed to fetch user data.');
@@ -64,27 +61,34 @@ const BookingDoc = () => {
   const handleConfirmBooking = async (e) => {
     e.preventDefault();
     const bookingData = {
-      P_ID: localData.TYPE === 'PARENT' ? localData.ID : userDetails[0].P_ID,  // Parent ID
-      C_ID: selectedChildId,  // Selected Child ID
+      P_ID: localData.TYPE === 'PARENT' ? localData.ID : userDetails.P_ID,  // Parent ID for parent login
+      C_ID: localData.TYPE === 'PARENT' ? selectedChildId : localData.ID,  // Selected Child ID or Child's ID directly
       H_ID: doctorId,  // Doctor (Health Professional) ID
+      BOOKING_DATE: document.getElementById('consultation-date').value,  // Selected Date
+      BOOKING_TIME: document.getElementById('consultation-time').value,  // Selected Time
     };
 
     console.log('Booking data:', bookingData);
 
     try {
-      const response = await fetch('http://localhost:5000/booking/physician', {
+      const response = await fetch('http://localhost:5000/physician', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(bookingData),
       });
-      
+
       if (response.ok) {
         toast.success('Booking Successful!', {
           position: 'top-right',
           autoClose: 2500,
         });
+        // Change button color and text on success
+        const confirmBtn = document.querySelector('.confirm-btn');
+        confirmBtn.style.backgroundColor = 'green'; // Inline style for immediate color change
+        confirmBtn.textContent = 'Booking Confirmed'; // Change button text
+        confirmBtn.classList.add('success');  // Add the success class to the button
       } else {
         toast.error('Booking Failed!', {
           position: 'top-right',
@@ -111,7 +115,11 @@ const BookingDoc = () => {
       {localData.TYPE === 'PARENT' && userDetails.length > 0 && (
         <div className='child-info-wrapper'>
           {userDetails.map((child) => (
-            <div className='child-card' key={child.C_ID} onClick={() => handleChildSelection(child.C_ID)}>
+            <div
+              className={`child-card ${selectedChildId === child.C_ID ? 'selected' : ''}`}
+              key={child.C_ID}
+              onClick={() => handleChildSelection(child.C_ID)}
+            >
               <i className="bx bx-user-circle child-icon"></i>
               <h2>{child.CHILD_NAME}</h2>
               <p>Email: {child.CHILD_EMAIL}</p>
