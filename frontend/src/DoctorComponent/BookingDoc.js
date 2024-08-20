@@ -114,7 +114,6 @@ const BookingDoc = () => {
       <ToastContainer />
       <Navbar />
 
-      {/* Display Child Info at the top */}
       {localData.TYPE === 'PARENT' && userDetails.length > 0 && (
         <div className='child-info-wrapper'>
           {userDetails.map((child) => (
@@ -138,12 +137,19 @@ const BookingDoc = () => {
         <div className='form-wrapper'>
           <div className='input-box'>
             <label htmlFor='consultation-date'>Select Date:</label>
-            <input type='date' id='consultation-date' required />
+            <input
+              className='booking-input'
+              type='date'
+              id='consultation-date'
+              required />
           </div>
 
           <div className='input-box'>
             <label htmlFor='consultation-time'>Select Time:</label>
-            <input type='time' id='consultation-time' required />
+            <input
+              className='booking-input'
+              type='time'
+              id='consultation-time' required />
           </div>
         </div>
 

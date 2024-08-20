@@ -1,72 +1,66 @@
-/* Blurred background effect for booking container */
+
 .booking-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: url(../img/bg.jpg) no-repeat center center fixed; /* Background image path, with fixed position */
+    background: url(../img/bg.jpg) no-repeat center center fixed; 
     background-size: cover;
-    min-height: 100vh; /* Use min-height to allow the content to expand beyond viewport height */
-    width: 100%;
-    overflow: auto; /* Allow scrolling */
+    height: 99%;
     position: relative;
-    padding-bottom: 50px; /* Add padding to avoid content at the bottom being cut off */
+    border: 5px solid red;
 }
 
-/* Form container with a blur effect over the background */
 .booking-header {
     width: 85%;
-    background: rgba(255, 255, 255, 0.2); /* Slightly transparent white background */
-    border: 2px solid rgba(255, 255, 255, 0.2); /* Transparent border */
-    backdrop-filter: blur(5px); /* Blurred background effect */
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
     color: #000;
     border-radius: 12px;
     margin-top: 20px;
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     animation: fadeIn 2s ease-in;
-    padding: 40px;
+    padding: 10px;
 }
-
-/* Child Info Section */
 .child-info-wrapper {
     display: flex;
-    justify-content: space-around; /* Align children side by side */
+    justify-content: space-around;
     align-items: center;
-    width: 80%;
+    width: 85%;
     margin-top: 30px;
-    background: rgba(255, 255, 255, 0.2); /* Blurred background with slight transparency */
-    backdrop-filter: blur(10px); /* Blurred effect for background */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1s ease-in-out;
 }
 
-/* Style for child cards to have white background and hover effects */
 .child-card {
-    background-color: #ffffff; /* White background for cards */
+    background-color: #ffffff;
     border-radius: 15px;
     padding: 10px;
     text-align: center;
     width: 150px;
     margin: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .child-card:hover {
-    transform: translateY(-10px); /* Hover effect */
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3); /* More intense shadow on hover */
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
 }
 
 .child-card.selected {
-    background-color: lightpink; /* Highlight selected child */
+    background-color: lightpink
 }
 
 .child-card h2 {
     font-size: 1rem;
-    color: #285364; /* Keeping original color for the name */
+    color: #285364
 }
 
 .child-card p {
@@ -74,7 +68,6 @@
     color: #555;
 }
 
-/* Person Icon for Child Info */
 .child-icon {
     font-size: 3rem;
     color: #333;
@@ -83,10 +76,9 @@
 }
 
 .child-card:hover .child-icon {
-    color: #39b7e1; /* Icon color changes on hover */
+    color: #39b7e1
 }
 
-/* Form wrapper for Date and Time fields, aligned side by side */
 .form-wrapper {
     display: flex;
     justify-content: center;
@@ -95,10 +87,9 @@
     margin-top: 30px;
 }
 
-/* Style for both date and time input boxes */
 .input-box {
     width: 40%;
-    margin: 0 20px; /* Adds space between the boxes */
+    margin: 0 20px;
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
@@ -109,8 +100,8 @@
 }
 
 .input-box:hover {
-    transform: scale(1.05); /* Dramatic hover effect */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .input-box label {
@@ -119,32 +110,28 @@
     margin-bottom: 10px;
 }
 
-/* Date and Time fields styled with white background */
-input[type="date"],
-input[type="time"] {
+.booking-input[type="date"],
+.booking-input[type="time"] {
     width: 100%;
     padding: 10px;
     border: 2px solid #e8e8e8;
-    background-color: #97b6cf; /* White background for tabs */
+    background-color: #97b6cf;
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-/* Hover effect for the input fields */
-input[type="date"]:hover,
-input[type="time"]:hover {
-    background-color: #f0f0f0; /* Change to light grey on hover */
-    border-color: #265fa4; /* Change border color on hover */
+.booking-input[type="date"]:hover,
+.booking-input[type="time"]:hover {
+    background-color: #f0f0f0;
+    border-color: #265fa4
 }
 
-/* Center the fields in form */
 .form-wrapper {
     display: flex;
     justify-content: center;
 }
 
-/* Confirm Button */
 .confirm-btn-wrapper {
     display: flex;
     justify-content: center;
@@ -189,13 +176,11 @@ input[type="time"]:hover {
     left: 100%;
 }
 
-/* Change confirm button color to green after booking */
 .confirm-btn.success {
-    background-color: green; /* Change color after successful booking */
-    color: white; /* Keep text white */
+    background-color: green;
+    color: white
 }
 
-/* Fade-in animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
