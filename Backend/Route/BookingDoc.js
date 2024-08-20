@@ -2,9 +2,7 @@ const express = require('express');
 const { getConnection } = require('../DB/connection');
 const router = express.Router();
 
-/**
- * Fetch Health Professional (Doctor) Details by ID
- */
+
 router.get('/physician/detail', async (req, res) => {
   const connection = await getConnection();
   console.log("Request received to fetch physician details");
@@ -23,9 +21,6 @@ router.get('/physician/detail', async (req, res) => {
   }
 });
 
-/**
- * Fetch Child Data for Parent
- */
 router.get('/physician/child/data', async (req, res) => {
   const connection = await getConnection();
   console.log("Request received to fetch child data");

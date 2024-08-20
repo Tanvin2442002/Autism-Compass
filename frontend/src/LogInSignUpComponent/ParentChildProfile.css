@@ -1,52 +1,53 @@
-/* From Uiverse.io by Spacious74 */
-
-
-.parentchilddivider{
+.parentchilddivider {
     display: flex;
-    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    margin: 1%;
+    border: #53295b43 solid 2px;
+    border-radius: 10px;
+    width: 75%;
+    background-color: rgba(255, 255, 255, 0.2);
+    justify-content: space-evenly;
+}
+
+.parent-child-profile-info{
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.parentchildimg{
-    border: #0034de 2px solid;
-    width: 50%;
-    height: 50%;
-}
-
-.imgSetting{
-    width: 100%;
-    /* height: 50%; */
-    margin-right: 20px;
+.imgSetting {
+    height: 350px;
+    width: 350px;
     border-radius: 50%;
 }
 
-.container {
-    border: 5px solid rebeccapurple;
-    /* border: solid 1px #8d8d8d; */
+.container-childparen {
+    border: 3px solid #7B91E6;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: #fff;
 }
 
-.container .heading {
+.container-childparen .heading {
     font-size: 1.3rem;
     margin-bottom: 20px;
     font-weight: bolder;
 }
 
-.form {
-    max-width: 300px;
+.profile-form-childparent {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
 
-.input-field {
+.input-field-childparent {
     position: relative;
+    width: 450px;
 }
 
-.input-field label {
+.input-field-childparent label {
     position: absolute;
     color: #8d8d8d;
     pointer-events: none;
@@ -60,23 +61,23 @@
     transition: all 0.3s ease;
 }
 
-.input-field input {
+.input-field-childparent input {
     padding: 10px 15px;
     font-size: 1rem;
     border-radius: 8px;
     border: solid 1px #8d8d8d;
     letter-spacing: 1px;
-    width: 100%;
+    width: 94%;
 }
 
-.input-field input:focus,
-.input-field input:valid {
+.input-field-childparent input:focus,
+.input-field-childparent input:valid {
     outline: none;
-    border: solid 1px #0034de;
+    border: solid 0.5px #0034deb2;
 }
 
-.input-field input:focus~label,
-.input-field input:valid~label {
+.input-field-childparent input:focus~label,
+.input-field-childparent input:valid~label {
     -webkit-transform: translateY(-51%) translateX(-10px) scale(0.8);
     -ms-transform: translateY(-51%) translateX(-10px) scale(0.8);
     transform: translateY(-51%) translateX(-10px) scale(0.8);
@@ -87,16 +88,4 @@
     letter-spacing: 1px;
     border: none;
     border-radius: 100px;
-}
-
-.form .passicon {
-    cursor: pointer;
-    font-size: 1.3rem;
-    position: absolute;
-    top: 6px;
-    right: 8px;
-}
-
-.form .close {
-    display: none;
 }
