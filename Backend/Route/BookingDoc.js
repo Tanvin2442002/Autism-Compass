@@ -84,9 +84,10 @@ router.post('/physician', async (req, res) => {
     let parentId = P_ID;
     if (!parentId) {
       const result = await connection.execute(
-        `SELECT P.P_ID
-         FROM PARENT_HAS_CHILD PHC
-         WHERE PHC.C_ID = :C_ID`,
+        `SELECT PHC.P_ID AS P_ID
+         FROM PARENT_HAS_CHILD PHC, CHILD C
+         WHERE PHC.C_ID = C.C_ID
+         AND C.C_ID = :C_ID`,
         { C_ID }
       );
       parentId = result.rows[0]?.P_ID;
@@ -96,9 +97,15 @@ router.post('/physician', async (req, res) => {
     }
 
     const result = await connection.execute(
-      `INSERT INTO CONSULTS (P_ID, H_ID, C_ID)
-       VALUES (:P_ID, :H_ID, :C_ID)`,
-      { P_ID: parentId, H_ID, C_ID },
+      `INSERT INTO CONSULTS (P_ID, H_ID, C_ID, SELECTED_DATE, SELECTED_TIME)
+       VALUES (:P_ID, :H_ID, :C_ID, :BOOKING_DATE, :BOOKING_TIME)`,
+      {
+        P_ID: parentId,
+        H_ID,
+        C_ID,
+        BOOKING_DATE,
+        BOOKING_TIME
+      },
       { autoCommit: true }
     );
 
@@ -109,6 +116,7 @@ router.post('/physician', async (req, res) => {
     res.status(500).send({ error: 'Database query failed' });
   }
 });
+
 
 /**
  * Check if Child Email is Associated with Parent
@@ -136,5 +144,81 @@ router.get('/physician/child/check', async (req, res) => {
     res.status(500).send({ error: 'Database query failed' });
   }
 });
+
+// Fetch All Consultations for a Parent or Child
+router.get('/consultations/data', async (req, res) => {
+  const connection = await getConnection();
+  console.log("Request received for fetching consultations");
+  const { id, type } = req.query;
+
+  try {
+    let result;
+    if (type === "CHILD") {
+      const parentId = await connection.execute(
+        `SELECT P_ID FROM PARENT_HAS_CHILD WHERE C_ID = :id`,
+        { id }
+      );
+
+      const P_ID = parentId.rows[0].P_ID;
+      result = await connection.execute(
+        `SELECT CO.C_ID, CO.P_ID, CO.H_ID, HP.NAME AS DOCTOR_NAME, HP.FIELD_OF_SPEC, 
+                HP.VISIT_TIME, HP.CONTACT_NO, HP.EMAIL, HP.NAME_OF_HOSPITAL, 
+                HP.ADDRESS.CITY AS CITY, HP.ADDRESS.STREET AS STREET, HP.ADDRESS.POSTAL_CODE AS POSTAL_CODE,
+                C.NAME AS CHILD_NAME, P.NAME AS PARENT_NAME, P.EMAIL AS PARENT_EMAIL
+         FROM CONSULTS CO
+         JOIN HEALTH_PROFESSIONAL HP ON CO.H_ID = HP.H_ID
+         JOIN CHILD C ON CO.C_ID = C.C_ID
+         JOIN PARENT P ON CO.P_ID = P.P_ID
+         WHERE CO.P_ID = :P_ID AND CO.C_ID = :id`,
+        { P_ID, id }
+      );
+    } else if (type === "PARENT") {
+      result = await connection.execute(
+        `SELECT CO.C_ID, CO.P_ID, CO.H_ID, HP.NAME AS DOCTOR_NAME, HP.FIELD_OF_SPEC, 
+                HP.VISIT_TIME, HP.CONTACT_NO, HP.EMAIL, HP.NAME_OF_HOSPITAL, 
+                HP.ADDRESS.CITY AS CITY, HP.ADDRESS.STREET AS STREET, HP.ADDRESS.POSTAL_CODE AS POSTAL_CODE,
+                C.NAME AS CHILD_NAME, P.NAME AS PARENT_NAME, P.EMAIL AS PARENT_EMAIL
+         FROM CONSULTS CO
+         JOIN HEALTH_PROFESSIONAL HP ON CO.H_ID = HP.H_ID
+         JOIN CHILD C ON CO.C_ID = C.C_ID
+         JOIN PARENT P ON CO.P_ID = P.P_ID
+         WHERE CO.P_ID = :id`,
+        { id }
+      );
+    }
+
+    // Ensure the response is always an array, even if empty
+    res.status(200).send(result.rows || []);
+  } catch (error) {
+    console.error('Error fetching consultations:', error);
+    res.status(500).send({ error: 'Database query failed' });
+  }
+});
+
+// Cancel a Consultation
+router.delete('/consultations/delete', async (req, res) => {
+  const connection = await getConnection();
+  const { P_ID, H_ID, C_ID } = req.query;
+  console.log("Request received for deleting consultation");
+
+  try {
+    const result = await connection.execute(
+      `DELETE FROM CONSULTS WHERE P_ID = :P_ID AND H_ID = :H_ID AND C_ID = :C_ID`,
+      { P_ID, H_ID, C_ID },
+      { autoCommit: true }
+    );
+
+    if (result.rowsAffected > 0) {
+      res.status(200).send({ success: true });
+      console.log("Consultation deleted successfully");
+    } else {
+      res.status(404).send({ success: false, message: 'Consultation not found' });
+    }
+  } catch (error) {
+    console.error('Error executing query for consultation deletion:', error);
+    res.status(500).send({ error: 'Database query failed' });
+  }
+});
+
 
 module.exports = router;

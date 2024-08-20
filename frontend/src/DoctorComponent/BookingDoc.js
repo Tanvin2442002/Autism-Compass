@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom'; // Added useNavigate for navigation
 import Navbar from '../Navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +13,7 @@ const BookingDoc = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate(); // For redirecting to BookedList.js
   const params = new URLSearchParams(location.search);
   const doctorId = params.get('DOC_ID'); // Fetch doctor ID from URL
 
@@ -106,6 +107,10 @@ const BookingDoc = () => {
     }
   };
 
+  const handleBookingUpdatesClick = () => {
+    navigate('/BookedList'); // Redirect to BookedList.js page
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -158,6 +163,9 @@ const BookingDoc = () => {
             Confirm Booking
           </button>
         </div>
+        <button className='booking-updates-btn' onClick={handleBookingUpdatesClick}>
+          See Booking Updates 
+        </button>
       </div>
     </div>
   );

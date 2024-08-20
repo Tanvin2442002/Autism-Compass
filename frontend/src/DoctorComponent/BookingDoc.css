@@ -1,13 +1,14 @@
-
 .booking-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     background: url(../img/bg.jpg) no-repeat center center fixed; 
     background-size: cover;
-    height: 99%;
+    width: 100%;
+    height: 100vh;
     position: relative;
-    border: 5px solid red;
+    margin:0;
+    padding:0;
 }
 
 .booking-header {
@@ -55,12 +56,12 @@
 }
 
 .child-card.selected {
-    background-color: lightpink
+    background-color: lightpink;
 }
 
 .child-card h2 {
     font-size: 1rem;
-    color: #285364
+    color: #285364;
 }
 
 .child-card p {
@@ -76,7 +77,7 @@
 }
 
 .child-card:hover .child-icon {
-    color: #39b7e1
+    color: #39b7e1;
 }
 
 .form-wrapper {
@@ -124,7 +125,7 @@
 .booking-input[type="date"]:hover,
 .booking-input[type="time"]:hover {
     background-color: #f0f0f0;
-    border-color: #265fa4
+    border-color: #265fa4;
 }
 
 .form-wrapper {
@@ -142,8 +143,8 @@
 
 .confirm-btn {
     width: 25%;
-    padding: 20px 35px;
-    border-radius: 25px;
+    padding: 20px 50px;
+    border-radius: 10px;
     background: linear-gradient(90deg, #db4b2e 0%, #880808 100%);
     color: #ffffff;
     font-weight: bold;
@@ -178,7 +179,30 @@
 
 .confirm-btn.success {
     background-color: green;
-    color: white
+    color: white;
+}
+
+.booking-updates-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #8fc4cb;
+    color: #000;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 250ms ease-in-out;
+    cursor: pointer;
+    border: none;
+}
+
+.booking-updates-btn:hover {
+    background-color: #5f98ca;
+    transform: scale(1.1);
+    color: #fff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes fadeIn {
