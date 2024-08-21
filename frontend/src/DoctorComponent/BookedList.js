@@ -4,6 +4,7 @@ import Navbar from '../Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
+
 const BookedList = () => {
   const [consultations, setConsultations] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -15,10 +16,14 @@ const BookedList = () => {
     const fetchConsultations = async () => {
       try {
         const response = await fetch(`http://localhost:5000/consultations/data?id=${localData.ID}&type=${localData.TYPE}`);
+
         const data = await response.json();
 
         if (Array.isArray(data)) {
           setConsultations(data);
+          consultations.forEach((consultation) => {
+            console.log(consultation);
+          });
         } else {
           setConsultations([]);
         }
@@ -29,10 +34,12 @@ const BookedList = () => {
     };
 
     fetchConsultations();
-  }, [localData]);
+    console.log('Consultations:', consultations);
+  }, []);
 
   const handleDelete = async () => {
     const { P_ID, H_ID, C_ID } = consultationToDelete;
+    console.log('Deleting consultation:', consultationToDelete);
     try {
       const response = await fetch(`http://localhost:5000/consultations/delete?P_ID=${P_ID}&H_ID=${H_ID}&C_ID=${C_ID}`, {
         method: 'DELETE',
@@ -42,7 +49,7 @@ const BookedList = () => {
       if (data.success) {
         setConsultations(consultations.filter(consultation => !(consultation.P_ID === P_ID && consultation.H_ID === H_ID && consultation.C_ID === C_ID)));
         setShowPopup(true);
-        setTimeout(() => setShowPopup(false), 3000); // Popup disappears after 3 seconds
+        setTimeout(() => setShowPopup(false), 3000);
       }
       setShowConfirmation(false);
     } catch (error) {
@@ -87,6 +94,7 @@ const BookedList = () => {
             <p>No consultations found.</p>
           )}
         </div>
+
 
         {showConfirmation && (
           <div className="confirmation-dialog">

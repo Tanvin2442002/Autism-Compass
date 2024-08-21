@@ -8,7 +8,7 @@ import './BookingDoc.css';
 
 const BookingDoc = () => {
   const [doctorDetails, setDoctorDetails] = useState(null);
-  const [userDetails, setUserDetails] = useState([]); // Array for multiple children
+  const [userDetails, setUserDetails] = useState([]); 
   const [selectedChildId, setSelectedChildId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -56,7 +56,8 @@ const BookingDoc = () => {
   }, []);
 
   const handleChildSelection = (childId) => {
-    setSelectedChildId(childId); // Select the child
+    setSelectedChildId(childId);
+    console.log('Selected Child ID:', childId);
   };
 
   const handleConfirmBooking = async (e) => {
@@ -75,6 +76,7 @@ const BookingDoc = () => {
     console.log('Booking data:', bookingData);
 
     try {
+      console.log(bookingData);
       const response = await fetch('http://localhost:5000/physician', {
         method: 'POST',
         headers: {
@@ -88,11 +90,10 @@ const BookingDoc = () => {
           position: 'top-right',
           autoClose: 2500,
         });
-        // Change button color and text on success
         const confirmBtn = document.querySelector('.confirm-btn');
-        confirmBtn.style.backgroundColor = 'green'; // Inline style for immediate color change
-        confirmBtn.textContent = 'Booking Confirmed'; // Change button text
-        confirmBtn.classList.add('success');  // Add the success class to the button
+        confirmBtn.style.backgroundColor = 'green'; 
+        confirmBtn.textContent = 'Booking Confirmed';
+        confirmBtn.classList.add('success'); 
       } else {
         toast.error('Booking Failed!', {
           position: 'top-right',
@@ -108,7 +109,7 @@ const BookingDoc = () => {
   };
 
   const handleBookingUpdatesClick = () => {
-    navigate('/BookedList'); // Redirect to BookedList.js page
+    navigate('/BookedList');
   };
 
   if (loading) return <div>Loading...</div>;
@@ -135,7 +136,6 @@ const BookingDoc = () => {
         </div>
       )}
 
-      {/* Consultation form below child info */}
       <div className='booking-header'>
         <h1>Book Consultation with Dr. {doctorDetails && doctorDetails.NAME}</h1>
 
@@ -172,3 +172,6 @@ const BookingDoc = () => {
 };
 
 export default BookingDoc;
+
+
+

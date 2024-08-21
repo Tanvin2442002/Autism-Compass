@@ -233,8 +233,7 @@ router.post("/user-info", async (req, res) => {
     const query = `
             SELECT *
             FROM ${TYPE}
-            WHERE ${idColumn} = :id
-        `;
+            WHERE ${idColumn} = :id`;
     const result = await connection.execute(query, { id: ID });
     if (result.rows.length > 0) {
         res.status(200).send(result.rows);
