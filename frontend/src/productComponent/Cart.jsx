@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar';
 import Button from "./Button";
 import './Cart.css';
@@ -16,6 +17,7 @@ const Cart = () => {
     street: '',
     houseNo: ''
   });
+  const navigate = useNavigate();
 
   const userData = JSON.parse(localStorage.getItem("USER"));
   const userID = userData.ID;
@@ -48,7 +50,11 @@ const Cart = () => {
         `http://localhost:5000/products/detail/checkout/total?userID=${userID}`
       );
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        if(response.status===404)
+          {
+            navigate('/products');
+            
+          }
       }
       const data = await response.json();
       console.log("Fetched data:", data);

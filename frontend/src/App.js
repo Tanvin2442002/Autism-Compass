@@ -19,6 +19,7 @@ import Therapy from "./TherapyComponent/Therapy";
 import TherapyDetail from "./TherapyComponent/TherapyDetails";
 import TherapyOrganizations from "./TherapyComponent/TherapyORG";
 import ProductCart from "./productComponent/productCart";
+import Order from "./productComponent/delivery/order";
 import DoctorsList from "./DoctorComponent/DocList";
 import DoctorProfile from "./DoctorComponent/DoctorProfile";
 import ParentChildProfile from "./LogInSignUpComponent/ParentChildProfile";
@@ -45,6 +46,7 @@ function App() {
                <Route path='/therapy/detail' element={<TherapyDetail />} />
                <Route path='/therapy/org' element={<TherapyOrganizations />} />
                <Route path='/products' element={<ProductList />} />
+               <Route path='/Delivery' element={<Order />} />
                <Route path='/disorder' element={<Disorder />} />
                <Route path='/therapy/booking' element={<BookingTherapy />} />
                <Route path='/therapy/booked' element={<BookedTherapy />} />

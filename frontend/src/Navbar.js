@@ -99,7 +99,7 @@ const Navbar = () => {
                            {isProductsHovered && (
                               <div className="products-dropdown">
                                  <Link to="/products" className="navbar-link">Products</Link>
-                                 <Link to="/carts" className="navbar-link">Cart</Link>
+                                 <Link to="/products/detail/checkout" className="navbar-link">Cart</Link>
                                  <Link to="/delivery" className="navbar-link">Delivery</Link>
                               </div>
                            )}
