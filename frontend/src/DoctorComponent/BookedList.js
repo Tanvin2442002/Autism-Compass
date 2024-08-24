@@ -12,6 +12,7 @@ const BookedList = () => {
   const [showPopup, setShowPopup] = useState(false);
   const localData = JSON.parse(localStorage.getItem('USER'));
 
+  
   useEffect(() => {
     const fetchConsultations = async () => {
       try {

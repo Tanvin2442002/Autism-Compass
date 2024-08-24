@@ -1,0 +1,146 @@
+.doctor-consultation,
+.therapy-booking-details,
+.delivery-info {
+    /* border: 2px solid red; */
+    background: #3d52a027;
+    border-radius: 10px;
+    margin: 1% 2%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 300px;
+}
+
+.doctor-consultation-info,
+.dash-therapy-info {
+    display: flex;
+    min-width: 100%;
+    width: fit-content;
+}
+
+.booked-doctor,
+.booking-doctor {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-radius: 10px;
+    /* padding: 10px; */
+}
+
+.dash-booking-doc,
+.dash-booked-doc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.card-item-doc,
+.card-item-therapy {
+    background-color: #ffffffac;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    width: 192px;
+    height: 220px;
+    margin: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-item-doc:hover,
+.card-item-therapy:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-item-doc h2,
+.card-item-therapy h2 {
+    font-size: 1.1rem;
+    color: #285364;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+.card-item-doc p,
+.card-item-therapy p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0px;
+}
+
+.card-item-doc p.label-square,
+.card-item-therapy p.label-square {
+    font-weight: bold;
+    color: #285364;
+    border: 1px solid #285364;
+    border-radius: 10px;
+    padding: 6px 10px;
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 80%;
+}
+
+
+.dashboard-heading {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.available-therapy {
+    display: flex;
+}
+
+.dash-booked-therapy,
+.dash-available-therapy {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.view-more-button {
+    width: 180px;
+    padding: 10px 10px;
+    margin-bottom: 7px;
+    border: unset;
+    border-radius: 5px;
+    color: #212121;
+    z-index: 1;
+    background: #e8e8e8;
+    position: relative;
+    font-weight: 800;
+    font-size: 13px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+.view-more-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 5px;
+    background-color: #212121;
+    z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms
+}
+
+.view-more-button:hover {
+    color: #e8e8e8;
+}
+
+.view-more-button:hover::before {
+    width: 100%;
+}

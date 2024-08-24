@@ -302,9 +302,11 @@ router.get("/parent-child-info", async (req, res) => {
     let result;
     if (type == 'PARENT') {
         result = await connection.execute(
-            `SELECT C.NAME AS NAME, C.EMAIL AS EMAIL, C.DOB AS DOB, C.AGE AS AGE, C.CONTACT_NO AS CONTACT_NO
-            FROM CHILD C, PARENT_HAS_CHILD PHC
+            `SELECT C.NAME AS NAME, C.EMAIL AS EMAIL, D.TYPE AS DISORDER, C.DOB AS DOB, C.AGE AS AGE, C.CONTACT_NO AS CONTACT_NO
+            FROM CHILD C, PARENT_HAS_CHILD PHC, DISORDER D, CHILD_HAS_DISORDER CHD
             WHERE PHC.C_ID = C.C_ID
+            AND CHD.C_ID = C.C_ID
+            AND CHD.D0_ID = D.D0_ID
             AND PHC.P_ID = :ID`,
             { ID: id, }
         );
