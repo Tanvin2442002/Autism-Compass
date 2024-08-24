@@ -233,8 +233,7 @@ router.post("/user-info", async (req, res) => {
     const query = `
             SELECT *
             FROM ${TYPE}
-            WHERE ${idColumn} = :id
-        `;
+            WHERE ${idColumn} = :id`;
     const result = await connection.execute(query, { id: ID });
     if (result.rows.length > 0) {
         res.status(200).send(result.rows);
@@ -260,7 +259,7 @@ router.post("/update-user-info", async (req, res) => {
         const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, P_EMAIL, CITY, STREET, POSTAL_CODE: Number(POSTAL_CODE) }, { autoCommit: true });
         res.status(200).send({ message: "User info updated successfully!" });
     }
-    else if(type === "PARENT") {
+    else if (type === "PARENT") {
         const { ID, NAME, DOB, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE } = req.body;
         const query = `
             UPDATE PARENT
@@ -270,7 +269,7 @@ router.post("/update-user-info", async (req, res) => {
         const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE: Number(POSTAL_CODE) }, { autoCommit: true });
         res.status(200).send({ message: "User info updated successfully!" });
     }
-    else if(type === "TEACHER") {
+    else if (type === "TEACHER") {
         const { ID, NAME, CONTACT_NO, EMAIL, INSTITUTION } = req.body;
         const query = `
             UPDATE TEACHER
@@ -280,17 +279,51 @@ router.post("/update-user-info", async (req, res) => {
         const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, INSTITUTION }, { autoCommit: true });
         res.status(200).send({ message: "User info updated successfully!" });
     }
-    else if(type === "HEALTH_PROFESSIONAL") {
-        const { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC} = req.body;
+    else if (type === "HEALTH_PROFESSIONAL") {
+        const { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC } = req.body;
         const query = `
             UPDATE HEALTH_PROFESSIONAL
             SET NAME = :NAME, CONTACT_NO = :CONTACT_NO, EMAIL = LOWER(:EMAIL), DEGREE = :DEGREE, FIELD_OF_SPEC = :FIELD_OF_SPEC
             WHERE H_ID = :ID
         `;
-        const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC}, { autoCommit: true });
+        const result = await connection.execute(query, { ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC }, { autoCommit: true });
         res.status(200).send({ message: "User info updated successfully!" });
     }
     console.log("Request processed");
+
+});
+
+
+router.get("/parent-child-info", async (req, res) => {
+    const connection = await getConnection();
+    const type = req.query.TYPE;
+    const id = req.query.ID;
+    console.log("Received data:", req.query);
+    let result;
+    if (type == 'PARENT') {
+        result = await connection.execute(
+            `SELECT C.NAME AS NAME, C.EMAIL AS EMAIL, C.DOB AS DOB, C.AGE AS AGE, C.CONTACT_NO AS CONTACT_NO
+            FROM CHILD C, PARENT_HAS_CHILD PHC
+            WHERE PHC.C_ID = C.C_ID
+            AND PHC.P_ID = :ID`,
+            { ID: id, }
+        );
+    }
+    else{
+        result = await connection.execute(
+            `SELECT P.NAME, P.EMAIL, P.DOB, P.AGE, P.CONTACT_NO
+            FROM PARENT P, CHILD C, PARENT_HAS_CHILD PHC
+            WHERE PHC.C_ID = C.C_ID
+            AND PHC.P_ID = P.P_ID
+            AND C.C_ID = :ID`,
+            { ID: id, }
+        );
+    }
+    if (result.rows.length > 0) {
+        res.status(200).send(result.rows);
+    } else {
+        res.status(404).send({ message: "User not found" });
+    }
 
 });
 

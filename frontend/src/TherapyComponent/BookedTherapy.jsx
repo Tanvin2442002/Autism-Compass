@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
 import './BookedTherapy.css';
 
+
 const BookedTherapy = () => {
    const [data, setData] = useState([]);
    const localData = JSON.parse(localStorage.getItem('USER'));

@@ -1,18 +1,44 @@
-/* Child Info Section at the top */
-.child-info-container {
+.booking-container {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
     align-items: center;
-    width: 80%;
+    background: url(../img/bg.jpg) no-repeat center center fixed; 
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    margin:0;
+    padding:0;
+}
+
+.booking-header {
+    width: 85%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    color: #000;
+    border-radius: 12px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 2s ease-in;
+    padding: 10px;
+}
+.child-info-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 85%;
     margin-top: 30px;
-    background-color: #aab6c9;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1s ease-in-out;
 }
 
-.child-info {
+.child-card {
     background-color: #ffffff;
     border-radius: 15px;
     padding: 10px;
@@ -24,113 +50,37 @@
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.child-info:hover {
+.child-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
 }
 
-.child-info h2 {
-    font-size: 1rem;
-    color: #0034de;
+.child-card.selected {
+    background-color: lightpink;
 }
 
-.child-info p {
+.child-card h2 {
+    font-size: 1rem;
+    color: #285364;
+}
+
+.child-card p {
     font-size: 0.9rem;
     color: #555;
 }
 
-/* Person Icon for Child Info */
-.person-icon {
+.child-icon {
     font-size: 3rem;
     color: #333;
     margin-bottom: 10px;
     transition: color 0.3s ease;
 }
 
-.child-info:hover .person-icon {
-    color: #0072ff;  /* Hover effect for the person icon */
-}
-/* Consultation Form */
-.booking-heading {
-    position: relative;
-    padding: 40px;
-    margin: 1%;
-    background: #ffffff;
-    margin-top: 40px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    width: 85%;
-    display: flex;
-    flex-direction: column;
-    animation: slideIn 0.8s ease-in-out;
-    align-items: center;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+.child-card:hover .child-icon {
+    color: #39b7e1;
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateY(-30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.booking-heading h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 30px;
-    font-weight: bold;
-}
-
-/* Form Inputs Layout */
-.form-container {
-    display: flex;
-    justify-content: space-between;
-    width: 70%;
-    margin-bottom: 40px;
-}
-
-.input-container {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    background: #f8f9fa;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-}
-
-.input-container:hover {
-    transform: scale(1.05);
-}
-
-.input-container label {
-    font-size: 1.1rem;
-    color: #0034de;
-    margin-bottom: 10px;
-}
-
-input[type="date"],
-input[type="time"] {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #e8e8e8;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease-in-out;
-}
-
-input[type="date"]:focus,
-input[type="time"]:focus {
-    border-color: #0072ff;
-}
-
-.confirm-button-container {
+.form-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,28 +88,81 @@ input[type="time"]:focus {
     margin-top: 30px;
 }
 
-.confirm-button {
+.input-box {
+    width: 40%;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.input-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.input-box label {
+    font-size: 1.1rem;
+    color: #3c607a;
+    margin-bottom: 10px;
+}
+
+.booking-input[type="date"],
+.booking-input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e8e8e8;
+    background-color: #97b6cf;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.booking-input[type="date"]:hover,
+.booking-input[type="time"]:hover {
+    background-color: #f0f0f0;
+    border-color: #265fa4;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.confirm-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.confirm-btn {
     width: 25%;
-    padding: 20px 35px;
-    border-radius: 25px;
-    background: linear-gradient(90deg, #e98571 0%, #d71e1e 100%);
+    padding: 20px 50px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #db4b2e 0%, #880808 100%);
     color: #ffffff;
     font-weight: bold;
     font-size: 1.2rem;
-    box-shadow: 0 8px 15px #4e07074d;
+    box-shadow: 0 8px 15px #f014144d;
     transition: all 250ms ease-in-out;
     cursor: pointer;
     position: relative;
     overflow: hidden;
 }
 
-.confirm-button:hover {
+.confirm-btn:hover {
     background-color: #212121;
     color: #e8e8e8;
     transform: scale(1.05);
 }
 
-.confirm-button::before {
+.confirm-btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -170,6 +173,43 @@ input[type="time"]:focus {
     transition: 0.5s ease-in-out;
 }
 
-.confirm-button:hover::before {
+.confirm-btn:hover::before {
     left: 100%;
+}
+
+.confirm-btn.success {
+    background-color: green;
+    color: white;
+}
+
+.booking-updates-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #8fc4cb;
+    color: #000;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 250ms ease-in-out;
+    cursor: pointer;
+    border: none;
+}
+
+.booking-updates-btn:hover {
+    background-color: #5f98ca;
+    transform: scale(1.1);
+    color: #fff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

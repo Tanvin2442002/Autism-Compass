@@ -24,6 +24,8 @@ import DoctorsList from "./DoctorComponent/DocList";
 import DoctorProfile from "./DoctorComponent/DoctorProfile";
 import ParentChildProfile from "./LogInSignUpComponent/ParentChildProfile";
 import BookingDoc from "./DoctorComponent/BookingDoc";
+import BookedList from "./DoctorComponent/BookedList";
+
 
 function App() {
 
@@ -53,6 +55,7 @@ function App() {
                <Route path='/HealthProfessionals' element={<DoctorsList />} />
                <Route path='/doctor/detail' element={<DoctorProfile />} />
                <Route path='/booking/doc' element={<BookingDoc />} />
+               <Route path='/BookedList' element={<BookedList />} />
                <Route path='/parent-child' element={<ParentChildProfile />} />
             </Routes>
          </Router>
