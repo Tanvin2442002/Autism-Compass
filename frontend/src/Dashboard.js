@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import './Dashboard.css';
+import Doctor from "./img/Doctor.svg"
+import Therapy from "./img/Therapy.svg"
 
 const Dashboard = () => {
    const [bookedDocData, setBookedDocData] = useState([]);
@@ -64,16 +66,17 @@ const Dashboard = () => {
 
    console.log(bookedDocData.length, bookedTherapyData.length);
 
-   const displayedBookedDocData = bookedDocData.slice(0, 3);
-   const displayedBookedTherapyData = bookedTherapyData.slice(0, 3);
+   const displayedBookedDocData = bookedDocData.slice(0, 2);
+   const displayedBookedTherapyData = bookedTherapyData.slice(0, 2);
 
    
-   const displayedAvailableDocData = availableDocData.slice(0, 3 + 3 - bookedDocData.length);
-   const displayedAvailableTherapyData = availableTherapyData.slice(0, 3 + 3 - bookedTherapyData.length);
+   const displayedAvailableDocData = availableDocData.slice(0, 2 + (bookedDocData.length >= 2 ? 0 : 2 - bookedDocData.length));
+   const displayedAvailableTherapyData = availableTherapyData.slice(0, 2 + (bookedTherapyData.length >= 2 ? 0 : 2 - bookedTherapyData.length));
 
    return (
       <div className="dashboard">
          <Navbar />
+         {/* <img src={Doctor} alt="Doctor" className="doctor-img" /> */}
          <div>
             <div className='doctor-consultation'>
                <div className='doctor-consultation-info'>
@@ -92,6 +95,7 @@ const Dashboard = () => {
                      </div>
                      <button className='view-more-button'>View more details</button>
                   </div>
+                  <img src={Doctor} alt="Doctor" className="doctor-img" />
                   {/* Available Doctor Section */}
                   <div className='dash-booking-doc'>
                      <h2 className='dashboard-heading'>Available Health Professional</h2>
@@ -127,6 +131,7 @@ const Dashboard = () => {
                      </div>
                      <button className='view-more-button'>View more details</button>
                   </div>
+                  <img src={Therapy} alt="Therapy" className="doctor-img" />
                   {/* Available Therapy Section */}
                   <div className='dash-booking-doc'>
                      <h2 className='dashboard-heading'>Available Therapy</h2>
