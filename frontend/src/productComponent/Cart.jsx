@@ -18,6 +18,17 @@ const Cart = () => {
     houseNo: ''
   });
   const navigate = useNavigate();
+  function Str_Random(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    
+    // Loop to generate characters for the specified length
+    for (let i = 0; i < length; i++) {
+        const randomInd = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomInd);
+    }
+    return result;
+}
 
   const userData = JSON.parse(localStorage.getItem("USER"));
   const userID = userData.ID;
@@ -150,13 +161,15 @@ const Cart = () => {
   };
 
   const setDeliveryAddress = async () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 4); // Add 3 days to the current date
     const param = {
         CITY: address.city,
         STREET: address.street,
         HOUSE_NO: address.houseNo,
         P_ID: userID,
         D_ID: deliverymanID,
-        DELIVERY_DATE: new Date().toISOString().split('T')[0]
+        DELIVERY_DATE: date.toISOString().split('T')[0]
     }
     try {
       const response = await fetch("http://localhost:5000/products/detail/checkout/setAddress", {

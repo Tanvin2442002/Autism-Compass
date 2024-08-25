@@ -1,229 +1,250 @@
-import React from 'react';
-import './OrderTracking.css'; // Make sure this path is correct
+import React from "react";
+import { useState, useEffect } from "react";
+import "./OrderTracking.css"; // Make sure this path is correct
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { FaCheck, FaUser, FaTruckMoving, FaBox } from "react-icons/fa";
+import delivery from "../../img/deliveryman.svg";
+import Navbar from "../../Navbar";
+import StepperComponent from "./StepperComponent.js";
+
+// import { TbGiftFilled } from "react-icons/tb";
 
 const OrderConfirmation = () => {
-  return (
-    <div className="container-fluid my-5 d-flex justify-content-center">
-      <div className="card card-1">
-        <div className="card-header bg-white">
-          <div className="media flex-sm-row flex-column-reverse justify-content-between">
-            <div className="col my-auto">
-              <h4 className="mb-0">Thanks for your Order, <span className="change-color">Anjali</span>!</h4>
-            </div>
-            <div className="col-auto text-center my-auto pl-0 pt-sm-4">
-              <img
-                className="img-fluid my-auto align-items-center mb-0 pt-3"
-                src="https://i.imgur.com/7q7gIzR.png"
-                width="115"
-                height="115"
-                alt="Logo"
-              />
-              <p className="mb-4 pt-0 Glasses">Glasses For Everyone</p>
-            </div>
-          </div>
-        </div>
-        <div className="card-body">
-          <div className="row justify-content-between mb-3">
-            <div className="col-auto">
-              <h6 className="color-1 mb-0 change-color">Receipt</h6>
-            </div>
-            <div className="col-auto">
-              <small>Receipt Voucher: 1KAU9-84UIL</small>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col">
-              <div className="card card-2">
-                <div className="card-body">
-                  <div className="media">
-                    <div className="sq align-self-center">
-                      <img
-                        className="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0"
-                        src="https://i.imgur.com/RJOW4BL.jpg"
-                        width="135"
-                        height="135"
-                        alt="Product"
-                      />
-                    </div>
-                    <div className="media-body my-auto text-right">
-                      <div className="row my-auto flex-column flex-md-row">
-                        <div className="col my-auto">
-                          <h6 className="mb-0">Jack Jacs</h6>
-                        </div>
-                        <div className="col-auto my-auto">
-                          <small>Golden Rim</small>
-                        </div>
-                        <div className="col my-auto">
-                          <small>Size: M</small>
-                        </div>
-                        <div className="col my-auto">
-                          <small>Qty: 1</small>
-                        </div>
-                        <div className="col my-auto">
-                          <h6 className="mb-0">&#8377;3,600.00</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <hr className="my-3" />
-                  <div className="row">
-                    <div className="col-md-3 mb-3">
-                      <small>
-                        Track Order <span><i className="ml-2 fa fa-refresh" aria-hidden="true"></i></span>
-                      </small>
-                    </div>
-                    <div className="col mt-auto">
-                      <div className="progress my-auto">
-                        <div
-                          className="progress-bar progress-bar rounded"
-                          style={{ width: '62%' }}
-                          role="progressbar"
-                          aria-valuenow="25"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <div className="media row justify-content-between">
-                        <div className="col-auto text-right">
-                          <span>
-                            <small className="text-right mr-sm-2"></small>
-                            <i className="fa fa-circle active"></i>
-                          </span>
-                        </div>
-                        <div className="flex-col">
-                          <span>
-                            <small className="text-right mr-sm-2">Out for delivery</small>
-                            <i className="fa fa-circle active"></i>
-                          </span>
-                        </div>
-                        <div className="col-auto flex-col-auto">
-                          <small className="text-right mr-sm-2">Delivered</small>
-                          <span><i className="fa fa-circle"></i></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="row mt-4">
-            <div className="col">
-              <div className="card card-2">
-                <div className="card-body">
-                  <div className="media">
-                    <div className="sq align-self-center">
-                      <img
-                        className="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0"
-                        src="https://i.imgur.com/fUWWpRS.jpg"
-                        width="135"
-                        height="135"
-                        alt="Product"
-                      />
-                    </div>
-                    <div className="media-body my-auto text-right">
-                      <div className="row my-auto flex-column flex-md-row">
-                        <div className="col-auto my-auto">
-                          <h6 className="mb-0">Michel Mark</h6>
-                        </div>
-                        <div className="col my-auto">
-                          <small>Black Rim</small>
-                        </div>
-                        <div className="col my-auto">
-                          <small>Size: L</small>
-                        </div>
-                        <div className="col my-auto">
-                          <small>Qty: 1</small>
-                        </div>
-                        <div className="col my-auto">
-                          <h6 className="mb-0">&#8377;1,235.00</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <hr className="my-3" />
-                  <div className="row">
-                    <div className="col-md-3 mb-3">
-                      <small>
-                        Track Order <span><i className="ml-2 fa fa-refresh" aria-hidden="true"></i></span>
-                      </small>
-                    </div>
-                    <div className="col mt-auto">
-                      <div className="progress">
-                        <div
-                          className="progress-bar progress-bar rounded"
-                          style={{ width: '28%' }}
-                          role="progressbar"
-                          aria-valuenow="28"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <div className="media row justify-content-between">
-                        <div className="col-auto text-right">
-                          <span>
-                            <small className="text-right mr-sm-2">Dispatched</small>
-                            <i className="fa fa-circle active"></i>
-                          </span>
-                        </div>
-                        <div className="flex-col">
-                          <span>
-                            <small className="text-right mr-sm-2">On the way</small>
-                            <i className="fa fa-circle"></i>
-                          </span>
-                        </div>
-                        <div className="col-auto flex-col-auto">
-                          <small className="text-right mr-sm-2">Delivered</small>
-                          <span><i className="fa fa-circle"></i></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="row invoice">
-            <div className="col">
-              <p className="mb-1">Invoice Number: 788152</p>
-              <p className="mb-1">Invoice Date: 22 Dec, 2019</p>
-              <p className="mb-1">Receipts Voucher: 18KU-62IIK</p>
-            </div>
-          </div>
-        </div>
-        <div className="card-footer">
-          <div className="jumbotron-fluid">
-            <div className="row justify-content-between">
-              <div className="col-sm-auto col-auto my-auto">
-                <img
-                  className="img-fluid my-auto align-self-center"
-                  src="https://i.imgur.com/7q7gIzR.png"
-                  width="115"
-                  height="115"
-                  alt="Logo"
-                />
-              </div>
-              <div className="col-auto my-auto">
-                <h2 className="mb-0 font-weight-bold">TOTAL PAID</h2>
-              </div>
-              <div className="col-auto my-auto ml-auto">
-                <h1 className="display-3">&#8377;5,528</h1>
-              </div>
-            </div>
-            <div className="row mb-3 mt-3 mt-md-0">
-              <div className="col-auto border-line">
-                <small className="text-white">PAN: AA02hDW7E</small>
-              </div>
-              <div className="col-auto border-line">
-                <small className="text-white">CIN: UMMC20PTC</small>
-              </div>
-              <div className="col-auto">
-                <small className="text-white">GSTN: 268FD07EXX</small>
-              </div>
-            </div>
-          </div>
-        </div>
+  const [OrderList, setOrderList] = useState([]);
+  const [OrderDetails, setOrderDetails] = useState([]);
+  const [DeliveryDetails, setDeliveryDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  function Str_Random(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    
+    // Loop to generate characters for the specified length
+    for (let i = 0; i < length; i++) {
+        const randomInd = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomInd);
+    }
+    return result;
+}
+console.log(Str_Random(10));
+
+  const userData = JSON.parse(localStorage.getItem("USER"));
+  const userID = userData.ID;
+
+  useEffect(() => {
+    const fetchOrderList = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/delivery?userID=${userID}`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log("Fetched data:", data);
+        setOrderList(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOrderList();
+
+    const fetchOrderDetails = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/delivery/track?userID=${userID}`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log("Fetched data:", data);
+        setOrderDetails(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOrderDetails();
+
+    let DeliveryID;
+    OrderDetails.map((item) => (
+      DeliveryID = item.D_ID
+    ));
+    const fetchDeliveryDetails = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/delivery/track/deliveryman?deliveryID=${DeliveryID}`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log("Fetched data:", data);
+        setDeliveryDetails(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDeliveryDetails();
+  }, []);
+
+  const settings = {
+    dots: true,
+    autoplay: OrderList.length > 4 ? true : false,
+    autoplaySpeed: 1500,
+    infinite: OrderList.length > 4 ? true : false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+
+  let DeliveryDate;
+  let DeliveryMan;
+  let city,street,house_no;
+  OrderDetails.map((item) => (
+    DeliveryDate = item.DELIVERY_DATE,
+    city = item.CITY,
+    street = item.STREET,
+    house_no = item.HOUSE_NO
+  ));
+
+  DeliveryDetails.map((item) => (
+    DeliveryMan = item.NAME
+  ));
+
+
+  const obj = {
+    CITY : city,
+    STREET : street,
+    HOUSE_NO : house_no
+  }
+
+
+  const listItems = OrderList.map((item) => (
+    <div className="ordercardslick">
+      <div className="ordercardslick-img">
+        <img src={item.SRC} alt={item.NAME} />
       </div>
+      <div className="ordercardslick-content">
+        <h3>{item.NAME}</h3>
+        <p>{item.PRICE}</p>
+      </div>
+    </div>
+  ));
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!OrderList.length) return <div>No products found</div>;
+  return (
+    <div className="orderContainer">
+      <Navbar />
+      <article className="ordercard-article">
+        <div className="order-card-body">
+          <div className="ordercard">
+            <header className="order-card-header">
+              <u>My order tracking</u>
+            </header>
+            <div className="InnerContainer">
+              <div className="containerDetails">
+                <div className="col">
+                  <p className="que">Estimated Delivery time:</p>
+                  <p className="ans">{DeliveryDate}</p>
+                </div>
+                <div className="col">
+                  <p className="que">Order ID:</p>
+                  <p className="ans">{Str_Random(13)}</p>
+                </div>
+                <div className="col">
+                  <p className="que">Shipping BY:</p>
+                  <p className="ans">{DeliveryMan} </p>
+                </div>
+                <div className="col">
+                  <p className="que">Status:</p>
+                  <p className="ans">Picked by the courier</p>
+                </div>
+                <div className="col">
+                  <p className="que">Address:</p>
+                  <p className="ans">{obj.HOUSE_NO},{obj.STREET},{obj.CITY}</p>
+                </div>
+              </div>
+              <div>
+                <StepperComponent/>
+              </div>
+              <img src={delivery} alt="delivery" className="imgtruck" />
+            </div>
+            {/* <div className="track">
+              <div className="step active">
+                <span className="icon">
+                  <FaCheck />
+                </span>
+                <span className="text">Order confirmed</span>
+              </div>
+              <div className="step active">
+                <span className="icon">
+                  <FaUser />
+                </span>
+                <span className="text">Picked by courier</span>
+              </div>
+              <div className="step">
+                <span className="icon">
+                  <FaTruckMoving />
+                </span>
+                <span className="text">On the way</span>
+              </div>
+              <div className="step">
+                <span className="icon">
+                  <FaBox />
+                </span>
+                <span className="text">Ready for pickup</span>
+              </div>
+            </div> */}
+          </div>
+          <hr />
+          {/* {/* <div className="orderslider-container">
+            <Slider {...settings}>{listItems}</Slider>
+          </div>
+          <hr />
+          <a href="#" className="btn btn-warning" data-abc="true">
+            <i className="fa fa-chevron-left"></i> Back to orders
+          </a> */}
+        </div> 
+      </article>
     </div>
   );
 };
