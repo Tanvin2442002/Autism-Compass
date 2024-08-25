@@ -168,4 +168,27 @@ router.get("/booked-therapy", async (req, res) => {
     }
 });
 
+router.get("/disorder-info", async (req, res) => {
+    const connection = await getConnection();
+    const C_ID = req.query.id;
+
+    console.log(`Fetch Disorder Info for Child ID: ${C_ID}`);
+
+    try {
+        const result = await connection.execute(
+            `SELECT C.C_ID, TYPE, DESCRIPTION
+            FROM CHILD C, DISORDER D, CHILD_HAS_DISORDER CD
+            WHERE C.C_ID = CD.C_ID
+            AND CD.D0_ID = D.D0_ID
+            AND C.C_ID = :C_ID`,
+            {C_ID }
+        );
+        res.status(200).send(result.rows[0]);
+    } catch (error) {
+        console.error('Error fetching disorder info:', error);
+        res.status(500).send({ error: 'Database query failed' });
+    }
+});
+
+
 module.exports = router;

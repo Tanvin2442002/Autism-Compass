@@ -1,7 +1,8 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { Typewriter, Cursor } from 'react-simple-typewriter'
+import { Typewriter } from 'react-simple-typewriter'
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import './Dashboard.css';
 import Doctor from "./img/Doctor.svg"
@@ -14,7 +15,8 @@ const Dashboard = () => {
    const [availableDocData, setAvailableDocData] = useState([]);
    const [availableTherapyData, setAvailableTherapyData] = useState([]);
    const [bookedTherapyData, setBookedTherapyData] = useState([]);
-   const [disorderData, setDisorderData] = useState([]);
+   const [disorderData, setDisorderData] = useState({});
+   const navigate = useNavigate();
    const localData = JSON.parse(localStorage.getItem('USER'));
 
    useEffect(() => {
@@ -62,14 +64,16 @@ const Dashboard = () => {
          }
       };
       const fetchDisorderData = async () => {
-         // try {
-         //    const response = await fetch(`http://localhost:5000/dash/disorder-info`);
-         //    const data = await response.json();
-         //    setDisorderData(data);
-         // } catch (error) {
-         //    console.error('Error fetching consultations:', error);
-         //    setDisorderData([]);
-         // }
+         try {
+            const response = await fetch(`http://localhost:5000/dash/disorder-info?id=${localData.ID}`);
+            const data = await response.json();
+            setDisorderData(data);
+            console.log(data);
+            console.log("Disorder Data: ", disorderData);
+         } catch (error) {
+            console.error('Error fetching consultations:', error);
+            setDisorderData();
+         }
       };
 
 
@@ -80,8 +84,6 @@ const Dashboard = () => {
       fetchDisorderData();
    }, []);
 
-
-
    console.log(bookedDocData.length, bookedTherapyData.length);
 
    const displayedBookedDocData = bookedDocData.slice(0, 2);
@@ -90,14 +92,32 @@ const Dashboard = () => {
    const displayedAvailableDocData = availableDocData.slice(0, 2 + (bookedDocData.length >= 2 ? 0 : 2 - bookedDocData.length));
    const displayedAvailableTherapyData = availableTherapyData.slice(0, 2 + (bookedTherapyData.length >= 2 ? 0 : 2 - bookedTherapyData.length));
 
+   const handleBookedDoctor = () => {
+      navigate('/BookedList');
+   }
+
+   const handleAvailableDoctor = () => {
+      navigate('/HealthProfessionals');
+   }
+
+   const handleBookedTherapy = () => {
+      navigate('/therapy/booked');
+   }
+
+   const handleAvailableTherapy = () => {
+      navigate('/therapy');
+   }
+
+   const handleDisorder = () => {
+      navigate('/disorder');
+   }
+
    return (
       <div className="dashboard">
          <Navbar />
-         {/* <img src={Doctor} alt="Doctor" className="doctor-img" /> */}
          <div>
             <div className='doctor-consultation'>
                <div className='doctor-consultation-info'>
-                  {/* Booked Doctor Section */}
                   <div className='dash-booked-doc'>
                      <h2 className='dashboard-heading'>Booked Doctor</h2>
                      <div className='booking-doctor'>
@@ -110,10 +130,9 @@ const Dashboard = () => {
                            </div>
                         ))}
                      </div>
-                     <button className='view-more-button'>View more details</button>
+                     <button className='view-more-button' onClick={handleBookedDoctor}>View more details</button>
                   </div>
                   <img src={Doctor} alt="Doctor" className="doctor-img" />
-                  {/* Available Doctor Section */}
                   <div className='dash-booking-doc'>
                      <h2 className='dashboard-heading'>Available Health Professional</h2>
                      <div className='booking-doctor'>
@@ -126,14 +145,13 @@ const Dashboard = () => {
                            </div>
                         ))}
                      </div>
-                     <button className='view-more-button'>View more details</button>
+                     <button className='view-more-button' onClick={handleAvailableDoctor}>View more details</button>
                   </div>
                </div>
             </div>
 
             <div className='therapy-booking-details'>
                <div className='dash-therapy-info'>
-                  {/* Booked Therapy Section */}
                   <div className='dash-booking-doc'>
                      <h2 className='dashboard-heading'>Booked Therapy</h2>
                      <div className='dash-booked-therapy'>
@@ -146,10 +164,9 @@ const Dashboard = () => {
                            </div>
                         ))}
                      </div>
-                     <button className='view-more-button'>View more details</button>
+                     <button className='view-more-button' onClick={handleBookedTherapy}>View more details</button>
                   </div>
                   <img src={Therapy} alt="Therapy" className="doctor-img" />
-                  {/* Available Therapy Section */}
                   <div className='dash-booking-doc'>
                      <h2 className='dashboard-heading'>Available Therapy</h2>
                      <div className='dash-available-therapy'>
@@ -159,7 +176,7 @@ const Dashboard = () => {
                            </div>
                         ))}
                      </div>
-                     <button className='view-more-button'>View more details</button>
+                     <button className='view-more-button' onClick={handleAvailableTherapy}>View more details</button>
                   </div>
                </div>
             </div>
@@ -170,7 +187,7 @@ const Dashboard = () => {
                      <div className='disorder-typography'>
                         <h2 className='dashboard-heading'>
                            <Typewriter
-                              words={['Social Communication Disorder (SCD)']}
+                              words={[disorderData.TYPE]}
                               loop
                               cursor
                               cursorStyle='_'
@@ -179,9 +196,9 @@ const Dashboard = () => {
                               delaySpeed={1000}
                            />
                         </h2>
-                        <p>Discription:  
+                        <p>Discription:
                            <Typewriter
-                              words={['  Difficulties with the social use of verbal and nonverbal communication, including challenges with social interactions, understanding social rules, and making inferences from context.']}
+                              words={ [disorderData.DESCRIPTION] }
                               loop
                               cursor
                               cursorStyle='_'
@@ -191,7 +208,7 @@ const Dashboard = () => {
                            />
                         </p>
                      </div>
-                     <button className='view-more-button'>View more info about your disorder</button>
+                     <button className='view-more-button' onClick={handleDisorder}>View more info about your disorder</button>
                   </div>
                   <img src={FindDisorder} alt="Find Disorder" className="doctor-img" />
                </div>
