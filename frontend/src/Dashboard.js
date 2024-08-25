@@ -1,14 +1,20 @@
+
+
 import React, { useEffect, useState } from 'react';
+import { Typewriter, Cursor } from 'react-simple-typewriter'
 import Navbar from './Navbar';
 import './Dashboard.css';
 import Doctor from "./img/Doctor.svg"
 import Therapy from "./img/Therapy.svg"
+import FindDisorder from "./img/FindDisorder.svg"
+
 
 const Dashboard = () => {
    const [bookedDocData, setBookedDocData] = useState([]);
    const [availableDocData, setAvailableDocData] = useState([]);
    const [availableTherapyData, setAvailableTherapyData] = useState([]);
    const [bookedTherapyData, setBookedTherapyData] = useState([]);
+   const [disorderData, setDisorderData] = useState([]);
    const localData = JSON.parse(localStorage.getItem('USER'));
 
    useEffect(() => {
@@ -55,21 +61,32 @@ const Dashboard = () => {
             setBookedTherapyData([]);
          }
       };
+      const fetchDisorderData = async () => {
+         // try {
+         //    const response = await fetch(`http://localhost:5000/dash/disorder-info`);
+         //    const data = await response.json();
+         //    setDisorderData(data);
+         // } catch (error) {
+         //    console.error('Error fetching consultations:', error);
+         //    setDisorderData([]);
+         // }
+      };
+
 
       fetchBookedDocData();
       fetchAvailableDocData();
       fetchAvailableTherapyData();
       fetchBookedTherapy();
+      fetchDisorderData();
    }, []);
 
-   
+
 
    console.log(bookedDocData.length, bookedTherapyData.length);
 
    const displayedBookedDocData = bookedDocData.slice(0, 2);
    const displayedBookedTherapyData = bookedTherapyData.slice(0, 2);
 
-   
    const displayedAvailableDocData = availableDocData.slice(0, 2 + (bookedDocData.length >= 2 ? 0 : 2 - bookedDocData.length));
    const displayedAvailableTherapyData = availableTherapyData.slice(0, 2 + (bookedTherapyData.length >= 2 ? 0 : 2 - bookedTherapyData.length));
 
@@ -86,7 +103,7 @@ const Dashboard = () => {
                      <div className='booking-doctor'>
                         {displayedBookedDocData.map((item) => (
                            <div className="card-item-doc" key={item.H_ID}>
-                              <h2>{item.DOCTOR_NAME}</h2>
+                              <h2>Dr. {item.DOCTOR_NAME}</h2>
                               <p>{item.NAME_OF_HOSPITAL}</p>
                               <p className="label-square">Date: {item.SELECTED_DATE}</p>
                               <p className="label-square">Child's Name: {item.CHILD_NAME}</p>
@@ -102,7 +119,7 @@ const Dashboard = () => {
                      <div className='booking-doctor'>
                         {displayedAvailableDocData.map((item) => (
                            <div className="card-item-doc" key={item.H_ID}>
-                              <h2>{item.DOCTOR_NAME}</h2>
+                              <h2>Dr. {item.DOCTOR_NAME}</h2>
                               <p>{item.FIELD_OF_SPEC}</p>
                               <p className="label-square">{item.NAME_OF_HOSPITAL}</p>
                               <p className="label-square">Contact No: {item.CONTACT_NO}</p>
@@ -147,6 +164,38 @@ const Dashboard = () => {
                </div>
             </div>
 
+            <div className='disorder-info'>
+               <div className='dash-disorder-info'>
+                  <div className='disorder-details'>
+                     <div className='disorder-typography'>
+                        <h2 className='dashboard-heading'>
+                           <Typewriter
+                              words={['Social Communication Disorder (SCD)']}
+                              loop
+                              cursor
+                              cursorStyle='_'
+                              typeSpeed={150}
+                              deleteSpeed={40}
+                              delaySpeed={1000}
+                           />
+                        </h2>
+                        <p>Discription:  
+                           <Typewriter
+                              words={['  Difficulties with the social use of verbal and nonverbal communication, including challenges with social interactions, understanding social rules, and making inferences from context.']}
+                              loop
+                              cursor
+                              cursorStyle='_'
+                              typeSpeed={50}
+                              deleteSpeed={40}
+                              delaySpeed={1000}
+                           />
+                        </p>
+                     </div>
+                     <button className='view-more-button'>View more info about your disorder</button>
+                  </div>
+                  <img src={FindDisorder} alt="Find Disorder" className="doctor-img" />
+               </div>
+            </div>
             <div className='delivery-info'>
                <h3>Delivery details</h3>
                <p>Details of product delivery</p>

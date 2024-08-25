@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 .doctor-consultation,
 .therapy-booking-details,
-.delivery-info {
-    /* border: 2px solid red; */
-    /* background: #3d52a027; */
+.delivery-info,
+.disorder-info {
     border-radius: 10px;
     margin: 1% 1%;
     justify-content: center;
@@ -13,17 +17,38 @@
 }
 
 .doctor-consultation-info,
-.dash-therapy-info {
+.dash-therapy-info
+{
+display: flex;
+min-width: 100%;
+width: fit-content;
+}
+
+.dash-disorder-info {
     display: flex;
-    min-width: 100%;
+    padding-right: 3%;
     width: fit-content;
+    /* border: #212121 solid 1px; */
+    max-width: 95%;
+    min-width: 95%;
+}
+
+.disorder-details{
+    background: #5291b011;
+    border-radius: 10px;
+    margin: 1% 10% 1% 1%;
+    padding: 2%;
+    min-width: 60%;
+}
+.disorder-typography{
+    /* margin: 5px 5px; */
+    /* border: red solid 1px; */
 }
 
 .booked-doctor,
 .booking-doctor {
     display: flex;
     justify-content: center;
-    /* width: 100%; */
     border-radius: 10px;
 }
 
@@ -40,13 +65,13 @@
     width: 100%;
 }
 
-.doctor-img{
+.doctor-img {
     width: 28%;
     align-items: center;
     justify-content: center;
     height: 100%
-    /* margin-bottom: 10px; */
 }
+
 
 .card-item-doc,
 .card-item-therapy {
@@ -67,7 +92,7 @@
 
 .card-item-doc:hover,
 .card-item-therapy:hover {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #5291b029;
     transform: translateY(-10px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
 }
@@ -78,7 +103,9 @@
     color: #285364;
     margin-bottom: 0px;
     font-weight: bold;
+    letter-spacing: 1px;
     justify-content: center;
+    font-family: 'Poppins', sans-serif;
 }
 
 .card-item-doc p,
@@ -86,13 +113,14 @@
     font-size: 0.9rem;
     color: #555;
     margin-bottom: 0px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .card-item-doc p.label-square,
 .card-item-therapy p.label-square {
-    font-weight: bold;
+    font-weight: 500;
     color: #285364;
-    border: 1px solid #285364;
+    border: 0.5px solid #285364;
     border-radius: 10px;
     padding: 6px 10px;
     display: inline-block;
@@ -104,6 +132,27 @@
 .dashboard-heading {
     margin-top: 5px;
     /* margin-bottom: 0px; */
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    word-spacing: 2px;
+    color: #263238;
+}
+
+.disorder-typography .dashboard-heading{
+    font-size:xx-large;
+    font-weight: 3000;
+    color: #0b6a99;
+    word-spacing: 5px;
+}
+
+.disorder-typography p{
+    margin: 0% 5% 3% 5%;
+    font-size: large;
+    font-family: 'Poppins', sans-serif;
+    word-spacing: 7px;
+    font-weight: 400;
+    color: #285364;
 }
 
 .available-therapy {
@@ -118,16 +167,19 @@
 }
 
 .view-more-button {
-    width: 180px;
+    /* width: inherit; */
     padding: 10px 10px;
     margin-bottom: 7px;
     border: unset;
     border-radius: 5px;
     color: #212121;
+    font-family: 'Roboto Condensed', sans-serif;
+    word-spacing: 2px;
+    letter-spacing: 1px;
     z-index: 1;
     background-color: #ffffffac;
     position: relative;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 13px;
     -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
     box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
@@ -156,4 +208,9 @@
 
 .view-more-button:hover::before {
     width: 100%;
+}
+
+.disorder-details button{
+    /* border: 2px solid red; */
+    margin: 5%;
 }

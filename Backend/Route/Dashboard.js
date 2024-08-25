@@ -95,38 +95,72 @@ router.get("/booked-therapy", async (req, res) => {
         console.log("Parent ID:", parentId.rows[0].P_ID);
         const findPID = parentId.rows[0].P_ID;
         const result = await connection.execute(
-            `SELECT UNIQUE C.C_ID AS C_ID, P.P_ID AS P_ID, TH.TH_ID AS TH_ID, THO.THO_ID AS THO_ID,
-        C.NAME AS CHILD_NAME, P.NAME AS PARENT_NAME,
-        P.EMAIL AS PARENT_EMAIL,TO_CHAR(B.BOOKING_DATE,'DD-MON-YYYY') AS BOOKING_DATE, TH.THERAPY_TYPE AS THERAPY_TYPE,
-        THO.NAME AS ORG_NAME, THO.CONTACT_NO AS ORG_CONTACT_NO, THO.EMAIL AS ORG_EMAIL
-        FROM CHILD C, PARENT P, PARENT_HAS_CHILD PHC, BOOKS B,
-        THERAPY TH, THERAPY_HAS_THEAPYORG THTHO, THERAPY_ORG THO
-        WHERE C.C_ID = PHC.C_ID
-        AND P.P_ID = PHC.P_ID
-        AND C.C_ID = B.C_ID
-        AND P.P_ID = B.P_ID
-        AND TH.TH_ID = B.TH_ID
-        AND THO.THO_ID = B.THO_ID
-        AND B.C_ID = :receivedID
-        AND B.P_ID = :findPID`,
+            `SELECT DISTINCT
+            C.C_ID AS C_ID,
+            P.P_ID AS P_ID,
+            TH.TH_ID AS TH_ID,
+            THO.THO_ID AS THO_ID,
+            C.NAME AS CHILD_NAME,
+            P.NAME AS PARENT_NAME,
+            P.EMAIL AS PARENT_EMAIL,
+            TO_CHAR(B.BOOKING_DATE, 'DD-MON-YYYY') AS BOOKING_DATE,
+            TH.THERAPY_TYPE AS THERAPY_TYPE,
+            THO.NAME AS ORG_NAME,
+            THO.CONTACT_NO AS ORG_CONTACT_NO,
+            THO.EMAIL AS ORG_EMAIL
+        FROM
+            CHILD C
+                JOIN
+            PARENT_HAS_CHILD PHC ON C.C_ID = PHC.C_ID
+                JOIN
+            PARENT P ON P.P_ID = PHC.P_ID
+                JOIN
+            BOOKS B ON C.C_ID = B.C_ID AND P.P_ID = B.P_ID
+                JOIN
+            THERAPY TH ON TH.TH_ID = B.TH_ID
+                JOIN
+            THERAPY_HAS_THEAPYORG THTHO ON TH.TH_ID = THTHO.TH_ID
+                JOIN
+            THERAPY_ORG THO ON THO.THO_ID = THTHO.THO_ID
+        WHERE
+            B.C_ID = :receivedID
+        AND B.P_ID = :findPID
+        ORDER BY
+            BOOKING_DATE`,
             { receivedID, findPID }
         );
         res.status(200).send(result.rows);
     }
     else if (receivedType === "PARENT") {
         const result = await connection.execute(
-            `SELECT UNIQUE C.C_ID AS C_ID, P.P_ID AS P_ID, TH.TH_ID AS TH_ID, THO.THO_ID AS THO_ID,
-            C.NAME AS CHILD_NAME, TO_CHAR(B.BOOKING_DATE,'DD-MON-YYYY') AS BOOKING_DATE, TH.THERAPY_TYPE AS THERAPY_TYPE,
-            THO.NAME AS ORG_NAME, THO.CONTACT_NO AS ORG_CONTACT_NO
-            FROM CHILD C, PARENT P, PARENT_HAS_CHILD PHC, BOOKS B,
-            THERAPY TH, THERAPY_HAS_THEAPYORG THTHO, THERAPY_ORG THO
-            WHERE C.C_ID = PHC.C_ID
-            AND P.P_ID = PHC.P_ID
-            AND C.C_ID = B.C_ID
-            AND P.P_ID = B.P_ID
-            AND TH.TH_ID = B.TH_ID
-            AND THO.THO_ID = B.THO_ID
-            AND B.P_ID = :receivedID`,
+            `SELECT DISTINCT
+                C.C_ID AS C_ID,
+                P.P_ID AS P_ID,
+                TH.TH_ID AS TH_ID,
+                THO.THO_ID AS THO_ID,
+                C.NAME AS CHILD_NAME,
+                TO_CHAR(B.BOOKING_DATE, 'DD-MON-YYYY') AS BOOKING_DATE,
+                TH.THERAPY_TYPE AS THERAPY_TYPE,
+                THO.NAME AS ORG_NAME,
+                THO.CONTACT_NO AS ORG_CONTACT_NO
+            FROM
+                CHILD C
+                    JOIN
+                PARENT_HAS_CHILD PHC ON C.C_ID = PHC.C_ID
+                    JOIN
+                PARENT P ON P.P_ID = PHC.P_ID
+                    JOIN
+                BOOKS B ON C.C_ID = B.C_ID AND P.P_ID = B.P_ID
+                    JOIN
+                THERAPY TH ON TH.TH_ID = B.TH_ID
+                    JOIN
+                THERAPY_HAS_THEAPYORG THTHO ON TH.TH_ID = THTHO.TH_ID
+                    JOIN
+                THERAPY_ORG THO ON THO.THO_ID = THTHO.THO_ID
+            WHERE
+                B.P_ID = :receivedID
+            ORDER BY
+                BOOKING_DATE`,
             { receivedID }
         );
 

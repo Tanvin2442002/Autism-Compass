@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ParentChildProfile.css";
-import parentChildImg from "../img/parent-child-relation.jpg";
+import parentChildImg from "../img/ParentChild.svg";
 import Navbar from '../Navbar.js';
 
 const ParentChildProfile = () => {
