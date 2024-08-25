@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ParentChildProfile.css";
-import parentChildImg from "../img/parent-child-relation.jpg";
+import parentChildImg from "../img/ParentChild.svg";
 import Navbar from '../Navbar.js';
 
 const ParentChildProfile = () => {
@@ -21,7 +21,8 @@ const ParentChildProfile = () => {
                   email: childData.EMAIL,
                   dob: new Date(childData.DOB).toISOString().split('T')[0],
                   age: childData.AGE,
-                  contactNo: childData.CONTACT_NO
+                  contactNo: childData.CONTACT_NO,
+                  disorder: type === 'PARENT' ? childData.DISORDER : '-'
                }));
                setInfoList(formattedData);
                console.log("Data fetched successfully:", formattedData);
@@ -78,6 +79,17 @@ const ParentChildProfile = () => {
                               />
                               <label htmlFor="contact-no">Contact No.</label>
                            </div>
+                           {info.disorder !== '-' && (
+                              <div className="input-field-childparent">
+                                 <input
+                                    required
+                                    autoComplete="off"
+                                    type="text"
+                                    value={info.disorder}
+                                 />
+                                 <label htmlFor="disorder">Disorder</label>
+                              </div>
+                           )}
                            <div className="input-field-childparent">
                               <input
                                  required
