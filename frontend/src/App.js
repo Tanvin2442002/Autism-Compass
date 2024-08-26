@@ -25,7 +25,7 @@ import DoctorProfile from "./DoctorComponent/DoctorProfile";
 import ParentChildProfile from "./LogInSignUpComponent/ParentChildProfile";
 import BookingDoc from "./DoctorComponent/BookingDoc";
 import BookedList from "./DoctorComponent/BookedList";
-
+import Consultation from "./DoctorComponent/Consultation";
 
 function App() {
 
@@ -57,6 +57,7 @@ function App() {
                <Route path='/booking/doc' element={<BookingDoc />} />
                <Route path='/BookedList' element={<BookedList />} />
                <Route path='/parent-child' element={<ParentChildProfile />} />
+               <Route path='/consultation' element={<Consultation />} />
             </Routes>
          </Router>
       </div>

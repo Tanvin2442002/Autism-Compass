@@ -43,11 +43,13 @@
 
 
 .input-field-childparent {
-    position: relative;
-    width: 450px;
+    position: relative; 
+    width: 95%;
 }
 
 .input-field-childparent label {
+    font-family: 'Roboto condensed', sans-serif;
+    font-size: 1.1rem;
     position: absolute;
     color: #8d8d8d;
     pointer-events: none;
@@ -62,10 +64,11 @@
 }
 
 .input-field-childparent input {
-    padding: 10px 15px;
+    /* padding: 10px 15px; */
+    padding: 2.2% 1.5%;
     font-size: 1rem;
     border-radius: 8px;
-    border: solid 1px #8d8d8d;
+    border: solid 1px #8d8d8d;  
     letter-spacing: 1px;
     width: 94%;
 }

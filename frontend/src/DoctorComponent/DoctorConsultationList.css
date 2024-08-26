@@ -1,0 +1,122 @@
+.doctor-consultation-list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.consult-list-table {
+    width: 95%;
+    /* height: 100%; */
+    border: 5px solid #b5d6e674;
+    border-collapse: collapse;
+}
+
+.doctor-consultation-list img,
+.prescription-img {
+    width: 40%;
+    height: 100%;
+}
+
+.consultation {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 1%;
+    /* border: 2px solid red; */
+}
+
+.consultation-form {
+    display: flex;
+    flex-direction: column;
+    background-color: #b5d6e674;
+    border-radius: 2%;
+    /* border: 2px solid blue; */
+    justify-content: center;
+    align-items: center;
+    width: 32%;
+    padding: 1%;
+    min-height: 100%;
+    gap: 1rem;
+}
+
+.consultation-form h1 {
+    font-family: New Amsterdam, sans- serif;
+    text-align: center;
+    letter-spacing: 5px;
+    font-size: 2.5rem;
+}
+
+
+
+
+
+.input-field-childparent select option {
+    font-family: 'Roboto condensed', sans-serif;
+    font-size: 1.1rem;
+    position: absolute;
+    color: #8d8d8d;
+    pointer-events: none;
+    background-color: transparent;
+    left: 15px;
+    bottom: 20px;
+    -webkit-transform: translateY(0.6rem);
+    -ms-transform: translateY(0.6rem);
+    transform: translateY(0.6rem);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.input-field-childparent select {
+    /* padding: 10px 15px; */
+    padding: 2.2% 1.5%;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: solid 1px #8d8d8d;
+    letter-spacing: 1px;
+    width: 97%;
+}
+
+.input-field-childparent select:focus,
+.input-field-childparent select:valid {
+    outline: none;
+    border: solid 0.5px #0034deb2;
+}
+
+.input-field-childparent select:focus~option,
+.input-field-childparent select:valid~option {
+    -webkit-transform: translateY(-51%) translateX(-10px) scale(0.8);
+    -ms-transform: translateY(-51%) translateX(-10px) scale(0.8);
+    transform: translateY(-51%) translateX(-10px) scale(0.8);
+    background-color: #fff;
+    padding: 0px 5px;
+    color: #0034de;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 100px;
+}
+
+.select-label{
+    opacity: 0;
+}
+
+.input-field-childparent select:focus,
+.input-field-childparent select:valid {
+    outline: none;
+    border: solid 0.5px #0034deb2;
+}
+
+.input-field-childparent select:focus~label,
+.input-field-childparent select:valid~label {
+    -webkit-transform: translateY(-51%) translateX(-10px) scale(0.8);
+    -ms-transform: translateY(-51%) translateX(-10px) scale(0.8);
+    transform: translateY(-51%) translateX(-10px) scale(0.8);
+    background-color: #fff;
+    padding: 0px 5px;
+    color: #0034de;
+    opacity: 1;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 100px;
+}
