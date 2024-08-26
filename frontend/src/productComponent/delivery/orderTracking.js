@@ -10,6 +10,7 @@ import delivery from "../../img/deliveryman.svg";
 const OrderConfirmation = () => {
   const [OrderList, setOrderList] = useState([]);
   const [OrderDetails, setOrderDetails] = useState([]);
+  const [ordercartItems, setorderCartItems] = useState([]);
   const [DeliveryDetails, setDeliveryDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,8 +19,8 @@ const OrderConfirmation = () => {
   const userID = userData.ID;
 
   function Str_Random(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let result = "";
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     // Loop to generate characters for the specified length
     for (let i = 0; i < length; i++) {
@@ -46,6 +47,24 @@ const OrderConfirmation = () => {
         setLoading(false);
       }
     };
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/products/detail/checkout?userID=${userID}`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log("Fetched data:", data);
+        setorderCartItems(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduct();
 
     const fetchOrderDetails = async () => {
       try {
@@ -167,6 +186,20 @@ const OrderConfirmation = () => {
           {/* Add your Slider and other components here */}
         </div>
       </article>
+      <div className="lower-container">
+        <div className="ordercartlower">
+          {ordercartItems.map((item) => (
+            <div key={item.PR_ID} className="ordercart-item">
+              <img src={item.SRC} alt={item.name} className="ordercartimg" />
+              <div className="orderitem-details">
+                <p>{item.NAME}</p>
+                <p>BDT {item.AMOUNT / item.QUANTITY}</p>
+                <div className="orderquantity">Quantity:{item.QUANTITY}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

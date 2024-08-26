@@ -12,6 +12,7 @@
 
 .ordercard {
     /* position: relative; */
+    /* position: fixed; */
     display: -webkit-box;
     display: -ms-flexbox;
     justify-content: center;
@@ -146,7 +147,58 @@
     overflow: hidden;
 }
 
+.ordercart-item {
+    display: flex;
+    flex-direction: row;
+    /* border: red solid 1px; */
+    padding: 10px; 
+    background-color: #f9f9f9; 
+    border-radius: 5px;
+    align-items: center; 
+}
 
+.orderitem-details p {
+    margin: 0 10px;
+}
+
+.orderitem-details{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+   
+}
+
+.orderquantity {
+    display: flex;
+    align-items: center;
+}
+
+.ordercartlower {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px;
+    margin-right: 20px;
+    border-radius: 10px;
+    /* overflow-y: auto; */
+}
+
+.lower-container {
+    overflow-y: scroll;
+    max-height: 15rem;
+    /* border: 5px solid black; */
+    /* flex: 3; */
+    align-items: center;
+    /* margin-right: 8px; */
+    margin: 0% 5% 1% 5%;
+}
+
+.ordercartimg{
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+}
 
 .slick-dots {
     bottom: -30px;
