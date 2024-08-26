@@ -14,6 +14,7 @@ const BookedTherapy = () => {
          const response = await fetch(`http://localhost:5000/booking/data?id=${localData.ID}&type=${localData.TYPE}`);
          const res = await response.json();
          setData(res);
+         console.log("Data:", res);
       };
       fetchData();
    }, []);
