@@ -94,6 +94,24 @@ routerProduct.get("/products/detail/checkout", async (req, res) => {
     res.status(500).send({ error: "Internal server error" });
   }
 });
+
+routerProduct.get("/products/detail/exists", async (req, res) => {
+    const { userID } = req.query;
+    let connection;
+    try{
+       connection = await getConnection();
+        const result = await connection.execute(
+            `SELECT PR_ID FROM PURCHASES WHERE P_ID = :userID `,
+            { userID }
+        );
+       res.json(result.rows);
+    }
+    catch (error) {
+        console.error("Error executing query:", error);
+        res.status(500).send({ error: "Internal server error" });
+    }
+});
+
 routerProduct.delete("/products/detail/checkout", async (req, res) => {
   const { userID, PR_ID } = req.query;
 
