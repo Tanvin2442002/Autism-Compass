@@ -10,6 +10,7 @@ const ParentChildProfile = () => {
    const parentId = localData.ID;
    const type = localData.TYPE;
 
+
    useEffect(() => {
       const fetchInfo = async () => {
          try {
@@ -42,74 +43,72 @@ const ParentChildProfile = () => {
          {infoList.length > 0 ? (
             infoList.map((info, index) => (
                <div key={index} className="parentchilddivider">
-                  <div className="parentchildimg">
-                     <img
-                        src={parentChildImg}
-                        alt="Avatar"
-                        className="imgSetting"
-                     />
-                  </div>
-                  <div>
-                     <div className="container-childparen">
-                        <form className="profile-form-childparent">
+                  <img
+                     src={parentChildImg}
+                     alt="Avatar"
+                     className="imgSetting"
+                  />
+                  <div className="form-details-childparent">
+                     {/* <div className="container-childparen"> */}
+                     <form className="profile-form-childparent">
+                        <div className="input-field-childparent">
+                           <input
+                              required
+                              autoComplete="off"
+                              type="text"
+                              value={info.name}
+                           />
+                           <label htmlFor="username">Child Name</label>
+                        </div>
+                        <div className="input-field-childparent">
+                           <input
+                              required
+                              autoComplete="off"
+                              type="email"
+                              value={info.email}
+                           />
+                           <label htmlFor="email">Child Email</label>
+                        </div>
+                        <div className="input-field-childparent">
+                           <input
+                              required
+                              autoComplete="off"
+                              type="text"
+                              value={info.contactNo}
+                           />
+                           <label htmlFor="contact-no">Contact No.</label>
+                        </div>
+                        {info.disorder !== '-' && (
                            <div className="input-field-childparent">
                               <input
                                  required
                                  autoComplete="off"
                                  type="text"
-                                 value={info.name}
+                                 value={info.disorder}
                               />
-                              <label htmlFor="username">Child Name</label>
+                              <label htmlFor="disorder">Disorder</label>
                            </div>
-                           <div className="input-field-childparent">
-                              <input
-                                 required
-                                 autoComplete="off"
-                                 type="email"
-                                 value={info.email}
-                              />
-                              <label htmlFor="email">Child Email</label>
-                           </div>
-                           <div className="input-field-childparent">
-                              <input
-                                 required
-                                 autoComplete="off"
-                                 type="text"
-                                 value={info.contactNo}
-                              />
-                              <label htmlFor="contact-no">Contact No.</label>
-                           </div>
-                           {info.disorder !== '-' && (
-                              <div className="input-field-childparent">
-                                 <input
-                                    required
-                                    autoComplete="off"
-                                    type="text"
-                                    value={info.disorder}
-                                 />
-                                 <label htmlFor="disorder">Disorder</label>
-                              </div>
-                           )}
-                           <div className="input-field-childparent">
-                              <input
-                                 required
-                                 autoComplete="off"
-                                 type="date"
-                                 value={info.dob}
-                              />
-                              <label htmlFor="date">Birthday</label>
-                           </div>
-                           <div className="input-field-childparent">
-                              <input
-                                 required
-                                 autoComplete="off"
-                                 type="number"
-                                 value={info.age}
-                              />
-                              <label htmlFor="age">Age</label>
-                           </div>
-                        </form>
-                     </div>
+                        )}
+                        <div className="input-field-childparent">
+                           <input
+                              required
+                              autoComplete="off"
+                              type="date"
+                              value={info.dob}
+                           />
+                           <label htmlFor="date">Birthday</label>
+                        </div>
+                        <div className="input-field-childparent">
+                           <input
+                              required
+                              autoComplete="off"
+                              type="number"
+                              value={info.age}
+                           />
+                           <label htmlFor="age">Age</label>
+                        </div>
+                     </form>
+                     {/* </div> */}
                   </div>
                </div>
             ))

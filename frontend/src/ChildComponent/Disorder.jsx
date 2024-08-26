@@ -66,6 +66,7 @@ const Disorder = () => {
          console.log(response.data.candidates[0].content.parts[0].text);
          setAns(response.data.candidates[0].content.parts[0].text);
          console.log(ans);
+         setAns(response.data.candidates[0].content.parts[0].text.replace(/\*/g, ''));
       } catch (error) {
          console.error("Error generating disorder details", error);
       }

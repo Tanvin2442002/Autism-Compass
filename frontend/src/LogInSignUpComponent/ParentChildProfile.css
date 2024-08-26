@@ -1,7 +1,7 @@
 .parentchilddivider {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin: 1%;
     border: #53295b43 solid 2px;
     border-radius: 10px;
@@ -19,26 +19,26 @@
 .imgSetting {
     height: 350px;
     width: 350px;
-    /* border-radius: 50%; */
 }
 
-.container-childparen {
-    /* border: 1px solid #7B91E6; */
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #dadff282;
-}
-
-.container-childparen .heading {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    font-weight: bolder;
+.form-details-childparent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
 }
 
 .profile-form-childparent {
+    border: 1px solid #7B91E6;
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #dadff282;
     gap: 15px;
+    width: 95%;
+
 }
 
 
