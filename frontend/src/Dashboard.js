@@ -153,6 +153,18 @@ const Dashboard = () => {
             <div className='therapy-booking-details'>
                <div className='dash-therapy-info'>
                   <div className='dash-booking-doc'>
+                     <h2 className='dashboard-heading'>Available Therapy</h2>
+                     <div className='dash-available-therapy'>
+                        {displayedAvailableTherapyData.map((item) => (
+                           <div className="card-item-therapy" key={item.TH_ID}>
+                              <h2>{item.THERAPY_TYPE}</h2>
+                           </div>
+                        ))}
+                     </div>
+                     <button className='view-more-button' onClick={handleAvailableTherapy}>View more details</button>
+                  </div>
+                  <img src={Therapy} alt="Therapy" className="doctor-img" />
+                  <div className='dash-booking-doc'>
                      <h2 className='dashboard-heading'>Booked Therapy</h2>
                      <div className='dash-booked-therapy'>
                         {displayedBookedTherapyData.map((item) => (
@@ -166,59 +178,49 @@ const Dashboard = () => {
                      </div>
                      <button className='view-more-button' onClick={handleBookedTherapy}>View more details</button>
                   </div>
-                  <img src={Therapy} alt="Therapy" className="doctor-img" />
-                  <div className='dash-booking-doc'>
-                     <h2 className='dashboard-heading'>Available Therapy</h2>
-                     <div className='dash-available-therapy'>
-                        {displayedAvailableTherapyData.map((item) => (
-                           <div className="card-item-therapy" key={item.TH_ID}>
-                              <h2>{item.THERAPY_TYPE}</h2>
-                           </div>
-                        ))}
-                     </div>
-                     <button className='view-more-button' onClick={handleAvailableTherapy}>View more details</button>
-                  </div>
                </div>
             </div>
+            {localData.TYPE === 'CHILD' && (
 
-            <div className='disorder-info'>
-               <div className='dash-disorder-info'>
-                  <div className='disorder-details'>
-                     <div className='disorder-typography'>
-                        <h2 className='dashboard-heading'>
-                           <Typewriter
-                              words={[disorderData.TYPE]}
-                              loop
-                              cursor
-                              cursorStyle='_'
-                              typeSpeed={150}
-                              deleteSpeed={40}
-                              delaySpeed={1000}
-                           />
-                        </h2>
-                        <p>Discription:
-                           <Typewriter
-                              words={ [disorderData.DESCRIPTION] }
-                              loop
-                              cursor
-                              cursorStyle='_'
-                              typeSpeed={50}
-                              deleteSpeed={40}
-                              delaySpeed={1000}
-                           />
-                        </p>
+               <div div className='disorder-info'>
+                  <div className='dash-disorder-info'>
+                     <div className='disorder-details'>
+                        <div className='disorder-typography'>
+                           <h2 className='dashboard-heading'>
+                              <Typewriter
+                                 words={[disorderData.TYPE]}
+                                 loop
+                                 cursor
+                                 cursorStyle='_'
+                                 typeSpeed={150}
+                                 deleteSpeed={40}
+                                 delaySpeed={1000}
+                              />
+                           </h2>
+                           <p>Discription:
+                              <Typewriter
+                                 words={[disorderData.DESCRIPTION]}
+                                 loop
+                                 cursor
+                                 cursorStyle='_'
+                                 typeSpeed={50}
+                                 deleteSpeed={40}
+                                 delaySpeed={1000}
+                              />
+                           </p>
+                        </div>
+                        <button className='view-more-button' onClick={handleDisorder}>View more info about your disorder</button>
                      </div>
-                     <button className='view-more-button' onClick={handleDisorder}>View more info about your disorder</button>
+                     <img src={FindDisorder} alt="Find Disorder" className="doctor-img" />
                   </div>
-                  <img src={FindDisorder} alt="Find Disorder" className="doctor-img" />
                </div>
-            </div>
+            )}
             <div className='delivery-info'>
                <h3>Delivery details</h3>
                <p>Details of product delivery</p>
             </div>
          </div>
-      </div>
+      </div >
    );
 };
 

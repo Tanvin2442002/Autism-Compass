@@ -7,15 +7,17 @@
     margin-bottom: 50px;
 }
 
+
+
+
 .ordercard {
-    position: relative;
+    /* position: relative; */
     display: -webkit-box;
     display: -ms-flexbox;
     justify-content: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    min-width: 0;
+    margin: 1% 5%;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
@@ -25,24 +27,24 @@
 }
 
 .InnerContainer{
-    position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
     border-radius: 0.10rem;
+    height: 50%;
     align-items: center;
-    /* justify-content: center; */
+    justify-content: space-evenly;
 }
 .containerDetails{
     display: flex;
-    width: 100%;
+    /* width: 100%;
+    border: aqua solid 1px; */
     /* height: 100%; */
     margin-left: 2%;
     flex-direction: column;
@@ -73,9 +75,10 @@
 }
 
 .imgtruck{
-    width:50%;
-    height: 40%;
-    display: flex;
+    width:35%;
+    height: 35%;
+    /* border: #4a22ff solid 5px; */
+    /* display: flex; */
     align-items:self-end;
 }
 
@@ -92,71 +95,7 @@
     letter-spacing: 2px;
     margin-bottom: 0;
     background-color: #fff;
-    /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
-}
-
-.track {
-    position: relative;
-    background-color: #ddd;
-    height: 10%;
-    width:  40%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin-bottom: 60px;
-    margin-top: 50px;
-    transform: rotateZ(90deg);
-}
-
-.track .step {
-    /* transform: rotateZ(-90deg); */
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    height:auto;
-    border: 5px solid red;
-    width: 25%;
-    margin-top: -18px;
-    text-align: center;
-    position: relative;
-}
-
-.track .step.active:before {
-    background: #FF5722;
-}
-
-.track .step::before {
-    height: 5%;
-    position: absolute;
-    content: "";
-    width: 100%;
-    left: 0;
-    top: 18px;
-}
-
-.track .step.active .icon {
-    background: #ee5435;
-    color: #fff;
-}
-
-.track .icon {
-    display: inline-block;
-    width: 25%;
-    height: 25%;
-    line-height: 25%px;
-    position: relative;
-    border-radius: 100%;
-    background: #ddd;
-}
-
-.track .step.active .text {
-    font-weight: 400;
-    color: #000;
-}
-
-.track .text {
-    display: block;
-    margin-top: 7px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .orderslider-container {
@@ -166,10 +105,8 @@
 
 .orderslider-container h1{
     text-align: center;
-    /* margin-top: 90px; */
     margin-bottom: 30px;
     font-size: 2.5rem;
-    /* color: rgb(255, 23, 23); */
 }
 .ordercardslick {
     width: 250px; 
@@ -178,11 +115,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    /* background-color: rgba(255, 255, 255, 0.974);  */
     background-color: #3d445850;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px; 
-    /* padding: 10px; */
 }
 
 .ordercardslick-img {
