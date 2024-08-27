@@ -357,4 +357,69 @@ routerProduct.get("/delivery/track/deliveryman", async (req, res) => {
   }
 });
 
+routerProduct.post('/products/detail/checkout/setOrder', async (req, res) => {
+  const { ORDER_ID, PR_ID, QUANTITY, P_ID, CITY, STREET, HOUSE_NO, DELIVERY_DATE } = req.body;
+  console.log('set prder' ,req.body);
+  let connection;
+  try {
+      connection = await getConnection();
+      const result = await connection.execute(
+          `INSERT INTO PAYS (B_ID, PR_ID, QUANTITY, P_ID, CITY, STREET, HOUSE_NO, DATE_OF_DELIVERY) 
+          VALUES (:ORDER_ID, :PR_ID, :QUANTITY, :P_ID, :CITY, :STREET, :HOUSE_NO, TO_DATE(:DELIVERY_DATE, 'YYYY-MM-DD'))`,
+          { ORDER_ID, PR_ID, QUANTITY, P_ID, CITY, STREET, HOUSE_NO, DELIVERY_DATE },
+          {
+              autoCommit: true,
+          }
+      );
+      console.log('set result: ', result);
+      res.status(200).send({ message: "Order placed successfully!", result });
+  } catch (error) {
+      console.error("Error executing query:", error);
+      res.status(500).send({ error: "Internal server error" });
+  }
+});
+
+
+routerProduct.post('/products/detail/checkout/setBill', async (req, res) => {
+    const { ORDER_ID,AMOUNT } = req.body;
+    console.log(req.body);
+    let connection;
+    try {
+        connection = await getConnection();
+        const result = await connection.execute(
+            `INSERT INTO BILLS (B_ID,AMOUNT) 
+            VALUES (:ORDER_ID,:AMOUNT)`,
+            { ORDER_ID,AMOUNT },
+            {
+                autoCommit: true,
+            }
+        );
+        res.status(200).send({ message: "Bill generated successfully!", result });
+    } catch (error) {
+        console.error("Error executing query:", error);
+        res.status(500).send({ error: "Internal server error" });
+    }
+});
+
+routerProduct.post('/products/detail/checkout/setAssignedTo', async (req, res) => {
+    const { ORDER_ID, D_ID } = req.body;
+    console.log(req.body);
+    let connection;
+    try {
+        connection = await getConnection();
+        const result = await connection.execute(
+            `INSERT INTO ASSIGNED_TO (B_ID,D_ID) 
+            VALUES (:ORDER_ID,:D_ID)`,
+            { ORDER_ID,D_ID },
+            {
+                autoCommit: true,
+            }
+        );
+        res.status(200).send({ message: "Delivery assigned successfully!", result });
+    } catch (error) {
+        console.error("Error executing query:", error);
+        res.status(500).send({ error: "Internal server error" });
+    }
+});
+
 module.exports = routerProduct;

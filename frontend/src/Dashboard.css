@@ -164,6 +164,7 @@
 
 .view-more-button {
     /* width: inherit; */
+    cursor: pointer;
     padding: 10px 10px;
     margin-bottom: 7px;
     border: unset;

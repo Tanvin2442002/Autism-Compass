@@ -176,7 +176,6 @@ const ProductDetails = () => {
             />
             <div className="product-meta">
               <span>Price: ${product.PRICE}</span>
-              <span>Total: ${totalPrice}</span>
             </div>
           </div>
           <div className="button-group">
