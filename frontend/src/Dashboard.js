@@ -116,9 +116,9 @@ const Dashboard = () => {
    }
 
    return (
-      <div className="dashboard">
+      <div>
          <Navbar />
-         <div>
+         <div className="dashboard">
             {localData.TYPE === 'HEALTH_PROFESSIONAL' && (
                <DoctorConsultationList />
             )}

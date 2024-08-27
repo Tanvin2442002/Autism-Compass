@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate as navigate, Link } from "react-router-dom";
 import "./App.css";
 
-const clientId="120968135958-a9lj4l0q1n5s33qsu08pvvbevcrg4nsn.apps.googleusercontent.com";
 
 const Landing = () => {
     return (
