@@ -109,7 +109,7 @@ const BookingDoc = () => {
   };
 
   const handleBookingUpdatesClick = () => {
-    navigate('/BookedList');
+    navigate('/doctor/booked');
   };
 
   if (loading) return <div>Loading...</div>;

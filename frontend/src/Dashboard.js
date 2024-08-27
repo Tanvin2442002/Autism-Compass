@@ -15,7 +15,10 @@ const Dashboard = () => {
    const [availableDocData, setAvailableDocData] = useState([]);
    const [availableTherapyData, setAvailableTherapyData] = useState([]);
    const [bookedTherapyData, setBookedTherapyData] = useState([]);
-   const [disorderData, setDisorderData] = useState({});
+   const [disorderData, setDisorderData] = useState({
+      TYPE: 'Unknown Disorder',
+      DESCRIPTION: 'No description available',
+   });
    const navigate = useNavigate();
    const localData = JSON.parse(localStorage.getItem('USER'));
 
@@ -68,14 +71,14 @@ const Dashboard = () => {
          try {
             const response = await fetch(`http://localhost:5000/dash/disorder-info?id=${localData.ID}`);
             const data = await response.json();
-            setDisorderData(data);
-            console.log(data);
-            console.log("Disorder Data: ", disorderData);
+            if (data.TYPE && data.DESCRIPTION) {
+               setDisorderData(data);
+            }
          } catch (error) {
             console.error('Error fetching consultations:', error);
-            setDisorderData();
          }
       };
+
 
       if (localData.TYPE === 'CHILD' || localData.TYPE === 'PARENT') {
          fetchBookedDocData();
@@ -96,7 +99,7 @@ const Dashboard = () => {
       displayedAvailableTherapyData = availableTherapyData.slice(0, 2 + (bookedTherapyData.length >= 2 ? 0 : 2 - bookedTherapyData.length));
    }
    const handleBookedDoctor = () => {
-      navigate('/BookedList');
+      navigate('/doctor/booked');
    }
 
    const handleAvailableDoctor = () => {
@@ -143,7 +146,7 @@ const Dashboard = () => {
                         <img src={Doctor} alt="Doctor" className="doctor-img" />
                         {displayedBookedDocData.length > 0 && (
                            <div className='dash-booking-doc'>
-                              <h2 className='dashboard-heading'>Booked Doctor</h2>
+                              <h2 className='dashboard-heading'>Booked Consultation</h2>
                               <div className='booking-doctor'>
                                  {displayedBookedDocData.map((item) => (
                                     <div className="card-item-doc" key={item.H_ID}>

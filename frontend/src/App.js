@@ -48,14 +48,14 @@ function App() {
                <Route path='/therapy/detail' element={<TherapyDetail />} />
                <Route path='/therapy/org' element={<TherapyOrganizations />} />
                <Route path='/products' element={<ProductList />} />
-               <Route path='/Delivery' element={<Order />} />
+               <Route path='/products/delivery' element={<Order />} />
                <Route path='/disorder' element={<Disorder />} />
                <Route path='/therapy/booking' element={<BookingTherapy />} />
                <Route path='/therapy/booked' element={<BookedTherapy />} />
                <Route path='/HealthProfessionals' element={<DoctorsList />} />
                <Route path='/doctor/detail' element={<DoctorProfile />} />
                <Route path='/booking/doc' element={<BookingDoc />} />
-               <Route path='/BookedList' element={<BookedList />} />
+               <Route path='/doctor/booked' element={<BookedList />} />
                <Route path='/parent-child' element={<ParentChildProfile />} />
                <Route path='/consultation' element={<Consultation />} />
             </Routes>

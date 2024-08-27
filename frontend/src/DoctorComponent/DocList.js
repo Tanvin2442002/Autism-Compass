@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DocList.css';
 import Navbar from '../Navbar';
+import Loader from '../Loader';
 
 const DoctorsList = () => {
    const [doctors, setDoctors] = useState([]);
@@ -17,8 +18,6 @@ const DoctorsList = () => {
                throw new Error("Network response was not ok");
             }
             const data = await response.json();
-
-            // Fetch gender data for all doctors
             const doctorsWithGender = await Promise.all(
                data.map(async (doctor) => {
                   
@@ -87,7 +86,7 @@ const DoctorsList = () => {
                <input type="text" placeholder="Search doctors..." onChange={handleSearch} required />
                <i className='bx bx-search'></i>
             </div>
-            {loading && <p>Loading...</p>}
+            {loading && <Loader />}
             {error && <p>{error}</p>}
             <div className="details">
                <div className="doc-container">
