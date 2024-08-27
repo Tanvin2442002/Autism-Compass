@@ -1,34 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Navbar from '../Navbar';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar";
 import Button from "./Button";
-import './Cart.css';
-import { toast, ToastContainer } from 'react-toastify';
+import CarLoader from "./CarLoader.js";
+import "./Cart.css";
+import { toast, ToastContainer } from "react-toastify";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [error, setError] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
-  const [assignedDeliveryMan, setAssignedDeliveryMan] = useState('');
-  const [deliverymanID,setdeliverymanID]=useState('')
+  const [assignedDeliveryMan, setAssignedDeliveryMan] = useState("");
+  const [deliverymanID, setdeliverymanID] = useState("");
   const [address, setAddress] = useState({
-    city: '',
-    street: '',
-    houseNo: ''
+    city: "",
+    street: "",
+    houseNo: "",
   });
+  const [message, setMessage] = useState("---");
+
   const navigate = useNavigate();
   function Str_Random(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    
+    let result = "";
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
     // Loop to generate characters for the specified length
     for (let i = 0; i < length; i++) {
-        const randomInd = Math.floor(Math.random() * characters.length);
-        result += characters.charAt(randomInd);
+      const randomInd = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomInd);
     }
     return result;
-}
+  }
 
   const userData = JSON.parse(localStorage.getItem("USER"));
   const userID = userData.ID;
@@ -60,12 +64,13 @@ const Cart = () => {
       const response = await fetch(
         `http://localhost:5000/products/detail/checkout/total?userID=${userID}`
       );
-      if (!response.ok) {
-        if(response.status===404)
-          {
-            navigate('/products');
-            
-          }
+      if (response.status === 404) {
+        setErrorMessage(
+          "Your cart is empty. Redirecting to the products page..."
+        );
+        
+        navigate("/products");
+
       }
       const data = await response.json();
       console.log("Fetched data:", data);
@@ -79,8 +84,8 @@ const Cart = () => {
 
   const handleQuantityChange = async (id, quantity) => {
     if (quantity < 1 || isNaN(quantity)) {
-      console.log('Invalid credentials');
-      toast.error('Item count cannot be null', {
+      console.log("Invalid credentials");
+      toast.error("Item count cannot be null", {
         position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,
@@ -115,7 +120,7 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveItem = async (PR_ID,event) => {
+  const handleRemoveItem = async (PR_ID, event) => {
     if (event) {
       event.preventDefault();
     }
@@ -146,7 +151,9 @@ const Cart = () => {
     setAddress({ ...address, city });
 
     try {
-      const response = await fetch(`http://localhost:5000/products/detail/checkout/deliveryman?city=${city}`);
+      const response = await fetch(
+        `http://localhost:5000/products/detail/checkout/deliveryman?city=${city}`
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -156,14 +163,13 @@ const Cart = () => {
       setdeliverymanID(data[0].D_ID);
     } catch (err) {
       console.error("Failed to fetch the assigned delivery man:", err);
-      setAssignedDeliveryMan('');
+      setAssignedDeliveryMan("");
     }
   };
 
   const setDeliveryAddress = async () => {
-
     if (!address.city || !address.street || !address.houseNo) {
-      toast.error('Please fill in all the fields', {
+      toast.error("Please fill in all the fields", {
         position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,
@@ -177,51 +183,31 @@ const Cart = () => {
     }
 
     const date = new Date();
-    // date.setDate(date.getDate() + 4); // Add 3 days to the current date
+    date.setDate(date.getDate() + 4); // Add 3 days to the current date
     const param = {
-        CITY: address.city,
-        STREET: address.street,
-        HOUSE_NO: address.houseNo,
-        P_ID: userID,
-        D_ID: deliverymanID,
-        DELIVERY_DATE: date.toISOString().split('T')[0]
-    }
+      CITY: address.city,
+      STREET: address.street,
+      HOUSE_NO: address.houseNo,
+      P_ID: userID,
+      D_ID: deliverymanID,
+      DELIVERY_DATE: date.toISOString().split("T")[0],
+    };
     try {
-      const response = await fetch("http://localhost:5000/products/detail/checkout/setAddress", {
-        method: "POST",
-        body: JSON.stringify(param),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "http://localhost:5000/products/detail/checkout/setAddress",
+        {
+          method: "POST",
+          body: JSON.stringify(param),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       console.log(data);
-      if (data.message === "Delivery address updated successfully!") {
-        toast.success(data.message, {
-          position: "top-right",
-          autoClose: 2500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      } else {
-        toast.error(data.message, {
-          position: "top-right",
-          autoClose: 2500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      }
     } catch (error) {
-      console.error('Error executing fetch:', error);
-      toast.error('Failed to update delivery address', {
+      console.error("Error executing fetch:", error);
+      toast.error("Failed to update delivery address", {
         position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,
@@ -232,14 +218,120 @@ const Cart = () => {
         theme: "light",
       });
     }
+    const orderID = Str_Random(13);
+
+    try {
+      const params = {
+        ORDER_ID: orderID,
+        AMOUNT: subtotal.TOTAL_AMOUNT,
+      };
+      const response = await fetch(
+        "http://localhost:5000/products/detail/checkout/setBill",
+        {
+          method: "POST",
+          body: JSON.stringify(params),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error executing fetch:", error);
+    }
+
+    try {
+      const params = {
+        ORDER_ID: orderID,
+        D_ID: deliverymanID,
+      };
+      const response = await fetch(
+        "http://localhost:5000/products/detail/checkout/setAssignedTo",
+        {
+          method: "POST",
+          body: JSON.stringify(params),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error executing fetch:", error);
+    }
+    let flag = 0;
+    cartItems.forEach(async (item) => {
+      const params = {
+        ORDER_ID: orderID,
+        PR_ID: item.PR_ID,
+        QUANTITY: item.QUANTITY,
+        P_ID: userID,
+        // AMOUNT: item.AMOUNT,
+        CITY: address.city,
+        STREET: address.street,
+        HOUSE_NO: address.houseNo,
+        DELIVERY_DATE: date.toISOString().split("T")[0],
+      };
+
+      try {
+        const response = await fetch(
+          "http://localhost:5000/products/detail/checkout/setOrder",
+          {
+            method: "POST",
+            body: JSON.stringify(params), // Note: Changed 'param' to 'params'
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        console.log("hello:", data);
+        console.log("hello message:", data.message);
+        setMessage(data.message);
+        console.log("flag value before:", flag);
+        console.log(typeof flag);
+        if (data.message === "Order placed successfully!" && flag == 0) {
+          flag = 1;
+          toast.success("Order placed successfully", {
+            position: "top-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+        setLoading(true);
+        setTimeout(() => {
+          navigate("/delivery");
+        }, 4500);
+      } catch (error) {
+        console.error("Error executing fetch:", error);
+        toast.error("Failed to place order", {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    });
+    console.log("skjfhakjdf", message);
   };
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!cartItems.length) return <div>Product not found</div>;
-  const isFormComplete = address.city && address.street && address.houseNo && assignedDeliveryMan;
+  const isFormComplete =
+    address.city && address.street && address.houseNo && assignedDeliveryMan;
   return (
-    <div className='main-app'>
+    <div className="main-app">
       <ToastContainer />
       <div className="cart-container">
         <Navbar />
@@ -249,7 +341,7 @@ const Cart = () => {
         <div className="cart">
           <div className="cart-items-summary">
             <div className="cart-items">
-              {cartItems.map(item => (
+              {cartItems.map((item) => (
                 <div key={item.PR_ID} className="cart-item">
                   <img src={item.SRC} alt={item.name} />
                   <div className="item-details">
@@ -257,20 +349,38 @@ const Cart = () => {
                     <p>€ {item.AMOUNT / item.QUANTITY}</p>
                     <div className="quantity">
                       <button
-                        onClick={() => handleQuantityChange(item.PR_ID, item.QUANTITY - 1)}>
+                        onClick={() =>
+                          handleQuantityChange(item.PR_ID, item.QUANTITY - 1)
+                        }
+                      >
                         -
                       </button>
-                      <input type="number"
-                        required defaultValue={item.QUANTITY} min={1}
-                        value={item.QUANTITY} onChange={(e) => handleQuantityChange(item.PR_ID, parseInt(e.target.value))} />
+                      <input
+                        type="number"
+                        required
+                        defaultValue={item.QUANTITY}
+                        min={1}
+                        value={item.QUANTITY}
+                        onChange={(e) =>
+                          handleQuantityChange(
+                            item.PR_ID,
+                            parseInt(e.target.value)
+                          )
+                        }
+                      />
                       <button
-                        onClick={() => handleQuantityChange(item.PR_ID, item.QUANTITY + 1)}>
+                        onClick={() =>
+                          handleQuantityChange(item.PR_ID, item.QUANTITY + 1)
+                        }
+                      >
                         +
                       </button>
                     </div>
                   </div>
                   <button
-                    className="remove" onClick={(e) => handleRemoveItem(item.PR_ID,e)}>
+                    className="remove"
+                    onClick={(e) => handleRemoveItem(item.PR_ID, e)}
+                  >
                     ×
                   </button>
                 </div>
@@ -287,7 +397,7 @@ const Cart = () => {
                 id="City"
                 placeholder="Enter City"
                 className="shipping"
-                value={address.city ? address.city : ''}
+                value={address.city ? address.city : ""}
                 onChange={handleCityChange}
               />
               <label>Street</label>
@@ -298,7 +408,9 @@ const Cart = () => {
                 placeholder="Enter Street"
                 className="shipping"
                 value={address.street}
-                onChange={(e) => setAddress({ ...address, street: e.target.value })}
+                onChange={(e) =>
+                  setAddress({ ...address, street: e.target.value })
+                }
               />
               <label>House No</label>
               <input
@@ -309,33 +421,46 @@ const Cart = () => {
                 placeholder="Enter House No"
                 className="shipping"
                 value={address.houseNo}
-                onChange={(e) => setAddress({ ...address, houseNo: e.target.value })}
+                onChange={(e) =>
+                  setAddress({ ...address, houseNo: e.target.value })
+                }
               />
               <label>Assigned Delivery Man</label>
               <input
                 type="text"
-                className='shipping'
+                className="shipping"
                 value={assignedDeliveryMan}
                 disabled
               />
               <label htmlFor="shipping">Delivery Type</label>
-              <select id='shipping' className='shipping'>
-                <option value="5" className='shipping'>Standard-Delivery - €5.00</option>
-                <option value="5" className='shipping'>Super Fast Delivery - €10.00</option>
+              <select id="shipping" className="shipping">
+                <option value="5" className="shipping">
+                  Standard-Delivery - €5.00
+                </option>
+                <option value="5" className="shipping">
+                  Super Fast Delivery - €10.00
+                </option>
               </select>
             </div>
-            <div className='total-price'>
-              <div className='sub-total'>
+            <div className="total-price">
+              <div className="sub-total">
                 <p>SUBTOTAL</p>
                 <p>TOTAL PRICE INCLUDING 5% VAT</p>
               </div>
-              <div className='final-total'>
+              <div className="final-total">
                 <p>: {subtotal.TOTAL}$</p>
                 <p>: {subtotal.TOTAL_AMOUNT}$</p>
               </div>
             </div>
-            <div className="checkout" onClick={isFormComplete ? setDeliveryAddress : null}
-                 style={{ pointerEvents: isFormComplete ? 'auto' : 'none', opacity: isFormComplete ? 1 : 0.5 }}>
+            <div
+              className="checkout"
+              onClick={isFormComplete ? setDeliveryAddress : null}
+              style={{
+                pointerEvents: isFormComplete ? "auto" : "none",
+                opacity: isFormComplete ? 1 : 0.5,
+              }}
+            >
+              {/* {loading && <Loader />} */}
               <Button />
             </div>
           </div>

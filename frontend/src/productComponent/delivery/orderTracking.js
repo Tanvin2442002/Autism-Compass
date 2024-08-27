@@ -18,18 +18,6 @@ const OrderConfirmation = () => {
   const userData = JSON.parse(localStorage.getItem("USER"));
   const userID = userData.ID;
 
-  function Str_Random(length) {
-    let result = "";
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    // Loop to generate characters for the specified length
-    for (let i = 0; i < length; i++) {
-      const randomInd = Math.floor(Math.random() * characters.length);
-      result += characters.charAt(randomInd);
-    }
-    return result;
-  }
-
   useEffect(() => {
     const fetchOrderList = async () => {
       try {
@@ -40,6 +28,7 @@ const OrderConfirmation = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        console.log("Orderlist data:", data);
         setOrderList(data);
       } catch (err) {
         setError(err.message);
@@ -47,25 +36,6 @@ const OrderConfirmation = () => {
         setLoading(false);
       }
     };
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:5000/products/detail/checkout?userID=${userID}`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        console.log("Fetched data:", data);
-        setorderCartItems(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProduct();
-
     const fetchOrderDetails = async () => {
       try {
         const response = await fetch(
@@ -75,6 +45,7 @@ const OrderConfirmation = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        console.log("OrderDetails data:", data);
         setOrderDetails(data);
       } catch (err) {
         setError(err.message);
@@ -85,6 +56,27 @@ const OrderConfirmation = () => {
 
     fetchOrderList();
     fetchOrderDetails();
+    const deleteCartItems = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/purchases?userID=${userID}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to delete cart items");
+        }
+
+        // Optionally, update your state or UI after deletion
+        setorderCartItems([]); // Assuming you want to clear the cart in the UI as well
+        console.log("Cart items deleted successfully");
+      } catch (error) {
+        console.error("Error:", error);
+        setError(error.message);
+      }
+    };
   }, [userID]);
 
   useEffect(() => {
@@ -99,6 +91,7 @@ const OrderConfirmation = () => {
             throw new Error("Network response was not ok");
           }
           const data = await response.json();
+          console.log("DeliveryDetails data:", data);
           setDeliveryDetails(data);
         } catch (err) {
           setError(err.message);
@@ -109,6 +102,26 @@ const OrderConfirmation = () => {
     }
   }, [OrderDetails]);
 
+  const deleteCartItems = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/delivery/cart?userID=${userID}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete cart items");
+      }
+      setorderCartItems([]);
+      console.log("Cart items deleted successfully");
+    } catch (error) {
+      console.error("Error:", error);
+      setError(error.message);
+    }
+  };
+  deleteCartItems();
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!OrderList.length) return <div>No products found</div>;
@@ -132,76 +145,86 @@ const OrderConfirmation = () => {
     HOUSE_NO: house_no,
   };
 
-  const listItems = OrderList.map((item) => (
-    <div className="ordercardslick" key={item.ID}>
-      <div className="ordercardslick-img">
-        <img src={item.SRC} alt={item.NAME} />
-      </div>
-      <div className="ordercardslick-content">
-        <h3>{item.NAME}</h3>
-        <p>{item.PRICE}</p>
-      </div>
-    </div>
-  ));
+  const deletegettable = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/delivery/get?userID=${userID}`,
+        {
+          method: "DELETE",
+        }
+      );
 
-  return (
-    <div className="orderContainer">
-      <Navbar />
-      <article className="ordercard-article">
-        <div className="order-card-body">
-          <div className="ordercard">
-            <header className="order-card-header">
-              <u>My order tracking</u>
-            </header>
-            <div className="InnerContainer">
-              <div className="containerDetails">
-                <div className="col">
-                  <p className="que">Estimated Delivery time:</p>
-                  <p className="ans">{DeliveryDate}</p>
+      if (!response.ok) {
+        throw new Error("Failed to delete get table");
+      }
+      setorderCartItems([]);
+      console.log("Cart items deleted successfully");
+    } catch (error) {
+      console.error("Error:", error);
+      setError(error.message);
+    }
+  }
+    deletegettable();
+
+    return (
+      <div className="orderContainer">
+        <Navbar />
+        <article className="ordercard-article">
+          <div className="order-card-body">
+            <div className="ordercard">
+              <header className="order-card-header">
+                <u>My order tracking</u>
+              </header>
+              <div className="InnerContainer">
+                <div className="containerDetails">
+                  <div className="col">
+                    <p className="que">Estimated Delivery time:</p>
+                    <p className="ans">{DeliveryDate}</p>
+                  </div>
+                  <div className="col">
+                    <p className="que">Order ID:</p>
+                    <p className="ans">HJBKBAD654</p>
+                  </div>
+                  <div className="col">
+                    <p className="que">Shipping BY:</p>
+                    <p className="ans">{DeliveryMan}</p>
+                  </div>
+                  <div className="col">
+                    <p className="que">Status:</p>
+                    <p className="ans">Picked by the courier</p>
+                  </div>
+                  <div className="col">
+                    <p className="que">Address:</p>
+                    <p className="ans">{`${obj.HOUSE_NO}, ${obj.STREET}, ${obj.CITY}`}</p>
+                  </div>
                 </div>
-                <div className="col">
-                  <p className="que">Order ID:</p>
-                  <p className="ans">{Str_Random(13)}</p>
+                <div>
+                  <StepperComponent />
                 </div>
-                <div className="col">
-                  <p className="que">Shipping BY:</p>
-                  <p className="ans">{DeliveryMan}</p>
-                </div>
-                <div className="col">
-                  <p className="que">Status:</p>
-                  <p className="ans">Picked by the courier</p>
-                </div>
-                <div className="col">
-                  <p className="que">Address:</p>
-                  <p className="ans">{`${obj.HOUSE_NO}, ${obj.STREET}, ${obj.CITY}`}</p>
-                </div>
+                <img src={delivery} alt="delivery" className="imgtruck" />
               </div>
-              <div>
-                <StepperComponent />
-              </div>
-              <img src={delivery} alt="delivery" className="imgtruck" />
             </div>
+            <hr />
+            {/* Add your Slider and other components here */}
           </div>
-          <hr />
-          {/* Add your Slider and other components here */}
-        </div>
-      </article>
-      <div className="lower-container">
-        <div className="ordercartlower">
-          {ordercartItems.map((item) => (
-            <div key={item.PR_ID} className="ordercart-item">
-              <img src={item.SRC} alt={item.name} className="ordercartimg" />
-              <div className="orderitem-details">
-                <p>{item.NAME}</p>
-                <p>BDT {item.AMOUNT / item.QUANTITY}</p>
-                <div className="orderquantity">Quantity:{item.QUANTITY}</div>
+        </article>
+        <div className="lower-container">
+          <div className="ordercartlower">
+            {OrderList.map((item) => (
+              <div key={item.PR_ID} className="ordercart-item">
+                <img src={item.SRC} alt={item.name} className="ordercartimg" />
+                <div className="orderitem-details">
+                  <p>{item.NAME}</p>
+                  <p>BDT {item.AMOUNT / item.QUANTITY}</p>
+                  <div className="orderquantity">Quantity:{item.QUANTITY}</div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
+
 
 export default OrderConfirmation;
