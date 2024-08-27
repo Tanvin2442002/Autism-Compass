@@ -16,7 +16,7 @@ const BookedList = () => {
   useEffect(() => {
     const fetchConsultations = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/consultations/data?id=${localData.ID}&type=${localData.TYPE}`);
+        const response = await fetch(`http://localhost:5000/consult/data?id=${localData.ID}&type=${localData.TYPE}`);
 
         const data = await response.json();
 

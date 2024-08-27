@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import Button from "./Button";
+import CarLoader from "./CarLoader.js";
 import "./Cart.css";
 import { toast, ToastContainer } from "react-toastify";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [error, setError] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
   const [assignedDeliveryMan, setAssignedDeliveryMan] = useState("");
@@ -62,10 +64,13 @@ const Cart = () => {
       const response = await fetch(
         `http://localhost:5000/products/detail/checkout/total?userID=${userID}`
       );
-      if (!response.ok) {
-        if (response.status === 404) {
-          navigate("/products");
-        }
+      if (response.status === 404) {
+        setErrorMessage(
+          "Your cart is empty. Redirecting to the products page..."
+        );
+        
+        navigate("/products");
+
       }
       const data = await response.json();
       console.log("Fetched data:", data);
@@ -215,48 +220,46 @@ const Cart = () => {
     }
     const orderID = Str_Random(13);
 
-    try{
-        const params = {
-            ORDER_ID: orderID,
-            AMOUNT: subtotal.TOTAL_AMOUNT
+    try {
+      const params = {
+        ORDER_ID: orderID,
+        AMOUNT: subtotal.TOTAL_AMOUNT,
+      };
+      const response = await fetch(
+        "http://localhost:5000/products/detail/checkout/setBill",
+        {
+          method: "POST",
+          body: JSON.stringify(params),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-        const response = await fetch(
-            "http://localhost:5000/products/detail/checkout/setBill",
-            {
-                method: "POST",
-                body: JSON.stringify(params),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        );
-        const data = await response.json();
-        console.log(data);
-    }
-    catch (error) {
-        console.error("Error executing fetch:", error);
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error executing fetch:", error);
     }
 
-    try{
-        const params = {
-            ORDER_ID: orderID,
-            D_ID: deliverymanID
+    try {
+      const params = {
+        ORDER_ID: orderID,
+        D_ID: deliverymanID,
+      };
+      const response = await fetch(
+        "http://localhost:5000/products/detail/checkout/setAssignedTo",
+        {
+          method: "POST",
+          body: JSON.stringify(params),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-        const response = await fetch(
-            "http://localhost:5000/products/detail/checkout/setAssignedTo",
-            {
-                method: "POST",
-                body: JSON.stringify(params),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        );
-        const data = await response.json();
-        console.log(data);
-    }
-    catch (error) {
-        console.error("Error executing fetch:", error);
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error executing fetch:", error);
     }
     let flag = 0;
     cartItems.forEach(async (item) => {
@@ -284,10 +287,10 @@ const Cart = () => {
           }
         );
         const data = await response.json();
-        console.log('hello:', data);
-        console.log('hello message:', data.message);
+        console.log("hello:", data);
+        console.log("hello message:", data.message);
         setMessage(data.message);
-        console.log('flag value before:', flag);
+        console.log("flag value before:", flag);
         console.log(typeof flag);
         if (data.message === "Order placed successfully!" && flag == 0) {
           flag = 1;
@@ -301,21 +304,11 @@ const Cart = () => {
             progress: undefined,
             theme: "light",
           });
-        } else {
-          toast.error("Failed to place order----", {
-            position: "top-right",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
         }
+        setLoading(true);
         setTimeout(() => {
           navigate("/delivery");
-        }, 4000);
+        }, 4500);
       } catch (error) {
         console.error("Error executing fetch:", error);
         toast.error("Failed to place order", {
@@ -333,7 +326,6 @@ const Cart = () => {
     console.log("skjfhakjdf", message);
   };
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!cartItems.length) return <div>Product not found</div>;
   const isFormComplete =
@@ -468,6 +460,7 @@ const Cart = () => {
                 opacity: isFormComplete ? 1 : 0.5,
               }}
             >
+              {/* {loading && <Loader />} */}
               <Button />
             </div>
           </div>

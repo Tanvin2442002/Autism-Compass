@@ -286,9 +286,9 @@ routerProduct.get("/delivery", async (req, res) => {
 
     const result = await connection.execute(
       `
-          SELECT PURCHASES.PR_ID, NAME, SRC, AMOUNT, PURCHASES.quantity
-          FROM PRODUCT, PURCHASES
-          WHERE PRODUCT.PR_ID = PURCHASES.PR_ID
+          SELECT PRODUCT.PR_ID, NAME, SRC, PRICE, PAYS.quantity
+          FROM PRODUCT, PAYS
+          WHERE PRODUCT.PR_ID = PAYS.PR_ID
           AND p_id = :userID
       `,
       { userID }
@@ -420,6 +420,44 @@ routerProduct.post('/products/detail/checkout/setAssignedTo', async (req, res) =
         console.error("Error executing query:", error);
         res.status(500).send({ error: "Internal server error" });
     }
+});
+
+routerProduct.delete('/delivery/cart', async (req, res) => {
+    const { userID } = req.query;
+    let connection;
+    try {
+        connection = await getConnection();
+        const result = await connection.execute(
+            `DELETE FROM PURCHASES WHERE P_ID = :userID`,
+            { userID },
+            {
+                autoCommit: true,
+            }
+        );
+        res.status(200).send({ message: "Cart cleared successfully!", result });
+    } catch (error) {
+        console.error("Error executing query:", error);
+        res.status(500).send({ error: "Internal server error" });
+    }
+});
+
+routerProduct.delete('/delivery/get', async (req, res) => {
+  const { userID } = req.query;
+  let connection;
+  try {
+      connection = await getConnection();
+      const result = await connection.execute(
+          `DELETE FROM GET WHERE P_ID = :userID`,
+          { userID },
+          {
+              autoCommit: true,
+          }
+      );
+      res.status(200).send({ message: "Cart cleared successfully!", result });
+  } catch (error) {
+      console.error("Error executing query:", error);
+      res.status(500).send({ error: "Internal server error" });
+  }
 });
 
 module.exports = routerProduct;

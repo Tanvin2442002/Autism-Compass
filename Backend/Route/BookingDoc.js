@@ -148,11 +148,11 @@ router.get('/physician/child/check', async (req, res) => {
 });
 
 // Fetch All Consultations for a Parent or Child
-router.get('/consultations/data', async (req, res) => {
+router.get('/consult/data', async (req, res) => {
   const connection = await getConnection();
-  console.log("Request received for fetching consultations");
+  console.log("Request received for fetching consultations--");
   const { id, type } = req.query;
-
+  console.log("ID:", id, "Type:", type);
   try {
     let result;
     if (type === "CHILD") {
@@ -183,6 +183,7 @@ router.get('/consultations/data', async (req, res) => {
         { id }
       );
     }
+    console.log(result.rows);
     res.status(200).send(result.rows || []);
   } catch (error) {
     console.error('Error fetching consultations:', error);
