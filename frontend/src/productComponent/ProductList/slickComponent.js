@@ -36,7 +36,7 @@ const SlickComponent = () => {
     };
 
     const settings = {
-        dots: true,
+        dots: false,
         autoplay: true,
         autoplaySpeed: 1500,
         infinite: true,

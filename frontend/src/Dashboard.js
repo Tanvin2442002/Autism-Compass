@@ -85,6 +85,43 @@ const Dashboard = () => {
       fetchDisorderData();
    }, []);
 
+   const settings = {
+      dots: false,
+      autoplay: true,
+      autoplaySpeed: 1500,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      responsive: [
+          {
+              breakpoint: 928,
+              settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 1,
+                  infinite: true,
+                  dots: false
+              }
+          },
+          {
+              breakpoint: 464,
+              settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1,
+                  initialSlide: 2
+              }
+          },
+          {
+              breakpoint: 232,
+              settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+              }
+          }
+      ]
+  };
+
+
    console.log(bookedDocData.length, bookedTherapyData.length);
 
    const displayedBookedDocData = bookedDocData.slice(0, 2);
@@ -122,6 +159,7 @@ const Dashboard = () => {
                   <div className='dash-booked-doc'>
                      <h2 className='dashboard-heading'>Available Health Professional</h2>
                      <div className='booking-doctor'>
+                        {/* <Slider {...settings}> */}
                         {displayedAvailableDocData.map((item) => (
                            <div className="card-item-doc" key={item.H_ID}>
                               <h2>Dr. {item.DOCTOR_NAME}</h2>
@@ -130,7 +168,9 @@ const Dashboard = () => {
                               <p className="label-square">Contact No: {item.CONTACT_NO}</p>
                            </div>
                         ))}
+                        {/* </Slider> */}
                      </div>
+                     
                      <button className='view-more-button' onClick={handleAvailableDoctor}>View more details</button>
                   </div>
                   <img src={Doctor} alt="Doctor" className="doctor-img" />

@@ -31,6 +31,7 @@ const MainContent = () => {
 
     const handleClick = (productID) => {
         navigate(`/products/detail?ID=${productID}`);
+        window.location.reload();
     };
 
     const listItems = productCards.map((item) =>

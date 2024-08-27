@@ -161,8 +161,23 @@ const Cart = () => {
   };
 
   const setDeliveryAddress = async () => {
+
+    if (!address.city || !address.street || !address.houseNo) {
+      toast.error('Please fill in all the fields', {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
+
     const date = new Date();
-    date.setDate(date.getDate() + 4); // Add 3 days to the current date
+    // date.setDate(date.getDate() + 4); // Add 3 days to the current date
     const param = {
         CITY: address.city,
         STREET: address.street,
@@ -222,7 +237,7 @@ const Cart = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!cartItems.length) return <div>Product not found</div>;
-
+  const isFormComplete = address.city && address.street && address.houseNo && assignedDeliveryMan;
   return (
     <div className='main-app'>
       <ToastContainer />
@@ -268,32 +283,33 @@ const Cart = () => {
               <label>City</label>
               <input
                 type="text"
+                required
                 id="City"
                 placeholder="Enter City"
                 className="shipping"
-                value={address.city}
+                value={address.city ? address.city : ''}
                 onChange={handleCityChange}
-                required
               />
               <label>Street</label>
               <input
                 type="text"
+                required
                 id="Street"
                 placeholder="Enter Street"
                 className="shipping"
                 value={address.street}
                 onChange={(e) => setAddress({ ...address, street: e.target.value })}
-                required
               />
               <label>House No</label>
               <input
                 type="text"
+                // autoComplete='off'
+                required
                 id="House"
                 placeholder="Enter House No"
                 className="shipping"
                 value={address.houseNo}
                 onChange={(e) => setAddress({ ...address, houseNo: e.target.value })}
-                required
               />
               <label>Assigned Delivery Man</label>
               <input
@@ -318,7 +334,8 @@ const Cart = () => {
                 <p>: {subtotal.TOTAL_AMOUNT}$</p>
               </div>
             </div>
-            <div className="checkout" onClick={setDeliveryAddress}>
+            <div className="checkout" onClick={isFormComplete ? setDeliveryAddress : null}
+                 style={{ pointerEvents: isFormComplete ? 'auto' : 'none', opacity: isFormComplete ? 1 : 0.5 }}>
               <Button />
             </div>
           </div>

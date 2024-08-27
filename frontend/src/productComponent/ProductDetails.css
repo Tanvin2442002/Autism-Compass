@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 .product-details-before-checkout {
   display: flex;
   flex-direction: column;
@@ -85,35 +90,53 @@
 .cart-button,
 .checkout-button,
 .continue-shopping-button {
-  padding: 10px 20px;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+   padding: 10px 10px;
+    margin-bottom: 7px;
+    border: unset;
+    border-radius: 5px;
+    color: #212121;
+    font-family: 'Roboto Condensed', sans-serif;
+    word-spacing: 2px;
+    letter-spacing: 1px;
+    z-index: 1;
+    background-color: #ffffffac;
+    position: relative;
+    font-weight: 700;
+    font-size: 13px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms;
+    overflow: hidden;
 }
 
-.cart-button {
-  background-color: #ff5722;
+.cart-button::before,
+.checkout-button::before,
+.continue-shopping-button::before{
+   content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 5px;
+    background-color: #212121;
+    z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms
 }
 
-.cart-button:hover {
-  background-color: #e64a19;
+.cart-button:hover,
+.checkout-button:hover,
+.continue-shopping-button:hover{
+
+  color: #e8e8e8;
 }
 
-.checkout-button {
-  background-color: #4caf50;
+.cart-button:hover::before,
+.checkout-button:hover::before,
+.continue-shopping-button:hover::before {
+  width: 100%;
 }
 
-.checkout-button:hover {
-  background-color: #45a049;
-}
 
-.continue-shopping-button {
-  background-color: #2196f3;
-}
-
-.continue-shopping-button:hover {
-  background-color: #1976d2;
-}
