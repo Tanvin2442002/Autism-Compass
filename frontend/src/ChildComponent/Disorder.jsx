@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from '../Navbar';
 import './Disorder.css';
+import DisoderImg from '../img/Disorder.svg';
 
 const Disorder = () => {
    const [DisorderDetails, setDisorderDetails] = useState({
@@ -64,23 +65,30 @@ const Disorder = () => {
 
          console.log(response.data.candidates[0].content.parts[0].text);
          setAns(response.data.candidates[0].content.parts[0].text);
+         console.log(ans);
+         setAns(response.data.candidates[0].content.parts[0].text.replace(/\*/g, ''));
       } catch (error) {
          console.error("Error generating disorder details", error);
       }
    };
 
    return (
-      <div className='disorder'>
+      <div>
          <Navbar />
-         <div className='disorder-item'>
-            <h1>{DisorderDetails.Name}</h1>
-            <p>{DisorderDetails.Description}</p>
-         </div>
-         <div className='disorder-item-details'>
-            <button onClick={generateDisorderDetails}>
-               Want to know more about the disorder
-            </button>
-            <div className='answer' dangerouslySetInnerHTML={{ __html: ans }} />
+         <div className='disorder'>
+            <div className='disorder-info'>
+               <div className='disorder-item'>
+                  <h1>{DisorderDetails.Name}</h1>
+                  <p>{DisorderDetails.Description}</p>
+                  <button className='view-more-button' onClick={generateDisorderDetails}>Want to know more about this disorder</button>
+               </div>
+               <div className='disorder-item-details'>
+                  {ans.length > 0 && (
+                     <textarea className='answer' value={ans} readOnly />
+                  )}
+               </div>
+            </div>
+            <img src={DisoderImg} alt='Disorder' />
          </div>
       </div>
    );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import Logo from './img/logo.png';
 import './Nav.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +11,7 @@ const Navbar = () => {
    const [userType, setUserType] = useState(null);
 
    const navigate = useNavigate();
-
+   const location = useLocation();
 
    useEffect(() => {
       const userDataString = localStorage.getItem('USER');
@@ -25,30 +26,35 @@ const Navbar = () => {
       navigate('/login');
    };
 
+   const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+   };
 
    return (
       <nav className="navbar">
          <div className="navbar-container">
             <Link to="/dashboard" className="navbar-logo">
-               <img src="https://newsone.com/wp-content/uploads/sites/22/2023/04/16819915401663.jpg?strip=all&quality=80&w=1024&crop=0,0,100,1024px" className="navbar-logo-img" alt="Logo" />
-               <span className="navbar-logo-text">Autism Compass</span>
+               <img src={Logo} className="navbar-logo-img" alt="Logo" />
             </Link>
+            <button className="navbar-menu-button" onClick={toggleMenu}>
+               <img src="https://img.icons8.com/ios-glyphs/30/000000/menu--v1.png" alt="menu" />
+            </button>
             <div className={`navbar-links-container ${isMenuOpen ? 'open' : ''}`} id="navbar-sticky">
                <ul className="navbar-links">
+                  <li>
+                     <Link to="/dashboard" className={`navbar-link ${location.pathname === '/dashboard' ? 'active' : ''}`}>Home</Link>
+                  </li>
                   {userType === 'CHILD' && (
                      <>
                         <li>
-                           <Link to="/parent-child" className="navbar-link">Parent</Link>
-                        </li>
-                        <li>
-                           <Link to="/HealthProfessionals" className="navbar-link">Health Professionals</Link>
+                           <Link to="/HealthProfessionals" className={`navbar-link ${location.pathname === '/HealthProfessionals' ? 'active' : ''}`}>Health Professionals</Link>
                         </li>
                         <li
                            className="navbar-dropdown"
                            onMouseEnter={() => setIsHovered(true)}
                            onMouseLeave={() => setIsHovered(false)}
                         >
-                           <Link to="/Therapy" className="navbar-link">Therapy</Link>
+                           <Link to="/Therapy" className={`navbar-link ${location.pathname.startsWith('/Therapy') ? 'active' : ''}`}>Therapy</Link>
                            {isHovered && (
                               <div className="products-dropdown">
                                  <Link to="/therapy" className="navbar-link">Available Therapy</Link>
@@ -58,30 +64,30 @@ const Navbar = () => {
                            )}
                         </li>
                         <li>
-                           <Link to="/courses" className="navbar-link">Courses</Link>
+                           <Link to="/courses" className={`navbar-link ${location.pathname === '/courses' ? 'active' : ''}`}>Courses</Link>
                         </li>
                         <li>
-                           <Link to="/disorder" className="navbar-link">Disorder</Link>
+                           <Link to="/disorder" className={`navbar-link ${location.pathname === '/disorder' ? 'active' : ''}`}>Disorder</Link>
                         </li>
                         <li>
-                           <Link to="/profile" className="navbar-link">Profile</Link>
+                           <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
                         </li>
                      </>
                   )}
                   {userType === 'PARENT' && (
                      <>
                         <li>
-                           <Link to="/parent-child" className="navbar-link">Child</Link>
+                           <Link to="/parent-child" className={`navbar-link ${location.pathname === '/parent-child' ? 'active' : ''}`}>Child</Link>
                         </li>
                         <li>
-                           <Link to="/HealthProfessionals" className="navbar-link">Health Professionals</Link>
+                           <Link to="/HealthProfessionals" className={`navbar-link ${location.pathname === '/HealthProfessionals' ? 'active' : ''}`}>Health Professionals</Link>
                         </li>
                         <li
                            className="navbar-dropdown"
                            onMouseEnter={() => setIsHovered(true)}
                            onMouseLeave={() => setIsHovered(false)}
                         >
-                           <Link to="/Therapy" className="navbar-link">Therapy</Link>
+                           <Link to="/Therapy" className={`navbar-link ${location.pathname.startsWith('/Therapy') ? 'active' : ''}`}>Therapy</Link>
                            {isHovered && (
                               <div className="products-dropdown">
                                  <Link to="/therapy" className="navbar-link">Available Therapy</Link>
@@ -95,7 +101,7 @@ const Navbar = () => {
                            onMouseEnter={() => setIsProductsHovered(true)}
                            onMouseLeave={() => setIsProductsHovered(false)}
                         >
-                           <Link to="/Products" className="navbar-link">Products</Link>
+                           <Link to="/Products" className={`navbar-link ${location.pathname.startsWith('/Products') ? 'active' : ''}`}>Products</Link>
                            {isProductsHovered && (
                               <div className="products-dropdown">
                                  <Link to="/products" className="navbar-link">Products</Link>
@@ -105,30 +111,28 @@ const Navbar = () => {
                            )}
                         </li>
                         <li>
-                           <Link to="/profile" className="navbar-link">Profile</Link>
+                           <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
                         </li>
                      </>
                   )}
                   {userType === 'HEALTH_PROFESSIONAL' && (
                      <li>
-                        <Link to="/profile" className="navbar-link">Profile</Link>
+                        <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
                      </li>
                   )}
                   {userType === 'TEACHER' && (
                      <>
                         <li>
-                           <Link to="/courses" className="navbar-link">Courses</Link>
+                           <Link to="/courses" className={`navbar-link ${location.pathname === '/courses' ? 'active' : ''}`}>Courses</Link>
                         </li>
                         <li>
-                           <Link to="/profile" className="navbar-link">Profile</Link>
+                           <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
                         </li>
                      </>
                   )}
                </ul>
             </div>
-            <div className="navbar-buttons">
-               <button className="navbar-button" onClick={handleLogOut}>Log Out</button>
-            </div>
+            <button className="navbar-button" onClick={handleLogOut}>Log Out</button>
          </div>
       </nav>
    );

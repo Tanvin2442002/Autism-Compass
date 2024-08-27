@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 
+
 .doctor-consultation,
 .therapy-booking-details,
 .delivery-info,
@@ -17,11 +18,10 @@
 }
 
 .doctor-consultation-info,
-.dash-therapy-info
-{
-display: flex;
-min-width: 100%;
-width: fit-content;
+.dash-therapy-info {
+    display: flex;
+    min-width: 100%;
+    width: fit-content;
 }
 
 .dash-disorder-info {
@@ -33,16 +33,12 @@ width: fit-content;
     min-width: 95%;
 }
 
-.disorder-details{
+.disorder-details {
     background: #5291b011;
     border-radius: 10px;
     margin: 1% 10% 1% 1%;
     padding: 2%;
     min-width: 60%;
-}
-.disorder-typography{
-    /* margin: 5px 5px; */
-    /* border: red solid 1px; */
 }
 
 .booked-doctor,
@@ -139,14 +135,14 @@ width: fit-content;
     color: #263238;
 }
 
-.disorder-typography .dashboard-heading{
-    font-size:xx-large;
+.disorder-typography .dashboard-heading {
+    font-size: xx-large;
     font-weight: 3000;
     color: #0b6a99;
     word-spacing: 5px;
 }
 
-.disorder-typography p{
+.disorder-typography p {
     margin: 0% 5% 3% 5%;
     font-size: large;
     font-family: 'Poppins', sans-serif;
@@ -210,7 +206,7 @@ width: fit-content;
     width: 100%;
 }
 
-.disorder-details button{
+.disorder-details button {
     /* border: 2px solid red; */
     margin: 5%;
 }
