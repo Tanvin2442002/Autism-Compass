@@ -40,20 +40,20 @@ const ProductDetails = () => {
     };
     const exi = async () => {
       try {
-         const response = await fetch(
-           `http://localhost:5000/products/detail/exists?userID=${userData.ID}`
-         );
-         if (!response.ok) {
-           throw new Error("Network response was not ok");
-         }
-         const data = await response.json();
-         setExists(data);
-         console.log("Exists data:", data);
-       } catch (err) {
-         setError(err.message);
-       } finally {
-         setLoading(false);
-       }
+        const response = await fetch(
+          `http://localhost:5000/products/detail/exists?userID=${userData.ID}`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setExists(data);
+        console.log("Exists data:", data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     }
     exi();
     console.log("Exists data:", exists);
@@ -65,7 +65,7 @@ const ProductDetails = () => {
   if (!product) return <div>Product not found</div>;
 
   const exist = async () => {
-   try {
+    try {
       const response = await fetch(
         `http://localhost:5000/products/detail/exists?userID=${userData.ID}`
       );
@@ -80,7 +80,7 @@ const ProductDetails = () => {
     } finally {
       setLoading(false);
     }
- }
+  }
 
   const totalPrice = product.PRICE * quantity;
 
@@ -140,7 +140,7 @@ const ProductDetails = () => {
         theme: "light",
       });
     }
-      exist();
+    exist();
   };
 
   const handleCheckout = () => {
