@@ -495,6 +495,50 @@ routerProduct.get('/delivery/get/orders', async (req, res) => {
   }
 });
 
+routerProduct.get('/delivery/orderlist', async (req, res) => {
+  const { orderID } = req.query;
+  console.log(orderID);
+  let connection;
+  try {
+      connection = await getConnection();
+      const result = await connection.execute(
+          `SELECT P.PR_ID, P.NAME, P.SRC, P.PRICE, PAYS.QUANTITY
+           FROM PRODUCT P, PAYS
+           WHERE P.PR_ID = PAYS.PR_ID
+           AND PAYS.B_ID = :orderID`,
+          { orderID }
+      );
+      res.status(200).send(result.rows);
+  } catch (error) {
+      console.error("Error executing query:", error);
+      res.status(500).send({ error: "Internal server error" });
+  }
+});
+routerProduct.get('/delivery/deliverydetails', async (req, res) => {
+  const { orderID } = req.query;
+  console.log(orderID);
+  let connection;
+  try {
+      connection = await getConnection();
+      const result = await connection.execute(
+          `SELECT DISTINCT D.NAME,D.CONTANCT_NO, B.DELIVERY_DATE, PAYS.CITY,PAYS.STREET,PAYS.HOUSE_NO
+           FROM
+           DELIVERY D,BILLS B,PAYS,ASSIGNED_TO AT
+           WHERE
+           PAYS.B_ID=B.B_ID
+           AND
+           B.B_ID=AT.B_ID
+           AND
+           AT.D_ID=D.D_ID
+           AND PAYS.B_ID=:orderID`,
+          { orderID }
+      );
+      res.status(200).send(result.rows);
+  } catch (error) {
+      console.error("Error executing query:", error);
+      res.status(500).send({ error: "Internal server error" });
+  }
+});
 
 
 module.exports = routerProduct;
