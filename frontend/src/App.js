@@ -26,6 +26,7 @@ import ParentChildProfile from "./LogInSignUpComponent/ParentChildProfile";
 import BookingDoc from "./DoctorComponent/BookingDoc";
 import BookedList from "./DoctorComponent/BookedList";
 import Consultation from "./DoctorComponent/Consultation";
+import Allorderlist from "./productComponent/delivery/Allorderlist";
 
 function App() {
 

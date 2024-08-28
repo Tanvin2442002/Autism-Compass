@@ -224,6 +224,7 @@ const Cart = () => {
       const params = {
         ORDER_ID: orderID,
         AMOUNT: subtotal.TOTAL_AMOUNT,
+        DELIVERY_DATE: date.toISOString().split("T")[0],
       };
       const response = await fetch(
         "http://localhost:5000/products/detail/checkout/setBill",
