@@ -23,7 +23,6 @@ const Profile = () => {
       INSTITUTION: '',
    });
 
-
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
    const [gender, setGender] = useState('boy');
