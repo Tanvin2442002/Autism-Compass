@@ -1,39 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=New+Amsterdam&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=New+Amsterdam&family=Noto+Sans+Hanunoo&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+
+
 .orderList-All-container{
     display: grid;
     grid-template-columns: 3fr 2fr;
-    
-    /* justify-content: space-evenly; */
-    /* align-items: center; */
-    margin-top: 20px;
-    margin-bottom: 20px;
+    /* height: 80vh; */
+    margin: 5px 10px;
+    align-items: center;
+}
+
+
+.header-list{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #5291b011;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .orderlist-img{
-    border: solid blue 2px;
-    width: 600px;
+    width: 100%;
+    height: 100%;
     align-items: self-end;
 }
 
 .OrderList-All{
+    /* border: 1px solid #662e26; */
+    overflow-y: scroll;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    overflow-y: scroll;
-    border: red 3px solid;
+    border-radius: 10px;
+    margin: 5px;
+    transition: all 0.5s ease;
 }
 
 .orderlist-header{
-    margin-top: 5px;
-    margin-left: 25%;
-    margin-bottom: 0%;
+    text-transform: uppercase;
     font-weight: 900;
-    font-size: 20px;
+    font-size: 40px;
+    text-align: center;
+    text-decoration: underline;
+    color: #662e26;
+    font-family: 'New Amsterdam', serif;
+    letter-spacing: 2px;
 }
 
 .delivery-img-div{
-    border: 1px solid black;
     align-items: center;
     justify-content: center;
+}
+
+.OrderList-All::-webkit-scrollbar {
+    width: 12px;
+}
+
+.OrderList-All::-webkit-scrollbar-track {
+    background: #f1f1f198;
+    border-radius: 10px;
+}
+
+.OrderList-All::-webkit-scrollbar-thumb {
+    background-color: #662f2658;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+
+.OrderList-All::-webkit-scrollbar-thumb:hover {
+    background: #662e26;
+}
+
+
+@media (max-width: 1150px) {
+    .orderList-All-container{
+        display: flex;
+        flex-direction: column-reverse;
+        height: 100%;
+    }
+
+    .orderlist-img{
+        width: 50%;
+        height: 50%;
+        align-items: center;
+    }
+
+    .orderlist-header{
+        font-size: 30px;
+    }
+    
 }

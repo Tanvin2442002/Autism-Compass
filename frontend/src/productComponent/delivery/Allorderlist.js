@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OrderCard from "./OrderCard";
+import OrderCard2 from "./OrderCard2";
 import OrderImage from "../../img/Orderlist.svg";
 import Navbar from "../../Navbar";
 import "./Allorderlist.css";
@@ -32,19 +33,16 @@ const Allorderlist = () => {
   return (
     <div>
       <Navbar />
-      <header className="orderlist-header">My Order List</header>
       <div className="orderList-All-container">
-          {/* <header>My Order List</header> */}
-        <div className="OrderList-All">
-          {/* <header>My Order List</header> */}
-          {AllOrderList.map((order, index) => (
-            <OrderCard key={index} product={order} />
-          ))}
+        <div className='header-list'>
+          <header className="orderlist-header">My Order List</header>
+          <div className="OrderList-All">
+            {AllOrderList.map((order, index) => (
+              <OrderCard2 key={index} product={order} />
+            ))}
+          </div>
         </div>
-
-        <div className="delivery-img-div">
-          <img src={OrderImage} alt="OrderList" className="orderlist-img" />
-        </div>
+        <img src={OrderImage} alt="OrderList" className="orderlist-img" />
       </div>
     </div>
   );

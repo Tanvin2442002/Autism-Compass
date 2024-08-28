@@ -308,7 +308,7 @@ const Cart = () => {
         }
         setLoading(true);
         setTimeout(() => {
-          navigate("/delivery");
+          navigate("/products/orders");
         }, 4500);
       } catch (error) {
         console.error("Error executing fetch:", error);

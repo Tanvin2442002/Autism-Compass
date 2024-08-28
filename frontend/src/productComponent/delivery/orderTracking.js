@@ -65,6 +65,7 @@ const OrderConfirmation = () => {
   const deliveryDate = DeliveryDetailsNew.length > 0 ? DeliveryDetailsNew[0].DELIVERY_DATE?.slice(0, 10) : "Not available";
   const shippingBy = DeliveryDetailsNew.length > 0 ? DeliveryDetailsNew[0].NAME : "Not available";
   const address = DeliveryDetailsNew.length > 0 ? `${DeliveryDetailsNew[0].CITY}, ${DeliveryDetailsNew[0].STREET}, ${DeliveryDetailsNew[0].CITY}` : "Not available";
+  const contact = DeliveryDetailsNew.length > 0 ? DeliveryDetailsNew[0].CONTANCT_NO : "Not available";
 
   const deleteCartItems = async () => {
     try {
@@ -138,7 +139,7 @@ const OrderConfirmation = () => {
                 </div>
                 <div className="col">
                   <p className="que">Shipping BY:</p>
-                  <p className="ans">{shippingBy}</p>
+                  <p className="ans">{shippingBy} | +88{contact}</p>
                 </div>
                 <div className="col">
                   <p className="que">Status:</p>
