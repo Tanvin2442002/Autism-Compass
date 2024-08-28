@@ -172,8 +172,8 @@ const Navbar = () => {
                                     className={`navbar-link ${location.pathname.startsWith('/products/detail/checkout') ? 'active' : ''}`}
                                  >Cart</Link>
                                  <Link
-                                    to="/products/delivery"
-                                    className={`navbar-link ${location.pathname.startsWith('/products/delivery') ? 'active' : ''}`}
+                                    to="/products/orders"
+                                    className={`navbar-link ${location.pathname.startsWith('/products/orders') ? 'active' : ''}`}
                                  >Delivery</Link>
                               </div>
                            )}
