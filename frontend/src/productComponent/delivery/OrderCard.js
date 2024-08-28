@@ -7,7 +7,7 @@ const OrderCard = ({ product }) => {
   const deliveryDate = product.DELIVERY_DATE.slice(0, 10);
   const handleDeliveryDetails = () => {
     console.log("Delivery Details:", product);
-    navigate('/products/delivery');
+    navigate(`/products/delivery?ORDER_ID=${product.B_ID}`);
   };
   return (
     <StyledWrapper>
