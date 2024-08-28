@@ -5,9 +5,8 @@
 
 
 .doctor-consultation,
-.therapy-booking-details,
 .delivery-info,
-.disorder-info {
+.disorder-info-dashboard {
     border-radius: 10px;
     margin: 1% 1%;
     justify-content: center;
@@ -17,18 +16,18 @@
     min-height: 300px;
 }
 
-.doctor-consultation-info,
-.dash-therapy-info {
+.doctor-consultation-info {
     display: flex;
     min-width: 100%;
     width: fit-content;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .dash-disorder-info {
     display: flex;
     padding-right: 3%;
     width: fit-content;
-    /* border: #212121 solid 1px; */
     max-width: 95%;
     min-width: 95%;
 }
@@ -41,42 +40,44 @@
     min-width: 60%;
 }
 
-.booked-doctor,
 .booking-doctor {
     display: flex;
     justify-content: center;
     border-radius: 10px;
 }
 
-.dash-booking-doc,
-.dash-booked-doc {
+.dash-booking-doc {
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 10px;
     background: #5291b011;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    margin: 10px;
-    width: 100%;
+    margin: 5px;
+    transition: all 0.5s ease;
 }
 
 .doctor-img {
     width: 28%;
     align-items: center;
     justify-content: center;
-    height: 100%
+    height: 100%;
+    width: 30%;
+    align-self: flex-start;
+    transition: all 0.5s ease;
 }
 
 
-.card-item-doc,
-.card-item-therapy {
+.card-item-doc {
     background-color: #ffffffac;
     border-radius: 15px;
     padding: 10px;
     text-align: center;
-    width: 192px;
-    height: 220px;
+    width: 13vw;
+    height: 30vh;
     margin: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -86,15 +87,13 @@
     justify-content: center;
 }
 
-.card-item-doc:hover,
-.card-item-therapy:hover {
+.card-item-doc:hover {
     background-color: #5291b029;
     transform: translateY(-10px);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
 }
 
-.card-item-doc h2,
-.card-item-therapy h2 {
+.card-item-doc h2 {
     font-size: 1.1rem;
     color: #285364;
     margin-bottom: 0px;
@@ -104,16 +103,14 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.card-item-doc p,
-.card-item-therapy p {
+.card-item-doc p{
     font-size: 0.9rem;
     color: #555;
     margin-bottom: 0px;
     font-family: 'Poppins', sans-serif;
 }
 
-.card-item-doc p.label-square,
-.card-item-therapy p.label-square {
+.card-item-doc p.label-square{
     font-weight: 500;
     color: #285364;
     border: 0.5px solid #285364;
@@ -155,8 +152,7 @@
     display: flex;
 }
 
-.dash-booked-therapy,
-.dash-available-therapy {
+.dash-booked-therapy{
     display: flex;
     justify-content: center;
     width: 100%;
@@ -208,6 +204,31 @@
 }
 
 .disorder-details button {
-    /* border: 2px solid red; */
     margin: 5%;
+}
+
+@media (max-width: 1100px) {
+
+    .doctor-img {
+        display: none;
+    }
+
+    .dash-booking-doc {
+        width: 100%;
+    }
+
+    .card-item-doc {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+
+        .doctor-consultation-info,
+        .dash-therapy-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
 }

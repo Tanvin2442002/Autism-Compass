@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { Typewriter } from 'react-simple-typewriter'
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -129,7 +127,7 @@ const Dashboard = () => {
                <>
                   <div className='doctor-consultation'>
                      <div className='doctor-consultation-info'>
-                        <div className='dash-booked-doc'>
+                        <div className='dash-booking-doc'>
                            <h2 className='dashboard-heading'>Available Health Professional</h2>
                            <div className='booking-doctor'>
                               {displayedAvailableDocData.map((item) => (
@@ -162,14 +160,14 @@ const Dashboard = () => {
                         )}
                      </div>
                   </div>
-                  <div className='therapy-booking-details'>
-                     <div className='dash-therapy-info'>
+                  <div className='doctor-consultation'>
+                     <div className='doctor-consultation-info'>
                         {displayedBookedTherapyData.length > 0 && (
                            <div className='dash-booking-doc'>
                               <h2 className='dashboard-heading'>Booked Therapy</h2>
-                              <div className='dash-booked-therapy'>
+                              <div className='booking-doctor'>
                                  {displayedBookedTherapyData.map((item) => (
-                                    <div className="card-item-therapy" key={item.TH_ID}>
+                                    <div className="card-item-doc" key={item.TH_ID}>
                                        <h2>{item.THERAPY_TYPE}</h2>
                                        <p>{item.ORG_NAME}</p>
                                        <p className="label-square">Date: {item.BOOKING_DATE}</p>
@@ -183,9 +181,9 @@ const Dashboard = () => {
                         <img src={Therapy} alt="Therapy" className="doctor-img" />
                         <div className='dash-booking-doc'>
                            <h2 className='dashboard-heading'>Available Therapy</h2>
-                           <div className='dash-available-therapy'>
+                           <div className='booking-doctor'>
                               {displayedAvailableTherapyData.map((item) => (
-                                 <div className="card-item-therapy" key={item.TH_ID}>
+                                 <div className="card-item-doc" key={item.TH_ID}>
                                     <h2>{item.THERAPY_TYPE}</h2>
                                  </div>
                               ))}
@@ -197,7 +195,7 @@ const Dashboard = () => {
                </>
             )}
             {localData.TYPE === 'CHILD' && (
-               <div div className='disorder-info'>
+               <div div className='disorder-info-dashboard'>
                   <div className='dash-disorder-info'>
                      <div className='disorder-details'>
                         <div className='disorder-typography'>
