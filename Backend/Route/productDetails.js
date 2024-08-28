@@ -381,15 +381,15 @@ routerProduct.post('/products/detail/checkout/setOrder', async (req, res) => {
 
 
 routerProduct.post('/products/detail/checkout/setBill', async (req, res) => {
-    const { ORDER_ID,AMOUNT } = req.body;
+    const { ORDER_ID,AMOUNT,DELIVERY_DATE } = req.body;
     console.log(req.body);
     let connection;
     try {
         connection = await getConnection();
         const result = await connection.execute(
-            `INSERT INTO BILLS (B_ID,AMOUNT) 
-            VALUES (:ORDER_ID,:AMOUNT)`,
-            { ORDER_ID,AMOUNT },
+            `INSERT INTO BILLS (B_ID,AMOUNT,DELIVERY_DATE) 
+            VALUES (:ORDER_ID,:AMOUNT,TO_DATE(:DELIVERY_DATE, 'YYYY-MM-DD'))`,
+            { ORDER_ID,AMOUNT,DELIVERY_DATE },
             {
                 autoCommit: true,
             }
@@ -459,5 +459,42 @@ routerProduct.delete('/delivery/get', async (req, res) => {
       res.status(500).send({ error: "Internal server error" });
   }
 });
+
+routerProduct.get('/delivery/get/orders', async (req, res) => {
+  const { userID } = req.query;
+  let connection;
+  try {
+      connection = await getConnection();
+      const result = await connection.execute(
+          `SELECT DISTINCT B.B_ID, B.AMOUNT, B.DELIVERY_DATE, D.NAME, D.CONTANCT_NO
+           FROM BILLS B, ASSIGNED_TO AT, DELIVERY D, PAYS P
+           WHERE B.B_ID = AT.B_ID
+           AND AT.D_ID = D.D_ID
+           AND P.B_ID = B.B_ID
+           AND P.P_ID = :userID`,
+          { userID }
+      );
+      const orders = await connection.execute(
+          `SELECT B_ID, SUM(QUANTITY) AS TOTAL_QUANTITY
+           FROM PAYS
+           WHERE P_ID = :userID
+           GROUP BY B_ID`,
+          { userID }
+      );
+      const mergedResults = result.rows.map(order => {
+          const quantity = orders.rows.find(q => q.B_ID === order.B_ID);
+          return {
+              ...order,
+              TOTAL_QUANTITY: quantity ? quantity.TOTAL_QUANTITY : 0,
+          };
+      });
+      res.status(200).send(mergedResults);
+  } catch (error) {
+      console.error("Error executing query:", error);
+      res.status(500).send({ error: "Internal server error" });
+  }
+});
+
+
 
 module.exports = routerProduct;

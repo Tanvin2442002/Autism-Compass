@@ -12,6 +12,8 @@ const OrderConfirmation = () => {
   const [OrderDetails, setOrderDetails] = useState([]);
   const [ordercartItems, setorderCartItems] = useState([]);
   const [DeliveryDetails, setDeliveryDetails] = useState([]);
+  const [bool, setBool] = useState(false);
+  const [getbool, setGetBool] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,6 +21,8 @@ const OrderConfirmation = () => {
   const userID = userData.ID;
 
   useEffect(() => {
+    setBool(true);
+    setGetBool(true);
     const fetchOrderList = async () => {
       try {
         const response = await fetch(
@@ -56,27 +60,6 @@ const OrderConfirmation = () => {
 
     fetchOrderList();
     fetchOrderDetails();
-    const deleteCartItems = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:5000/purchases?userID=${userID}`,
-          {
-            method: "DELETE",
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to delete cart items");
-        }
-
-        // Optionally, update your state or UI after deletion
-        setorderCartItems([]); // Assuming you want to clear the cart in the UI as well
-        console.log("Cart items deleted successfully");
-      } catch (error) {
-        console.error("Error:", error);
-        setError(error.message);
-      }
-    };
   }, [userID]);
 
   useEffect(() => {
@@ -121,7 +104,11 @@ const OrderConfirmation = () => {
       setError(error.message);
     }
   };
-  deleteCartItems();
+  if(getbool){
+    deleteCartItems();
+    setGetBool(false);
+  }
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!OrderList.length) return <div>No products found</div>;
@@ -158,13 +145,16 @@ const OrderConfirmation = () => {
         throw new Error("Failed to delete get table");
       }
       setorderCartItems([]);
-      console.log("Cart items deleted successfully");
+      // console.log("Cart items deleted successfully");
     } catch (error) {
       console.error("Error:", error);
       setError(error.message);
     }
   }
+  if(bool){
     deletegettable();
+    setBool(false);
+  }
 
     return (
       <div className="orderContainer">

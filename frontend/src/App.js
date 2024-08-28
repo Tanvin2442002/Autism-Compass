@@ -26,6 +26,7 @@ import ParentChildProfile from "./LogInSignUpComponent/ParentChildProfile";
 import BookingDoc from "./DoctorComponent/BookingDoc";
 import BookedList from "./DoctorComponent/BookedList";
 import Consultation from "./DoctorComponent/Consultation";
+import Allorderlist from "./productComponent/delivery/Allorderlist";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
                <Route path='/therapy/org' element={<TherapyOrganizations />} />
                <Route path='/products' element={<ProductList />} />
                <Route path='/Delivery' element={<Order />} />
+               <Route path='/Delivery/orders' element={<Allorderlist />} />
                <Route path='/disorder' element={<Disorder />} />
                <Route path='/therapy/booking' element={<BookingTherapy />} />
                <Route path='/therapy/booked' element={<BookedTherapy />} />
