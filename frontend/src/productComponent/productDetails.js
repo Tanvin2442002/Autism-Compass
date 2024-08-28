@@ -58,7 +58,7 @@ const ProductDetails = () => {
     exi();
     console.log("Exists data:", exists);
     fetchProduct();
-  }, [productType,]);
+  }, [productType]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;

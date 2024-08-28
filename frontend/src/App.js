@@ -18,7 +18,6 @@ import BookedTherapy from "./TherapyComponent/BookedTherapy";
 import Therapy from "./TherapyComponent/Therapy";
 import TherapyDetail from "./TherapyComponent/TherapyDetails";
 import TherapyOrganizations from "./TherapyComponent/TherapyORG";
-import ProductCart from "./productComponent/productCart";
 import Order from "./productComponent/delivery/order";
 import DoctorsList from "./DoctorComponent/DocList";
 import DoctorProfile from "./DoctorComponent/DoctorProfile";

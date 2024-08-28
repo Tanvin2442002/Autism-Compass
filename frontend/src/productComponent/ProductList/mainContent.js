@@ -1,7 +1,11 @@
+
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./mainContent.css";
 import SingleProductCard from "./SingleProductCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const MainContent = () => {
@@ -9,6 +13,7 @@ const MainContent = () => {
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
 
+   const userID = JSON.parse(localStorage.getItem("USER"));
    const navigate = useNavigate();
 
    useEffect(() => {
@@ -27,18 +32,12 @@ const MainContent = () => {
             setLoading(false);
          }
       };
-
       fetchProduct();
-   }, []);
-
-   const handleClick = (productID) => {
-      navigate(`/products/detail?ID=${productID}`);
-      window.location.reload();
-   };
+   }, [])
 
    const listItems = productCards.map((item) =>
       <div className="" key={item.PR_ID}>
-         <SingleProductCard itemDetails={item} handleClick={handleClick} />
+         <SingleProductCard itemDetails={item}/>
       </div>
    );
 
@@ -48,6 +47,7 @@ const MainContent = () => {
 
    return (
       <div className="main_content">
+         <ToastContainer />
          <h2>More Products</h2>
          {listItems}
       </div >

@@ -42,7 +42,7 @@ routerProduct.get("/products", async (req, res) => {
   }
 });
 
-routerProduct.post("/products/detail", async (req, res) => {
+routerProduct.post("/products/add/cart", async (req, res) => {
   const connection = await getConnection();
   const { P_ID, PR_ID, AMOUNT, QUANTITY, DOB } = req.body;
   const FinalAmount = parseInt(AMOUNT);

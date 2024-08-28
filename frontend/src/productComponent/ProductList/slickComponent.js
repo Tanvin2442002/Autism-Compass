@@ -4,6 +4,7 @@ import "./mainContent.css";
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import AddCart from "../AddCart";
 
 const SlickComponent = () => {
     const [productCards, setProduct] = useState([]);
@@ -79,6 +80,11 @@ const SlickComponent = () => {
             <div className="cardslick-content">
                 <h2>{item.NAME}</h2>
                 <p>{item.DESCRIPTION}</p>
+            </div>
+            <div className="card-footer">
+                <div className="card-button" onClick={() => handleClick(item.PR_ID)}>
+                    <AddCart price={item.PRICE} />
+                </div>
             </div>
         </div>
     );
