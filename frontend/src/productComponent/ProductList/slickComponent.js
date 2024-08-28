@@ -77,7 +77,7 @@ const SlickComponent = () => {
                 <img src={item.SRC} alt={item.NAME} />
             </div>
             <div className="cardslick-content">
-                <h3>{item.NAME}</h3>
+                <h2>{item.NAME}</h2>
                 <p>{item.DESCRIPTION}</p>
             </div>
         </div>

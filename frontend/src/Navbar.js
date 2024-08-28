@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
    const [isProductsHovered, setIsProductsHovered] = useState(false);
    const [isHovered, setIsHovered] = useState(false);
+   const [isDocHovered, setIsDocHovered] = useState(false);
    const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [userType, setUserType] = useState(null);
 
@@ -46,20 +47,49 @@ const Navbar = () => {
                   </li>
                   {userType === 'CHILD' && (
                      <>
-                        <li>
-                           <Link to="/HealthProfessionals" className={`navbar-link ${location.pathname === '/HealthProfessionals' ? 'active' : ''}`}>Health Professionals</Link>
+                        <li
+                           className="navbar-dropdown"
+                           onMouseEnter={() => setIsDocHovered(true)}
+                           onMouseLeave={() => setIsDocHovered(false)}
+                        >
+                           <Link
+                              to="/HealthProfessionals"
+                              className={`navbar-link ${location.pathname.startsWith('/doctor/booked') || location.pathname.startsWith('/HealthProfessionals') ? 'active' : ''}`}>
+                              Health Professionals
+                           </Link>
+                           {isDocHovered && (
+                              <div className="products-dropdown">
+                                 <Link to="/HealthProfessionals" className={`navbar-link ${location.pathname == '/HealthProfessionals' ? 'active' : ''}`}>Available </Link>
+                                 <Link
+                                    to="/doctor/booked"
+                                    className={`navbar-link ${location.pathname.startsWith('/doctor/booked') ? 'active' : `${location.pathname.startsWith('/HealthProfessionals')} ? 'active' : ''`}`}
+                                 >Booked Doctor
+                                 </Link>
+                              </div>
+                           )}
                         </li>
                         <li
                            className="navbar-dropdown"
                            onMouseEnter={() => setIsHovered(true)}
                            onMouseLeave={() => setIsHovered(false)}
                         >
-                           <Link to="/Therapy" className={`navbar-link ${location.pathname.startsWith('/Therapy') ? 'active' : ''}`}>Therapy</Link>
+                           <Link to="/therapy" className={`navbar-link ${location.pathname.startsWith('/therapy') ? 'active' : ''}`}>Therapy</Link>
                            {isHovered && (
                               <div className="products-dropdown">
-                                 <Link to="/therapy" className="navbar-link">Available Therapy</Link>
-                                 <Link to="/therapy/booked" className="navbar-link">Booked Therapy</Link>
-                                 <Link to="/therapy/org" className="navbar-link">Therapy Organizations</Link>
+                                 <Link
+                                    to="/therapy"
+                                    className={`navbar-link`}
+                                 >Available Therapy
+                                 </Link>
+                                 <Link
+                                    to="/therapy/booked"
+                                    className={`navbar-link ${location.pathname.startsWith('/therapy/booked') ? 'active' : ''}`}
+                                 >Booked Therapy
+                                 </Link>
+                                 <Link
+                                    to="/therapy/org" className={`navbar-link ${location.pathname.startsWith('/therapy/org') ? 'active' : ''}`}
+                                 >Therapy Organizations
+                                 </Link>
                               </div>
                            )}
                         </li>
@@ -79,20 +109,49 @@ const Navbar = () => {
                         <li>
                            <Link to="/parent-child" className={`navbar-link ${location.pathname === '/parent-child' ? 'active' : ''}`}>Child</Link>
                         </li>
-                        <li>
-                           <Link to="/HealthProfessionals" className={`navbar-link ${location.pathname === '/HealthProfessionals' ? 'active' : ''}`}>Health Professionals</Link>
+                        <li
+                           className="navbar-dropdown"
+                           onMouseEnter={() => setIsDocHovered(true)}
+                           onMouseLeave={() => setIsDocHovered(false)}
+                        >
+                           <Link
+                              to="/HealthProfessionals"
+                              className={`navbar-link ${location.pathname.startsWith('/doctor/booked') || location.pathname.startsWith('/HealthProfessionals') ? 'active' : ''}`}>
+                              Health Professionals
+                           </Link>
+                           {isDocHovered && (
+                              <div className="products-dropdown">
+                                 <Link to="/HealthProfessionals" className={`navbar-link ${location.pathname == '/HealthProfessionals' ? 'active' : ''}`}>Available </Link>
+                                 <Link
+                                    to="/doctor/booked"
+                                    className={`navbar-link ${location.pathname.startsWith('/doctor/booked') ? 'active' : `${location.pathname.startsWith('/HealthProfessionals')} ? 'active' : ''`}`}
+                                 >Booked Doctor
+                                 </Link>
+                              </div>
+                           )}
                         </li>
                         <li
                            className="navbar-dropdown"
                            onMouseEnter={() => setIsHovered(true)}
                            onMouseLeave={() => setIsHovered(false)}
                         >
-                           <Link to="/Therapy" className={`navbar-link ${location.pathname.startsWith('/Therapy') ? 'active' : ''}`}>Therapy</Link>
+                           <Link to="/therapy" className={`navbar-link ${location.pathname.startsWith('/therapy') ? 'active' : ''}`}>Therapy</Link>
                            {isHovered && (
                               <div className="products-dropdown">
-                                 <Link to="/therapy" className="navbar-link">Available Therapy</Link>
-                                 <Link to="/therapy/booked" className="navbar-link">Booked Therapy</Link>
-                                 <Link to="/therapy/org" className="navbar-link">Therapy Organizations</Link>
+                                 <Link
+                                    to="/therapy"
+                                    className={`navbar-link `}
+                                 >Available Therapy
+                                 </Link>
+                                 <Link
+                                    to="/therapy/booked"
+                                    className={`navbar-link ${location.pathname.startsWith('/therapy/booked') ? 'active' : ''}`}
+                                 >Booked Therapy
+                                 </Link>
+                                 <Link
+                                    to="/therapy/org" className={`navbar-link ${location.pathname.startsWith('/therapy/org') ? 'active' : ''}`}
+                                 >Therapy Organizations
+                                 </Link>
                               </div>
                            )}
                         </li>
@@ -101,12 +160,21 @@ const Navbar = () => {
                            onMouseEnter={() => setIsProductsHovered(true)}
                            onMouseLeave={() => setIsProductsHovered(false)}
                         >
-                           <Link to="/Products" className={`navbar-link ${location.pathname.startsWith('/Products') ? 'active' : ''}`}>Products</Link>
+                           <Link to="/products" className={`navbar-link ${location.pathname.startsWith('/products') ? 'active' : ''}`}>Products</Link>
                            {isProductsHovered && (
                               <div className="products-dropdown">
-                                 <Link to="/products" className="navbar-link">Products</Link>
-                                 <Link to="/products/detail/checkout" className="navbar-link">Cart</Link>
-                                 <Link to="/delivery" className="navbar-link">Delivery</Link>
+                                 <Link
+                                    to="/products"
+                                    className={`navbar-link`}
+                                 >Products</Link>
+                                 <Link
+                                    to="/products/detail/checkout"
+                                    className={`navbar-link ${location.pathname.startsWith('/products/detail/checkout') ? 'active' : ''}`}
+                                 >Cart</Link>
+                                 <Link
+                                    to="/products/delivery"
+                                    className={`navbar-link ${location.pathname.startsWith('/products/delivery') ? 'active' : ''}`}
+                                 >Delivery</Link>
                               </div>
                            )}
                         </li>
@@ -119,6 +187,7 @@ const Navbar = () => {
                      <li>
                         <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
                      </li>
+
                   )}
                   {userType === 'TEACHER' && (
                      <>
