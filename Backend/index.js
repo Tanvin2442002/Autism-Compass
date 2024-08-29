@@ -18,6 +18,7 @@ app.use("/dash", require("./Route/Dashboard"));
 
 app.post("/login", async (req, res) => {     
     const { email, password, type } = req.body;
+    console.log(`User login request: ${email}, ${password}, ${type}`);
     const connection = await getConnection();
     if (!connection) {
         throw new Error("Database connection not established");

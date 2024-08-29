@@ -38,8 +38,7 @@ routerProduct.get("/products", async (req, res) => {
     }
 
     res.json(result.rows);
-    res.status(200).send(result.rows);
-    console.log(result);
+    console.log(result.rows);
   } catch (err) {
     console.error("Database query error:", err);
     res.status(500).json({ error: "Internal server error" });

@@ -10,6 +10,7 @@ import "./mainContent.css"; // Ensure this CSS file has the combined styles
 
 const ProductList = () => {
   const [productCards, setProduct] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -22,10 +23,8 @@ const ProductList = () => {
         console.log('Fetched data:', data);
         setProduct(data);
       } catch (err) {
-        // setError(err.message);
-      } finally {
-        // setLoading(false);
-      }
+        setError(err.message);
+      } 
     };
     fetchProduct();
   }, []);
@@ -38,7 +37,7 @@ const ProductList = () => {
       <div className="posSlick">
         <SlickComponent products = {productCards} />
       </div>
-      {/* <MainContent /> */}
+      <MainContent products = {productCards} />
     </div>
   );
 };

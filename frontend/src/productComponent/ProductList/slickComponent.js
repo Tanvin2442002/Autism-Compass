@@ -6,42 +6,23 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AddCart from "../AddCart";
 
-const SlickComponent = (products) => {
+const SlickComponent = ({ products }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [productCards, setProduct] = useState(products);
-
-    console.log("______", productCards);
-    console.log(products);
-
-    // if (products) {
-    //     setProduct(products);
-    //     setLoading(false);
-    // } else {
-    //     setError("Failed to fetch data!");
-    // }
-    setProduct(products)
-
+    const [productCards, setProductCards] = useState([]);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     const fetchProduct = async () => {
-    //         try {
-    //             const response = await fetch(`http://localhost:5000/products`);
-    //             if (!response.ok) {
-    //                 throw new Error("Network response was not ok");
-    //             }
-    //             const data = await response.json();
-    //             console.log('Fetched data:', data);
-    //             setProduct(data);
-    //         } catch (err) {
-    //             setError(err.message);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-    //     fetchProduct();
-    // }, []);
+    useEffect(() => {
+        console.log("Products:", products);
+        if (products.length > 0) {
+            setProductCards(products);
+            setLoading(false);
+            setError(false);
+            console.log("Product cards:", productCards);
+        } else {
+            setError(true);
+        }
+    }, [products]);
 
     const handleClick = (productID) => {
         navigate(`/products/detail?ID=${productID}`);
@@ -84,7 +65,7 @@ const SlickComponent = (products) => {
     };
 
     const listItems = productCards.map((item) =>
-        <div className="cardslick" key={item.PR_ID} onClick={() => { handleClick(item.PR_ID) }}>
+        <div className="cardslick" key={item.PR_ID} onClick={() => handleClick(item.PR_ID)}>
             <div className="cardslick-img">
                 <img src={item.SRC} alt={item.NAME} />
             </div>
@@ -93,7 +74,7 @@ const SlickComponent = (products) => {
                 <p>{item.DESCRIPTION}</p>
             </div>
             <div className="card-footer">
-                <div className="card-button" onClick={() => handleClick(item.PR_ID)}>
+                <div className="card-button">
                     <AddCart price={item.PRICE} />
                 </div>
             </div>
@@ -101,8 +82,7 @@ const SlickComponent = (products) => {
     );
 
     if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-    if (!productCards.length) return <div>No products found</div>;
+    if (error) return <div>Error: No products found</div>;
 
     return (
         <div className='slider-container'>
