@@ -6,31 +6,42 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AddCart from "../AddCart";
 
-const SlickComponent = () => {
-    const [productCards, setProduct] = useState([]);
+const SlickComponent = (products) => {
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
+    const [productCards, setProduct] = useState(products);
+
+    console.log("______", productCards);
+    console.log(products);
+
+    // if (products) {
+    //     setProduct(products);
+    //     setLoading(false);
+    // } else {
+    //     setError("Failed to fetch data!");
+    // }
+    setProduct(products)
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchProduct = async () => {
-            try {
-                const response = await fetch(`http://localhost:5000/products`);
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                const data = await response.json();
-                console.log('Fetched data:', data);
-                setProduct(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchProduct();
-    }, []);
+    // useEffect(() => {
+    //     const fetchProduct = async () => {
+    //         try {
+    //             const response = await fetch(`http://localhost:5000/products`);
+    //             if (!response.ok) {
+    //                 throw new Error("Network response was not ok");
+    //             }
+    //             const data = await response.json();
+    //             console.log('Fetched data:', data);
+    //             setProduct(data);
+    //         } catch (err) {
+    //             setError(err.message);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+    //     fetchProduct();
+    // }, []);
 
     const handleClick = (productID) => {
         navigate(`/products/detail?ID=${productID}`);

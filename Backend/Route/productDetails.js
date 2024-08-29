@@ -26,6 +26,8 @@ routerProduct.get("/products/detail", async (req, res) => {
 routerProduct.get("/products", async (req, res) => {
   let connection;
 
+  console.log("Fetching all the products");
+
   try {
     connection = await getConnection();
 
@@ -36,6 +38,8 @@ routerProduct.get("/products", async (req, res) => {
     }
 
     res.json(result.rows);
+    res.status(200).send(result.rows);
+    console.log(result);
   } catch (err) {
     console.error("Database query error:", err);
     res.status(500).json({ error: "Internal server error" });

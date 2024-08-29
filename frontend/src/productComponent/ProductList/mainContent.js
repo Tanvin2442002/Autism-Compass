@@ -16,24 +16,24 @@ const MainContent = () => {
    const userID = JSON.parse(localStorage.getItem("USER"));
    const navigate = useNavigate();
 
-   useEffect(() => {
-      const fetchProduct = async () => {
-         try {
-            const response = await fetch(`http://localhost:5000/products`);
-            if (!response.ok) {
-               throw new Error("Network response was not ok");
-            }
-            const data = await response.json();
-            console.log('Fetched data:', data);
-            setProduct(data);
-         } catch (err) {
-            setError(err.message);
-         } finally {
-            setLoading(false);
-         }
-      };
-      fetchProduct();
-   }, [])
+   // useEffect(() => {
+   //    const fetchProduct = async () => {
+   //       try {
+   //          const response = await fetch(`http://localhost:5000/products`);
+   //          if (!response.ok) {
+   //             throw new Error("Network response was not ok");
+   //          }
+   //          const data = await response.json();
+   //          console.log('Fetched data:', data);
+   //          setProduct(data);
+   //       } catch (err) {
+   //          setError(err.message);
+   //       } finally {
+   //          setLoading(false);
+   //       }
+   //    };
+   //    fetchProduct();
+   // }, [])
 
    const listItems = productCards.map((item) =>
       <div className="" key={item.PR_ID}>
