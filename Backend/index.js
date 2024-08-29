@@ -15,6 +15,10 @@ app.use("/therapy", require("./Route/TherapyThings"));
 app.use("/booking", require("./Route/BookingTherapy"));
 app.use("", require("./Route/BookingDoc"));
 app.use("/dash", require("./Route/Dashboard"));
+app.use("", require("./Route/Suggest"));  
+
+
+
 
 app.post("/login", async (req, res) => {     
     const { email, password, type } = req.body;

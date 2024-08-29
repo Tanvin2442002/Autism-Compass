@@ -1,0 +1,98 @@
+.suggested-list-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* Align items to the left */
+    justify-content: flex-start;  /* Align items to the top */
+    background-color: #e3f2fd; /* Light blue background matching theme */
+    width: 100%;
+    position: relative;  /* Make it relative for absolute positioning of the SVG */
+    padding: 20px 40px;  /* More padding for balanced spacing */
+}
+
+.content-header {
+    width: 92%;  /* Full width for centering */
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #d0d4d9;
+    backdrop-filter: blur(5px);
+    color: #333;
+    border-radius: 12px;
+    text-align: center;  /* Center align the text */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.suggestions-table-container {
+    width: 75%;  /* Adjusted width for better alignment */
+    max-width: 900px;  /* Limit table width */
+    margin-top: 20px;
+    margin-left: 10px;  /* Move table more to the left */
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-table {
+    width: 100%;
+    border-collapse: separate;  /* Separate border collapse for spacing between cells */
+    border-spacing: 0 10px;  /* Adds spacing between rows */
+    background-color: #e0eafc; /* Light blue background matching theme */
+    border-radius: 12px;
+}
+
+.suggestions-table th, .suggestions-table td {
+    border: 1px solid #d0d4d9;  /* Add borders */
+    padding: 15px;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 12px;  /* Rounded corners for each cell */
+    background-color: #e0eafc;  /* Light background for the table */
+}
+
+.suggestions-table th {
+    background-color: #7d9cb5;  /* Different background for headers */
+    font-weight: bold;
+    color: #f3f0f0;
+}
+
+.suggestions-table td {
+    background-color: #ffffff;  /* White background for the cells */
+    color: #333;
+}
+
+.suggestion-svg {
+    position: absolute;
+    top: 150px;  /* Keep the current top position */
+    right: 95px;  /* Keep the current right position */
+    width: 450px;  /* Adjusted size */
+    height: auto;
+    z-index: 1;  /* Ensure it stays behind the table */
+}
+
+tbody tr td:nth-child(1) {
+    font-weight: bold;
+    color: #2a507c;
+    text-align: left;
+    padding-left: 20px;
+}
+
+tbody tr td {
+    text-align: center;
+    vertical-align: middle;
+    color: #333;
+    margin: 50px;  /* Adds spacing between cells */
+}
+
+.suggestions-table tr {
+    background-color: #d6e4f0;  /* Background color to match theme */
+    border-radius: 15px;  /* Rounded corners for rows */
+}

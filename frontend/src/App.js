@@ -26,6 +26,8 @@ import BookingDoc from "./DoctorComponent/BookingDoc";
 import BookedList from "./DoctorComponent/BookedList";
 import Consultation from "./DoctorComponent/Consultation";
 import Allorderlist from "./productComponent/delivery/Allorderlist";
+import SuggestedList from "./DoctorComponent/Suggested";
+
 
 function App() {
 
@@ -33,7 +35,7 @@ function App() {
       <div className="main-app">
          <Router>
             <Routes>
-               <Route path="/" element={<Landing/>} />
+               <Route path="/" element={<SuggestedList/>} />
                <Route path="/login" element={<LogIn />} />
                <Route path="/signup/parent" element={<ParentReg />} />
                <Route path="/signup/child" element={<ChildReg />} />
@@ -59,6 +61,8 @@ function App() {
                <Route path='/doctor/booked' element={<BookedList />} />
                <Route path='/parent-child' element={<ParentChildProfile />} />
                <Route path='/consultation' element={<Consultation />} />
+               <Route path='/suggestions' element={<SuggestedList />} />
+
             </Routes>
          </Router>
       </div>
