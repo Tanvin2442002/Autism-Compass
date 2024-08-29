@@ -13,12 +13,12 @@ const SlickComponent = ({ products }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("Products:", products);
+        // console.log("Products:", products);
         if (products.length > 0) {
             setProductCards(products);
             setLoading(false);
             setError(false);
-            console.log("Product cards:", productCards);
+            // console.log("Product cards:", productCards);
         } else {
             setError(true);
         }
