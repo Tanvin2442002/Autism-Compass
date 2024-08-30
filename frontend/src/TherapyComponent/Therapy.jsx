@@ -4,6 +4,7 @@ import './Therapy.css';
 import 'boxicons/css/boxicons.min.css';
 import TherapyDetails from '../img/TherapyDetails.svg';
 import Navbar from '../Navbar';
+import LoadingAnimation from '../LoadingAnimation';
 
 const AvailableTherapies = () => {
    const [therapies, setTherapies] = useState([]);
@@ -58,7 +59,7 @@ const AvailableTherapies = () => {
          <div className='therapy-details'>
             <div className="avaiableTherapyContents">
                <h1>Available Therapies</h1>
-               <div className="search-box">
+               <div className="search-input-box">
                   <input
                      type="text"
                      placeholder="Search therapies..."
@@ -66,7 +67,7 @@ const AvailableTherapies = () => {
                      required />
                   <i className='bx bx-search'></i>
                </div>
-               {loading && <p>Loading...</p>}
+               {loading && <LoadingAnimation />}
                {error && <p>{error}</p>}
                <div className="therapy-list">
                   {therapies.map((therapy) => (
