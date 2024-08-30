@@ -15,6 +15,13 @@
    min-height: 90vh;
 }
 
+.therapy-details-image{
+   top: 50px;
+   width: 100%;
+   margin-top: 25%;
+   position: fixed;
+}
+
 .avaiableTherapyContents h1 {
    color: #662E26;
    font-family: 'New Amsterdam', serif;
@@ -97,7 +104,7 @@
    border-radius: 12px;
    padding: 20px;
    text-align: left;
-   max-height: 150px;
+   max-height: 170px;
    color: #333;
    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }

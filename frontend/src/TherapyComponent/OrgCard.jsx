@@ -12,6 +12,13 @@ const Card = ({ product }) => {
    const therapyId = params.get('type');
    const navigate = useNavigate();
 
+   // find current page url
+   console.log('Current page URL:', window.location.href);
+   // if url end with ord then book now button willnot be shown
+
+   const url = window.location.href;
+   const isBookingPage = url.endsWith('org');
+   console.log('Is booking page:', isBookingPage);
 
    const handleClick = (ORG_ID) => () => {
       console.log('Book now clicked');
@@ -39,7 +46,9 @@ const Card = ({ product }) => {
                   <FontAwesomeIcon icon={faLocationDot} size="lg" style={{ color: "#662E26" }} />
                   <p className="small-desc">{product.STREET} {product.CITY}</p>
                </div>
-               <button className="view-more-button" onClick={handleClick(product.THO_ID)}>Book Now</button>
+               {!isBookingPage && (
+                  <button className="view-more-button" onClick={handleClick(product.THO_ID)}>Book Now</button>
+               )}
             </div>
          </div>
       </StyledWrapper>

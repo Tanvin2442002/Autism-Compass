@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Therapy.css';
 import 'boxicons/css/boxicons.min.css';
-import TherapyDetails from '../img/TherapyDetails.svg';
+import TherapyDis from '../img/TherapyDis.svg';
 import Navbar from '../Navbar';
 import LoadingAnimation from '../LoadingAnimation';
 
@@ -82,7 +82,7 @@ const AvailableTherapies = () => {
                </div>
             </div>
             <div className="therapy-details-image">
-               <img src={TherapyDetails} alt="Therapy Details" />
+               <img src={TherapyDis} alt="Therapy Details" />
             </div>
          </div>
       </div>

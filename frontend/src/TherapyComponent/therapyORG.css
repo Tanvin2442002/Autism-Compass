@@ -4,24 +4,20 @@
     flex-direction: column;
     align-items: center;
     padding: auto;
-    /* background-image: url(../img/bg.jpg); */
 }
 
 .therapy-org .therapy-org-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top:5px;
+    margin-top: 5px;
     min-height: 89vh;
-    width: 85%;
-    /* background: rgba(255, 255, 255, 0.2); */
-    /* border: 2px solid rgba(255, 255, 255, 0.2); */
+    width: 95%;
     backdrop-filter: blur(5px);
     color: #fff;
     border-radius: 12px;
     padding: 0px 40px;
     text-align: center;
-    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
     animation: fadeIn 2s ease-in;
 }
 
@@ -35,144 +31,29 @@
     }
 }
 
-.therapy-org-content h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.search-box {
-    position: relative;
-    width: 80%;
-    margin-bottom: 30px;
-}
-
-.search-box input {
-    width: 100%;
-    height: 50px;
-    background: rgba(0, 0, 0, 0.3);
-    border: none;
-    outline: none;
-    border-radius: 25px;
-    font-size: 16px;
-    color: #fff;
-    padding: 0 20px;
-    transition: all 0.5s ease;
-}
-
-.search-box input::placeholder {
-    color: #ffffff;
-}
-
-.search-box input:hover {
-    background: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0 20px rgba(239, 234, 234, 0.8);
-}
-
-.search-box input:focus {
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 25px rgba(239, 234, 234, 0.9);
-}
-
-.search-box i {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    pointer-events: none;
-    color: #fff;
-    transition: color 0.3s ease;
-}
-
-.search-box i:hover {
-    color: #007bff;
-}
-
 .details {
-    width: 100%;
+    width: 90%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.details h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #132e47;
+.details h1 {
+    color: #662E26;
+    font-family: 'New Amsterdam', serif;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    word-spacing: 2px;
+    font-size: 40px;
+    margin: 10px 0px;
+    margin-bottom: 0px;
 }
 
 .org-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
     width: 100%;
-}
-
-.org-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 30%;
-    box-sizing: border-box;
-}
-
-.org-box {
-    background-color: #add8e6;
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    padding: 20px;
-    width: 100%;
-    /* Adjusted width for better visibility */
-    text-align: center;
-    /* Center-align text */
-    color: #333;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: slideIn 1s ease-in-out;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.org-box:hover {
-    background-color: #87CEEB;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
-}
-
-.org-box h3 {
-    margin-bottom: 50px;
-    font-size: 24px;
-    /* Adjusted font size */
-    font-weight: bold;
-    /* Made text bold */
-    color: #000000;
-
-}
-
-.org-box p {
-    font-size: 18px;
-    /* Adjusted font size */
-    font-weight: normal;
-    /* Normal weight for details */
-    text-align: center;
-    /* Center-align text */
-    color: #000;
-}
-
-.attribute {
-    font-weight: bold;
-    text-decoration: underline;
 }
