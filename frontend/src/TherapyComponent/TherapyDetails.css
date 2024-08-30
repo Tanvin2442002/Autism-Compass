@@ -1,191 +1,133 @@
 .therapy-details {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 3.5fr 2fr;
     justify-content: center;
-    background-image: url(../img/bg.jpg);
+    align-items: start;
+}
+
+.therapy-details-image {
+    position: sticky;
+    top: 10%;
+    padding: 10px;
 }
 
 .therapy-details-content {
-    margin-top: 50px;
-    width: 85vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    color: #0c0909;
-    border-radius: 12px;
-    padding: 20px;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.therapy-details-content h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
-}
-
-.therapy-details-content .search-box {
-    position: relative;
-    width: 80%;
-    margin-bottom: 30px;
-}
-
-.search-box input {
+    justify-content: center;
+    margin: 5px 10px;
     width: 100%;
-    height: 50px;
-    background: rgba(0, 0, 0, 0.3);
-    border: none;
-    outline: none;
-    border-radius: 25px;
-    font-size: 16px;
-    color: #fff;
-    padding: 0 20px;
-    transition: all 0.5s ease;
 }
 
-.search-box input::placeholder {
-    color: #ffffff;
+.details-of-therapy {
+    margin: 5px 10px;
+    text-align: center;
+    background-color: #5291b036;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
 }
 
-.search-box input:hover {
-    background: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0 20px rgba(239, 234, 234, 0.8);
+.details-of-therapy h2 {
+    font-size: 40px;
+    margin: 20px;
+    font-family: 'New Amsterdam', serif;
+    letter-spacing: 3px;
+    color: #662E26;
 }
 
-.search-box input:focus {
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 25px rgba(239, 234, 234, 0.9);
-}
-
-.search-box i {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+.details-of-therapy p {
     font-size: 20px;
-    pointer-events: none;
-    color: #fff;
-    transition: color 0.3s ease;
-}
-
-.search-box i:hover {
-    color: #007bff;
-}
-
-.details h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #254d89;
-}
-
-.details p {
-    font-size: 18px;
-    line-height: 1.6;
-    text-align: left;
-    margin-bottom: 30px;
-    color: #0b0909;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .availability {
-    margin-top: 30px;
-    width: 100%;
-    padding: 20px;
-    /* border: 5px solid #c42d2d; */
-    background-color: #82a6dc62;
+    margin: 5px 10px;
+    width: 98%;
+    background-color: #5291b036;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;     
+    border-radius: 10px;
 }
 
 .availability h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #254d89;
-    text-align: center;
+    font-size: 30px;
+    font-family: 'New Amsterdam', serif;
+    letter-spacing: 2px;
+    margin: 20px;
+    color: #662E26;
+}
+.details-of-therapy .disorder-item-details .answer {
+    font-size: medium;
+    font-family: 'Poppins', sans-serif;
+    background: rgba(255, 255, 255, 0.442);
+    border: none;
+    border-radius: 10px;
+    padding: 1% 3%;
+    max-width: 100%;
+    color: #662E26;
+    resize: both;
+    overflow: auto;
+    min-height: 310px;
+    text-wrap: wrap;
+    min-width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #662f2658 #f1f1f198;
 }
 
-.org-container {
+.details-of-therapy .disorder-item-details .answer::-webkit-scrollbar {
+    width: 12px;
+}
+
+.details-of-therapy .disorder-item-details .answer::-webkit-scrollbar-track {
+    background: #f1f1f198;
+    border-radius: 10px;
+}
+
+.details-of-therapy .disorder-item-details .answer::-webkit-scrollbar-thumb {
+    background-color: #662f2658;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+
+.details-of-therapy .disorder-item-details .answer::-webkit-scrollbar-thumb:hover {
+    background: #662e26;
+}
+
+.details-of-therapy .disorder-item-details {
+    max-height: 400px;
+}
+
+.availability .org-container {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    justify-content: center;
     width: 100%;
 }
 
-.org-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 30%;
-    box-sizing: border-box;
-}
-
-.availability .org-box {
-    background-color: #77ceeb79;
-    border: none;
-    border-radius: 20px;
-    width: 400px;
-    padding: 20px;
-    text-align: center;
-    color: #132e47;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
-}
-
-.org-box:hover {
-    background-color: #87CEEB;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
-}
-
-.org-box p {
-    margin-bottom: 10px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.book-now {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #9f2b20;
-    border: none;
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.book-now:hover {
-    background-color: #c42d2d;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.btn {
-    width: auto;
-    height: 40px;
-    background: #39729de2;
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgb(255, 254, 254);
-    cursor: pointer;
-    font-size: 16px;
-    color: #ffffff;
-    font-weight: 600;
-    transition: all 0.5s ease;
-    padding: 0 20px;
+.loading-animation {
+    font-size: 18px;
+    color: #662E26;
     margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+    animation: spin 1s linear infinite;
 }
 
-.btn:hover {
-    background: #305c7d;
-    box-shadow: 0 0 20px rgba(157, 207, 229, 0.8);
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
