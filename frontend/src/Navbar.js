@@ -65,6 +65,7 @@ const Navbar = () => {
                                     className={`navbar-link ${location.pathname.startsWith('/doctor/booked') ? 'active' : `${location.pathname.startsWith('/HealthProfessionals')} ? 'active' : ''`}`}
                                  >Booked Doctor
                                  </Link>
+                                 <Link to ="/doctor/feedback" className={`navbar-link ${location.pathname.startsWith('/doctor/feedback') ? 'active' : ''}`}>Feedback</Link>
                               </div>
                            )}
                         </li>
@@ -127,6 +128,7 @@ const Navbar = () => {
                                     className={`navbar-link ${location.pathname.startsWith('/doctor/booked') ? 'active' : `${location.pathname.startsWith('/HealthProfessionals')} ? 'active' : ''`}`}
                                  >Booked Doctor
                                  </Link>
+                                 <Link to ="/doctor/feedback" className={`navbar-link ${location.pathname.startsWith('/doctor/feedback') ? 'active' : ''}`}>Feedback</Link>
                               </div>
                            )}
                         </li>

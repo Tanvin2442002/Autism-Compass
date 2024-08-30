@@ -35,7 +35,7 @@ function App() {
       <div className="main-app">
          <Router>
             <Routes>
-               <Route path="/" element={<SuggestedList/>} />
+               <Route path="/" element={<Landing/>} />
                <Route path="/login" element={<LogIn />} />
                <Route path="/signup/parent" element={<ParentReg />} />
                <Route path="/signup/child" element={<ChildReg />} />
@@ -61,7 +61,7 @@ function App() {
                <Route path='/doctor/booked' element={<BookedList />} />
                <Route path='/parent-child' element={<ParentChildProfile />} />
                <Route path='/consultation' element={<Consultation />} />
-               <Route path='/suggestions' element={<SuggestedList />} />
+               <Route path='/doctor/feedback' element={<SuggestedList />} />
 
             </Routes>
          </Router>
