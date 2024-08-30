@@ -33,13 +33,13 @@ const Card = ({ product }) => {
                </div>
                <div className="individual-details">
                   <FontAwesomeIcon icon={faEnvelope} size="lg" style={{ color: "#662E26" }} />
-                  <p className="small-desc">{product.EMAIL} BDT</p>
+                  <p className="small-desc">{product.EMAIL}</p>
                </div>
                <div className="individual-details">
                   <FontAwesomeIcon icon={faLocationDot} size="lg" style={{ color: "#662E26" }} />
                   <p className="small-desc">{product.STREET} {product.CITY}</p>
                </div>
-               <button className="view-more-button" onClick={handleClick(product.THO_ID)}>BOOK NOW</button>
+               <button className="view-more-button" onClick={handleClick(product.THO_ID)}>Book Now</button>
             </div>
          </div>
       </StyledWrapper>
@@ -52,7 +52,6 @@ const StyledWrapper = styled.div`
 .card {
     border: 1.4px solid #602f29;
   display: block;
-//   position: relative;
   max-width: 230px;
   max-height: 330px;
   background-color: #f2f8f9;
@@ -62,7 +61,6 @@ const StyledWrapper = styled.div`
   text-decoration: none;
   z-index: 0;
   overflow: hidden;
-//   background: linear-gradient(to bottom, #c3e6ec, #a7d1d9);
     background: #9FC0D2;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -73,7 +71,6 @@ const StyledWrapper = styled.div`
   z-index: -1;
   top: -16px;
   right: -16px;
-//   background: linear-gradient(135deg, #364a60, #384c6c);
     background: #5290B0;
   height: 32px;
   width: 32px;
@@ -138,6 +135,50 @@ const StyledWrapper = styled.div`
    display: grid;
    grid-template-columns: 1fr 3fr;
 }
+
+.card-content .view-more-button {
+    cursor: pointer;
+    padding: 10px 10px;
+    border: unset;
+    border-radius: 5px;
+    color: #662E26;
+    font-family: 'Roboto Condensed', sans-serif;
+    word-spacing: 2px;
+    letter-spacing: 1px;
+    z-index: 1;
+    background-color: #ffffffac;
+    position: relative;
+    font-weight: 700;
+    font-size: 13px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+.card-content .view-more-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 5px;
+    background-color: #662E26;
+    z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms
+}
+
+.card-content .view-more-button:hover {
+    color: #e8e8e8;
+}
+
+.card-content .view-more-button:hover::before {
+    width: 100%;
+}
+
 
 `;
 
