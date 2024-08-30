@@ -2,8 +2,14 @@
     width: 100%;
     display: grid;
     grid-template-columns: 3.5fr 2fr;
-    align-items: center;
     justify-content: center;
+    align-items: start;
+}
+
+.therapy-details-image {
+    position: sticky;
+    top: 10%;
+    padding: 10px;
 }
 
 .therapy-details-content {
@@ -26,7 +32,6 @@
     border-radius: 10px;
 }
 
-
 .details-of-therapy h2 {
     font-size: 40px;
     margin: 20px;
@@ -41,20 +46,16 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-
 .availability {
     margin: 5px 10px;
     width: 98%;
-    height: 63vh;
     background-color: #5291b036;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: scroll;
+    position: relative;     
     border-radius: 10px;
-    overflow-x: hidden;
 }
-
 
 .availability h3 {
     font-size: 30px;
@@ -63,33 +64,70 @@
     margin: 20px;
     color: #662E26;
 }
-
-
-
-.availability .org-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
+.details-of-therapy .disorder-item-details .answer {
+    font-size: medium;
+    font-family: 'Poppins', sans-serif;
+    background: rgba(255, 255, 255, 0.442);
+    border: none;
+    border-radius: 10px;
+    padding: 1% 3%;
+    max-width: 100%;
+    color: #662E26;
+    resize: both;
+    overflow: auto;
+    min-height: 310px;
+    text-wrap: wrap;
+    min-width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #662f2658 #f1f1f198;
 }
 
-
-.availability::-webkit-scrollbar {
+.details-of-therapy .disorder-item-details .answer::-webkit-scrollbar {
     width: 12px;
 }
 
-.availability::-webkit-scrollbar-track {
+.details-of-therapy .disorder-item-details .answer::-webkit-scrollbar-track {
     background: #f1f1f198;
     border-radius: 10px;
 }
 
-.availability::-webkit-scrollbar-thumb {
+.details-of-therapy .disorder-item-details .answer::-webkit-scrollbar-thumb {
     background-color: #662f2658;
     border-radius: 10px;
     border: 3px solid #f1f1f1;
 }
 
-.availability::-webkit-scrollbar-thumb:hover {
+.details-of-therapy .disorder-item-details .answer::-webkit-scrollbar-thumb:hover {
     background: #662e26;
+}
+
+.details-of-therapy .disorder-item-details {
+    max-height: 400px;
+}
+
+.availability .org-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.loading-animation {
+    font-size: 18px;
+    color: #662E26;
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
