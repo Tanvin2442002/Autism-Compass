@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import Button from "./Button";
 import CarLoader from "./CarLoader.js";
-import "./Cart.css";
-import { toast, ToastContainer } from "react-toastify";
+import "./Cart.css";import { toast, ToastContainer } from "react-toastify";
+
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);

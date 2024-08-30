@@ -15,12 +15,12 @@ const MainContent = ({ products }) => {
    const navigate = useNavigate();
 
    useEffect(() => {
-      console.log("Products:", products);
+      // console.log("Products:", products);
       if (products.length > 0) {
          setProduct(products);
          setLoading(false);
          setError(false);
-         console.log("Product cards:", productCards);
+         // console.log("Product cards:", productCards);
       } else {
          setError(true);
       }
