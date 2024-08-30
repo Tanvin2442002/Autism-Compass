@@ -6,6 +6,7 @@ import SlickComponent from "./slickComponent";
 import MainContent from "./mainContent";
 import "./slickComponent.css";
 import "./mainContent.css"; // Ensure this CSS file has the combined styles
+import { toast, ToastContainer } from "react-toastify";
 
 
 const ProductList = () => {
@@ -34,6 +35,7 @@ const ProductList = () => {
   return (
     <div className="container1">
       <Navbar />
+      <ToastContainer/>
       <div className="posSlick">
         <SlickComponent products = {productCards} />
       </div>
