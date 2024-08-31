@@ -44,6 +44,12 @@
     color: #333;
   } */
 
+.slickloading{
+    /* height: 100vh; */
+    align-items: center;
+    justify-content: center;
+}
+
 .slider-container h1 {
     text-align: center;
     margin: 10px;
