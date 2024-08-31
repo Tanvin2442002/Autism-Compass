@@ -7,6 +7,7 @@ import Doctor from "./img/Doctor.svg"
 import Therapy from "./img/Therapy.svg"
 import FindDisorder from "./img/FindDisorder.svg"
 import DoctorConsultationList from './DoctorComponent/DoctorConsultationList';
+import DashDelivery from './img/DashDelivery.svg';
 
 const Dashboard = () => {
    const [bookedDocData, setBookedDocData] = useState([]);
@@ -128,7 +129,7 @@ const Dashboard = () => {
                   <div className='doctor-consultation'>
                      <div className='doctor-consultation-info'>
                         <div className='dash-booking-doc'>
-                           <h2 className='dashboard-heading'>Available Health Professional</h2>
+                           <h2 className='dashboard-heading'>Available Doctors</h2>
                            <div className='booking-doctor'>
                               {displayedAvailableDocData.map((item) => (
                                  <div className="card-item-doc" key={item.H_ID}>
@@ -229,9 +230,33 @@ const Dashboard = () => {
                </div>
             )}
             {localData.TYPE === 'PARENT' && (
-               <div className='delivery-info'>
-                  <h3>Delivery details</h3>
-                  <p>Details of product delivery</p>
+               <div className='delivery-info-dash'>
+                  <div className='dash-booking-doc'>
+                     <h2 className='dashboard-heading'>Delivery Information</h2>
+                     <div className='booking-doctor'>
+                        <div className="card-item-doc">  
+                           <p className="label-square">Delivered By: Arif Abdullah</p>
+                           <p className="label-square">Date: 12-AUG-2024</p>
+                           <h2>Price: 300$</h2>
+                        </div>
+                        <div className="card-item-doc">
+                           <p className="label-square">Delivered By: Arif Abdullah</p>
+                           <p className="label-square">Date: 12-AUG-2024</p>
+                           <h2>Price: 300$</h2>
+                        </div>
+                        <div className="card-item-doc">
+                           <p className="label-square">Delivered By: Arif Abdullah</p>
+                           <p className="label-square">Date: 12-AUG-2024</p>
+                           <h2>Price: 300$</h2>
+                        </div><div className="card-item-doc">
+                           <p className="label-square">Delivered By: Arif Abdullah</p>
+                           <p className="label-square">Date: 12-AUG-2024</p>
+                           <h2>Price: 300$</h2>
+                        </div>
+                     </div>
+                     <button className='view-more-button'>View more details</button>
+                  </div>
+                  <img src={DashDelivery} alt="Therapy" className="doctor-img" />
                </div>
             )}
          </div>

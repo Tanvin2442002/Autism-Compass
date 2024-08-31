@@ -55,17 +55,17 @@ const Navbar = () => {
                            <Link
                               to="/HealthProfessionals"
                               className={`navbar-link ${location.pathname.startsWith('/doctor/booked') || location.pathname.startsWith('/HealthProfessionals') ? 'active' : ''}`}>
-                              Health Professionals
+                              Doctors
                            </Link>
                            {isDocHovered && (
                               <div className="products-dropdown">
-                                 <Link to="/HealthProfessionals" className={`navbar-link ${location.pathname == '/HealthProfessionals' ? 'active' : ''}`}>Available </Link>
+                                 <Link to="/HealthProfessionals" className={`navbar-link ${location.pathname == '/HealthProfessionals' ? 'active' : ''}`}>Available Doctors </Link>
                                  <Link
                                     to="/doctor/booked"
                                     className={`navbar-link ${location.pathname.startsWith('/doctor/booked') ? 'active' : `${location.pathname.startsWith('/HealthProfessionals')} ? 'active' : ''`}`}
-                                 >Booked Doctor
+                                 >Booked Doctors
                                  </Link>
-                                 <Link to ="/doctor/feedback" className={`navbar-link ${location.pathname.startsWith('/doctor/feedback') ? 'active' : ''}`}>Feedback</Link>
+                                 <Link to ="/doctor/feedback" className={`navbar-link ${location.pathname.startsWith('/doctor/feedback') ? 'active' : ''}`}>Feedbacks</Link>
                               </div>
                            )}
                         </li>
@@ -118,17 +118,17 @@ const Navbar = () => {
                            <Link
                               to="/HealthProfessionals"
                               className={`navbar-link ${location.pathname.startsWith('/doctor/booked') || location.pathname.startsWith('/HealthProfessionals') ? 'active' : ''}`}>
-                              Health Professionals
+                              Doctors
                            </Link>
                            {isDocHovered && (
                               <div className="products-dropdown">
-                                 <Link to="/HealthProfessionals" className={`navbar-link ${location.pathname == '/HealthProfessionals' ? 'active' : ''}`}>Available </Link>
+                                 <Link to="/HealthProfessionals" className={`navbar-link ${location.pathname == '/HealthProfessionals' ? 'active' : ''}`}>Available Doctors</Link>
                                  <Link
                                     to="/doctor/booked"
                                     className={`navbar-link ${location.pathname.startsWith('/doctor/booked') ? 'active' : `${location.pathname.startsWith('/HealthProfessionals')} ? 'active' : ''`}`}
-                                 >Booked Doctor
+                                 >Booked Doctors
                                  </Link>
-                                 <Link to ="/doctor/feedback" className={`navbar-link ${location.pathname.startsWith('/doctor/feedback') ? 'active' : ''}`}>Feedback</Link>
+                                 <Link to ="/doctor/feedback" className={`navbar-link ${location.pathname.startsWith('/doctor/feedback') ? 'active' : ''}`}>Feedbacks</Link>
                               </div>
                            )}
                         </li>
