@@ -90,6 +90,51 @@ const BookingTherapy = () => {
          C_ID: userDetails.C_ID,
          BOOKING_DATE: `${e.target[8].value} ${new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`,
       }
+
+      // if cid, pid, thid, thoid are already present in the database then update the booking date
+      const checkExist = await fetch(`http://localhost:5000/booking/therapy/check?C_ID=${userDetails.C_ID}&P_ID=${userDetails.P_ID}&TH_ID=${therapyId}&THO_ID=${orgId}`);
+      const checkData = await checkExist.json();
+      console.log('Check data:', checkData);
+      if (checkData.length > 0) {
+         console.log("IN.......");
+         const response = await fetch('http://localhost:5000/booking/therapy/update', {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bookingData),
+         });
+         const data = await response.json();
+         console.log('Booking response:', data);
+         console.log('Booking status:', response.status);
+         if (response.status === 200) {
+            toast.success("Booking Updated Successfully", {
+               position: "top-right",
+               autoClose: 2500,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: false,
+               draggable: true,
+               progress: undefined,
+               theme: "colored",
+            });
+         } else {
+            toast.error("Booking update failed!", {
+               position: "top-right",
+               autoClose: 2500,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: false,
+               draggable: true,
+               progress: undefined,
+               theme: "colored",
+            });
+         }
+
+         console.log("DONE.......");
+         return;
+      }
+
       console.log('Booking data:', bookingData);
       const response = await fetch('http://localhost:5000/booking/therapy', {
          method: 'POST',
@@ -175,7 +220,6 @@ const BookingTherapy = () => {
          <Navbar />
          <div className='booking-heading'>
             <div className="organization-details">
-               {/* <h2>Organization Details</h2> */}
                <img src={OrgImage} alt="Organization" />
             </div>
             <div className="user-details">

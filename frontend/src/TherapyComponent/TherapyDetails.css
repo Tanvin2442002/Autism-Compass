@@ -159,3 +159,17 @@
 .details-of-therapy .view-more-button:hover::before {
     width: 100%;
 }
+
+@media (max-width: 900px) {
+    .therapy-details {
+        grid-template-columns: 1fr;
+        width: 97vw;
+        /* border: 1px solid red; */
+    }
+
+    .therapy-details-image {
+        display: none;
+    }
+
+    
+}
