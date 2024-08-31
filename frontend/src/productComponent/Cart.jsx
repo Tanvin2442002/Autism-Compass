@@ -26,7 +26,6 @@ const Cart = () => {
     let result = "";
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    // Loop to generate characters for the specified length
     for (let i = 0; i < length; i++) {
       const randomInd = Math.floor(Math.random() * characters.length);
       result += characters.charAt(randomInd);
@@ -293,6 +292,9 @@ const Cart = () => {
         setMessage(data.message);
         console.log("flag value before:", flag);
         console.log(typeof flag);
+        address.city = "";
+        address.street = "";
+        address.houseNo = "";
         if (data.message === "Order placed successfully!" && flag == 0) {
           flag = 1;
           toast.success("Order placed successfully", {

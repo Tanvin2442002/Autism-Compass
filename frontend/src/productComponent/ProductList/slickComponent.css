@@ -8,7 +8,7 @@
     width: 80%;
     margin: auto;
 }
-/* .confirmation-dialog {
+.con-dialog {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -16,7 +16,7 @@
     z-index: 10;
   }
 
-  .confirmation-dialog-content {
+  .con-dialog-content {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -24,8 +24,8 @@
     text-align: center;
   }
 
-  .confirm-btn,
-  .cancel-btn {
+  .co-btn,
+  .ca-btn {
     padding: 10px 20px;
     margin: 10px;
     border-radius: 5px;
@@ -34,15 +34,15 @@
     font-size: 1rem;
   }
 
-  .confirm-btn {
+  .co-btn {
     background-color: #e74c3c;
     color: #fff;
   }
 
-  .cancel-btn {
+  .ca-btn {
     background-color: #ccc;
     color: #333;
-  } */
+  }
 
 .slickloading{
     /* height: 100vh; */

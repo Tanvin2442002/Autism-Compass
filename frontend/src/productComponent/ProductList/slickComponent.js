@@ -28,7 +28,9 @@ const SlickComponent = ({ products }) => {
   }, [products]);
 
   const handleAddCart = () => {
+    console.log("Add to cart clicked");
     setPopUp(true);
+    console.log("PopUp:", PopUp);
   };
 
   const handleCancel = () => {
@@ -82,7 +84,6 @@ const SlickComponent = ({ products }) => {
     } catch (err) {
       console.log("Error in adding to cart", err);
     }
-
     setPopUp(false);
   };
 
@@ -134,23 +135,23 @@ const SlickComponent = ({ products }) => {
         </div>
         <div className="card-footer">
           <div className="card-button">
-            <AddCart price={item.PRICE} onClick={handleAddCart} />
+            <AddCart price={item.PRICE} onClick={()=>handleAddCart()} />
           </div>
         </div>
-        {PopUp && (
-          <div className="confirmation-dialog">
-            <div className="confirmation-dialog-content">
-              <p>Do you want to add this product to cart?</p>
-              <button className="confirm-btn" onClick={handlePopUp(item)}>
-                Yes
-              </button>
-              <button className="cancel-btn" onClick={handleCancel}>
-                No
-              </button>
-            </div>
-          </div>
-        )}
       </div>
+      {PopUp && (
+        <div className="con-dialog">
+          <div className="con-dialog-content">
+            <p>Do you want to add this product to cart?</p>
+            <button className="co-btn" onClick={handlePopUp(item)}>
+              Yes
+            </button>
+            <button className="ca-btn" onClick={handleCancel}>
+              No
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   ));
 
