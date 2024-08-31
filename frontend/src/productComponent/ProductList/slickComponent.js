@@ -4,6 +4,7 @@ import "./mainContent.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Loader from "../../LoadingAnimation";
 import AddCart from "../AddCart";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -153,7 +154,7 @@ const SlickComponent = ({ products }) => {
     </div>
   ));
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="slickloading"><Loader/></div>;
   if (error) return <div>Error: No products found</div>;
 
   return (

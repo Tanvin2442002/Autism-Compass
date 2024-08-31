@@ -12,6 +12,7 @@
     height: 90vh;
     width: 95%;
     align-items: center;
+    
     justify-content: center;
     display: grid;
     grid-template-columns: 1fr 2.5fr;
