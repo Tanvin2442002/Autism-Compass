@@ -89,13 +89,13 @@ const SingleProductCard = ({ itemDetails }) => {
           </div>
         </div>
         {PopUp && (
-          <div className="confirmation-dialog">
-            <div className="confirmation-dialog-content">
+          <div className="confirmation-dial">
+            <div className="confirmation-dial-content">
               <p>Do you want to add this product to cart?</p>
-              <button className="confirm-btn" onClick={handlePopUp}>
+              <button className="confi-btn" onClick={handlePopUp}>
                 Yes
               </button>
-              <button className="cancel-btn" onClick={handleCancel}>
+              <button className="canc-btn" onClick={handleCancel}>
                 No
               </button>
             </div>
@@ -189,15 +189,16 @@ const StyledWrapper = styled.div`
       rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
   }
 
-  .confirmation-dialog {
+  .confirmation-dial {
     position: absolute;
+    width:100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
   }
 
-  .confirmation-dialog-content {
+  .confirmation-dial-content {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -205,8 +206,8 @@ const StyledWrapper = styled.div`
     text-align: center;
   }
 
-  .confirm-btn,
-  .cancel-btn {
+  .confi-btn,
+  .canc-btn {
     padding: 10px 20px;
     margin: 10px;
     border-radius: 5px;
@@ -215,12 +216,12 @@ const StyledWrapper = styled.div`
     font-size: 1rem;
   }
 
-  .confirm-btn {
+  .confi-btn {
     background-color: #e74c3c;
     color: #fff;
   }
 
-  .cancel-btn {
+  .canc-btn {
     background-color: #ccc;
     color: #333;
   }
