@@ -12,10 +12,9 @@
     height: 90vh;
     width: 95%;
     align-items: center;
-    
     justify-content: center;
     display: grid;
-    grid-template-columns: 1fr 2.5fr;
+    grid-template-columns: 2fr 2.5fr;
 }
 
 .organization-details {
@@ -24,7 +23,6 @@
     border-radius: 20px;
     margin: 20px;
     padding: 20px;
-    height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,7 +30,6 @@
 }
 
 .organization-details img {
-    height: 80vh;
     border-radius: 5px;
 }
 
@@ -188,4 +185,25 @@
 
 .user-details .confirm-button:hover::before {
     width: 100%;
+}
+
+
+@media (max-width: 900px) {
+    .booking .booking-heading {
+        grid-template-columns: 1fr;
+    }
+
+    .organization-details {
+        /* margin: 10px; */
+        display: none;
+    }
+
+    .user-details {
+        margin: 10px;
+    }
+
+    .user-details .confirm-button {
+        margin-left: 50%;
+    }
+    
 }

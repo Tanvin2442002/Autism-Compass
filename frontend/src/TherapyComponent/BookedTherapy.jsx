@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHospital, faCalendarDays, faChild, faEnvelope, faPhone, faAddressBook,faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faHospital, faCalendarDays, faChild, faEnvelope, faPhone, faAddressBook, faTrashAlt, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import './BookedTherapy.css';
+import { useNavigate } from "react-router-dom";
 
 const BookedTherapy = () => {
    const [data, setData] = useState([]);
    const localData = JSON.parse(localStorage.getItem('USER'));
    const [showConfirmation, setShowConfirmation] = useState(false);
    const [consultationToDelete, setConsultationToDelete] = useState(null);
+   const navigate = useNavigate();
+
 
    useEffect(() => {
       const fetchData = async () => {
@@ -50,6 +53,12 @@ const BookedTherapy = () => {
       setConsultationToDelete(null);
    };
 
+   const handleEditClick = (it) => {
+      console.log("Edit Button Clicked:", it);
+      // navigate(`/edit-therapy/${it.C_ID}/${it.P_ID}/${it.TH_ID}/${it.THO_ID}`);
+      navigate(`/therapy/booking?TH_ID=${it.TH_ID}&THO_ID=${it.THO_ID}`);
+   }
+
    return (
       <div className='booked-therapy'>
          <Navbar />
@@ -86,10 +95,16 @@ const BookedTherapy = () => {
                      <FontAwesomeIcon icon={faAddressBook} />
                      <p>{it.ORG_STREET}{it.ORG_CITY}</p>
                   </div>
-                  <button className="delete-button" onClick={() => handleDeleteClick(it)}>
-                <FontAwesomeIcon icon={faTrashAlt} size="lg" style={{ color: '#e74c3c' }} />
-                <span className="delete-label">Delete</span>
-              </button>
+                  <div className='button-div'>
+                     <button className="delete-button" onClick={() => handleEditClick(it)}>
+                        <FontAwesomeIcon icon={faPenToSquare} size="lg" style={{ color: 'green' }} />
+                        <span className="delete-label" style={{ color: '#2b831a'}}>Edit</span>
+                     </button>
+                     <button className="delete-button" onClick={() => handleDeleteClick(it)}>
+                        <FontAwesomeIcon icon={faTrashAlt} size="lg" style={{ color: '#e74c3c' }} />
+                        <span className="delete-label">Delete</span>
+                     </button>
+                  </div>
                </div>
             ))}
             {showConfirmation && (
