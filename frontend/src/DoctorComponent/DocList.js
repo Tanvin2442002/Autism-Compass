@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DocList.css';
 import Navbar from '../Navbar';
-import Loader from '../Loader';
+import LoadingAnimation from '../LoadingAnimation';
 
 const DoctorsList = () => {
    const [doctors, setDoctors] = useState([]);
@@ -86,7 +86,7 @@ const DoctorsList = () => {
                <input type="text" placeholder="Search doctors..." onChange={handleSearch} required />
                <i className='bx bx-search'></i>
             </div>
-            {loading && <Loader />}
+            {loading && <LoadingAnimation />}
             {error && <p>{error}</p>}
             <div className="details">
                <div className="doc-container">

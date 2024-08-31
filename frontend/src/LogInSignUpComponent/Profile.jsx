@@ -3,7 +3,7 @@ import Navbar from '../Navbar.js';
 import './Profile.css';
 import ProfileImage from '../img/Profile.svg';
 import { ToastContainer, toast } from 'react-toastify';
-import Loader from '../Loader.jsx';
+import LoadingAnimation from '../LoadingAnimation';
 
 const Profile = () => {
    const [profileData, setProfileData] = useState({
@@ -161,7 +161,7 @@ const Profile = () => {
       console.log('Delete Account');
    };
 
-   if (loading) return <Loader />;
+   if (loading) return <LoadingAnimation />;
    if (error) return <p>Error: {error}</p>;
 
    // child user              : name, contact number, email, parent email, street, city, postal code, age

@@ -159,10 +159,8 @@
 }
 
 .view-more-button {
-    /* width: inherit; */
     cursor: pointer;
     padding: 10px 10px;
-    margin-bottom: 7px;
     border: unset;
     border-radius: 5px;
     color: #212121;
