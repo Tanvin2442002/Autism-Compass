@@ -253,7 +253,7 @@ const Dashboard = () => {
                   </div>
                </div>
             )}
-            {localData.TYPE === 'PARENT' && (
+            {(localData.TYPE === 'PARENT' && displayedDeliveryData.length) && (
                <div className='delivery-info-dash'>
                   <div className='dash-booking-doc'>
                      <h2 className='dashboard-heading'>Delivery Information</h2>

@@ -16,3 +16,22 @@ INSERT INTO PRODUCT (PR_ID, NAME, SRC, PRICE, QUANTITY, DESCRIPTION) VALUES ('P_
 INSERT INTO PRODUCT (PR_ID, NAME, SRC, PRICE, QUANTITY, DESCRIPTION) VALUES ('P_15', 'My First Learning Phone', 'https://img.freepik.com/premium-photo/childs-toy-with-toy-phone-toy-car_1189726-7020.jpg?w=740', 165, 10, 'An interactive toy phone designed to introduce young children to numbers, colors, and shapes through play.');
 INSERT INTO PRODUCT (PR_ID, NAME, SRC, PRICE, QUANTITY, DESCRIPTION) VALUES ('P_16', 'Space Explorer Playset', 'https://img.freepik.com/premium-photo/collection-vintage-toys-each-one-portal-nostalgic-memories-carefree-days-filled-with-e_1176614-22199.jpg?w=740', 210, 10, 'A thrilling space-themed playset filled with rockets, astronauts, and space vehicles to inspire cosmic adventures.');
 --END OF PRODUCT TABLES--
+
+
+INSERT INTO DELIVERY (
+    D_ID,
+    NAME,
+    CITY,
+    STREET,
+    HOUSE_NO,
+    CONTANCT_NO
+) VALUES (
+    'D_01',
+    'Arif Abdullah',
+    'Dhaka',
+    'Kalshi',
+    '274/A',
+    '01721171112'
+);
+
+COMMIT;

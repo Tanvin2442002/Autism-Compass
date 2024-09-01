@@ -37,6 +37,7 @@
     align-items: center;
     border-radius: 10px;
     margin: 5px;
+    min-height: 55vh;
     transition: all 0.5s ease;
 }
 

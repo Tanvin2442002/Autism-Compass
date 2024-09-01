@@ -21,6 +21,8 @@ const Profile = () => {
       DEGREE: '',
       FIELD_OF_SPEC: '',
       INSTITUTION: '',
+      HOSPITAL: '',
+      VISIT_TIME: '',
    });
 
    const [loading, setLoading] = useState(true);
@@ -49,6 +51,7 @@ const Profile = () => {
             }
 
             const data = await response.json();
+            console.log('Data:', data);
             setProfileData({
                TYPE: userData.TYPE,
                ID: userData.ID,
@@ -58,13 +61,16 @@ const Profile = () => {
                CONTACT_NO: data[0].CONTACT_NO,
                EMAIL: data[0].EMAIL,
                P_EMAIL: data[0].P_EMAIL,
-               STREET: data[0].STREET,
-               CITY: data[0].CITY,
-               POSTAL_CODE: data[0].POSTAL_CODE,
+               STREET: data[0].STREET || data[0].ADDRESS.STREET,
+               CITY: data[0].CITY || data[0].ADDRESS.CITY,
+               POSTAL_CODE: data[0].POSTAL_CODE || data[0].ADDRESS.POSTAL_CODE,
                DEGREE: data[0].DEGREE,
                FIELD_OF_SPEC: data[0].FIELD_OF_SPEC,
                INSTITUTION: data[0].INSTITUTION,
+               HOSPITAL: data[0].NAME_OF_HOSPITAL,
+               VISIT_TIME: data[0].VISIT_TIME
             });
+            console.log('PROFILE DATA:', profileData);
          } catch (err) {
             setError(err.message);
          } finally {
@@ -169,6 +175,8 @@ const Profile = () => {
    // teacher user            : name, contact number, email, institution
    // healthprofessional user : name, contact number, email, degree, field of specilaization, street, city, postal code
 
+   console.log("Final Data: ", profileData);
+
    return (
       <div className='profile'>
          <ToastContainer />
@@ -242,7 +250,7 @@ const Profile = () => {
                            />
                         </div>
                      )}
-                     {(userData.TYPE === 'CHILD' || userData.TYPE === 'PARENT') && (
+                     {(userData.TYPE === 'CHILD' || userData.TYPE === 'PARENT' || userData.TYPE === 'HEALTH_PROFESSIONAL') && (
                         <>
                            <div className="profile-form-group">
                               <label>Street</label>
@@ -313,6 +321,28 @@ const Profile = () => {
                                  name="FIELD_OF_SPEC"
                                  placeholder="Field of specialization"
                                  value={profileData.FIELD_OF_SPEC}
+                                 onChange={handleChange}
+                              />
+                           </div>
+                           <div className="profile-form-group">
+                              <label>Hospital</label>
+                              <label>:</label>
+                              <input
+                                 type="text"
+                                 name="STREET"
+                                 placeholder="Enter street"
+                                 value={profileData.HOSPITAL}
+                                 onChange={handleChange}
+                              />
+                           </div>
+                           <div className="profile-form-group">
+                              <label>Visit Time</label>
+                              <label>:</label>
+                              <input
+                                 type="text"
+                                 name="CITY"
+                                 placeholder="Enter city"
+                                 value={profileData.VISIT_TIME}
                                  onChange={handleChange}
                               />
                            </div>

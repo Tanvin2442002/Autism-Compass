@@ -77,6 +77,8 @@ const DoctorsList = () => {
       }
    };
 
+   console.log(doctors);
+
    return (
       <div className="doctors-background">
          <Navbar />
