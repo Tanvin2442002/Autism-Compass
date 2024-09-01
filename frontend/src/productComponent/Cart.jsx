@@ -6,6 +6,7 @@ import CarLoader from "./CarLoader.js";
 import "./Cart.css";import { toast, ToastContainer } from "react-toastify";
 
 
+
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -330,7 +331,7 @@ const Cart = () => {
   };
 
   if (error) return <div>Error: {error}</div>;
-  if (!cartItems.length) return <div>Product not found</div>;
+  if (!cartItems.length) return <div>page not found</div>;
   const isFormComplete =
     address.city && address.street && address.houseNo && assignedDeliveryMan;
   return (
