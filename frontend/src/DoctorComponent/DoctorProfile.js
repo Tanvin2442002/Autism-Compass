@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar';
 import './DoctorProfile.css';
 import { useLocation } from 'react-router-dom';
+import docProfile from '../img/docProfile.svg';
 
 const DoctorProfile = () => {
   const { id } = useParams();
@@ -63,6 +64,18 @@ const DoctorProfile = () => {
   return (
     <div className="doctor-profile-background">
       <Navbar />
+      <ul class="circles">
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+            </ul>
       <div className="doctor-profile">
         <h1>Doctor's Profile</h1>
         {doctor && (
