@@ -63,17 +63,16 @@
 
 
 .doc-background {
-  /* border: 1px solid green; */
   width: 40%;
-  height: 100%;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .doc-background img {
-  width: 80%;
-  height: 80%;
+  width: 85%;
+  height: 85%;
   object-fit: cover;
 }
 
@@ -99,8 +98,8 @@
 }
 
 .all-info-doc .avatar img {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 170px;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -115,9 +114,9 @@
   /* height: 100px; */
 }
 
-.ifrit-button{
-  color: white;
-  border: none;
+.ifrit-button {
+  color: white; /* Text color */
+  border: none; /* No border */
   width: 20%;
   height: 40px;
   padding: 15px 30px;
@@ -127,26 +126,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s ease;
-
+  background-color: red; /* Initial background color */
+  transition: all 0.4s ease; /* Smooth transition for all properties */
+  position: relative; /* Position relative for pseudo-element if needed */
+  overflow: hidden; /* Hide overflow */
 }
 
-.book-now-button:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 0, 0.2);
-  transform: scale(1.05);
+.ifrit-button:hover {
+  background-color: darkred; /* Change to a darker color on hover */
+  transform: scale(1.1); /* Slightly increase the size */
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.3); /* Add a glowing shadow effect */
 }
 
-.book-now-button.booked {
-  background-color: #346229;
-}
 
-.book-now-button .button-text {
-  transition: none;
-}
 
-.book-now-button.booked .button-text {
-  transform: none;
-}
+
 
 
 

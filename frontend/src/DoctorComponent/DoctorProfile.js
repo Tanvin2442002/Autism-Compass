@@ -146,7 +146,7 @@ const DoctorProfile = () => {
               />
             </div>
             <div className="profile-form-group">
-              <label>Hospital</label>
+              <label>Name of Hospital</label>
               <label>:</label>
               <input
                 type="text"
@@ -157,7 +157,7 @@ const DoctorProfile = () => {
               />
             </div>
             <div className="profile-form-group">
-              <label>Address</label>
+              <label>Address of Hospital</label>
               <label>:</label>
               <input
                 type="text"
