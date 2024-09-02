@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
-import { faPersonCarryBox } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays,faPhoneVolume } from "@fortawesome/free-solid-svg-icons";
+import { faTruck,faHashtag } from "@fortawesome/free-solid-svg-icons";
 
 const OrderCard2 = ({ product }) => {
   const navigate = useNavigate();
@@ -22,15 +22,15 @@ const OrderCard2 = ({ product }) => {
             <p>{deliveryDate}</p>
           </div>
           <div className="card-details-info">
-            <FontAwesomeIcon icon={faCalendarDays} beatFade />
+          <FontAwesomeIcon icon={faTruck} bounce />
             <p>{product.NAME}</p>
           </div>
           <div className="card-details-info">
-            <FontAwesomeIcon icon={faCalendarDays} beatFade />
+          <FontAwesomeIcon icon={faPhoneVolume} shake />
             <p>{product.CONTANCT_NO}</p>
           </div>
           <div className="card-details-info">
-            <FontAwesomeIcon icon={faCalendarDays} beatFade />
+          <FontAwesomeIcon icon={faHashtag} flip />
             <p>{product.TOTAL_QUANTITY}</p>
           </div>
           <p className="card-pay">PAY: {product.AMOUNT}$</p>

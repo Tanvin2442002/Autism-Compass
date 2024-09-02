@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #DDE6ED;
+    background-color:#DDE6ED;
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
     width: 100%;
     height: 100%;
@@ -22,7 +22,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 0;
+    z-index:0;
 }
 
 .circles li {
@@ -106,11 +106,11 @@
 }
 
 .circles li:nth-child(10) {
-    left: 85%;
+    left: 5%;
     width: 150px;
     height: 150px;
     animation-delay: 0s;
-    animation-duration: 11s;
+    animation-duration: 15s;
 }
 
 @keyframes animate {

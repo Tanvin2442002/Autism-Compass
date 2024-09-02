@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Logo from './img/logo.png';
 import './Nav.css';
 import { useNavigate } from 'react-router-dom';
+import Logout from './Logout';
 
 const Navbar = () => {
    const [isProductsHovered, setIsProductsHovered] = useState(false);
@@ -203,7 +204,11 @@ const Navbar = () => {
                   )}
                </ul>
             </div>
-            <button className="navbar-button" onClick={handleLogOut}>Log Out</button>
+            {/* <button className="navbar-button" onClick={handleLogOut}>Log Out</button> */}
+            <div>
+               <Logout />
+
+            </div>
          </div>
       </nav>
    );
