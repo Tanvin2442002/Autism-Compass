@@ -10,6 +10,7 @@ const DoctorProfile = () => {
   const [doctor, setDoctor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [docAddress, setDocAddress] = useState(null);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const doctorId = params.get('id');
@@ -26,6 +27,9 @@ const DoctorProfile = () => {
         setDoctor(data[0]);
 
         await fetchGenderData(data[0].NAME);
+        console.log(data[0]);
+        const add = data[0].ADDRESS.STREET + ", " + data[0].ADDRESS.CITY + "- " + data[0].ADDRESS.POSTAL_CODE;
+        setDocAddress(add);
       } catch (err) {
         setError(err.message);
         console.error("Error fetching doctor details:", err);
@@ -62,71 +66,131 @@ const DoctorProfile = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="doctor-profile-background">
-      <Navbar />
+    <div className='doc-profile-temp'>
       <ul class="circles">
-               <li></li>
-               <li></li>
-               <li></li>
-               <li></li>
-               <li></li>
-               <li></li>
-               <li></li>
-               <li></li>
-               <li></li>
-               <li></li>
-            </ul>
-      <div className="doctor-profile">
-        <h1>Doctor's Profile</h1>
-        {doctor && (
-          <div className="profile-container">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <Navbar />
+      <div className="doctor-profile-doc">
+        <div className='doc-info'>
+          <h1>Doctor's Profile</h1>
+          <div className='all-info-doc'>
             <div className='avatar'>
-              {/* <img src={`https://avatar.iran.liara.run/public/${doctor.GENDER}?username=${doctor.NAME}`} alt='Avatar' /> */}
               <img src={`https://avataaars.io/?avatarStyle=Circle&topType=${doctor.GENDER === 'male' ? 'ShortHairShortCurly' : 'LongHairStraight'}&accessoriesType=Blank&hairColor=${doctor.GENDER === 'male' ? 'Brown' : 'Blonde'}&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light`} alt="Profile" className="doctor-list-avatar" />
-
-            </div>
-            <h2 className="doctor-name">Dr. {doctor.NAME}</h2>
-            <div className="info-group">
-              <p className="attribute">Field of Specialization:</p>
-              <div className="info-box slide-in">{doctor.FIELD_OF_SPEC}</div>
-            </div>
-            <div className="info-group">
-              <p className="attribute">Degree:</p>
-              <div className="info-box slide-in">{doctor.DEGREE}</div>
-            </div>
-            <div className="info-group">
-              <p className="attribute">Contact No.:</p>
-              <div className="info-box slide-in">{doctor.CONTACT_NO}</div>
-            </div>
-            <div className="info-group">
-              <p className="attribute">Email:</p>
-              <div className="info-box slide-in">{doctor.EMAIL}</div>
-            </div>
-            <div className="info-group">
-              <p className="attribute">Hospital:</p>
-              <div className="info-box slide-in">{doctor.NAME_OF_HOSPITAL}</div>
-            </div>
-            <div className="info-group">
-              <p className="attribute">Visit Time:</p>
-              <div className="info-box slide-in">{doctor.VISIT_TIME}</div>
-            </div>
-            <div className="info-group">
-              <p className="attribute">Address:</p>
-              <div className="info-box slide-in">
-                {doctor.ADDRESS.CITY}, {doctor.ADDRESS.STREET}, {doctor.ADDRESS.POSTAL_CODE}
+              <div className="profile-info">
+                <h1>Dr. {doctor.NAME}</h1>
               </div>
             </div>
+            {/* <div className="profile-form-group">
+              <label>Name</label>
+              <label>:</label>
+              <input
+                type="text"
+                name="NAME"
+                placeholder="Enter your Name"
+                value={doctor.NAME}
+              />
+            </div> */}
+            <div className="profile-form-group">
+              <label>Email Address</label>
+              <label>:</label>
+              <input
+                type="text"
+                name="EMAIL"
+                placeholder="Email Address"
+                disabled
+                value={doctor.EMAIL}
+              // onChange={handleChange}
+              />
+            </div>
+            <div className="profile-form-group">
+              <label>Contact Number</label>
+              <label>:</label>
+              <input
+                type="text"
+                name="CONTACT_NO"
+                placeholder="Enter contact number"
+                value={doctor.CONTACT_NO}
+              // onChange={handleChange}
+              />
+            </div>
+            <div className="profile-form-group">
+              <label>Degree</label>
+              <label>:</label>
+              <input
+                type="text"
+                name="DEGREE"
+                placeholder="Degree"
+                value={doctor.DEGREE}
+              // onChange={handleChange}
+              />
+            </div>
+            <div className="profile-form-group">
+              <label>Field of Specialization</label>
+              <label>:</label>
+              <input
+                type="text"
+                name="FIELD_OF_SPEC"
+                placeholder="Field of specialization"
+                value={doctor.FIELD_OF_SPEC}
+              // onChange={handleChange}
+              />
+            </div>
+            <div className="profile-form-group">
+              <label>Hospital</label>
+              <label>:</label>
+              <input
+                type="text"
+                name="STREET"
+                placeholder="Enter street"
+                value={doctor.NAME_OF_HOSPITAL}
+              // onChange={handleChange}
+              />
+            </div>
+            <div className="profile-form-group">
+              <label>Address</label>
+              <label>:</label>
+              <input
+                type="text"
+                name="STREET"
+                placeholder="Enter street"
+                value={docAddress}
+              />
+            </div>
 
-            {/* Book Now button to redirect */}
-            <button
-              className="book-now-button"
-              onClick={handleBookingRedirect}
-              style={{ backgroundColor: 'red' }}
-            >
-              <span className="button-text">Book Now</span>
-            </button>
+            <div className="profile-form-group">
+              <label>Visit Time</label>
+              <label>:</label>
+              <input
+                type="text"
+                name="CITY"
+                placeholder="Enter city"
+                value={doctor.VISIT_TIME}
+              // onChange={handleChange}
+              />
+            </div>
+            <div className="book-now-button">
+              <button className='ifrit-button'
+                onClick={handleBookingRedirect}
+                style={{ backgroundColor: 'red' }}
+              >
+                <span className="button-text">Book Now</span>
+              </button>
+            </div>
           </div>
-        )}
+        </div>
+        <div className='doc-background'>
+          <img src={docProfile} alt="Doctor Profile" />
+        </div>
       </div>
     </div>
   );
