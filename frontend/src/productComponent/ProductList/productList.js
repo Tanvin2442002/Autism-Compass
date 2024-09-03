@@ -7,6 +7,7 @@ import MainContent from "./mainContent";
 import "./slickComponent.css";
 import "./mainContent.css"; // Ensure this CSS file has the combined styles
 import { toast, ToastContainer } from "react-toastify";
+import ComponentName from "../../footer";
 
 
 const ProductList = () => {
@@ -40,6 +41,7 @@ const ProductList = () => {
         <SlickComponent products = {productCards} />
       </div>
       <MainContent products = {productCards} />
+      <ComponentName/>
     </div>
   );
 };
