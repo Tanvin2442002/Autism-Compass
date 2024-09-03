@@ -205,9 +205,8 @@ const Navbar = () => {
                </ul>
             </div>
             {/* <button className="navbar-button" onClick={handleLogOut}>Log Out</button> */}
-            <div>
+            <div onClick={handleLogOut}>
                <Logout />
-
             </div>
          </div>
       </nav>
