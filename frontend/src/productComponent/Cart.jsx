@@ -10,6 +10,7 @@ import "./Cart.css";import { toast, ToastContainer } from "react-toastify";
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [ordercartItems, setorderCartItems] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [error, setError] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
@@ -167,6 +168,45 @@ const Cart = () => {
     }
   };
 
+  const deleteCartItems = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/delivery/cart?userID=${userID}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete cart items");
+      }
+      setorderCartItems([]);
+      console.log("Cart items deleted successfully");
+    } catch (error) {
+      console.error("Error:", error);
+      setError(error.message);
+    }
+  };
+
+  const deletegettable = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/delivery/get?userID=${userID}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete get table");
+      }
+      setorderCartItems([]);
+    } catch (error) {
+      console.error("Error:", error);
+      setError(error.message);
+    }
+  }
+
   const setDeliveryAddress = async () => {
     if (!address.city || !address.street || !address.houseNo) {
       toast.error("Please fill in all the fields", {
@@ -312,6 +352,9 @@ const Cart = () => {
         setLoading(true);
         setTimeout(() => {
           navigate("/products/orders");
+          deleteCartItems();
+          deletegettable();
+
         }, 4500);
       } catch (error) {
         console.error("Error executing fetch:", error);
