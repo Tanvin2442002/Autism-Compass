@@ -4,6 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.css';
 import 'boxicons/css/boxicons.min.css';
+import LogInImage from '../img/LogIn.svg';
+
 
 const LogIn = () => {
    const [email, setEmail] = React.useState("");
@@ -61,33 +63,49 @@ const LogIn = () => {
    };
 
    return (
-      <div className='login-contents'>
-         <div className="login-wrapper">
-            <form onSubmit={handleLogIn}>
+      <div>
+         <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+         </ul>
+         <div className='login-contents'>
+            <form onSubmit={handleLogIn} className="login-wrapper">
                <h1>WELCOME!</h1>
-               <div className="login-input-box">
+               <div className="profile-form-group">
+                  <label>Username</label>
+                  <span>:</span>
                   <input
-                     className='login-input'
-                     type="text"
-                     placeholder="Username"
+                     type="email"
+                     name="username"
+                     placeholder="example@gmail.com"
                      onChange={(e) => setEmail(e.target.value)}
                      value={email}
                      required
                   />
-                  <i className="bx bxs-user"></i>
                </div>
-               <div className="login-input-box">
+               <div className="profile-form-group">
+                  <label>Password</label>
+                  <span>:</span>
                   <input
-                     className='login-input'
-                     type="password"
+                     type="text"
+                     name="password"
                      placeholder="Password"
                      onChange={(e) => setPassword(e.target.value)}
                      value={password}
                      required
                   />
-                  <i className="bx bxs-lock-alt"></i>
                </div>
-               <div className="login-input-box">
+               <div className="profile-form-group">
+                  <label>Your Type</label>
+                  <span>:</span>
                   <select
                      value={userType}
                      onChange={(e) => setUserType(e.target.value)}
@@ -96,13 +114,13 @@ const LogIn = () => {
                      <option value="" disabled>
                         Who is logging in?
                      </option>
-                     <option value="child">Child</option>
-                     <option value="parent">Parent</option>
-                     <option value="teacher">Teacher</option>
-                     <option value="Health_professional">Health Professional</option>
+                     <option value="child">CHILD</option>
+                     <option value="parent">PARENT</option>
+                     <option value="Health_professional">DOCTOR</option>
+                     <option value="teacher">TEACHER</option>
                   </select>
-                  <i className="bx bxs-down-arrow"></i>
                </div>
+
                <div className="login-remember-forgot">
                   <label className='login-text'>
                      <input
@@ -112,17 +130,18 @@ const LogIn = () => {
                      />
                      Remember me
                   </label>
-                  <Link to='/reset-password' className='login-text'> Forgot Password</Link>
+
+                  
+                  <Link to='/reset-password' className='link-to-reg'> Forgot Password</Link>
                </div>
-               <button type="submit" className="login-btn">
-                  LOGIN
-               </button>
+               <button className='view-more-button' > LOG IN</button>
                <div className="login-register-link">
                   <p className='login-text'>
-                     Don't have an account? <Link to="/">Register</Link>
+                     Don't have an account? <Link to="/" className='link-to-reg'>Register</Link>
                   </p>
                </div>
             </form>
+            <img src={LogInImage} alt='Image' className='login-img' />
          </div>
          <ToastContainer />
       </div>
