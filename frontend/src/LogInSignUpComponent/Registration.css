@@ -1,142 +1,166 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-
-
-.registration-contents {
-    width: 100vw;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-}
-
-.registration-section {
-    background-color: rgba(255, 255, 255, 0.445);
-    width: 60vw;
-    border-radius: 20px;
-}
-
-.registration-main-part {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.sign-up-page {
+    min-height: 100%;
+    /* border: 1px solid red; */
+    display: grid;
     align-items: center;
+    grid-template-columns: 6fr 4fr;
 }
 
-.registration-main-part header {
-    font-size: 1.8rem;
-    color: #062248;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.registration-form {
-    width: 100%;
-    background: transparent;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* border: 5px solid aqua; */
-}
-
-.registration-form .registration-input-box {
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
-}
-
-.registration-form .registration-input-box input,
-.registration-form .registration-input-box select {
-    position: relative;
-    height: 50px;
-    width: 97%;
-    outline: none;
-    font-size: 1rem;
-    color: #000000;
-    margin-top: 8px;
-    border: 1px solid #031f4763;
-    border-radius: 6px;
-    padding: 0 15px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    transition: box-shadow 0.3s ease;
-}
-
-.registration-form .registration-address {
-    width: 95%;
-    display: flex;
-}
-.registration-form .registration-address .registration-input-box {
-    /* border: 5px solid green; */
-    width: 100%;
-}
-
-.registration-form .registration-address .registration-input-box input {
-    /* border: 5px solid green; */
+.sign-up-image {
     width: 90%;
-}
-
-.registration-form .registration-input-box input:focus,
-.registration-form .registration-select-box:focus {
-    box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
-}
-
-.registration-form .registration-input-box input:hover,
-.registration-form .registration-select-box:hover {
-    box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
-}
-
-.registration-form .registration-input-box .registration-password {
-    position: relative;
-}
-
-.registration-form .registration-input-box .registration-password input {
-    padding-right: 30px;
-    width: 95%;
-}
-
-.password-icon {
-    position: absolute;
-    opacity: 50%;
-    color: rgb(24, 23, 23);
-    right: 10px;
-    top: 55%;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-
-.registration-form .registration-submit-button {
-    position: relative;
-    justify-content: center;
+    display: flex;
     align-items: center;
-    height: 50px;
-    width: 30%;
+    justify-content: center;
+    position: sticky;
+    top: 10%;
+    padding: 10px;
+}
+
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    justify-content: center;
+    margin: 10px 10%;
+    background-color: #BDD1E1;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sign-up-form h1 {
+    font-family: 'New Amsterdam', serif;
+    width: 100%;
+    text-align: center;
+    font-size: 35px;
+    letter-spacing: 3px;
+    color: #5C5C5C;
+    text-decoration: underline;
+}
+
+.sign-up-in-feild {
+    width: 90%;
+    /* border: 1px solid blue; */
+    display: grid;
+    grid-template-columns: 100px 10px 7fr;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    gap: 1%;
+}
+
+
+.sign-up-in-feild input,
+.sign-up-in-feild select,
+.add-info input {
+    font-family: 'Poppins', sans-serif;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #5C5C5C;
+    transform: 1s ease-in-out;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.sign-up-in-feild select {
+    height: 35px;
+}
+
+.sign-up-in-feild input:focus,
+.add-info input:focus {
     outline: none;
-    font-size: 1rem;
-    color: #000000;
-    margin-top: 8px;
-    border: 1px solid #031f4763;
-    border-radius: 6px;
-    padding: 0 15px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    transition: box-shadow 0.3s ease;
+    border-bottom: 2px solid #3B9BE8;
+    font-size: 16px;
+    font-weight: 450;
 }
 
-.registration-form .registration-submit-button:hover {
-    background: rgb(38, 73, 109);
+.sign-up-in-feild select option {
+    background-color: #BDD1E1;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    transform: 1s ease-in-out;
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+}
+
+.address {
+    width: 93%;
+    /* border: 1px solid blue; */
+    align-items: center;
+    /* justify-content: center; */
+    display: grid;
+    grid-template-columns: 16% 2% 26% 26% 27%;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    gap: 1%;
+}
+
+.address label {
+    margin-left: 5%;
+}
+
+.add-info {
+    /* border: 1px solid yellow; */
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
 }
 
 
-@media screen and (max-width: 500px) {
-    form .column {
-        flex-wrap: wrap;
+
+@media (max-width: 1000px) {
+    .sign-up-image {
+        display: none;
     }
+
+    .sign-up-page {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+
+    @media (max-width: 500px) {
+        .sign-up-form {
+            margin: 10px;
+            width: 95vw;
+        }
+
+        .sign-up-in-feild {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .sign-up-in-feild span,
+        .address .add,
+        .address span {
+            display: none;
+        }
+
+        .sign-up-in-feild input,
+        select {
+            width: 95%;
+        }
+
+        .address {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .add-info {
+            margin-left: 5px;
+        }
+
+        .add-info label {
+            margin-left: 0px;
+        }
+    }
+
 }
