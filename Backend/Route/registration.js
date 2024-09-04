@@ -39,7 +39,12 @@ router.post("/child", async (req, res) => {
         },
         { autoCommit: true }
     );
-    console.log(findParent.rows[0].P_ID);
+    console.log(findParent);
+    // console.log(findParent.rows[0].P_ID);
+    if(findParent.rows.length == 0){
+        res.status(404).send({ message: "Parent not found" });
+        return;
+    }
     const resultParent = await connection.execute(
         `INSERT INTO PARENT_HAS_CHILD (C_ID, P_ID)
             VALUES (:C_ID, :P_ID)`,
@@ -115,14 +120,6 @@ router.post("/parent", async (req, res) => {
     } catch (err) {
         console.error("Error during parent registration:", err);
         res.status(500).send({ message: "Error during parent registration", error: err.message });
-    } finally {
-        if (connection) {
-            try {
-                await connection.close();
-            } catch (err) {
-                console.error("Error closing connection:", err);
-            }
-        }
     }
 });
 
@@ -142,7 +139,7 @@ router.post("/doctor", async (req, res) => {
             VISIT_TIME: req.body.VISIT_TIME,
             CITY: req.body.CITY,
             STREET: req.body.STREET,
-            POSTAL_CODE: req.body.POST
+            POSTAL_CODE: req.body.POSTAL_CODE
         },
         { autoCommit: true }
     );

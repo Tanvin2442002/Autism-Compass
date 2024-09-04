@@ -5,10 +5,7 @@ import Dashboard from "./Dashboard";
 import Landing from "./Landing";
 import LogIn from "./LogInSignUpComponent/Login";
 import Profile from "./LogInSignUpComponent/Profile";
-import ChildReg from "./LogInSignUpComponent/RegChild";
-import DoctorReg from "./LogInSignUpComponent/RegDoctor";
-import ParentReg from "./LogInSignUpComponent/RegParent";
-import TeacherReg from "./LogInSignUpComponent/RegTeacher";
+import Registration from "./LogInSignUpComponent/Registration";
 import ResetPass from "./LogInSignUpComponent/ResetPass";
 import Cart from "./productComponent/Cart";
 import ProductDetails from "./productComponent/productDetails";
@@ -37,10 +34,7 @@ function App() {
             <Routes>
                <Route path="/" element={<Landing/>} />
                <Route path="/login" element={<LogIn />} />
-               <Route path="/signup/parent" element={<ParentReg />} />
-               <Route path="/signup/child" element={<ChildReg />} />
-               <Route path="/signup/doctor" element={<DoctorReg />} />
-               <Route path="/signup/teacher" element={<TeacherReg />} />
+               <Route path="/signup" element={<Registration />} />
                <Route path="/dashboard" element={<Dashboard />} />
                <Route path='/reset-password' element={<ResetPass />} />
                <Route path="/products/detail" element={<ProductDetails />} />
