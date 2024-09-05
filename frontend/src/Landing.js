@@ -12,26 +12,11 @@ const Landing = () => {
                 </li>
                 <div className="signUpContainer">
                     <li>
-                        <Link>Sign Up</Link>
+                        <Link to="/signup">Sign Up</Link>
                     </li>
-                    <div className="signUpOptions">
-                        <li>
-                            <Link to="/signup/parent">Parent</Link>
-                        </li>
-                        <li>
-                            <Link to="/signup/child">Child</Link>
-                        </li>
-                        <li>
-                            <Link to="/signup/doctor">Doctor</Link>
-                        </li>
-                        <li>
-                            <Link to="/signup/teacher">Teacher</Link>
-                        </li>
-                    </div>
                 </div>
             </ul>
             <div className="introduction">
-                
             </div>
             <div className="google-login">
             </div>

@@ -1,20 +1,16 @@
-
 .doctors-background {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: url(../img/bg.jpg) no-repeat;
   background-size: cover;
   background-position: center;
 }
-
 
 .doctor-list {
   width: 85%;
   background: rgba(255, 255, 255, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(5px);
-  color: #fff;
   border-radius: 12px;
   padding: 30px 40px;
   margin-top: 1%;
@@ -27,18 +23,28 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .doctor-list h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
+  color: #662E26;
+  font-family: 'New Amsterdam', serif;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  word-spacing: 2px;
+  font-size: 40px;
+  margin: 10px 0px;
 }
 
 .doctor-search-box {
   position: relative;
   width: 80%;
+  margin-bottom: 20px;
 }
 
 .doctor-search-box input {
@@ -50,37 +56,34 @@
   border-radius: 25px;
   font-size: 16px;
   color: #fff;
-  padding: 0 20px;
+  padding: 0 50px 0 20px;
   transition: all 0.5s ease;
+  box-shadow: 0 0 10px rgba(239, 234, 234, 0.2);
 }
 
 .doctor-search-box input::placeholder {
   color: #ffffff;
 }
 
-.doctor-search-box input:hover {
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 20px rgba(239, 234, 234, 0.8);
-}
-
+.doctor-search-box input:hover,
 .doctor-search-box input:focus {
   background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 25px rgba(239, 234, 234, 0.9);
 }
 
-.doctor-search-box i {
+.doctor-search-box .search-icon {
   position: absolute;
-  right: 20px;
+  right: 0px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
-  pointer-events: none;
   color: #fff;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
-.doctor-search-box i:hover {
-  color: #007bff;
+.doctor-search-box .search-icon:hover {
+  color: #1b1d1e;
 }
 
 .details {
@@ -88,70 +91,84 @@
   text-align: left;
 }
 
-.details h2 {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #132e47;
+.doc-container {
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
 }
 
-.doc-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; 
-  justify-content: center;
+.svg-center {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+  margin: 25px 0;
+}
+
+.svg-center img {
+  width: 100%;
+  max-width: 700px; 
+  height: auto;
 }
 
 .doc-box {
   position: relative;
-  background-color: #add8e6;
-  border: none;
-  outline: none;
+  background-color: #ffffff;
+  border: 2px solid #3f4e55;
   border-radius: 20px;
   padding: 20px 20px;
-  width: 20%; 
-  min-width: 250px; 
-  height: auto; 
-  text-align: center; 
+  width: 250px;
+  text-align: center;
   color: #333;
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   animation: slideIn 1s ease-in-out;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 @keyframes slideIn {
-  from { transform: translateY(50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .doc-box:hover {
-  background-color: #87CEEB; 
+  background-color: #e6f2ff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
 }
 
 .doc-box h3 {
   margin-bottom: 5px;
-  font-size: 18px; 
-  font-weight: bold; 
+  font-size: 18px;
+  font-weight: bold;
   color: #000;
 }
 
 .doc-box .degree {
-  font-weight: normal; 
+  font-weight: normal;
+  font-size: 14px;
+  color: #555;
 }
 
 .doc-box p.hospital {
   margin-top: 5px;
   margin-bottom: 10px;
-  font-size: 16px; 
-  font-weight: normal; 
-  text-align: center; 
+  font-size: 16px;
+  font-weight: normal;
+  text-align: center;
   color: #000;
 }
 
@@ -161,4 +178,9 @@
   border-radius: 50%;
   background-color: #ccc;
   margin: 0 auto 10px;
+  transition: transform 0.3s ease;
+}
+
+.doctor-list-avatar:hover {
+  transform: scale(1.1);
 }

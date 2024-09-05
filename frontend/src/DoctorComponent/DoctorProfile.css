@@ -5,32 +5,19 @@
 .doctor-profile-doc {
   width: 100%;
   height: 100%;
-  /* background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  color: #000;
-  border-radius: 12px;
-  margin-top: 0.5%;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 2s ease-in; */
-  /* border: 3px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
-  /* flex-direction: column; */
 }
 
 
 .doc-info {
-  /* border: 1px solid blue; */
   width: 60%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* margin: 10px; */
 }
 
 .doc-info h1 {
@@ -52,9 +39,6 @@
   display: flex;
   flex-direction: column;
   padding: 40px;
-  /* align-items: center;  */
-  /* justify-content: center; */
-  /* padding: 100px; */
 }
 
 .all-info-doc .profile-form-group {
@@ -78,7 +62,6 @@
 
 
 .all-info-doc .avatar{
-  /* border: 1px solid green; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -107,16 +90,14 @@
 
 .book-now-button {
   margin-top: 20px;
-  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100px; */
 }
 
 .ifrit-button {
-  color: white; /* Text color */
-  border: none; /* No border */
+  color: white; 
+  border: none; 
   width: 20%;
   height: 40px;
   padding: 15px 30px;
@@ -126,16 +107,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red; /* Initial background color */
-  transition: all 0.4s ease; /* Smooth transition for all properties */
-  position: relative; /* Position relative for pseudo-element if needed */
-  overflow: hidden; /* Hide overflow */
+  background-color: red;
+  transition: all 0.4s ease; 
+  position: relative; 
+  overflow: hidden;
 }
 
 .ifrit-button:hover {
-  background-color: darkred; /* Change to a darker color on hover */
-  transform: scale(1.1); /* Slightly increase the size */
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.3); /* Add a glowing shadow effect */
+  background-color: darkred;
+  transform: scale(1.1); 
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.3);
 }
 
 
