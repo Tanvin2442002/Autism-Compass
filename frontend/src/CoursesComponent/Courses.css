@@ -11,17 +11,16 @@
     margin-bottom: 20px;
 }
 
-/* Adjust the container to allow vertical scrolling */
 .courses-grid {
     display: flex;
-    flex-direction: column; /* Set flex direction to column for vertical layout */
+    flex-direction: column; 
     flex-wrap: nowrap;
-    overflow-y: auto; /* Enable vertical scrolling */
-    max-height: 900px; /* Increase max height to make the courses section taller */
+    overflow-y: auto;
+    max-height: 900px;
     padding: 10px;
-    gap: 20px; /* Space between items */
-    width: 90%; /* Set grid container width to full */
-    box-sizing: border-box; /* Ensure padding is included in width */
+    gap: 20px;
+    width: 90%;
+    box-sizing: border-box;
     align-items:center;
 }
 
@@ -33,7 +32,7 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     width: 80%;
     box-sizing: border-box;
-    min-height: 250px; /* Increase the minimum height to make the course cards larger */
+    min-height: 250px; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
