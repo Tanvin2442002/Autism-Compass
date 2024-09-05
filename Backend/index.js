@@ -41,6 +41,31 @@ app.post("/login", async (req, res) => {
     console.log("Request processed");
 });
 
+app.get('/api/courses', async (req, res) => {
+    let connection;
+console.log("hello");
+    try {
+        connection = await getConnection();
+        const result = await connection.execute('SELECT c.course_code,c.course_name,t.name AS teacher_name FROM courses c JOIN assigned a ON c.course_code = a.course_code JOIN teacher t ON a.T_ID = t.T_ID');
+        const rows = result.rows;
+console.log(rows);
+        if (Array.isArray(rows)) {
+            /*res.json(rows.map(row => ({
+                course_code: row[0], // Adjust index based on your schema
+                course_name: row[1]  // Adjust index based on your schema
+            })));*/
+            res.status(200).send(rows);
+        } else {
+            res.status(500).send('Unexpected result format');
+        }
+    } catch (err) {
+        console.error('Error fetching courses:', err);
+        res.status(500).send('Internal Server Error');
+    } 
+    
+});
+
+
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000...");

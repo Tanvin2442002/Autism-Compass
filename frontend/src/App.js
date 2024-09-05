@@ -26,6 +26,9 @@ import BookingDoc from "./DoctorComponent/BookingDoc";
 import BookedList from "./DoctorComponent/BookedList";
 import Consultation from "./DoctorComponent/Consultation";
 import Allorderlist from "./productComponent/delivery/Allorderlist";
+import Courses from "./CoursesComponent/Courses";
+import EnrolledCourses from "./CoursesComponent/EnrolledCourses";
+
 
 function App() {
 
@@ -59,6 +62,8 @@ function App() {
                <Route path='/doctor/booked' element={<BookedList />} />
                <Route path='/parent-child' element={<ParentChildProfile />} />
                <Route path='/consultation' element={<Consultation />} />
+               <Route path='/courses' element={<Courses />} />
+               <Route path='/enrolled-courses' element={<EnrolledCourses />} />
             </Routes>
          </Router>
       </div>
