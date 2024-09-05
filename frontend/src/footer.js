@@ -1,7 +1,7 @@
 import React from "react";
 // import './footer.css';
 import { FaGithub, FaLinkedinIn,FaTwitter,FaInstagram} from "react-icons/fa";
-
+import './footer.css';
 
 const ComponentName = () => {
     const year = new Date().getFullYear();
@@ -48,7 +48,7 @@ const ComponentName = () => {
                     <li className="my-4 list-none">phone: +880 1790009585</li>
                     
                 </ul>
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 ">
                     <a className="text-white  hover:text-pink-500 transform hover:scale-150 transition-all duration-150 ease-in-out" href="">
                         <FaGithub/>
                     </a>
@@ -64,7 +64,7 @@ const ComponentName = () => {
                 </div>
             </div>
         </div>
-        <div>
+        {/* <div>
             <div className="h-full flex items-center justify-center mb-5">
                 <form className="w-96 relative" action="">
                     <input className="w-full text-gray-800 p-4 h-10 rounded-full focus:outline-none focus:border border-pink-800" type="email"/>
@@ -72,7 +72,7 @@ const ComponentName = () => {
                 </form>
             </div>
         </div>
-        <h6 className="text-center">&copy; Copy right Dev Pallob {year}</h6>
+        <h6 className="text-center">&copy; Copy right Dev Pallob {year}</h6> */}
       </div>
     </footer>
   );
