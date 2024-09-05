@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './Suggested.css';
 import Navbar from '../Navbar';
 import suggestion from "../img/suggestion.svg";
+import { useNavigate } from 'react-router-dom';
 
 
 const SuggestedList = () => {
   const [suggestions, setSuggestions] = useState([]);
   const userData = JSON.parse(localStorage.getItem('USER'));
   const [isParent, setIsParent] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSuggestions = async () => {
@@ -30,6 +32,19 @@ const SuggestedList = () => {
     setIsParent(userData.TYPE === "PARENT");
   }, []);
 
+  console.log(suggestions);
+
+
+  const handleTherapy = (thId) => async () => {
+    console.log("Therapy ID:", thId);
+    navigate(`/therapy/detail?type=${thId}`);
+  };
+
+  const handleDoctor = (hId) => async () => {
+    console.log("Doctor ID:", hId);
+    navigate(`/doctor/detail?id=${hId}`);
+  }
+
   return (
     <div className="suggested-list-container">
       <Navbar />
@@ -50,12 +65,12 @@ const SuggestedList = () => {
               </thead>
               <tbody>
                 {suggestions.length > 0 ? suggestions.map((suggestion, index) => (
-                  <tr key={`${suggestion.CHILD_NAME}-${suggestion.HEALTH_PROFESSIONAL_NAME}-${suggestion.THERAPY_TYPE}`}>
+                  <tr key={`${suggestion.CHILD_NAME}-${suggestion.HEALTH_PROFESSIONAL_NAME}-${suggestion.THERAPY_TYPE}`} className='row-hover'>
                     {userData.TYPE === "PARENT" && (
                       <td>{index + 1}. {suggestion.CHILD_NAME}</td>
                     )}
-                    <td>Dr. {suggestion.HEALTH_PROFESSIONAL_NAME}</td>
-                    <td>{suggestion.THERAPY_TYPE}</td>
+                    <td onClick={handleDoctor(suggestion.H_ID)} className='table-hover'>Dr. {suggestion.HEALTH_PROFESSIONAL_NAME}</td>
+                    <td onClick={handleTherapy(suggestion.TH_ID)} className='table-hover'> {suggestion.THERAPY_TYPE} </td>
                     <td>{suggestion.FEEDBACK ? suggestion.FEEDBACK : "No feedback provided."}</td>
                   </tr>
                 )) : (

@@ -131,6 +131,10 @@ const ParentReg = () => {
          }
       }
       else if (userType === 'DOCTOR') {
+         const startTime = document.getElementById("start-visit-time").value;
+         const endTime = document.getElementById("end-visit-time").value;
+         console.log(startTime, endTime);
+         const visitTime = startTime + " - " + endTime;
          const doctorData = {
             H_ID: Math.floor(Math.random() * 1000),
             NAME: document.getElementById("name").value,
@@ -139,7 +143,7 @@ const ParentReg = () => {
             DEGREE: document.getElementById("degree").value,
             FIELD_OF_SPEC: document.getElementById("spec").value,
             NAME_OF_HOSPITAL: document.getElementById("hospital").value,
-            VISIT_TIME: document.getElementById("visit-time").value,
+            VISIT_TIME: visitTime,
             CITY: document.getElementById("city").value,
             STREET: document.getElementById("street").value,
             POSTAL_CODE: document.getElementById("postal-code").value,
@@ -381,11 +385,21 @@ const ParentReg = () => {
                         />
                      </div>
                      <div className="sign-up-in-feild">
-                        <label>Visit Time</label>
+                        <label>Start Visit Time</label>
                         <span>:</span>
                         <input
-                           id="visit-time"
-                           type="text"
+                           id="start-visit-time"
+                           type="time"
+                           placeholder="10AM - 2PM"
+                           required
+                        />
+                     </div>
+                     <div className="sign-up-in-feild">
+                        <label>End Visit Time</label>
+                        <span>:</span>
+                        <input
+                           id="end-visit-time"
+                           type="time"
                            placeholder="10AM - 2PM"
                            required
                         />

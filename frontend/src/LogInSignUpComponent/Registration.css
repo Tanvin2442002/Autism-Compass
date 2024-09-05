@@ -4,6 +4,8 @@
     display: grid;
     align-items: center;
     grid-template-columns: 6fr 4fr;
+    z-index: 2;
+    position: relative;
 }
 
 .sign-up-image {
