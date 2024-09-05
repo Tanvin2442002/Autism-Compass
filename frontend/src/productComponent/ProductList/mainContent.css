@@ -14,7 +14,13 @@
     word-spacing: 10px;
     color: #263238;
 }
-
+.loader-maincontent{
+    position: absolute;
+    width:100%;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+}
 .card {
     background: #3d52a047;
     border: 2px solid #ddd;

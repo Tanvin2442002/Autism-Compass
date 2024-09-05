@@ -15,9 +15,14 @@ app.use("/therapy", require("./Route/TherapyThings"));
 app.use("/booking", require("./Route/BookingTherapy"));
 app.use("", require("./Route/BookingDoc"));
 app.use("/dash", require("./Route/Dashboard"));
+app.use("", require("./Route/Suggest"));  
+
+
+
 
 app.post("/login", async (req, res) => {     
     const { email, password, type } = req.body;
+    console.log(`User login request: ${email}, ${password}, ${type}`);
     const connection = await getConnection();
     if (!connection) {
         throw new Error("Database connection not established");

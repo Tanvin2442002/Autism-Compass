@@ -7,7 +7,7 @@ html{
 
 .main-app {
    align-items: center;
-   width: 100vw;
+   width: 100vw;  
    height: 100vh;
    background-color: #DDE6ED;
    overflow-x: hidden;

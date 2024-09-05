@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import Button from "./Button";
 import CarLoader from "./CarLoader.js";
-import "./Cart.css";
-import { toast, ToastContainer } from "react-toastify";
+import "./Cart.css";import { toast, ToastContainer } from "react-toastify";
+
+
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [ordercartItems, setorderCartItems] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [error, setError] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
@@ -26,7 +28,6 @@ const Cart = () => {
     let result = "";
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    // Loop to generate characters for the specified length
     for (let i = 0; i < length; i++) {
       const randomInd = Math.floor(Math.random() * characters.length);
       result += characters.charAt(randomInd);
@@ -167,6 +168,45 @@ const Cart = () => {
     }
   };
 
+  const deleteCartItems = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/delivery/cart?userID=${userID}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete cart items");
+      }
+      setorderCartItems([]);
+      console.log("Cart items deleted successfully");
+    } catch (error) {
+      console.error("Error:", error);
+      setError(error.message);
+    }
+  };
+
+  const deletegettable = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/delivery/get?userID=${userID}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete get table");
+      }
+      setorderCartItems([]);
+    } catch (error) {
+      console.error("Error:", error);
+      setError(error.message);
+    }
+  }
+
   const setDeliveryAddress = async () => {
     if (!address.city || !address.street || !address.houseNo) {
       toast.error("Please fill in all the fields", {
@@ -293,6 +333,9 @@ const Cart = () => {
         setMessage(data.message);
         console.log("flag value before:", flag);
         console.log(typeof flag);
+        address.city = "";
+        address.street = "";
+        address.houseNo = "";
         if (data.message === "Order placed successfully!" && flag == 0) {
           flag = 1;
           toast.success("Order placed successfully", {
@@ -309,6 +352,9 @@ const Cart = () => {
         setLoading(true);
         setTimeout(() => {
           navigate("/products/orders");
+          deleteCartItems();
+          deletegettable();
+
         }, 4500);
       } catch (error) {
         console.error("Error executing fetch:", error);
@@ -328,7 +374,7 @@ const Cart = () => {
   };
 
   if (error) return <div>Error: {error}</div>;
-  if (!cartItems.length) return <div>Product not found</div>;
+  if (!cartItems.length) return <div>page not found</div>;
   const isFormComplete =
     address.city && address.street && address.houseNo && assignedDeliveryMan;
   return (

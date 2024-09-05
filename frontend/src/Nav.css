@@ -1,10 +1,13 @@
 .navbar {
-    background-color: #5291b072;
+    background-color: #5291b081;
     width: 100%;
     height: 60px;
     z-index: 2;
     top: 0;
     padding: 10;
+    position: sticky;
+    backdrop-filter: blur(20px);
+    top: 0;
 }
 
 .navbar-container {
@@ -77,6 +80,8 @@
     padding: 10px;
     border-radius: 5px;
     font-size: 15px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .products-dropdown .navbar-link {
@@ -111,7 +116,7 @@
         display: block;
         display: inline;
         justify-content: end;
-        border:1px solid #5291b0c7;
+        border: 1px solid #5291b0c7;
     }
 
     .navbar-links-container {

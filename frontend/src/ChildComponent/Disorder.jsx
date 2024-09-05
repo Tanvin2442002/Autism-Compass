@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from '../Navbar';
 import './Disorder.css';
 import DisoderImg from '../img/Disorder.svg';
+import LoadingAnimation from '../LoadingAnimation';
 
 const Disorder = () => {
    const [DisorderDetails, setDisorderDetails] = useState({
@@ -10,6 +11,7 @@ const Disorder = () => {
       Description: ''
    });
    const [ans, setAns] = useState('');
+   const [loading, setLoading] = useState(false);
 
    const userData = JSON.parse(localStorage.getItem('USER'));
    console.log(userData);
@@ -18,6 +20,7 @@ const Disorder = () => {
       console.log("Use Effect");
 
       const fetchData = async () => {
+         setLoading(true);
          try {
             const queryParams = new URLSearchParams({ ID: userData.ID }).toString();
             const response = await fetch(`http://localhost:5000/child/disorder?${queryParams}`, {
@@ -39,6 +42,8 @@ const Disorder = () => {
             console.log(DisorderDetails);
          } catch (error) {
             console.log(error);
+         } finally {
+            setLoading(false);
          }
       };
 
@@ -48,6 +53,7 @@ const Disorder = () => {
    const generateDisorderDetails = async () => {
       console.log("Generating disorder details");
       console.log(DisorderDetails.Name);
+      setLoading(true);
       try {
          const response = await axios({
             method: 'POST',
@@ -56,7 +62,7 @@ const Disorder = () => {
                contents: [
                   {
                      parts: [
-                        { text: "Explain more about " + DisorderDetails.Name }
+                        { text: "Explain more about " + DisorderDetails.Name + " and how to handle with it." }
                      ]
                   }
                ]
@@ -69,6 +75,8 @@ const Disorder = () => {
          setAns(response.data.candidates[0].content.parts[0].text.replace(/\*/g, ''));
       } catch (error) {
          console.error("Error generating disorder details", error);
+      } finally {
+         setLoading(false);
       }
    };
 
@@ -83,8 +91,12 @@ const Disorder = () => {
                   <button className='view-more-button' onClick={generateDisorderDetails}>Want to know more about this disorder</button>
                </div>
                <div className='disorder-item-details'>
-                  {ans.length > 0 && (
-                     <textarea className='answer' value={ans} readOnly />
+                  {loading ? (
+                     <LoadingAnimation />
+                  ) : (
+                     ans.length > 0 && (
+                        <textarea className='answer' value={ans} readOnly />
+                     )
                   )}
                </div>
             </div>

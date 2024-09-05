@@ -8,6 +8,47 @@
     width: 80%;
     margin: auto;
 }
+.con-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  .con-dialog-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+
+  .co-btn,
+  .ca-btn {
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+  }
+
+  .co-btn {
+    background-color: #e74c3c;
+    color: #fff;
+  }
+
+  .ca-btn {
+    background-color: #ccc;
+    color: #333;
+  }
+
+.slickloading{
+    /* height: 100vh; */
+    align-items: center;
+    justify-content: center;
+}
 
 .slider-container h1 {
     text-align: center;
@@ -31,7 +72,7 @@
     background-color: #3d445850;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    border: red 1px solid;
+    /* border: red 1px solid; */
 }
 
 .cardslick-img {

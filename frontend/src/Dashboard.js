@@ -7,11 +7,13 @@ import Doctor from "./img/Doctor.svg"
 import Therapy from "./img/Therapy.svg"
 import FindDisorder from "./img/FindDisorder.svg"
 import DoctorConsultationList from './DoctorComponent/DoctorConsultationList';
+import DashDelivery from './img/DashDelivery.svg';
 
 const Dashboard = () => {
    const [bookedDocData, setBookedDocData] = useState([]);
    const [availableDocData, setAvailableDocData] = useState([]);
    const [availableTherapyData, setAvailableTherapyData] = useState([]);
+   const [orderList,setorderList] = useState([]);
    const [bookedTherapyData, setBookedTherapyData] = useState([]);
    const [disorderData, setDisorderData] = useState({
       TYPE: 'Unknown Disorder',
@@ -76,6 +78,21 @@ const Dashboard = () => {
             console.error('Error fetching consultations:', error);
          }
       };
+      const fetchOrderList = async () => {
+         try {
+            const response = await fetch(
+              `http://localhost:5000/delivery/get/orders?userID=${localData.ID}`
+            );
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            console.log("Fetched data:", data);
+            setorderList(data);
+          } catch (err) {
+            console.error(err);
+          }
+      };
 
 
       if (localData.TYPE === 'CHILD' || localData.TYPE === 'PARENT') {
@@ -85,16 +102,21 @@ const Dashboard = () => {
          fetchBookedTherapy();
          if (localData.TYPE === 'CHILD')
             fetchDisorderData();
+         else if (localData.TYPE === 'PARENT')
+            fetchOrderList();
       }
    }, []);
 
-   let displayedBookedDocData, displayedBookedTherapyData, displayedAvailableDocData, displayedAvailableTherapyData;
+   let displayedBookedDocData, displayedBookedTherapyData, displayedAvailableDocData, displayedAvailableTherapyData,displayedDeliveryData;
 
    if (localData.TYPE === 'CHILD' || localData.TYPE === 'PARENT') {
       displayedBookedDocData = bookedDocData.slice(0, 2);
       displayedBookedTherapyData = bookedTherapyData.slice(0, 2);
       displayedAvailableDocData = availableDocData.slice(0, 2 + (bookedDocData.length >= 2 ? 0 : 2 - bookedDocData.length));
       displayedAvailableTherapyData = availableTherapyData.slice(0, 2 + (bookedTherapyData.length >= 2 ? 0 : 2 - bookedTherapyData.length));
+   }
+   if(localData.TYPE === 'PARENT'){
+      displayedDeliveryData = orderList.slice(0, 4);
    }
    const handleBookedDoctor = () => {
       navigate('/doctor/booked');
@@ -115,6 +137,9 @@ const Dashboard = () => {
    const handleDisorder = () => {
       navigate('/disorder');
    }
+   const handleDeliveryDetails = () => {
+      navigate('/products/orders');
+   }
 
    return (
       <div>
@@ -128,7 +153,7 @@ const Dashboard = () => {
                   <div className='doctor-consultation'>
                      <div className='doctor-consultation-info'>
                         <div className='dash-booking-doc'>
-                           <h2 className='dashboard-heading'>Available Health Professional</h2>
+                           <h2 className='dashboard-heading'>Available Doctors</h2>
                            <div className='booking-doctor'>
                               {displayedAvailableDocData.map((item) => (
                                  <div className="card-item-doc" key={item.H_ID}>
@@ -228,10 +253,22 @@ const Dashboard = () => {
                   </div>
                </div>
             )}
-            {localData.TYPE === 'PARENT' && (
-               <div className='delivery-info'>
-                  <h3>Delivery details</h3>
-                  <p>Details of product delivery</p>
+            {(localData.TYPE === 'PARENT' && displayedDeliveryData.length) && (
+               <div className='delivery-info-dash'>
+                  <div className='dash-booking-doc'>
+                     <h2 className='dashboard-heading'>Delivery Information</h2>
+                     <div className='booking-doctor'>
+                        {displayedDeliveryData.map((item) =>(
+                        <div className="card-item-doc">  
+                           <p className="label-square">Delivered By: {item.NAME}</p>
+                           <p className="label-square">Date: {item.DELIVERY_DATE.slice(0,10)}</p>
+                           <h2>Price: {item.AMOUNT}$</h2>
+                        </div>
+                        ))}
+                     </div>
+                     <button className='view-more-button' onClick={handleDeliveryDetails}>View more details</button>
+                  </div>
+                  <img src={DashDelivery} alt="Therapy" className="doctor-img" />
                </div>
             )}
          </div>

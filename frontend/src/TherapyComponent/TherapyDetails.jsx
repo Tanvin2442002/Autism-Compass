@@ -1,9 +1,13 @@
 import './TherapyDetails.css';
 import 'boxicons/css/boxicons.min.css';
+import axios from 'axios';
 import Navbar from '../Navbar';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import TherapyDetails from '../img/TherapyDetails.svg';
+import OrgCard from './OrgCard';
+import LoadingAnimation from '../LoadingAnimation';
 
 const TherapyDetail = () => {
   const navigate = useNavigate();
@@ -15,9 +19,10 @@ const TherapyDetail = () => {
   const [therapyOrgData, setTherapyOrgData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [ans, setAns] = useState('');
+  const [loadingTherapyDetails, setLoadingTherapyDetails] = useState(false);
 
   useEffect(() => {
-    console.log('Therapy ID:', therapyId);
     const fetchTherapyData = async () => {
       try {
         const response = await fetch(`http://localhost:5000/therapy/Detail?type=${therapyId}`);
@@ -30,8 +35,6 @@ const TherapyDetail = () => {
         setLoading(false);
       }
     };
-
-    console.log(therapyId);
 
     const fetchTherapyOrgData = async () => {
       try {
@@ -52,48 +55,33 @@ const TherapyDetail = () => {
     }
   }, [therapyId]);
 
-  const handleBooking = (ORG_ID) => {
-    console.log('Book now clicked');
-    console.log('ORG_ID:', ORG_ID);
-    console.log('Therapy ID:', therapyId);
-    navigate(`/therapy/booking?TH_ID=${therapyId}&THO_ID=${ORG_ID}`);
-    // Handle booking logic here
-    // const userData = JSON.parse(localStorage.getItem('USER'));
+  const generateTherapyDetails = async () => {
+    setLoadingTherapyDetails(true); // Start loading animation
+    try {
+      const response = await axios({
+        method: 'POST',
+        url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDYuRJ9qvb47Q0Jspl1g3Ey4jNrRHTUe9g',
+        data: {
+          contents: [
+            {
+              parts: [
+                { text: "Explain more about " + therapyData.THERAPY_TYPE + " how it works" }
+              ]
+            }
+          ]
+        }
+      });
 
-    // const BookingDetails = {
-    //   THO_ID: ORG_ID,
-    //   USER_ID: userData.ID,
-    //   USER_TYPE: userData.TYPE,
-    //   TH_ID: therapyId,
-    //   // today date
-    //   BOOKING_DATE: new Date().toISOString().split('T')[0],
-    // };
-
-    // const response = await fetch('http://localhost:5000/therapy/book', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(BookingDetails),
-    // });
-
-    // const data = await response.json();
-    // console.log(data);
-    // // if response is ok then show success message
-    // // else show error message
-    // if (response.ok) {
-    //   alert('Booking successful');
-    // } else {
-    //   alert('Booking failed');
-    // }
-
-    // console.log('Book now clicked');
-    // console.log('ORG_ID:', ORG_ID);
+      setAns(response.data.candidates[0].content.parts[0].text.replace(/\*/g, ''));
+    } catch (error) {
+      console.error("Error generating disorder details", error);
+    } finally {
+      setLoadingTherapyDetails(false);
+    }
   };
 
-
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
 
   if (error) {
@@ -101,44 +89,37 @@ const TherapyDetail = () => {
   }
 
   return (
-    <div className="therapy-details">
+    <div>
       <Navbar />
-      <div className="therapy-details-content">
-        <h1>Therapy Details</h1>
-        <div className="search-box">
-          <input type="text" placeholder="Search therapies..." required />
-          <i className='bx bx-search'></i>
-        </div>
-        {therapyData ? (
-          <div className="details">
+      <div className='therapy-details'>
+        <div className="therapy-details-content">
+          <div className="details-of-therapy">
             <h2>{therapyData.THERAPY_TYPE}</h2>
             <p>{therapyData.THERAPY_DESCRIPTION}</p>
+            <button className='view-more-button' onClick={generateTherapyDetails}>
+              Want to know more about this therapy
+            </button>
+            <div className='disorder-item-details'>
+              {loadingTherapyDetails ? (
+                <LoadingAnimation />
+              ) : (
+                ans.length > 0 && (
+                  <textarea className='answer' value={ans} readOnly />
+                )
+              )}
+            </div>
           </div>
-        ) : (
-          <p>Therapy details not found.</p>
-        )}
-        <div className="availability">
-          <h3>Currently available in:</h3>
-          <div className="org-container">
-            {therapyOrgData.map((org) => (
-              <div key={org.ORG_ID} className="org-wrapper">
-                <div className="org-box">
-                  <p>NAME: {org.NAME}</p>
-                  <p>CONTACT NO: {org.CONTACT_NO}</p>
-                  <p>EMAIL: {org.EMAIL}</p>
-                  <p>CITY: {org.CITY}</p>
-                  <p>STREET: {org.STREET}</p>
-                  <p>POSTAL_CODE: {org.POSTAL_CODE}</p>
-                  <button
-                    className="book-now"
-                    value={org.ORG_ID}
-                    onClick={() => handleBooking(org.THO_ID, therapyId)}>
-                    Book now
-                  </button>
-                </div>
-              </div>
-            ))}
+          <div className="availability">
+            <h3>Currently available in:</h3>
+            <div className="org-container">
+              {therapyOrgData.map((org) => (
+                <OrgCard product={org} key={org.id} />
+              ))}
+            </div>
           </div>
+        </div>
+        <div className="therapy-details-image">
+          <img src={TherapyDetails} alt="TherapyDetails" className="TherapyDetails" />
         </div>
       </div>
     </div>

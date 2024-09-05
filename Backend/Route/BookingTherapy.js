@@ -217,5 +217,43 @@ router.delete('/delete', async (req, res) => {
    }
 });
 
+router.get('/therapy/check', async (req, res) => {
+   const connection = await getConnection();
+   console.log("Request received");
+   console.log(req.query);
+   const { C_ID, P_ID, TH_ID, THO_ID } = req.query;
+   const result = await connection.execute(
+      `SELECT * FROM BOOKS WHERE C_ID = :C_ID AND P_ID = :P_ID AND TH_ID = :TH_ID AND THO_ID = :THO_ID`,
+      { C_ID, P_ID, TH_ID, THO_ID }
+   );
+   res.status(200).send(result.rows);
+   console.log("Request processed");
+});
+
+router.put('/therapy/update', async (req, res) => {
+   const connection = await getConnection();
+   console.log("Request received");
+   console.log(req.body);
+
+   const { C_ID, P_ID, TH_ID, THO_ID, BOOKING_DATE } = req.body;
+   console.log("NEW_BOOKING_DATE:", BOOKING_DATE);
+
+   try {
+      const result = await connection.execute(
+         `UPDATE BOOKS SET BOOKING_DATE = TO_DATE(:BOOKING_DATE, 'YYYY-MM-DD HH:MI AM')
+            WHERE C_ID = :C_ID AND P_ID = :P_ID AND TH_ID = :TH_ID AND THO_ID = :THO_ID`,
+         { C_ID, P_ID, TH_ID, THO_ID, BOOKING_DATE },
+         { autoCommit: true }
+      );
+      res.status(200).send({ message: 'Booking updated' });
+   } catch (error) {
+      console.error('Error executing query:', error);
+      res.status(500).send({ error: 'Database query failed' });
+   } finally {
+      console.log("Request processed");
+   }
+});
+
+
 
 module.exports = router;

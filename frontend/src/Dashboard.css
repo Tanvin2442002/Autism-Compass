@@ -159,10 +159,8 @@
 }
 
 .view-more-button {
-    /* width: inherit; */
     cursor: pointer;
     padding: 10px 10px;
-    margin-bottom: 7px;
     border: unset;
     border-radius: 5px;
     color: #212121;
@@ -206,6 +204,15 @@
 .disorder-details button {
     margin: 5%;
 }
+
+.delivery-info-dash{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
 
 @media (max-width: 1100px) {
 

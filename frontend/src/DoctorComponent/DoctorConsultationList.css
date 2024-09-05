@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=New+Amsterdam&family=Noto+Sans+Hanunoo&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 .doctor-consultation-list {
     width: 100%;
     display: flex;
@@ -40,14 +46,12 @@
 }
 
 .consultation-form h1 {
-    font-family: New Amsterdam, sans- serif;
+    font-size: 2rem;
+    font-family: 'Roboto condensed', sans-serif;
     text-align: center;
-    letter-spacing: 5px;
-    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: #032d42;
 }
-
-
-
 
 
 .input-field-childparent select option {
@@ -96,7 +100,7 @@
     border-radius: 100px;
 }
 
-.select-label{
+.select-label {
     opacity: 0;
 }
 
@@ -119,4 +123,17 @@
     letter-spacing: 1px;
     border: none;
     border-radius: 100px;
+}
+
+
+@media (max-width: 768px) {
+    .consultation {
+        display: flex;
+        flex-direction: column;
+        /* border: 5px red solid; */
+    }
+
+    .consultation-form {
+        width: 85%;
+    }
 }

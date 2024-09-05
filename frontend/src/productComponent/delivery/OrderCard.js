@@ -2,32 +2,32 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const OrderCard = ({ product }) => {
-  const navigate = useNavigate();
-  const deliveryDate = product.DELIVERY_DATE.slice(0, 10);
-  const handleDeliveryDetails = () => {
-    console.log("Delivery Details:", product);
-    navigate(`/products/delivery?ORDER_ID=${product.B_ID}`);
-  };
-  return (
-    <StyledWrapper>
-      <div className="flip-card">
-        <div className="flip-card-inner">
-          <div className="flip-card-front">
-            <p className="title">Order ID: {product.B_ID}</p>
-            <p className="date-card">Delivery Date: {deliveryDate}</p>
-          </div>
-          <div className="flip-card-back">
-            <p className="title">Total Cost: {product.AMOUNT} BDT</p>
-            <p>Delivery Man: {product.NAME}</p>
-            <p>Contact No: {product.CONTANCT_NO}</p>
-            <p>Total Quantity: {product.TOTAL_QUANTITY} </p>
-            <button className="view-more-button" onClick={handleDeliveryDetails}>View More</button>
-          </div>
-        </div>
-      </div>
-    </StyledWrapper>
-  );
+const OrderCard = ({ data }) => {
+	const navigate = useNavigate();
+	// const deliveryDate = product.DELIVERY_DATE.slice(0, 10);
+	// const handleDeliveryDetails = () => {
+	//   console.log("Delivery Details:", product);
+	//   navigate(`/products/delivery?ORDER_ID=${product.B_ID}`);
+	// };
+	return (
+		<StyledWrapper>
+			<div className="flip-card">
+				<div className="flip-card-inner">
+					<div className="flip-card-front">
+						<p className="title">{data.NAME}</p>
+						<p className="date-card">{data.CONTACT_NO}</p>
+					</div>
+					<div className="flip-card-back">
+						<p className="title">{data.EMAIL}</p>
+						<p>{data.CITY}</p>
+						<p>{data.STREET}</p>
+						<p>{data.POSTAL_CODE} </p>
+						<button className="view-more-button">View More</button>
+					</div>
+				</div>
+			</div>
+		</StyledWrapper>
+	);
 };
 
 const StyledWrapper = styled.div`
@@ -78,12 +78,13 @@ const StyledWrapper = styled.div`
     backface-visibility: hidden;
     border: 1px solid coral;
     border-radius: 1rem;
+    font-family: 'Roboto Condensed', sans-serif;
   }
 
   .flip-card-front {
     background: linear-gradient(120deg, bisque 60%, rgb(255, 231, 222) 88%,
        rgb(255, 211, 195) 40%, rgba(255, 127, 80, 0.603) 48%);
-    color: coral;
+    color: black;
   }
 
   .flip-card-back {
