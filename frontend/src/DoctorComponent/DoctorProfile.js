@@ -90,16 +90,6 @@ const DoctorProfile = () => {
                 <h1>Dr. {doctor.NAME}</h1>
               </div>
             </div>
-            {/* <div className="profile-form-group">
-              <label>Name</label>
-              <label>:</label>
-              <input
-                type="text"
-                name="NAME"
-                placeholder="Enter your Name"
-                value={doctor.NAME}
-              />
-            </div> */}
             <div className="profile-form-group">
               <label>Email Address</label>
               <label>:</label>
@@ -107,7 +97,6 @@ const DoctorProfile = () => {
                 type="text"
                 name="EMAIL"
                 placeholder="Email Address"
-                disabled
                 value={doctor.EMAIL}
               // onChange={handleChange}
               />

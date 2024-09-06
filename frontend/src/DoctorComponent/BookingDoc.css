@@ -7,8 +7,8 @@
     width: 100%;
     height: 100vh;
     position: relative;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 .booking-header {
@@ -24,18 +24,40 @@
     animation: fadeIn 2s ease-in;
     padding: 10px;
 }
+
+.booking-header h1,
+.child-info-wrapper h1{
+    font-family: 'New Amsterdam', serif;
+    width: 100%;
+    text-align: center;
+    font-size: 35px;
+    letter-spacing: 3px;
+    color: #5C5C5C;
+}
+.child-info-wrapper h1{
+    margin: 10px;
+}
+
 .child-info-wrapper {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-direction: column;
     width: 85%;
     margin-top: 30px;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    padding: 20px;
+    padding: 10px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1s ease-in-out;
+    font-family: 'Poppins', sans-serif;
+}
+
+.all-child-card{
+    display: flex;
+    flex-wrap: wrap;align-items: center;
+    justify-content: space-evenly;
 }
 
 .child-card {
@@ -43,7 +65,10 @@
     border-radius: 15px;
     padding: 10px;
     text-align: center;
-    width: 150px;
+    width: 250px;
+    height: 150px;
+    align-items: center;
+    justify-content: center;
     margin: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     cursor: pointer;
@@ -142,13 +167,13 @@
 }
 
 .confirm-btn {
-    width: 25%;
-    padding: 20px 50px;
+    /* width: 25%; */
+    padding: 10px 30px;
     border-radius: 10px;
     background: linear-gradient(90deg, #db4b2e 0%, #880808 100%);
     color: #ffffff;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     box-shadow: 0 8px 15px #f014144d;
     transition: all 250ms ease-in-out;
     cursor: pointer;
@@ -187,7 +212,7 @@
     bottom: 20px;
     right: 20px;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: #8fc4cb;
     color: #000;
     font-weight: bold;
@@ -209,7 +234,46 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .child-info-wrapper {
+        flex-direction: column;
+    }
+
+    .child-card {
+        width: 100%;
+    }
+
+    .input-box {
+        width: 80%;
+    }
+
+    .confirm-btn {
+        width: 50%;
+    }
+    
+    .form-wrapper {
+        flex-direction: column;
+        gap:20px;
+    }
+
+    .confirm-btn-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:20px;
+    }
+    .booking-updates-btn {
+        position: relative;
+        margin-top: 20px;
+        left: 0;
+        right: 0;
     }
 }

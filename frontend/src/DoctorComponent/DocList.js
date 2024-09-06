@@ -6,12 +6,15 @@ import './DocList.css';
 import Navbar from '../Navbar';
 import LoadingAnimation from '../LoadingAnimation';
 import Doclist from '../img/Doclist.svg';
+import Doctor from '../img/Doctor.svg';
+
 
 const DoctorsList = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchDoctors = async () => {
@@ -134,7 +137,7 @@ const DoctorsList = () => {
 
             {/* SVG in the center */}
             <div className="svg-center">
-              <img src={Doclist} alt="Doctor Details" />
+              <img src={Doctor} alt="Doctor Details" />
             </div>
 
             {doctors.slice(4).map((doctor, index) => (

@@ -1,11 +1,15 @@
 .sign-up-page {
-    min-height: 100%;
-    /* border: 1px solid red; */
+    min-height: 100vh;
     display: grid;
     align-items: center;
     grid-template-columns: 6fr 4fr;
     z-index: 2;
     position: relative;
+}
+
+
+.sign-up-form .view-more-button{
+    margin-bottom: 10px;
 }
 
 .sign-up-image {
@@ -14,7 +18,7 @@
     align-items: center;
     justify-content: center;
     position: sticky;
-    top: 10%;
+    top: 0;
     padding: 10px;
 }
 

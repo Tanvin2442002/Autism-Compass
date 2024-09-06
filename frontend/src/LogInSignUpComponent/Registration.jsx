@@ -135,6 +135,7 @@ const ParentReg = () => {
          const endTime = document.getElementById("end-visit-time").value;
          console.log(startTime, endTime);
          const visitTime = startTime + " - " + endTime;
+         console.log(visitTime);
          const doctorData = {
             H_ID: Math.floor(Math.random() * 1000),
             NAME: document.getElementById("name").value,

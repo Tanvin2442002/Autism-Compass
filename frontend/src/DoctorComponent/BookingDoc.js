@@ -63,31 +63,23 @@ const BookingDoc = () => {
     if (doctorDetails && doctorDetails.VISIT_TIME) {
       const timeSlots = [];
       const time = doctorDetails.VISIT_TIME;
-      const startTime = parseInt(time.split(' ')[0].split(':')[0]);
-      const endTime = parseInt(time.split(' ')[3].split(':')[0]);
-      console.log('Start Time:', startTime);
-      console.log('End Time:', endTime);
+      const startTime = parseInt(time.split(' ')[0]);
+      const endTime = parseInt(time.split(' ')[2]);
+      // console.log('Start Time:', startTime);
+      // console.log('End Time:', endTime);
 
-      for (let i = startTime; i < (endTime + 12) % 24; i++) {
-        timeSlots.push(`${i}:00`);
-        console.log(`Hello: ${i}:00`);
+      for (let i = startTime; i < endTime; i++) {
+        if (i < 12)
+          timeSlots.push(`${i}:00 AM`);
+        else if (i == 12)
+          timeSlots.push(`${i}:00 PM`);
+        else
+          timeSlots.push(`${(i % 12)}:00 PM`);
       }
-      // how can i handle am and pm
-      for(let i = 0; i < timeSlots.length; i++){
-        if(timeSlots[i].split(':')[0] > 12){
-          timeSlots[i] = `${timeSlots[i].split(':')[0] - 12}:00 PM`;
-        }else if(timeSlots[i].split(':')[0] == 12){
-          timeSlots[i] = `${timeSlots[i]} PM`;
-        }
-         else {
-          timeSlots[i] = `${timeSlots[i]} AM`;
-        }
-      }
-
       setVisitTime(timeSlots);
       console.log("Time Slots: ", timeSlots);
     }
-  }, [doctorDetails]); // This effect runs when doctorDetails is updated
+  }, [doctorDetails]);
 
   const handleChildSelection = (childId) => {
     setSelectedChildId(childId);
@@ -155,17 +147,20 @@ const BookingDoc = () => {
 
       {localData.TYPE === 'PARENT' && userDetails.length > 0 && (
         <div className='child-info-wrapper'>
-          {userDetails.map((child) => (
-            <div
-              className={`child-card ${selectedChildId === child.C_ID ? 'selected' : ''}`}
-              key={child.C_ID}
-              onClick={() => handleChildSelection(child.C_ID)}
-            >
-              <i className="bx bx-user-circle child-icon"></i>
-              <h2>{child.CHILD_NAME}</h2>
-              <p>Email: {child.CHILD_EMAIL}</p>
-            </div>
-          ))}
+          <h1>Select your child.</h1>
+          <div className='all-child-card'>
+            {userDetails.map((child) => (
+              <div
+                className={`child-card ${selectedChildId === child.C_ID ? 'selected' : ''}`}
+                key={child.C_ID}
+                onClick={() => handleChildSelection(child.C_ID)}
+              >
+                <i className="bx bx-user-circle child-icon"></i>
+                <h2>{child.CHILD_NAME}</h2>
+                <p>Email: {child.CHILD_EMAIL}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -196,10 +191,10 @@ const BookingDoc = () => {
           <button type='submit' className='confirm-btn' onClick={handleConfirmBooking}>
             Confirm Booking
           </button>
+          <button className='booking-updates-btn' onClick={handleBookingUpdatesClick}>
+            See Booking Updates
+          </button>
         </div>
-        <button className='booking-updates-btn' onClick={handleBookingUpdatesClick}>
-          See Booking Updates
-        </button>
       </div>
     </div>
   );
