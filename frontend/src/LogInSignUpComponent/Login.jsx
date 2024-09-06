@@ -1,18 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.css';
 import 'boxicons/css/boxicons.min.css';
 import LogInImage from '../img/LogIn.svg';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const LogIn = () => {
-   const [email, setEmail] = React.useState("");
-   const [password, setPassword] = React.useState("");
-   const [userType, setUserType] = React.useState("");
-   const [rememberMe, setRememberMe] = React.useState(false);
+   const [email, setEmail] = useState("");
+   const [password, setPassword] = useState("");
+   const [userType, setUserType] = useState("");
+   const [rememberMe, setRememberMe] = useState(false);
+   const [showPassword, setShowPassword] = useState(false); // New state to toggle password visibility
    const navigate = useNavigate();
+   const [showPopup, setShowPopup] = useState(false);
 
    useEffect(() => {
       document.body.classList.add('login-body');
@@ -48,6 +51,11 @@ const LogIn = () => {
       if (data.TYPE) {
          navigate("/dashboard");
          localStorage.setItem("USER", JSON.stringify(userData));
+         if (rememberMe) {
+            localStorage.setItem("REMEMBER_ME", "1");
+         } else {
+            localStorage.setItem("REMEMBER_ME", "0");
+         }
       } else {
          toast.error('Invalid credentials', {
             position: "top-right",
@@ -63,8 +71,8 @@ const LogIn = () => {
    };
 
    return (
-      <div>
-         <ul class="circles">
+      <div className='login-div'>
+         <ul className="circles">
             <li></li>
             <li></li>
             <li></li>
@@ -91,17 +99,20 @@ const LogIn = () => {
                      required
                   />
                </div>
-               <div className="profile-form-group">
+               <div className="profile-form-group password-input">
                   <label>Password</label>
                   <span>:</span>
                   <input
-                     type="text"
+                     type={showPassword ? "text" : "password"}
                      name="password"
                      placeholder="Password"
                      onChange={(e) => setPassword(e.target.value)}
                      value={password}
                      required
                   />
+                  <span className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
+                     <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  </span>
                </div>
                <div className="profile-form-group">
                   <label>Your Type</label>
@@ -130,11 +141,9 @@ const LogIn = () => {
                      />
                      Remember me
                   </label>
-
-                  
-                  <Link to='/reset-password' className='link-to-reg'> Forgot Password</Link>
+                  <Link to="/reset-password" className='link-to-reg'>Forgot Password?</Link>
                </div>
-               <button className='view-more-button' > LOG IN</button>
+               <button className='view-more-button'> LOG IN</button>
                <div className="login-register-link">
                   <p className='login-text'>
                      Don't have an account? <Link to="/" className='link-to-reg'>Register</Link>

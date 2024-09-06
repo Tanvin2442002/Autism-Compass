@@ -1,15 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 
+
+.login-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.login-div .circles {
+    width: 95%;
+    height: 100vh;
+}
+
 .login-contents {
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    height: 100vh;
     justify-content: space-evenly;
     position: relative;
     z-index: 1;
-    /* border: 5px solid red; */
 }
 
 .login-contents img {
@@ -47,13 +61,11 @@
     grid-template-columns: 100px 4px 1fr;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid red; */
 }
 
 .login-wrapper .profile-form-group label {
     display: flex;
     align-items: center;
-    /* border: 1px solid red; */
     height: 50px;
 }
 
@@ -65,7 +77,6 @@
     transform: 1s ease-in-out;
     font-size: 15px;
     font-weight: 400;
-    /* color: #757575; */
     border-bottom: 1px solid #5C5C5C;
 }
 
@@ -114,7 +125,18 @@
     color: #437196;
 }
 
+.password-input {
+    position: relative;
+}
 
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+}
 
 @media (max-width: 800px) {
     .login-contents img {
@@ -126,7 +148,6 @@
     @media (max-width: 450px) {
         .login-wrapper {
             max-width: 300px;
-            /* border: 1px solid red; */
         }
 
         .login-wrapper .profile-form-group {
@@ -145,53 +166,82 @@
             width: 95%;
         }
 
-        .profile-form-group span {
+        .profile-form-group span:nth-child(2) {
             content-visibility: hidden;
+        }
+
+        .password-toggle {
+            margin-top: 30px;
+            margin-right: 5px;
         }
     }
 }
 
-/* 
-----------------------------------------
+
+/* ------------------------------------------------- */
+
+
 
 .resetpass {
-    margin: 0 auto;
-    padding: 20px;
-    width: 500px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+    flex-direction: column;
 }
 
 .resetpass h1 {
     text-align: center;
+    margin: 0;
     margin-bottom: 20px;
+    font-family: 'New Amsterdam', serif;
+    width: 100%;
+    font-size: 35px;
+    letter-spacing: 3px;
+    color: #5C5C5C;
 }
 
 .resetpass form {
+    width: 325px;
+    padding: 25px;
+    background-color: #BDD1E1;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: center;
+    align-items: self-start;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 }
 
 .input-box-in-resetpass {
     position: relative;
-    height: 50px;
+    height: 25px;
     width: 100%;
     outline: none;
+    background-color: transparent;
     font-size: 1rem;
     color: #000000;
-    margin-top: 8px;
-    border: 2px solid #031f4763;
-    border-radius: 6px;
-    padding: 0 15px;
+    border: none;
+    border-bottom: 2px solid #031f4763;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+
+.res-pass-div {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
 
 .input-box-in-resetpass:focus,
 .input-box-in-resetpass:hover {
     border-color: #007bff;
-    box-shadow: 0 0 10px rgba(1, 22, 113, 0.422);
 }
 
 .input-box-in-resetpass.invalid {
@@ -206,13 +256,13 @@
 .VerifyBtn {
     background-color: #0088ff;
     position: relative;
-    height: 50px;
+    height: 40px;
     width: 100%;
-    outline: none;
+    left: 10px;
     font-size: 1rem;
     color: #ffffff;
-    margin-top: 8px;
-    border-radius: 6px;
+    margin-top: 5px;
+    border-radius: 5px;
     appearance: none;
     border: none;
     transition: background-color 0.3s;
@@ -230,12 +280,12 @@
 .recoverpassBtn {
     background-color: #0088ff;
     position: relative;
-    height: 50px;
-    width: 100%;
+    height: 40px;
     outline: none;
     font-size: 1rem;
+    left: 10px;
     color: #ffffff;
-    margin-top: 8px;
+    margin-top: 5px;
     border-radius: 6px;
     appearance: none;
     border: none;
@@ -247,16 +297,17 @@
 }
 
 .password-input-container {
+    width: 100%;
     position: relative;
 }
 
 .password-toggle-icon {
     position: absolute;
-    right: 10px;
+    right: 0px;
     top: 54%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #ccc;
+    color: #777373;
 }
 
 @media (max-width: 480px) {
@@ -270,4 +321,4 @@
         padding: 8px;
         font-size: 14px;
     }
-} */
+}

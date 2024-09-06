@@ -31,11 +31,19 @@ import EnrolledCourses from "./CoursesComponent/EnrolledCourses";
 
 function App() {
 
+   const rem = JSON.parse(localStorage.getItem('REMEMBER_ME'));
+   if (rem === "0") {
+      console.log("4567890");
+      window.onbeforeunload = function () {
+         localStorage.clear();
+      }
+   }
+
    return (
       <div className="main-app">
          <Router>
             <Routes>
-               <Route path="/" element={<Landing/>} />
+               <Route path="/" element={<Landing />} />
                <Route path="/login" element={<LogIn />} />
                <Route path="/signup" element={<Registration />} />
                <Route path="/dashboard" element={<Dashboard />} />

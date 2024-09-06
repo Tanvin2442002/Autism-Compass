@@ -13,7 +13,7 @@ const ResetPass = () => {
    const [isEmailValid, setIsEmailValid] = useState(false);
    const [showVerifyButton, setShowVerifyButton] = useState(false);
    const [verificationSent, setVerificationSent] = useState(false);
-   const [generatedVerificationCode, setGeneratedVerificationCode] = useState(''); 
+   const [generatedVerificationCode, setGeneratedVerificationCode] = useState('');
    const [enteredVerificationCode, setEnteredVerificationCode] = useState('');
    const [isVerificationCodeMatched, setIsVerificationCodeMatched] = useState(false);
    const [newPassword, setNewPassword] = useState('');
@@ -68,10 +68,10 @@ const ResetPass = () => {
       };
 
       emailjs.send(
-         'service_7d9d58s', // Your EmailJS service ID
-         'template_zm1cokb', // Your EmailJS template ID
+         'service_7d9d58s',
+         'template_zm1cokb',
          templateParams,
-         '_8DUdddBxrHErN9_P' // Your EmailJS public key
+         '_8DUdddBxrHErN9_P'
       )
          .then(
             () => {
@@ -102,7 +102,7 @@ const ResetPass = () => {
    const handleVerificationCodeChange = (event) => {
       const code = event.target.value;
       setEnteredVerificationCode(code);
-      setIsVerificationCodeMatched(code === generatedVerificationCode); // Compare with the stored code
+      setIsVerificationCodeMatched(code === generatedVerificationCode);
    };
 
    const handleNewPasswordChange = (event) => {
@@ -141,36 +141,38 @@ const ResetPass = () => {
          console.error('Error checking:', error);
       }
       console.log('Password Recovered Successfully!');
-      navigate('/dashboard');
+      navigate('/login');
 
    };
 
    return (
       <div className="resetpass">
-         <h1>Recover Password</h1>
          <form>
-            <label>Email</label>
-            <input
-               type="email"
-               id='email'
-               name='email'
-               placeholder="Enter your email"
-               className={`input-box-in-resetpass ${email && !isEmailValid ? 'invalid' : (email && isEmailValid ? 'valid' : '')}`}
-               value={email}
-               onChange={handleEmailChange}
-               disabled={verificationSent}
-               style={{ opacity: verificationSent ? 0.5 : 1 }}
-            />
-            <button
-               className={`VerifyBtn ${verificationSent ? 'sent' : ''}`}
-               onClick={handleSendVerificationCode}
-               disabled={!showVerifyButton || verificationSent}
-               style={{ opacity: verificationSent ? 0.5 : 1 }}
-            >
-               {verificationSent ? 'Verification code sent' : 'Send verification code'}
-            </button>
+            <h1>Recover Password</h1>
+            <div className='res-pass-div'>
+               <label>Email</label>
+               <input
+                  type="email"
+                  id='email'
+                  name='email'
+                  placeholder="Enter your email"
+                  className={`input-box-in-resetpass ${email && !isEmailValid ? 'invalid' : (email && isEmailValid ? 'valid' : '')}`}
+                  value={email}
+                  onChange={handleEmailChange}
+                  disabled={verificationSent}
+                  style={{ opacity: verificationSent ? 0.5 : 1 }}
+               />
+               <button
+                  className={`VerifyBtn ${verificationSent ? 'sent' : ''}`}
+                  onClick={handleSendVerificationCode}
+                  disabled={!showVerifyButton || verificationSent}
+                  style={{ opacity: verificationSent ? 0.5 : 1 }}
+               >
+                  {verificationSent ? 'Verification code sent' : 'Send verification code'}
+               </button>
+            </div>
             {showVerifyButton && verificationSent && (
-               <>
+               <div className='res-pass-div'>
                   <label>Verification Code</label>
                   <input
                      type="text"
@@ -182,10 +184,10 @@ const ResetPass = () => {
                      disabled={isVerificationCodeMatched}
                      style={{ opacity: isVerificationCodeMatched ? 0.5 : 1 }}
                   />
-               </>
+               </div>
             )}
             {isVerificationCodeMatched && (
-               <>
+               <div className='res-pass-div'>
                   <label>New Password</label>
                   <div className="password-input-container">
                      <input
@@ -221,7 +223,7 @@ const ResetPass = () => {
                   {isPasswordsMatched && (
                      <button className="recoverpassBtn" onClick={handleRecoverPassword}>Recover Password</button>
                   )}
-               </>
+               </div>
             )}
          </form>
          <ToastContainer />

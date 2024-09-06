@@ -82,12 +82,16 @@ const Profile = () => {
    }, []);
 
    const fetchGenderData = async () => {
+      console.log('Fetching ', profileData.NAME);
       const genderResponse = await fetch(`https://api.genderapi.io/api/?name=${encodeURIComponent(profileData.NAME)}&key=667faf277a781c44944e8b13`);
       const genderData = await genderResponse.json();
       if (genderData.status && genderData.gender !== 'null') {
          setGender(genderData.gender === 'female' ? 'girl' : 'boy');
       }
+      console.log(genderData);
    };
+   fetchGenderData();
+   console.log(gender);
 
    const handleChange = (e) => {
       const { name, value } = e.target;
@@ -160,7 +164,7 @@ const Profile = () => {
          progress: undefined,
          theme: "colored",
       });
-      await fetchGenderData();
+      // await fetchGenderData();
    };
 
    const handleDelete = () => {
@@ -176,6 +180,8 @@ const Profile = () => {
    // healthprofessional user : name, contact number, email, degree, field of specilaization, street, city, postal code
 
    console.log("Final Data: ", profileData);
+
+   fetchGenderData();
 
    return (
       <div className='profile'>
