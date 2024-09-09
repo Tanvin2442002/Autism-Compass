@@ -119,6 +119,14 @@
 }
 
 
+.sign-up-form .view-more-button, 
+.sign-up-form .loader-div{
+    margin-bottom: 10px;
+    width: 30%;
+    height: 35px;
+}
+
+
 
 @media (max-width: 1000px) {
     .sign-up-image {

@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Protest+Guerrilla&display=swap');
+
+.langingPage {
+    /* position: relative; */
+    /* height: 100vh; */
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.page1 {
+    border: .1px solid red;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.Nav {
+    width: 95%;
+    display: flex;
+    padding: 10px;
+    justify-content: end;
+    margin: 0px 15px;
+    gap: 20px;
+    
+    /* border: 1px solid green; */
+}
+
+.Nav a{
+    text-decoration: none;
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+.downImg {
+    position: absolute;
+    /* border: 1px solid green; */
+    bottom: 0;
+}
+
+.first {
+    bottom: -50px;
+}
+
+.downL {
+    left: 0px;
+}
+
+.downR {
+    right: 0px;
+}
+
+.rand1C {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+}
+
+.innerRand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.innerRand img,
+.innerRand h1 {
+    position: absolute;
+}
+
+.innerRand .im3 {
+    opacity: 0.1;
+}
+
+.innerRand h1 {
+    /* background-color: #c0e7fdb9; */
+    border-radius: 30px;
+    text-wrap: nowrap;
+    letter-spacing: 5px;
+    word-spacing: 5px;
+    color: #0a74ee;
+    font-family: 'Protest Guerrilla', sans-serif;
+    font-size: 50px;
+}
+
+.innerRand .im2 {
+    bottom: 40px;
+    left: 70px;
+}
+
+
+.page2, 
+.page4,
+.page6 {
+    border: .1px solid red;
+    width: 100%;
+    height: 100vh;
+    /* position: relative; */
+    display: grid;
+    grid-template-columns: 600px 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.page3,
+.page5,
+.page7 {
+    border: .1px solid red;
+    width: 100%;
+    height: 100vh;
+    /* position: relative; */
+    display: grid;
+    grid-template-columns: 1fr 600px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.sideImg { 
+    padding:10%;
+}
+
+.sideInfo {
+    padding: 50px;
+}
+
+.sideInfo h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 50px;
+    color: #0a74ee;
+    letter-spacing: 5px;
+    word-spacing: 5px;
+}
+
+.sideInfo p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    word-spacing: 1px;
+}

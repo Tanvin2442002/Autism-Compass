@@ -29,6 +29,8 @@ import Courses from "./CoursesComponent/Courses";
 import EnrolledCourses from "./CoursesComponent/EnrolledCourses";
 
 
+
+import "./App.css";
 function App() {
 
    const rem = JSON.parse(localStorage.getItem('REMEMBER_ME'));

@@ -8,7 +8,7 @@ import './Registration.css';
 import SignUpImg from '../img/SignUp.svg'
 
 
-const ParentReg = () => {
+const Registration = () => {
    const navigate = useNavigate();
    const [userType, setUserType] = useState('');
    const [showPassword, setShowPassword] = useState(false);
@@ -16,10 +16,13 @@ const ParentReg = () => {
    const toggleShowPassword = () => { setShowPassword(!showPassword); };
    const toggleShowConfirmPassword = () => { setShowConfirmPassword(!showConfirmPassword); };
 
+   const [showLoader, setShowLoader] = useState(false);
+
    useEffect(() => {
 
    }, []);
-   const handleParentRegForm = async (e) => {
+   const handleRegistrationForm = async (e) => {
+      setShowLoader(true);
       e.preventDefault();
       const pass = {
          PASSWORD: document.getElementById("password").value,
@@ -40,6 +43,7 @@ const ParentReg = () => {
          return;
       }
       if (userType === 'PARENT') {
+
          const parentData = {
             P_ID: Math.floor(Math.random() * 1000),
             NAME: document.getElementById("name").value,
@@ -61,22 +65,25 @@ const ParentReg = () => {
             },
          });
          let data = await response.json();
-         console.log(data);
-         if (data.message === "Parent registered successfully!") {
-            navigate("/login");
-         }
-         else {
-            toast.error(data.message, {
-               position: "top-right",
-               autoClose: 2500,
-               hideProgressBar: false,
-               closeOnClick: true,
-               pauseOnHover: false,
-               draggable: true,
-               progress: undefined,
-               theme: "light",
-            });
-         }
+         setTimeout(() => {
+            console.log(data);
+            if (data.message === "Parent registered successfully!") {
+               navigate("/login");
+            }
+            else {
+               toast.error(data.message, {
+                  position: "top-right",
+                  autoClose: 2500,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+               });
+            }
+            setShowLoader(false);
+         }, 1000);
       }
       else if (userType === 'CHILD') {
          const childData = {
@@ -103,32 +110,36 @@ const ParentReg = () => {
          });
          let data = await response.json();
          console.log(data);
-         if (data.message === "Child registered successfully!") {
-            navigate("/login");
-         } else if (data.message === "Parent not found") {
-            toast.error(data.message, {
-               position: "top-right",
-               autoClose: 2500,
-               hideProgressBar: false,
-               closeOnClick: true,
-               pauseOnHover: false,
-               draggable: true,
-               progress: undefined,
-               theme: "light",
-            });
-         }
-         else {
-            toast.error(data.message, {
-               position: "top-right",
-               autoClose: 2500,
-               hideProgressBar: false,
-               closeOnClick: true,
-               pauseOnHover: false,
-               draggable: true,
-               progress: undefined,
-               theme: "light",
-            });
-         }
+         setTimeout(() => {
+            console.log(data.message);
+            if (data.message === "Child registered successfully!") {
+               navigate("/login");
+            } else if (data.message === "Parent not found") {
+               toast.error(data.message, {
+                  position: "top-right",
+                  autoClose: 2500,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+               });
+            }
+            else {
+               toast.error(data.message, {
+                  position: "top-right",
+                  autoClose: 2500,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+               });
+            }
+            setShowLoader(false);
+         }, 1000);
       }
       else if (userType === 'DOCTOR') {
          const startTime = document.getElementById("start-visit-time").value;
@@ -160,21 +171,24 @@ const ParentReg = () => {
             },
          });
          const data = await response.json();
-         console.log(data);
-         if (data.message === "Doctor registered successfully!")
-            navigate("/login");
-         else {
-            toast.error(data.message, {
-               position: "top-right",
-               autoClose: 2500,
-               hideProgressBar: false,
-               closeOnClick: true,
-               pauseOnHover: false,
-               draggable: true,
-               progress: undefined,
-               theme: "light",
-            });
-         }
+         setTimeout(() => {
+            console.log(data);
+            if (data.message === "Doctor registered successfully!")
+               navigate("/login");
+            else {
+               toast.error(data.message, {
+                  position: "top-right",
+                  autoClose: 2500,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+               });
+            }
+            setShowLoader(false);
+         }, 1000);
       }
       else if (userType === 'TEACHER') {
          const teacherData = {
@@ -195,22 +209,25 @@ const ParentReg = () => {
             },
          });
          let data = await response.json();
-         console.log(data);
-         if (data.message === "Teacher registered successfully!") {
-            navigate("/login");
-         }
-         else {
-            toast.error(data.message, {
-               position: "top-right",
-               autoClose: 2500,
-               hideProgressBar: false,
-               closeOnClick: true,
-               pauseOnHover: false,
-               draggable: true,
-               progress: undefined,
-               theme: "light",
-            });
-         }
+         setTimeout(() => {
+            console.log(data);
+            if (data.message === "Teacher registered successfully!") {
+               navigate("/login");
+            }
+            else {
+               toast.error(data.message, {
+                  position: "top-right",
+                  autoClose: 2500,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+               });
+            }
+            setShowLoader(false);
+         }, 1000);
       }
    };
    console.log(userType);
@@ -220,7 +237,7 @@ const ParentReg = () => {
          <ul class="circles">
             <li></li>
             <li></li>
-            <li></li>      
+            <li></li>
             <li></li>
             <li></li>
             <li></li>
@@ -230,7 +247,7 @@ const ParentReg = () => {
             <li></li>
          </ul>
          <div className="sign-up-page">
-            <form className="sign-up-form" onSubmit={handleParentRegForm}>
+            <form className="sign-up-form" onSubmit={handleRegistrationForm}>
                <h1>Fill up the details</h1>
                <div className="sign-up-in-feild">
                   <label>Name</label>
@@ -439,7 +456,12 @@ const ParentReg = () => {
                      required
                   />
                </div>
-               <button className='view-more-button' > SIGN UP</button>
+               {showLoader &&
+                  <div className='loader-div'>
+                     <div className='loader-animation'></div>
+                  </div>
+               }
+               {!showLoader && <button className='view-more-button'> SIGN UP</button>}
             </form>
             <div className="sign-up-image">
                <img src={SignUpImg} alt="Sign Up Image" />
@@ -450,4 +472,4 @@ const ParentReg = () => {
    );
 };
 
-export default ParentReg;
+export default Registration;

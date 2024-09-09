@@ -6,6 +6,19 @@ const router = express.Router();
 router.post("/child", async (req, res) => {
     const connection = await getConnection();
     console.log("Received data:", req.body);
+    const findParent = await connection.execute(
+        `SELECT P_ID FROM PARENT WHERE EMAIL = LOWER(:EMAIL)`,
+        {
+            EMAIL: req.body.P_EMAIL,
+        },
+        { autoCommit: true }
+    );
+    console.log(findParent);
+    // console.log(findParent.rows[0].P_ID);
+    if(findParent.rows.length == 0){
+        res.status(404).send({ message: "Parent not found" });
+        return;
+    }
     const resultReg = await connection.execute(
         `INSERT INTO CHILD (C_ID, NAME, DOB, CONTACT_NO, EMAIL, P_EMAIL, CITY, STREET, POSTAL_CODE)
             VALUES (:C_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, LOWER(:EMAIL), LOWER(:P_EMAIL), :CITY, :STREET, :POSTAL_CODE)`,
@@ -32,19 +45,6 @@ router.post("/child", async (req, res) => {
         { autoCommit: true }
     );
 
-    const findParent = await connection.execute(
-        `SELECT P_ID FROM PARENT WHERE EMAIL = LOWER(:EMAIL)`,
-        {
-            EMAIL: req.body.P_EMAIL,
-        },
-        { autoCommit: true }
-    );
-    console.log(findParent);
-    // console.log(findParent.rows[0].P_ID);
-    if(findParent.rows.length == 0){
-        res.status(404).send({ message: "Parent not found" });
-        return;
-    }
     const resultParent = await connection.execute(
         `INSERT INTO PARENT_HAS_CHILD (C_ID, P_ID)
             VALUES (:C_ID, :P_ID)`,

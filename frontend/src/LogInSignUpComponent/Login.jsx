@@ -13,9 +13,9 @@ const LogIn = () => {
    const [password, setPassword] = useState("");
    const [userType, setUserType] = useState("");
    const [rememberMe, setRememberMe] = useState(false);
-   const [showPassword, setShowPassword] = useState(false); // New state to toggle password visibility
+   const [showPassword, setShowPassword] = useState(false);
    const navigate = useNavigate();
-   const [showPopup, setShowPopup] = useState(false);
+   const [showLoader, setShowLoader] = useState(false);
 
    useEffect(() => {
       document.body.classList.add('login-body');
@@ -25,6 +25,7 @@ const LogIn = () => {
    }, []);
 
    const handleLogIn = async (e) => {
+      setShowLoader(true);
       e.preventDefault();
       const response = await fetch("http://localhost:5000/login", {
          method: "POST",
@@ -48,26 +49,29 @@ const LogIn = () => {
          ID: ID,
          TYPE: data.TYPE,
       };
-      if (data.TYPE) {
-         navigate("/dashboard");
-         localStorage.setItem("USER", JSON.stringify(userData));
-         if (rememberMe) {
-            localStorage.setItem("REMEMBER_ME", "1");
+      setTimeout(() => {
+         if (data.TYPE) {
+            navigate("/dashboard");
+            localStorage.setItem("USER", JSON.stringify(userData));
+            if (rememberMe) {
+               localStorage.setItem("REMEMBER_ME", "1");
+            } else {
+               localStorage.setItem("REMEMBER_ME", "0");
+            }
          } else {
-            localStorage.setItem("REMEMBER_ME", "0");
+            toast.error('Invalid credentials', {
+               position: "top-right",
+               autoClose: 2000,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: false,
+               draggable: true,
+               progress: undefined,
+               theme: "colored",
+            });
          }
-      } else {
-         toast.error('Invalid credentials', {
-            position: "top-right",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-         });
-      }
+         setShowLoader(false);
+      }, 1000);
    };
 
    return (
@@ -143,7 +147,12 @@ const LogIn = () => {
                   </label>
                   <Link to="/reset-password" className='link-to-reg'>Forgot Password?</Link>
                </div>
-               <button className='view-more-button'> LOG IN</button>
+               {showLoader &&
+                  <div className='loader-div'>
+                     <div className='loader-animation'></div>
+                  </div>
+               }
+               {!showLoader && <button className='view-more-button'> LOG IN</button>}
                <div className="login-register-link">
                   <p className='login-text'>
                      Don't have an account? <Link to="/" className='link-to-reg'>Register</Link>
