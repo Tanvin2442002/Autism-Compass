@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './BookedList.css'; 
+import './BookedList.css';
 import Navbar from '../Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -64,39 +64,41 @@ const BookedList = () => {
   return (
     <div className="booked-list-container">
       <Navbar />
-      <div className="main-content">
+      <div className="main-content-list">
         {/* Left Side: Booked List with scrollbar */}
-        <div className="list-container">
-          <div className="header-container">
-            <h1>Booked Consultations</h1>
-            <p>Here are your booked consultations.</p>
-          </div>
-          <div className="card-wrapper">
-            {consultations.length > 0 ? consultations.map((consultation) => (
-              <div key={`${consultation.P_ID}-${consultation.H_ID}-${consultation.C_ID}`} className="card-item">
-                <i className="card-icon bx bx-user-circle"></i>
-                <h2>Dr. {consultation.DOCTOR_NAME}</h2>
-                <p>{consultation.FIELD_OF_SPEC}</p>
-                <p>{consultation.NAME_OF_HOSPITAL}</p>
-                <p className="label-square">Date: {consultation.SELECTED_DATE}</p>
-                <p className="label-square">Time: {consultation.SELECTED_TIME}</p>
-                <p className="label-square">Patient's Name: {consultation.CHILD_NAME}</p>
-                <button className="delete-button" onClick={() => handleDeleteClick(consultation)}>
-                  <FontAwesomeIcon icon={faTrashAlt} size="lg" style={{ color: '#e74c3c' }} />
-                  <span className="delete-label">Delete</span>
-                </button>
-              </div>
-            )) : (
-              <p>No consultations found.</p>
-            )}
+        <div className="list-container-list">
+          <div className='list-booked-info'>
+            <div className="header-container">
+              <h1>Booked Consultations</h1>
+              <p>Here are your booked consultations.</p>
+            </div>
+            <div className="card-wrapper-list">
+              {consultations.length > 0 ? consultations.map((consultation) => (
+                <div key={`${consultation.P_ID}-${consultation.H_ID}-${consultation.C_ID}`} className="card-item">
+                  <i className="card-icon bx bx-user-circle"></i>
+                  <h2>Dr. {consultation.DOCTOR_NAME}</h2>
+                  <p>{consultation.FIELD_OF_SPEC}</p>
+                  <p>{consultation.NAME_OF_HOSPITAL}</p>
+                  <p className="label-square">Date: {consultation.SELECTED_DATE}</p>
+                  <p className="label-square">Time: {consultation.SELECTED_TIME}</p>
+                  <p className="label-square">Patient's Name: {consultation.CHILD_NAME}</p>
+                  <button className="delete-button" onClick={() => handleDeleteClick(consultation)}>
+                    <FontAwesomeIcon icon={faTrashAlt} size="lg" style={{ color: '#e74c3c' }} />
+                    <span className="delete-label">Delete</span>
+                  </button>
+                </div>
+              )) : (
+                <p>No consultations found.</p>
+              )}
+            </div>
           </div>
 
           {showConfirmation && (
             <div className="confirmation-dialog">
+              <p>Are you sure you want to delete this?</p>
               <div className="confirmation-dialog-content">
-                <p>Are you sure you want to delete this?</p>
-                <button className="confirm-btn" onClick={handleDelete}>Yes</button>
-                <button className="cancel-btn" onClick={handleCancelDelete}>No</button>
+                <button className="confirm-btn-list" onClick={handleDelete}>Yes</button>
+                <button className="cancel-btn-list" onClick={handleCancelDelete}>No</button>
               </div>
             </div>
           )}

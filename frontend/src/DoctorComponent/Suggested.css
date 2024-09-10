@@ -129,6 +129,11 @@ tbody tr td {
     background: #455A64;
 }
 
+.table-hover{
+    cursor: pointer;
+}
+
+
 @media (max-width: 900px) {
     .main-content-suggestion {
         display: flex;

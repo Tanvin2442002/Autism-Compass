@@ -25,6 +25,7 @@ const Navbar = () => {
 
    const handleLogOut = () => {
       localStorage.removeItem('USER');
+      localStorage.removeItem('REMEMBER_ME');
       navigate('/login');
    };
 

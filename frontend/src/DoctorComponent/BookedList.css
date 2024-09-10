@@ -1,137 +1,249 @@
 .booked-list-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .main-content {
-    display: flex;
-    width: 100%;
-    height: 90vh; /* Adjust based on your design */
-  }
-  
-  .list-container {
-    flex: 2;
-    overflow-y: auto; /* Enable vertical scrolling */
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-     
-  }
-  
-  .header-container {
-    text-align: center;
-  }
-  
-  .card-wrapper {
-    display: flex;
-    flex-wrap: wrap; /* Enable wrapping of cards */
-    gap: 20px; /* Space between cards */
-    justify-content: center; /* Center the cards */
-    margin-top: 20px;
-  }
-  
-  .card-item {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 16px; /* Rounded edges */
-    padding: 20px;
-    width: 270px; /* Fixed width for square shape */
-    height: 270px; /* Fixed height for square shape */
-    display: flex;
-    flex-direction: column; /* Align content in column */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Center-align text */
-    position: relative;
-  }
-  
-  .card-icon {
-    font-size: 50px; /* Larger icon */
-    color: #333;
-    margin-bottom: 10px; /* Space between icon and text */
-  }
-  
-  .card-item h2 {
-    margin: 10px 0;
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-  
-  .card-item p {
-    margin: 5px 0;
-  }
-  
-  .card-item .label-square {
-    font-weight: bold; /* Highlight patient's name */
-    margin: 5px 0;
-  }
-  
-  .delete-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #e74c3c;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  
-  .delete-button:hover {
-    color: #c0392b;
-  }
-  
-  .svg-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .enlarged-svg {
-    width: 80%; /* Adjust size as needed */
-    max-width: 500px;
-    height: auto; /* Maintain aspect ratio */
-  }
-  
-  .confirmation-dialog {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .confirm-btn,
-  .cancel-btn {
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .confirm-btn:hover {
-    background-color: #27ae60;
-    color: white;
-  }
-  
-  .cancel-btn:hover {
-    background-color: #e74c3c;
-    color: white;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content-list {
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  flex-direction: row-reverse;
+}
+
+.list-container-list {
+  flex: 2;
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  display: flex;
+  padding-top: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-booked-info {
+  margin-top: 0;
+  display: flex;
+  margin-top: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  /* border: 1px solid red; */
+  top: 0;
+}
+
+.header-container {
+  text-align: center;
+  height: 20%;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(30px);
+  border-radius: 10px;
+  z-index: 1;
+  width: 99%;
+}
+
+.header-container h1 {
+  color: #662E26;
+  font-family: 'New Amsterdam', serif;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  word-spacing: 2px;
+  font-size: 40px;
+  margin: 10px 0px;
+}
+
+.card-wrapper-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+  justify-content: center;
+
+}
+
+.card-item {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  /* Rounded edges */
+  padding: 20px;
+  width: 260px;
+  font-family: "Poppins", sans-serif;
+  /* Fixed width for square shape */
+  height: 300px;
+  /* Fixed height for square shape */
+  display: flex;
+  flex-direction: column;
+  /* Align content in column */
+  align-items: center;
+  /* Center items horizontally */
+  justify-content: center;
+  /* Center items vertically */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  /* Center-align text */
+  position: relative;
+}
+
+.card-icon {
+  font-size: 50px;
+  /* Larger icon */
+  color: #333;
+  margin-bottom: 10px;
+  /* Space between icon and text */
+}
+
+.card-item h2 {
+  margin: 10px 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.card-item p {
+  margin: 5px 0;
+}
+
+.card-item .label-square {
+  font-weight: bold;
+  /* Highlight patient's name */
+  margin: 5px 0;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #e74c3c;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.delete-button:hover {
+  color: #c0392b;
+}
+
+.svg-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.enlarged-svg {
+  width: 80%;
+  /* Adjust size as needed */
+  max-width: 500px;
+  height: auto;
+  /* Maintain aspect ratio */
+}
+
+.confirmation-dialog {
+  position: fixed;
+  height: 150px;
+  width: 300px;
+  justify-content: center;
+  background-color: #455a6467;
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  text-align: center;
+}
+
+.confirmation-dialog-content{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+
+.cancel-btn-list {
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  transition: all 250ms ease-in-out;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.cancel-btn-list:hover {
+  background-color: #212121c6;
+  color: #e8e8e8;
+  transform: scale(1.05);
+}
+
+.confirm-btn-list {
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #db4b2e 0%, #880808 100%);
+  color: #ffffff;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 8px 15px #f014144d;
+  transition: all 250ms ease-in-out;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.confirm-btn-list:hover {
+  background-color: #212121;
+  color: #e8e8e8;
+  transform: scale(1.05);
+}
+
+.confirm-btn-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: 0.5s ease-in-out;
+}
+
+.confirm-btn-list:hover::before {
+  left: 100%;
+}
+
+.confirm-btn-list.success {
+  background-color: green;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #e74c3c;
+  color: white;
+}

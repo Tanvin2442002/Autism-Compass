@@ -8,10 +8,7 @@
 
 .doctor-list {
   width: 85%;
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 30px 40px;
   margin-top: 1%;
   display: flex;
@@ -20,12 +17,15 @@
   align-items: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   animation: fadeIn 2s ease-in;
+  background: #5291b028;
+  backdrop-filter: blur(5px);
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -92,8 +92,8 @@
 }
 
 .doc-container {
-  display: grid; 
-  grid-template-columns: repeat(3, 1fr); 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   justify-items: center;
   align-items: center;
@@ -101,26 +101,41 @@
   margin-top: 30px;
 }
 
+
+/* 
+
+.svg-center will be occupied in the center of the grid
+it will take column 2, 3 of row 2, 3. Do it.
+
+.svg-center{
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+}
+
+can i stick it to the center of 
+
+*/
+
 .svg-center {
-  grid-column: 2;
-  grid-row: 2;
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
   justify-self: center;
-  margin: 25px 0;
+  width: 70%;
 }
 
 .svg-center img {
   width: 100%;
-  max-width: 700px; 
   height: auto;
 }
 
 .doc-box {
   position: relative;
-  background-color: #ffffff;
-  border: 2px solid #3f4e55;
+  background-color: #ffffffd4;
+  border: 1px solid #3f4e55;
   border-radius: 20px;
   padding: 20px 20px;
-  width: 250px;
+  width: 220px;
+  height: 180px;
   text-align: center;
   color: #333;
   transition: all 0.3s ease;
@@ -138,6 +153,7 @@
     transform: translateY(50px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;

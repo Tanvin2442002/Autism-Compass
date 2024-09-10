@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // Added useNavigate for navigation
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,17 +8,19 @@ import './BookingDoc.css';
 
 const BookingDoc = () => {
   const [doctorDetails, setDoctorDetails] = useState(null);
-  const [userDetails, setUserDetails] = useState([]); 
+  const [userDetails, setUserDetails] = useState([]);
   const [selectedChildId, setSelectedChildId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [visitTime, setVisitTime] = useState([]);
   const location = useLocation();
-  const navigate = useNavigate(); // For redirecting to BookedList.js
+  const navigate = useNavigate();
   const params = new URLSearchParams(location.search);
-  const doctorId = params.get('DOC_ID'); // Fetch doctor ID from URL
+  const doctorId = params.get('DOC_ID');
 
-  const localData = JSON.parse(localStorage.getItem('USER')); // Retrieve logged-in user details
+  const localData = JSON.parse(localStorage.getItem('USER'));
 
+  // Fetch doctor details
   useEffect(() => {
     const fetchDoctorDetails = async () => {
       try {
@@ -43,8 +45,8 @@ const BookingDoc = () => {
         }
 
         const data = await response.json();
-        setUserDetails(data); // Store the entire array
-        setSelectedChildId(data.C_ID); // Set the child ID directly for child login
+        setUserDetails(data);
+        setSelectedChildId(data.C_ID);
       } catch (error) {
         console.error('Error fetching user data:', error);
         setError('Failed to fetch user data.');
@@ -53,7 +55,31 @@ const BookingDoc = () => {
 
     fetchDoctorDetails();
     fetchUserDetails();
-  }, []);
+  }, [doctorId]);
+
+  console.log('Doctor Details:', doctorDetails);
+  // Create visit time slots when doctor details are available
+  useEffect(() => {
+    if (doctorDetails && doctorDetails.VISIT_TIME) {
+      const timeSlots = [];
+      const time = doctorDetails.VISIT_TIME;
+      const startTime = parseInt(time.split(' ')[0]);
+      const endTime = parseInt(time.split(' ')[2]);
+      // console.log('Start Time:', startTime);
+      // console.log('End Time:', endTime);
+
+      for (let i = startTime; i < endTime; i++) {
+        if (i < 12)
+          timeSlots.push(`${i}:00 AM`);
+        else if (i == 12)
+          timeSlots.push(`${i}:00 PM`);
+        else
+          timeSlots.push(`${(i % 12)}:00 PM`);
+      }
+      setVisitTime(timeSlots);
+      console.log("Time Slots: ", timeSlots);
+    }
+  }, [doctorDetails]);
 
   const handleChildSelection = (childId) => {
     setSelectedChildId(childId);
@@ -63,20 +89,19 @@ const BookingDoc = () => {
   const handleConfirmBooking = async (e) => {
     e.preventDefault();
     const bookingData = {
-      H_ID: doctorId,  // Doctor (Health Professional) ID
-      C_ID: localData.TYPE === 'PARENT' ? selectedChildId : localData.ID,  // Selected Child ID or Child's ID directly
-      BOOKING_DATE: document.getElementById('consultation-date').value,  // Selected Date
-      BOOKING_TIME: document.getElementById('consultation-time').value,  // Selected Time
+      H_ID: doctorId,
+      C_ID: localData.TYPE === 'PARENT' ? selectedChildId : localData.ID,
+      BOOKING_DATE: document.getElementById('consultation-date').value,
+      BOOKING_TIME: document.getElementById('consultation-time').value,
     };
 
     if (localData.TYPE === 'PARENT') {
-      bookingData.P_ID = localData.ID;  // Parent ID for parent login
+      bookingData.P_ID = localData.ID;
     }
 
     console.log('Booking data:', bookingData);
 
     try {
-      console.log(bookingData);
       const response = await fetch('http://localhost:5000/physician', {
         method: 'POST',
         headers: {
@@ -91,9 +116,9 @@ const BookingDoc = () => {
           autoClose: 2500,
         });
         const confirmBtn = document.querySelector('.confirm-btn');
-        confirmBtn.style.backgroundColor = 'green'; 
+        confirmBtn.style.backgroundColor = 'green';
         confirmBtn.textContent = 'Booking Confirmed';
-        confirmBtn.classList.add('success'); 
+        confirmBtn.classList.add('success');
       } else {
         toast.error('Booking Failed!', {
           position: 'top-right',
@@ -122,17 +147,20 @@ const BookingDoc = () => {
 
       {localData.TYPE === 'PARENT' && userDetails.length > 0 && (
         <div className='child-info-wrapper'>
-          {userDetails.map((child) => (
-            <div
-              className={`child-card ${selectedChildId === child.C_ID ? 'selected' : ''}`}
-              key={child.C_ID}
-              onClick={() => handleChildSelection(child.C_ID)}
-            >
-              <i className="bx bx-user-circle child-icon"></i>
-              <h2>{child.CHILD_NAME}</h2>
-              <p>Email: {child.CHILD_EMAIL}</p>
-            </div>
-          ))}
+          <h1>Select your child.</h1>
+          <div className='all-child-card'>
+            {userDetails.map((child) => (
+              <div
+                className={`child-card ${selectedChildId === child.C_ID ? 'selected' : ''}`}
+                key={child.C_ID}
+                onClick={() => handleChildSelection(child.C_ID)}
+              >
+                <i className="bx bx-user-circle child-icon"></i>
+                <h2>{child.CHILD_NAME}</h2>
+                <p>Email: {child.CHILD_EMAIL}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -151,10 +179,11 @@ const BookingDoc = () => {
 
           <div className='input-box'>
             <label htmlFor='consultation-time'>Select Time:</label>
-            <input
-              className='booking-input'
-              type='time'
-              id='consultation-time' required />
+            <select className='booking-input' type="time" id='consultation-time'>
+              {visitTime.map((time) => (
+                <option key={time} value={time}>{time}</option>
+              ))}
+            </select>
           </div>
         </div>
 
@@ -162,16 +191,13 @@ const BookingDoc = () => {
           <button type='submit' className='confirm-btn' onClick={handleConfirmBooking}>
             Confirm Booking
           </button>
+          <button className='booking-updates-btn' onClick={handleBookingUpdatesClick}>
+            See Booking Updates
+          </button>
         </div>
-        <button className='booking-updates-btn' onClick={handleBookingUpdatesClick}>
-          See Booking Updates 
-        </button>
       </div>
     </div>
   );
 };
 
 export default BookingDoc;
-
-
-

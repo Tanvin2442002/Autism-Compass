@@ -5,6 +5,8 @@ import 'boxicons/css/boxicons.min.css';
 import TherapyDis from '../img/TherapyDis.svg';
 import Navbar from '../Navbar';
 import LoadingAnimation from '../LoadingAnimation';
+import { motion } from 'framer-motion';
+import RevealLeftToRight from '../RevealLeftToRight';
 
 const AvailableTherapies = () => {
    const [therapies, setTherapies] = useState([]);
@@ -57,33 +59,43 @@ const AvailableTherapies = () => {
       <div>
          <Navbar />
          <div className='therapy-details'>
-            <div className="avaiableTherapyContents">
-               <h1>Available Therapies</h1>
-               <div className="search-input-box">
-                  <input
-                     type="text"
-                     placeholder="Search therapies..."
-                     onChange={handleSearch}
-                     required />
-                  <i className='bx bx-search'></i>
-               </div>
+            <motion.div className="avaiableTherapyContents"
+               initial={{ opacity: 0, x: -100 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.5 }}
+            >
+                  <h1>Available Therapies</h1>
+                  <div className="search-input-box">
+                     <input
+                        type="text"
+                        placeholder="Search therapies..."
+                        onChange={handleSearch}
+                        required />
+                     <i className='bx bx-search'></i>
+                  </div>
                {loading && <LoadingAnimation />}
                {error && <p>{error}</p>}
                <div className="therapy-list">
                   {therapies.map((therapy) => (
-                     <div key={therapy.TH_ID} className='therapy-item'>
-                        <h2>{therapy.THERAPY_TYPE}</h2>
-                        <p>{therapy.THERAPY_DESCRIPTION}</p>
-                        <button className='view-more-button' onClick={() => handleEventClick(therapy.TH_ID)}>
-                           View More Details...
-                        </button>
-                     </div>
+                     <RevealLeftToRight>
+                        <div key={therapy.TH_ID} className='therapy-item'>
+                           <h2>{therapy.THERAPY_TYPE}</h2>
+                           <p>{therapy.THERAPY_DESCRIPTION}</p>
+                           <button className='view-more-button' onClick={() => handleEventClick(therapy.TH_ID)}>
+                              View More Details...
+                           </button>
+                        </div>
+                     </RevealLeftToRight>
                   ))}
                </div>
-            </div>
-            <div className="therapy-details-image">
+            </motion.div>
+            <motion.div className="therapy-details-image"
+               initial={{ opacity: 0, x: 100 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.5 }}
+            >
                <img src={TherapyDis} alt="Therapy Details" />
-            </div>
+            </motion.div>
          </div>
       </div>
    );
