@@ -8,12 +8,18 @@ import Therapy from "./img/Therapy.svg"
 import FindDisorder from "./img/FindDisorder.svg"
 import DoctorConsultationList from './DoctorComponent/DoctorConsultationList';
 import DashDelivery from './img/DashDelivery.svg';
+import RevealRightToLeft from './RevealRightToLeft';
+import RevealLeftToRight from './RevealLeftToRight';
+import RevealUp from './RevealUp';
+import { motion } from 'framer-motion';
+import Reveal from './RevealRightToLeft';
+
 
 const Dashboard = () => {
    const [bookedDocData, setBookedDocData] = useState([]);
    const [availableDocData, setAvailableDocData] = useState([]);
    const [availableTherapyData, setAvailableTherapyData] = useState([]);
-   const [orderList,setorderList] = useState([]);
+   const [orderList, setorderList] = useState([]);
    const [bookedTherapyData, setBookedTherapyData] = useState([]);
    const [disorderData, setDisorderData] = useState({
       TYPE: 'Unknown Disorder',
@@ -81,17 +87,17 @@ const Dashboard = () => {
       const fetchOrderList = async () => {
          try {
             const response = await fetch(
-              `http://localhost:5000/delivery/get/orders?userID=${localData.ID}`
+               `http://localhost:5000/delivery/get/orders?userID=${localData.ID}`
             );
             if (!response.ok) {
-              throw new Error("Network response was not ok");
+               throw new Error("Network response was not ok");
             }
             const data = await response.json();
             console.log("Fetched data:", data);
             setorderList(data);
-          } catch (err) {
+         } catch (err) {
             console.error(err);
-          }
+         }
       };
 
 
@@ -107,7 +113,7 @@ const Dashboard = () => {
       }
    }, []);
 
-   let displayedBookedDocData, displayedBookedTherapyData, displayedAvailableDocData, displayedAvailableTherapyData,displayedDeliveryData;
+   let displayedBookedDocData, displayedBookedTherapyData, displayedAvailableDocData, displayedAvailableTherapyData, displayedDeliveryData;
 
    if (localData.TYPE === 'CHILD' || localData.TYPE === 'PARENT') {
       displayedBookedDocData = bookedDocData.slice(0, 2);
@@ -115,7 +121,7 @@ const Dashboard = () => {
       displayedAvailableDocData = availableDocData.slice(0, 2 + (bookedDocData.length >= 2 ? 0 : 2 - bookedDocData.length));
       displayedAvailableTherapyData = availableTherapyData.slice(0, 2 + (bookedTherapyData.length >= 2 ? 0 : 2 - bookedTherapyData.length));
    }
-   if(localData.TYPE === 'PARENT'){
+   if (localData.TYPE === 'PARENT') {
       displayedDeliveryData = orderList.slice(0, 4);
    }
    const handleBookedDoctor = () => {
@@ -152,69 +158,87 @@ const Dashboard = () => {
                <>
                   <div className='doctor-consultation'>
                      <div className='doctor-consultation-info'>
-                        <div className='dash-booking-doc'>
-                           <h2 className='dashboard-heading'>Available Doctors</h2>
-                           <div className='booking-doctor'>
-                              {displayedAvailableDocData.map((item) => (
-                                 <div className="card-item-doc" key={item.H_ID}>
-                                    <h2>Dr. {item.DOCTOR_NAME}</h2>
-                                    <p>{item.FIELD_OF_SPEC}</p>
-                                    <p className="label-square">{item.NAME_OF_HOSPITAL}</p>
-                                    <p className="label-square">Contact No: {item.CONTACT_NO}</p>
-                                 </div>
-                              ))}
-                           </div>
-                           <button className='view-more-button' onClick={handleAvailableDoctor}>View more details</button>
-                        </div>
-                        <img src={Doctor} alt="Doctor" className="doctor-img" />
-                        {displayedBookedDocData.length > 0 && (
+                        <RevealLeftToRight>
                            <div className='dash-booking-doc'>
-                              <h2 className='dashboard-heading'>Booked Consultation</h2>
+                              <h2 className='dashboard-heading'>Available Doctors</h2>
                               <div className='booking-doctor'>
-                                 {displayedBookedDocData.map((item) => (
+                                 {displayedAvailableDocData.map((item) => (
                                     <div className="card-item-doc" key={item.H_ID}>
                                        <h2>Dr. {item.DOCTOR_NAME}</h2>
-                                       <p>{item.NAME_OF_HOSPITAL}</p>
-                                       <p className="label-square">Date: {item.SELECTED_DATE}</p>
-                                       <p className="label-square">Child's Name: {item.CHILD_NAME}</p>
+                                       <p>{item.FIELD_OF_SPEC}</p>
+                                       <p className="label-square">{item.NAME_OF_HOSPITAL}</p>
+                                       <p className="label-square">Contact No: {item.CONTACT_NO}</p>
                                     </div>
                                  ))}
                               </div>
-                              <button className='view-more-button' onClick={handleBookedDoctor}>View more details</button>
+                              <button className='view-more-button' onClick={handleAvailableDoctor}>View more details</button>
                            </div>
+                        </RevealLeftToRight>
+                        <RevealUp>
+                           <div className="doctor-img">
+                              <img src={Doctor} alt="Doctor" />
+                           </div>
+                        </RevealUp>
+                        {displayedBookedDocData.length > 0 && (
+                           <RevealRightToLeft>
+
+                              <div className='dash-booking-doc'>
+                                 <h2 className='dashboard-heading'>Booked Consultation</h2>
+                                 <div className='booking-doctor'>
+                                    {displayedBookedDocData.map((item) => (
+                                       <div className="card-item-doc" key={item.H_ID}>
+                                          <h2>Dr. {item.DOCTOR_NAME}</h2>
+                                          <p>{item.NAME_OF_HOSPITAL}</p>
+                                          <p className="label-square">Date: {item.SELECTED_DATE}</p>
+                                          <p className="label-square">Child's Name: {item.CHILD_NAME}</p>
+                                       </div>
+                                    ))}
+                                 </div>
+                                 <button className='view-more-button' onClick={handleBookedDoctor}>View more details</button>
+                              </div>
+                           </RevealRightToLeft>
                         )}
                      </div>
                   </div>
                   <div className='doctor-consultation'>
                      <div className='doctor-consultation-info'>
                         {displayedBookedTherapyData.length > 0 && (
+                           <RevealLeftToRight>
+
+                              <div className='dash-booking-doc'>
+                                 <h2 className='dashboard-heading'>Booked Therapy</h2>
+                                 <div className='booking-doctor'>
+                                    {displayedBookedTherapyData.map((item) => (
+                                       <div className="card-item-doc" key={item.TH_ID}>
+                                          <h2>{item.THERAPY_TYPE}</h2>
+                                          <p>{item.ORG_NAME}</p>
+                                          <p className="label-square">Date: {item.BOOKING_DATE}</p>
+                                          <p className="label-square">Child's Name: {item.CHILD_NAME}</p>
+                                       </div>
+                                    ))}
+                                 </div>
+                                 <button className='view-more-button' onClick={handleBookedTherapy}>View more details</button>
+                              </div>
+                           </RevealLeftToRight>
+                        )}
+                        <RevealUp>
+                           <div className="doctor-img">
+                              <img src={Therapy} alt="Doctor" />
+                           </div>
+                        </RevealUp>
+                        <RevealRightToLeft>
                            <div className='dash-booking-doc'>
-                              <h2 className='dashboard-heading'>Booked Therapy</h2>
+                              <h2 className='dashboard-heading'>Available Therapy</h2>
                               <div className='booking-doctor'>
-                                 {displayedBookedTherapyData.map((item) => (
+                                 {displayedAvailableTherapyData.map((item) => (
                                     <div className="card-item-doc" key={item.TH_ID}>
                                        <h2>{item.THERAPY_TYPE}</h2>
-                                       <p>{item.ORG_NAME}</p>
-                                       <p className="label-square">Date: {item.BOOKING_DATE}</p>
-                                       <p className="label-square">Child's Name: {item.CHILD_NAME}</p>
                                     </div>
                                  ))}
                               </div>
-                              <button className='view-more-button' onClick={handleBookedTherapy}>View more details</button>
+                              <button className='view-more-button' onClick={handleAvailableTherapy}>View more details</button>
                            </div>
-                        )}
-                        <img src={Therapy} alt="Therapy" className="doctor-img" />
-                        <div className='dash-booking-doc'>
-                           <h2 className='dashboard-heading'>Available Therapy</h2>
-                           <div className='booking-doctor'>
-                              {displayedAvailableTherapyData.map((item) => (
-                                 <div className="card-item-doc" key={item.TH_ID}>
-                                    <h2>{item.THERAPY_TYPE}</h2>
-                                 </div>
-                              ))}
-                           </div>
-                           <button className='view-more-button' onClick={handleAvailableTherapy}>View more details</button>
-                        </div>
+                        </RevealRightToLeft>
                      </div>
                   </div>
                </>
@@ -255,20 +279,26 @@ const Dashboard = () => {
             )}
             {(localData.TYPE === 'PARENT' && displayedDeliveryData.length) && (
                <div className='delivery-info-dash'>
-                  <div className='dash-booking-doc'>
-                     <h2 className='dashboard-heading'>Delivery Information</h2>
-                     <div className='booking-doctor'>
-                        {displayedDeliveryData.map((item) =>(
-                        <div className="card-item-doc">  
-                           <p className="label-square">Delivered By: {item.NAME}</p>
-                           <p className="label-square">Date: {item.DELIVERY_DATE.slice(0,10)}</p>
-                           <h2>Price: {item.AMOUNT}$</h2>
+                  <RevealLeftToRight>
+                     <div className='dash-booking-doc'>
+                        <h2 className='dashboard-heading'>Delivery Information</h2>
+                        <div className='booking-doctor'>
+                           {displayedDeliveryData.map((item) => (
+                              <div className="card-item-doc">
+                                 <p className="label-square">Delivered By: {item.NAME}</p>
+                                 <p className="label-square">Date: {item.DELIVERY_DATE.slice(0, 10)}</p>
+                                 <h2>Price: {item.AMOUNT}$</h2>
+                              </div>
+                           ))}
                         </div>
-                        ))}
+                        <button className='view-more-button' onClick={handleDeliveryDetails}>View more details</button>
                      </div>
-                     <button className='view-more-button' onClick={handleDeliveryDetails}>View more details</button>
-                  </div>
-                  <img src={DashDelivery} alt="Therapy" className="doctor-img" />
+                  </RevealLeftToRight>
+                  <RevealRightToLeft>
+                     <div className='dash-delivery-img'>
+                        <img src={DashDelivery} alt="Therapy" />
+                     </div>
+                  </RevealRightToLeft>
                </div>
             )}
          </div>

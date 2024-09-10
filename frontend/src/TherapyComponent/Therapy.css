@@ -15,10 +15,9 @@
 }
 
 .therapy-details-image {
-   top: 50px;
-   width: 100%;
+   /* border: 1px solid #5291b036; */
+   position: absolute;
    margin-top: 25%;
-   position: fixed;
 }
 
 .avaiableTherapyContents h1 {

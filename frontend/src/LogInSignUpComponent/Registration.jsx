@@ -6,6 +6,7 @@ import { ToastContainer, toast, useToast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './Registration.css';
 import SignUpImg from '../img/SignUp.svg'
+import {motion} from 'framer-motion';
 
 
 const Registration = () => {
@@ -463,9 +464,21 @@ const Registration = () => {
                }
                {!showLoader && <button className='view-more-button'> SIGN UP</button>}
             </form>
-            <div className="sign-up-image">
+            <motion.div className="sign-up-image"
+               initial={{ opacity: 0, scale: 0.5 }}
+               animate={{ opacity: 1, scale: 1 }}
+               transition={{
+                  duration: 0.3,
+                  ease: [0, 0.71, 0.2, 1.01],
+                  scale: {
+                     type: "spring", 
+                     damping: 5,
+                     stiffness: 100,
+                     restDelta: 0.001
+                  }
+               }}>
                <img src={SignUpImg} alt="Sign Up Image" />
-            </div>
+            </motion.div>
          </div>
          <ToastContainer />
       </div>
