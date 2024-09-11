@@ -1,0 +1,44 @@
+.Download-button {
+    cursor: pointer;
+    padding: 10px 10px;
+    bottom: 20px; /* Adjust the bottom distance */
+    position: fixed; /* Make sure the button stays fixed at the bottom right */
+    right: 100px; /* Adjust the right distance */
+    border: unset;
+    border-radius: 5px;
+    color: #212121;
+    font-family: 'Roboto Condensed', sans-serif;
+    word-spacing: 2px;
+    letter-spacing: 1px;
+    z-index: 1000;
+    background-color: #ffffffac;
+    font-weight: 700;
+    font-size: 13px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+.Download-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 5px;
+    background-color: #212121;
+    z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 250ms;
+}
+
+.Download-button:hover {
+    color: #e8e8e8;
+}
+
+.Download-button:hover::before {
+    width: 100%;
+}
