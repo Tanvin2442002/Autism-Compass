@@ -27,7 +27,7 @@ import SuggestedList from "./DoctorComponent/Suggested";
 
 import Courses from "./CoursesComponent/Courses";
 import EnrolledCourses from "./CoursesComponent/EnrolledCourses";
-
+import OfferCard from "./OfferCard";
 
 import { AnimatePresence } from "framer-motion";
 

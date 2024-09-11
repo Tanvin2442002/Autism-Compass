@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Protest+Guerrilla&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&family=Lilita+One&display=swap');
+
 .langingPage {
     width: 100vw;
     overflow-x: hidden;
@@ -18,7 +22,7 @@
     margin: 0;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 0;
     /* border: 5px solid #6DCC6E; */
 }
@@ -44,7 +48,7 @@
     width: 55px;
     height: 55px;
     animation-delay: 0s;
-    background-color: #ea46466d;
+    background-color: #ea464624;
 }
 
 .puzzle-circles li:nth-child(2) {
@@ -53,7 +57,7 @@
     height: 20px;
     animation-delay: 2s;
     animation-duration: 12s;
-    background-color: #ffad2981;
+    background-color: #ffad2934;
 }
 
 .puzzle-circles li:nth-child(3) {
@@ -61,7 +65,7 @@
     width: 20px;
     height: 20px;
     animation-delay: 4s;
-    background-color: #55acd573;
+    background-color: #55acd537;
 }
 
 .puzzle-circles li:nth-child(4) {
@@ -70,7 +74,7 @@
     height: 60px;
     animation-delay: 0s;
     animation-duration: 18s;
-    background-color: #6dcc6f7d;
+    background-color: #6dcc6f36;
 }
 
 .puzzle-circles li:nth-child(5) {
@@ -78,7 +82,7 @@
     width: 20px;
     height: 20px;
     animation-delay: 0s;
-    background-color: #ea464669;
+    background-color: #ea46462d;
 }
 
 .puzzle-circles li:nth-child(6) {
@@ -86,7 +90,7 @@
     width: 80px;
     height: 80px;
     animation-delay: 3s;
-    background-color: #6dcc6f6f;
+    background-color: #6dcc6f2d;
 }
 
 .puzzle-circles li:nth-child(7) {
@@ -94,7 +98,7 @@
     width: 100px;
     height: 100px;
     animation-delay: 7s;
-    background-color: #55acd575;
+    background-color: #55acd532;
 }
 
 .puzzle-circles li:nth-child(8) {
@@ -103,7 +107,7 @@
     height: 25px;
     animation-delay: 15s;
     animation-duration: 45s;
-    background-color: #ffad2973;
+    background-color: #ffad292b;
 }
 
 .puzzle-circles li:nth-child(9) {
@@ -112,7 +116,7 @@
     height: 15px;
     animation-delay: 2s;
     animation-duration: 35s;
-    background-color: #55acd56e;
+    background-color: #55acd53e;
 }
 
 .puzzle-circles li:nth-child(10) {
@@ -121,7 +125,7 @@
     height: 50px;
     animation-delay: 0s;
     animation-duration: 15s;
-    background-color: #6dcc6f75;
+    background-color: #6dcc6f32;
 }
 
 @keyframes animate {
@@ -139,12 +143,6 @@
 }
 
 
-.page1 {
-    /* border: .1px solid #EA4647; */
-    width: 100%;
-    height: 100vh;
-    position: relative;
-}
 
 .Nav {
     width: 95%;
@@ -153,75 +151,119 @@
     justify-content: end;
     margin: 0px 15px;
     gap: 20px;
-    
+    top: 0;
+    position: sticky;
     /* border: 1px solid #6DCC6E; */
 }
 
-.Nav a{
+.Nav a {
     text-decoration: none;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     padding: 5px;
 }
 
-.downImg {
+.page1 {
+    /* border: .1px solid #EA4647; */
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 600px;
+    place-items: center;
+}
+
+
+.land-main {
+    /* border: 6px solid #6DCC6E; */
     position: absolute;
-    /* border: 1px solid #6DCC6E; */
-    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    align-items: center;
+    justify-content: center;
 }
 
-.first {
-    bottom: -50px;
-}
 
-.downL {
-    left: 0px;
-}
-
-.downR {
-    right: 0px;
-}
-
-.rand1C {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-}
-
-.innerRand {
+.land-main-img {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* border: #0a74ee 1px solid; */
     position: relative;
 }
 
-.innerRand img,
-.innerRand h1 {
-    position: absolute;
+.land-main-img img {
+    position: relative;
 }
 
-.innerRand .im3 {
+.land-main-img .im3 {
     opacity: 0.15;
     rotate: 45deg;
 }
 
-.innerRand h1 {
-    /* background-color: #c0e7fdb9; */
-    border-radius: 30px;
+.land-main-info-text {
     text-wrap: nowrap;
-    letter-spacing: 5px;
+    position: absolute;
+    top: 0;
+    width: 40%;
+    padding: 30px;
+    margin-left: 50px;
+    gap: 10px;
+    padding: 10px;
+    /* border: 1px solid #022537c8; */
+}
+
+.land-main-info-text h1 {
+    /* border: 1px solid #022537c8; */
+    height: 60px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 35px;
+    color: #455A64;
+    letter-spacing: 3px;
     word-spacing: 5px;
-    color: #0a74ee;
-    font-family: 'Protest Guerrilla', sans-serif;
-    font-size: 50px;
+    margin: 0;
+    margin-left: 10px;
 }
 
-.innerRand .im2 {
-    bottom: 40px;
-    left: 70px;
+.land-main-info-text p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    letter-spacing: 2px;
+    word-spacing: 1px;
+    margin: 0;
+    margin-left: 20px;
+    text-wrap: wrap;
 }
 
 
-.page2, 
+.land-main-info-text button {
+    left: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+
+.land-side-img {
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    /* top: 0%; */
+    /* left: 50%; */
+    /* border: 1px solid red; */
+    right: 0;
+    /* transform: translate(-50%, -50%); */
+}
+
+.land-main-info {
+    position: relative;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    /* border: 1px solid #6DCC6E; */
+}
+
+
+.page2,
 .page4,
 .page6 {
     /* border: .1px solid #EA4647; */
@@ -240,7 +282,7 @@
     /* border: .1px solid #EA4647; */
     width: 100%;
     height: 100vh;
-    /* position: relative; */
+    /* position: */
     display: grid;
     grid-template-columns: 1fr 600px;
     align-items: center;
@@ -248,12 +290,15 @@
 }
 
 
-.sideImg { 
-    padding:10%;
+.sideImg {
+    padding: 10%;
+    height: 80vh;
+    /* border: 1px solid #6DCC6E; */
 }
 
 .sideInfo {
     padding: 50px;
+    /* border: 1px solid #6DCC6E; */
 }
 
 .sideInfo h1 {
@@ -269,4 +314,40 @@
     font-size: 16px;
     letter-spacing: 2px;
     word-spacing: 1px;
+}
+
+
+
+
+
+
+
+
+.our-offers {
+    top: 0;
+    margin: 10px;
+    margin-right: 20px;
+    /* border: 5px solid #6DCC6E; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.our-offers h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 40px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+}
+
+.offer-card-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    gap: 16px;
+}
+
+.offer-card-land {
+    border: 1px solid red;
+    /* min-width: 200px; */
 }
