@@ -158,7 +158,7 @@ const LogIn = () => {
                   {!showLoader && <button className='view-more-button'> LOG IN</button>}
                   <div className="login-register-link">
                      <p className='login-text'>
-                        Don't have an account? <Link to="/" className='link-to-reg'>Register</Link>
+                        Don't have an account? <Link to="/signup" className='link-to-reg'>Register</Link>
                      </p>
                   </div>
                </form>

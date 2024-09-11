@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
+import RevealLeftToRight from '../RevealLeftToRight'
+
 const Card = ({ product }) => {
 
    const location = useLocation();
@@ -78,9 +80,9 @@ const StyledWrapper = styled.div`
   content: '';
   position: absolute;
   z-index: -1;
-  top: -16px;
-  right: -16px;
-    background: #5290B0;
+  top: 0px;
+  right: 0px;
+background: #5290B0;
   height: 32px;
   width: 32px;
   border-radius: 32px;

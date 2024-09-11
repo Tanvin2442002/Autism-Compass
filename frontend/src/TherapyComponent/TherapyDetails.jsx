@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import TherapyDetails from '../img/TherapyDetails.svg';
 import OrgCard from './OrgCard';
 import LoadingAnimation from '../LoadingAnimation';
+import RevealLeftToRight from '../RevealLeftToRight';
+import RevealRightToLeft from '../RevealRightToLeft';
+
 
 const TherapyDetail = () => {
   const navigate = useNavigate();
@@ -93,34 +96,40 @@ const TherapyDetail = () => {
       <Navbar />
       <div className='therapy-details'>
         <div className="therapy-details-content">
-          <div className="details-of-therapy">
-            <h2>{therapyData.THERAPY_TYPE}</h2>
-            <p>{therapyData.THERAPY_DESCRIPTION}</p>
-            <button className='view-more-button' onClick={generateTherapyDetails}>
-              Want to know more about this therapy
-            </button>
-            <div className='disorder-item-details'>
-              {loadingTherapyDetails ? (
-                <LoadingAnimation />
-              ) : (
-                ans.length > 0 && (
-                  <textarea className='answer' value={ans} readOnly />
-                )
-              )}
+          <RevealLeftToRight>
+            <div className="details-of-therapy">
+              <h2>{therapyData.THERAPY_TYPE}</h2>
+              <p>{therapyData.THERAPY_DESCRIPTION}</p>
+              <button className='view-more-button' onClick={generateTherapyDetails}>
+                Want to know more about this therapy
+              </button>
+              <div className='disorder-item-details'>
+                {loadingTherapyDetails ? (
+                  <LoadingAnimation />
+                ) : (
+                  ans.length > 0 && (
+                    <textarea className='answer' value={ans} readOnly />
+                  )
+                )}
+              </div>
             </div>
-          </div>
-          <div className="availability">
-            <h3>Currently available in:</h3>
-            <div className="org-container">
-              {therapyOrgData.map((org) => (
-                <OrgCard product={org} key={org.id} />
-              ))}
+          </RevealLeftToRight>
+          <RevealLeftToRight>
+            <div className="availability">
+              <h3>Currently available in:</h3>
+              <div className="org-container">
+                {therapyOrgData.map((org) => (
+                  <OrgCard product={org} key={org.id} />
+                ))}
+              </div>
             </div>
+          </RevealLeftToRight>
+        </div>
+        <RevealRightToLeft>
+          <div className="therapy-details-image">
+            <img src={TherapyDetails} alt="TherapyDetails" className="TherapyDetails" />
           </div>
-        </div>
-        <div className="therapy-details-image">
-          <img src={TherapyDetails} alt="TherapyDetails" className="TherapyDetails" />
-        </div>
+        </RevealRightToLeft>
       </div>
     </div>
   );

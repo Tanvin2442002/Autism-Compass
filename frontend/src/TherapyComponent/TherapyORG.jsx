@@ -3,6 +3,7 @@ import './therapyORG.css';
 import 'boxicons/css/boxicons.min.css';
 import Navbar from '../Navbar';
 import OrgCard from './OrgCard';
+import { motion } from 'framer-motion';
 
 const TherapyOrganizations = () => {
 	const [therapyOrgData, setTherapyOrgData] = useState([]);
@@ -50,7 +51,20 @@ const TherapyOrganizations = () => {
 			<Navbar />
 			<div className="therapy-org-content">
 				<div className="details">
-					<h1>Our Partner Organizations</h1>
+					<motion.h1
+						initial={{ opacity: 0, scale: 0.5 }}
+						animate={{ opacity: 1, scale: 1 }}
+						transition={{
+							duration: 0.3,
+							ease: [0, 0.71, 0.2, 1.01],
+							scale: {
+								type: "spring",
+								damping: 5,
+								stiffness: 100,
+								restDelta: 0.001
+							}
+						}}
+					>Our Partner Organizations</motion.h1>
 					<div className="search-input-box">
 						<input
 							onChange={handleSearch}

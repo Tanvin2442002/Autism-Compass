@@ -10,33 +10,33 @@ import LandTreat from './img/LandTreat.svg';
 import LandPuzzle from "./img/puzzlebg.png";
 import "./Landing.css";
 import Reveal from "./RevealRightToLeft";
-
-
-
-const containerVariants = {
-   hidden: {
-      opacity: 0,
-   },
-   visible: {
-      opacity: 1,
-      transition: { delay: 1.5, duration: 1.5 }
-   },
-   exit: {
-      x: '-100vh',
-      transition: { ease: 'easeInOut' }
-   }
-};
-
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 const Landing = () => {
 
+   const { scrollYProgress } = useScroll();
+   const scaleX = useSpring(scrollYProgress, {
+      stiffness: 100,
+      damping: 30,
+      restDelta: 0.001
+   });
+
    return (
-      <div className="langingPage"
-         variants={containerVariants}
-         initial="hidden"
-         animate="visible"
-         exit="exit"
+      <motion.div className="langingPage"
+         // style={{ scaleX }}
       >
+         <ul class="puzzle-circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+         </ul>
          <Reveal>
             <div className="page1">
                <div className="Nav">
@@ -64,9 +64,9 @@ const Landing = () => {
                   <img src={LandMother} className="left" alt="course" />
                </div>
                <div className="sideInfo">
-                  <h1>Features name.</h1>
+                  <h1>Parent and Children</h1>
                   <p>
-                     Lorem ipsum odor amet, consectetuer adipiscing elit. Curae varius felis et arcu per.Himenaeos convallis porta nullam elementum arcu a, cursus vel. Interdum convallis viverra proin felis tortor tellus pulvinar. Habitasse vehicula augue quis fusce curae parturient. Praesent gravida cursus et curae phasellus quisque litora. Porta litora ligula eleifend adipiscing pharetra at dignissim integer. Feugiat non pharetra massa semper eu bibendum ullamcorper lacus sollicitudin? Fusce leo tellus tincidunt sociosqu dapibus elementum commodo integer.
+                     Empowering parents to take control of their child’s care, Autism Compass provides easy access to book doctor appointments, explore therapy options, and track updates all in one place. With the ability to view details about doctors, therapy locations, and even purchase specialized products for home delivery, parents have everything they need to ensure their child’s well-being right at their fingertips.
                   </p>
                   <button className="view-more-button">JOIN US AND EXPLORE MORE...</button>
                </div>
@@ -75,9 +75,9 @@ const Landing = () => {
          <Reveal>
             <div className="page3">
                <div className="sideInfo">
-                  <h1>Features name.</h1>
+                  <h1>Doctor</h1>
                   <p>
-                     Lorem ipsum odor amet, consectetuer adipiscing elit. Curae varius felis et arcu per.Himenaeos convallis porta nullam elementum arcu a, cursus vel. Interdum convallis viverra proin felis tortor tellus pulvinar. Habitasse vehicula augue quis fusce curae parturient. Praesent gravida cursus et curae phasellus quisque litora. Porta litora ligula eleifend adipiscing pharetra at dignissim integer. Feugiat non pharetra massa semper eu bibendum ullamcorper lacus sollicitudin? Fusce leo tellus tincidunt sociosqu dapibus elementum commodo integer.
+                     Doctors can connect with families, offer tailored suggestions. By recommending therapies and providing timely feedback, doctors ensure each child’s unique needs are met, creating a streamlined experience for both medical professionals and parents working together.
                   </p>
                   <button className="view-more-button">JOIN US AND EXPLORE MORE...</button>
                </div>
@@ -92,9 +92,9 @@ const Landing = () => {
                   <img src={LandTreat} className="left" alt="course" />
                </div>
                <div className="sideInfo">
-                  <h1>Features name.</h1>
+                  <h1>Therapy</h1>
                   <p>
-                     Lorem ipsum odor amet, consectetuer adipiscing elit. Curae varius felis et arcu per.Himenaeos convallis porta nullam elementum arcu a, cursus vel. Interdum convallis viverra proin felis tortor tellus pulvinar. Habitasse vehicula augue quis fusce curae parturient. Praesent gravida cursus et curae phasellus quisque litora. Porta litora ligula eleifend adipiscing pharetra at dignissim integer. Feugiat non pharetra massa semper eu bibendum ullamcorper lacus sollicitudin? Fusce leo tellus tincidunt sociosqu dapibus elementum commodo integer.
+                     Autism Compass offers a comprehensive list of therapies tailored to various needs, with detailed descriptions and locations to help parents and children find the right support. Easily browse therapy options, view where sessions are available, and book appointments directly through the platform. This seamless system ensures that finding and scheduling therapies is convenient and accessible without needing direct contact with therapists.
                   </p>
                   <button className="view-more-button">JOIN US AND EXPLORE MORE...</button>
                </div>
@@ -103,9 +103,8 @@ const Landing = () => {
          <Reveal>
             <div className="page5">
                <div className="sideInfo">
-                  <h1>Features name.</h1>
-                  <p>
-                     Lorem ipsum odor amet, consectetuer adipiscing elit. Curae varius felis et arcu per.Himenaeos convallis porta nullam elementum arcu a, cursus vel. Interdum convallis viverra proin felis tortor tellus pulvinar. Habitasse vehicula augue quis fusce curae parturient. Praesent gravida cursus et curae phasellus quisque litora. Porta litora ligula eleifend adipiscing pharetra at dignissim integer. Feugiat non pharetra massa semper eu bibendum ullamcorper lacus sollicitudin? Fusce leo tellus tincidunt sociosqu dapibus elementum commodo integer.
+                  <h1>Shops & Delivery</h1>
+                  <p>Autism Compass offers a thoughtful selection of products, including toys and items designed to support children with autism. Users can easily browse, add products to their cart, and complete purchases smoothly. Track your delivery status directly on the platform and know exactly when your order will arrive. With convenient doorstep delivery, finding the right products for your child has never been more straightforward or stress-free.
                   </p>
                   <button className="view-more-button">JOIN US AND EXPLORE MORE...</button>
                </div>
@@ -120,15 +119,15 @@ const Landing = () => {
                   <img src={LandTeaching} className="left" alt="course" />
                </div>
                <div className="sideInfo">
-                  <h1>Features name.</h1>
+                  <h1>Teacher</h1>
                   <p>
-                     Lorem ipsum odor amet, consectetuer adipiscing elit. Curae varius felis et arcu per.Himenaeos convallis porta nullam elementum arcu a, cursus vel. Interdum convallis viverra proin felis tortor tellus pulvinar. Habitasse vehicula augue quis fusce curae parturient. Praesent gravida cursus et curae phasellus quisque litora. Porta litora ligula eleifend adipiscing pharetra at dignissim integer. Feugiat non pharetra massa semper eu bibendum ullamcorper lacus sollicitudin? Fusce leo tellus tincidunt sociosqu dapibus elementum commodo integer.
+                     Teachers can offer specialized courses designed for children with autism, where parents and children can select classes, submit assignments, and interact with learning materials. Autism Compass fosters an accessible, supportive environment where education is tailored to individual learning styles and progress can be tracked with ease.
                   </p>
                   <button className="view-more-button">JOIN US AND EXPLORE MORE...</button>
                </div>
             </div>
          </Reveal>
-      </div>
+      </motion.div>
    );
 };
 

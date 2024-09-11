@@ -7,6 +7,8 @@ import 'boxicons/css/boxicons.min.css';
 import './BookingTherapy.css';
 import OrgImage from '../img/OrgImage.svg';
 import LoadingAnimation from '../LoadingAnimation';
+import RevealLeftToRight from '../RevealLeftToRight'
+import RevealRightToLeft from '../RevealRightToLeft'
 
 const BookingTherapy = () => {
    const [orgDetails, setOrgDetails] = useState(null);
@@ -219,140 +221,144 @@ const BookingTherapy = () => {
          <ToastContainer />
          <Navbar />
          <div className='booking-heading'>
-            <div className="organization-details">
-               <img src={OrgImage} alt="Organization" />
-            </div>
-            <div className="user-details">
-               <h2>Fill up the details</h2>
-               <form onSubmit={handleConfirmBooking}>
-                  <div className="user-info">
-                     <input
-                        required
-                        type="text"
-                        value={orgDetails[0].NAME}
-                     />
-                     <label>Organization Name</label>
-                  </div>
-                  <div className="user-info">
-                     <input
-                        required
-                        type="text"
-                        value={orgDetails[0].CONTACT_NO}
-                     />
-                     <label>Contact No.</label>
-                  </div>
-                  <div className="user-info">
-                     <input
-                        required
-                        type="text"
-                        value={orgDetails[0].EMAIL}
-                     />
-                     <label>Organization Email</label>
-                  </div>
-                  {userDetails && (
-                     <>
-                        <div className='parent-user-info'>
-                           <div className="user-info">
-                              <input
-                                 required
-                                 autoComplete="off"
-                                 type="email"
-                                 value={userDetails.PARENT_EMAIL || ''}
-                              />
-                              <label htmlFor="email">Parent Email</label>
-                           </div>
-                           <div className="user-info">
-                              <input
-                                 required
-                                 autoComplete="off"
-                                 type="name"
-                                 value={userDetails.PARENT_NAME || ''}
-                              />
-                              <label htmlFor="name">Parent Name</label>
-                           </div>
-                        </div>
-                        {localData.TYPE === 'PARENT' && (
-                           <div className='child-user-info'>
+            <RevealLeftToRight>
+               <div className="organization-details">
+                  <img src={OrgImage} alt="Organization" />
+               </div>
+            </RevealLeftToRight>
+            <RevealRightToLeft>
+               <div className="user-details">
+                  <h2>Fill up the details</h2>
+                  <form onSubmit={handleConfirmBooking}>
+                     <div className="user-info">
+                        <input
+                           required
+                           type="text"
+                           value={orgDetails[0].NAME}
+                        />
+                        <label>Organization Name</label>
+                     </div>
+                     <div className="user-info">
+                        <input
+                           required
+                           type="text"
+                           value={orgDetails[0].CONTACT_NO}
+                        />
+                        <label>Contact No.</label>
+                     </div>
+                     <div className="user-info">
+                        <input
+                           required
+                           type="text"
+                           value={orgDetails[0].EMAIL}
+                        />
+                        <label>Organization Email</label>
+                     </div>
+                     {userDetails && (
+                        <>
+                           <div className='parent-user-info'>
                               <div className="user-info">
                                  <input
                                     required
                                     autoComplete="off"
                                     type="email"
-                                    value={childEmail}
-                                    onChange={handleChildEmailChange}
-                                    className={isEmailValid ? 'valid' : ''}
+                                    value={userDetails.PARENT_EMAIL || ''}
                                  />
-                                 <label htmlFor="email">Child Email</label>
+                                 <label htmlFor="email">Parent Email</label>
                               </div>
                               <div className="user-info">
                                  <input
                                     required
                                     autoComplete="off"
                                     type="name"
-                                    value={childName}
+                                    value={userDetails.PARENT_NAME || ''}
                                  />
-                                 <label htmlFor="name">Child Name</label>
+                                 <label htmlFor="name">Parent Name</label>
                               </div>
                            </div>
-                        )}
-                        {localData.TYPE === 'CHILD' && (
-                           <div className='child-user-info'>
-                              <div className="user-info">
-                                 <input
-                                    required
-                                    autoComplete="off"
-                                    type="email"
-                                    value={userDetails.CHILD_EMAIL || ''}
-                                 />
-                                 <label htmlFor="email">Child Email</label>
+                           {localData.TYPE === 'PARENT' && (
+                              <div className='child-user-info'>
+                                 <div className="user-info">
+                                    <input
+                                       required
+                                       autoComplete="off"
+                                       type="email"
+                                       value={childEmail}
+                                       onChange={handleChildEmailChange}
+                                       className={isEmailValid ? 'valid' : ''}
+                                    />
+                                    <label htmlFor="email">Child Email</label>
+                                 </div>
+                                 <div className="user-info">
+                                    <input
+                                       required
+                                       autoComplete="off"
+                                       type="name"
+                                       value={childName}
+                                    />
+                                    <label htmlFor="name">Child Name</label>
+                                 </div>
                               </div>
-                              <div className="user-info">
-                                 <input
-                                    required
-                                    autoComplete="off"
-                                    type="name"
-                                    value={userDetails.CHILD_NAME || ''}
-                                 />
-                                 <label htmlFor="name">Child Name</label>
+                           )}
+                           {localData.TYPE === 'CHILD' && (
+                              <div className='child-user-info'>
+                                 <div className="user-info">
+                                    <input
+                                       required
+                                       autoComplete="off"
+                                       type="email"
+                                       value={userDetails.CHILD_EMAIL || ''}
+                                    />
+                                    <label htmlFor="email">Child Email</label>
+                                 </div>
+                                 <div className="user-info">
+                                    <input
+                                       required
+                                       autoComplete="off"
+                                       type="name"
+                                       value={userDetails.CHILD_NAME || ''}
+                                    />
+                                    <label htmlFor="name">Child Name</label>
+                                 </div>
                               </div>
-                           </div>
-                        )}
-                     </>
-                  )}
-                  <div className="user-info">
-                     <input
-                        required
-                        autoComplete="off"
-                        type="text"
-                        value={therapyType || ''}
-                     />
-                     <label htmlFor="text">Therapy Type</label>
-                  </div>
-                  <div className="user-info">
-                     <input
-                        required
-                        type="date"
-                        id="preferable-date"
-                        defaultValue={currentDate}
-                     />
-                     <label htmlFor="preferable-date">Preferable Date</label>
-                  </div>
+                           )}
+                        </>
+                     )}
+                     <div className="user-info">
+                        <input
+                           required
+                           autoComplete="off"
+                           type="text"
+                           value={therapyType || ''}
+                        />
+                        <label htmlFor="text">Therapy Type</label>
+                     </div>
+                     <div className="user-info">
+                        <input
+                           required
+                           type="date"
+                           id="preferable-date"
+                           defaultValue={currentDate}
+                        />
+                        <label htmlFor="preferable-date">Preferable Date</label>
+                     </div>
 
-                  <div className="user-info">
-                     <input
-                        required
-                        autoComplete="off"
-                        type="time"
-                        id="preferable-time"
-                        defaultValue={currentTime}
-                     />
-                     <label htmlFor="preferable-time">Preferable Time</label>
-                  </div>
-                  <button className='confirm-button'>
-                     Confirm booking
-                  </button>
-               </form>
-            </div>
+                     <div className="user-info">
+                        <input
+                           required
+                           autoComplete="off"
+                           type="time"
+                           id="preferable-time"
+                           defaultValue={currentTime}
+                        />
+                        <label htmlFor="preferable-time">Preferable Time</label>
+                     </div>
+                     <button className='confirm-button'>
+                        Confirm booking
+                     </button>
+                  </form>
+               </div>
+            </RevealRightToLeft>
          </div>
       </div>
    );
