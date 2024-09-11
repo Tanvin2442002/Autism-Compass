@@ -1,17 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays,faPhoneVolume } from "@fortawesome/free-solid-svg-icons";
-import { faTruck,faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays,faPhoneVolume, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faTruck,faHashtag,faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const OrderCard2 = ({ product }) => {
   const navigate = useNavigate();
+  const [pending, setPending] = React.useState(false);
+  const cmpdeliveryDate = new Date(product.DELIVERY_DATE);
+  // console.log("Delivery Date:", cmpdeliveryDate);
   const deliveryDate = product.DELIVERY_DATE.slice(0, 10);
+  console.log("product:", product);
+
+  useEffect(() => {
+    const currentDate = new Date();
+    console.log("Current Date:", currentDate);
+    if (currentDate < cmpdeliveryDate) {
+      setPending(false);
+    } else {
+      setPending(true);
+    }
+    console.log("Pending:", pending);
+  }, [cmpdeliveryDate]);
+
   const handleDeliveryDetails = () => {
     console.log("Delivery Details:", product);
     navigate(`/products/delivery?ORDER_ID=${product.B_ID}`);
   };
+
   return (
     <StyledWrapper>
       <div className="card">
@@ -22,17 +39,28 @@ const OrderCard2 = ({ product }) => {
             <p>{deliveryDate}</p>
           </div>
           <div className="card-details-info">
-          <FontAwesomeIcon icon={faTruck} bounce />
+          <FontAwesomeIcon icon={faTruck} />
             <p>{product.NAME}</p>
           </div>
           <div className="card-details-info">
-          <FontAwesomeIcon icon={faPhoneVolume} shake />
+          <FontAwesomeIcon icon={faPhoneVolume} />
             <p>{product.CONTANCT_NO}</p>
           </div>
           <div className="card-details-info">
-          <FontAwesomeIcon icon={faHashtag} flip />
+          <FontAwesomeIcon icon={faHashtag} />
             <p>{product.TOTAL_QUANTITY}</p>
           </div>
+          {pending ? (
+            <div className="card-details-info">
+           <FontAwesomeIcon icon={faCheck} />
+              <p>Deliverd</p>
+            </div>
+          ):(
+            <div className="card-details-info">
+            <FontAwesomeIcon icon={faSpinner} spinPulse/>
+              <p>In Process</p>
+             </div>
+          )}
           <p className="card-pay">PAY: {product.AMOUNT}$</p>
         </div>
         <button className="card-button" onClick={handleDeliveryDetails}>

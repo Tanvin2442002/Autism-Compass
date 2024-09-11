@@ -10,7 +10,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import ifrit from "./img/ifrit.jpg";
 
-
 const Footer = () => {
   return (
     <div className="pg-footer">
@@ -121,58 +120,6 @@ const Footer = () => {
               </p>
             </div>
           </div>
-
-          <div className="footer-content-column">
-            <div className="footer-meet-team">
-              <h2>Meet our team</h2>
-              <ul>
-                <li>
-                  <p>
-                    <img src="logo.png" alt="" class="footer-meet-team-img" />
-                    Yusuf Reza Hasnat
-                    <span class="footer-meet-icon">
-                      <FontAwesomeIcon icon={faGithub} className="meet-github" />
-                      <FontAwesomeIcon icon={faFacebook} className="meet-github"/>
-                      <FontAwesomeIcon icon={faLinkedin} className="meet-github"/>
-                    </span>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    <img src="logo.png" alt="" class="footer-meet-team-img" />
-                    Tanvin Sarkar Pallab
-                    <span class="footer-meet-icon">
-                      <FontAwesomeIcon icon={faGithub } className="meet-github" />
-                      <FontAwesomeIcon icon={faFacebook} className="meet-github"/>
-                      <FontAwesomeIcon icon={faLinkedin} className="meet-github"/>
-                    </span>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    <img src={ifrit} alt="" class="footer-meet-team-img" />
-                    Nazifa Zahin Ifrit
-                    <span class="footer-meet-icon">
-                      <FontAwesomeIcon icon={faGithub} className="meet-github"/>
-                      <FontAwesomeIcon icon={faFacebook} className="meet-github" />
-                      <FontAwesomeIcon icon={faLinkedin} className="meet-github"/>
-                    </span>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    <img src="logo.png" alt="" class="footer-meet-team-img" />
-                    Mehnaj Hridi
-                    <span class="footer-meet-icon">
-                      <FontAwesomeIcon icon={faGithub} className="meet-github"/>
-                      <FontAwesomeIcon icon={faFacebook} className="meet-github" />
-                      <FontAwesomeIcon icon={faLinkedin} className="meet-github"/>
-                    </span>
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </div>
           <div className="footer-social-links">
             <svg
               className="footer-social-amoeba-svg"
@@ -256,6 +203,93 @@ const Footer = () => {
                 ></path>
               </svg>
             </a>
+          </div>
+          <div className="footer-info-column">
+            <div className="footer-meet-team">
+              <h2>Meet our team</h2>
+              <ul>
+                <li>
+                  <p>
+                    <img src="logo.png" alt="" class="footer-meet-team-img" />
+                    Yusuf Reza Hasnat
+                    <span class="footer-meet-icon">
+                      <FontAwesomeIcon
+                        icon={faGithub}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faFacebook}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faLinkedin}
+                        className="meet-github"
+                      />
+                    </span>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <img src="logo.png" alt="" class="footer-meet-team-img" />
+                    Tanvin Sarkar Pallab
+                    <span class="footer-meet-icon">
+                      <FontAwesomeIcon
+                        icon={faGithub}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faFacebook}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faLinkedin}
+                        className="meet-github"
+                      />
+                    </span>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <img src={ifrit} alt="" class="footer-meet-team-img" />
+                    Nazifa Zahin Ifrit
+                    <span class="footer-meet-icon">
+                      <FontAwesomeIcon
+                        icon={faGithub}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faFacebook}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faLinkedin}
+                        className="meet-github"
+                      />
+                    </span>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <img src="logo.png" alt="" class="footer-meet-team-img" />
+                    Mehnaj Hridi
+                    <span class="footer-meet-icon">
+                      <FontAwesomeIcon
+                        icon={faGithub}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faFacebook}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faLinkedin}
+                        className="meet-github"
+                      />
+                    </span>
+                  </p>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </footer>
