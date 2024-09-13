@@ -1,4 +1,5 @@
 import React from "react";
+import { Typewriter } from 'react-simple-typewriter'
 import { Link } from "react-router-dom";
 import LandDelivery from './img/LandDelivery.svg';
 import LandDoc from './img/LandDoc.svg';
@@ -36,6 +37,8 @@ const fadeInUpAnimation = {
 };
 
 
+
+
 const weOffers = [
    {
       image: LandMother,
@@ -62,50 +65,25 @@ const weOffers = [
       title: "Shops & Delivery",
       description: "Autism Compass offers a thoughtful selection of products, including toys and items designed to support children with autism. Users can easily browse, add products to their cart, and complete purchases smoothly. Track your delivery status directly on the platform and know exactly when your order will arrive. With convenient doorstep delivery, finding the right products for your child has never been more straightforward or stress-free."
    },
-   {
-      image: LandMother,
-      title: "Parent and Children",
-      description: "Empowering parents to take control of their child’s care, Autism Compass provides easy access to book doctor appointments, explore therapy options, and track updates all in one place. With the ability to view details about doctors, therapy locations, and even purchase specialized products for home delivery, parents have everything they need to ensure their child’s well-being right at their fingertips."
-   },
-   {
-      image: LandDoc,
-      title: "Doctor",
-      description: "Doctors can connect with families, offer tailored suggestions. By recommending therapies and providing timely feedback, doctors ensure each child’s unique needs are met, creating a streamlined experience for both medical professionals and parents working together."
-   },
-   {
-      image: LandTreat,
-      title: "Therapy",
-      description: "Autism Compass offers a comprehensive list of therapies tailored to various needs, with detailed descriptions and locations to help parents and children find the right support. Easily browse therapy options, view where sessions are available, and book appointments directly through the platform. This seamless system ensures that finding and scheduling therapies is convenient and accessible."
-   },
-   {
-      image: LandTeaching,
-      title: "Teacher",
-      description: "Teachers can offer specialized courses designed for children with autism, where parents and children can select classes, submit assignments, and interact with learning materials. Autism Compass fosters an accessible, supportive environment where education is tailored to individual learning styles and progress can be tracked with ease."
-   },
-   {
-      image: LandDelivery,
-      title: "Shops & Delivery",
-      description: "Autism Compass offers a thoughtful selection of products, including toys and items designed to support children with autism. Users can easily browse, add products to their cart, and complete purchases smoothly. Track your delivery status directly on the platform and know exactly when your order will arrive. With convenient doorstep delivery, finding the right products for your child has never been more straightforward or stress-free."
-   }
 ]
 
+const DESCRIPTION = "AUTISM COMPASS is your dedicated partner in navigating the complexities of autism care. With expert guidance, tailored resources, and compassionate support, we help families find the right path for their loved ones, ensuring no journey is taken alone.";
 
 const Landing = () => {
 
-   const FAST_DURATION = 45;
+   const FAST_DURATION = 35;
    const SLOW_DURATION = 100;
-
    const [duration, setDuration] = useState(FAST_DURATION);
    let [ref, { width }] = useMeasure();
-
    const xTranslation = useMotionValue(0);
-
    const [mustFinish, setMustFinish] = useState(false);
    const [rerender, setRerender] = useState(false);
 
    useEffect(() => {
       let controls;
-      let finalPosition = -5 * width;
+      let finalPosition = -5 * width - 60;
+
+      console.log(finalPosition);
 
       if (mustFinish) {
          controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
@@ -135,6 +113,9 @@ const Landing = () => {
 
    const x = useTransform(scrollYProgress, [0, 1], ['0%', '-55%']);
 
+
+   console.log(weOffers);
+
    return (
       <motion.div className="langingPage"
       >
@@ -153,7 +134,7 @@ const Landing = () => {
          <Reveal>
             <div className="Nav">
                <Link to="/login" className="login">LOG IN</Link>
-               <Link to="/signup" className="register">SIGN UP</Link>
+               <Link to="/signup" className="register">JOIN US</Link>
             </div>
             <div className="page1">
                <div className="land-main">
@@ -173,15 +154,21 @@ const Landing = () => {
                      <motion.p
                         variants={fadeInUpAnimation}
                      >
-                        <motion.strong
-                           variants={fadeInUpAnimation}
-                        >AUTISM COMPASS  </motion.strong>
-                        is your dedicated partner in navigating the complexities of autism care. With expert guidance, tailored resources, and compassionate support, we help families find the right path for their loved ones, ensuring no journey is taken alone.
+                        <Typewriter
+                           words={[DESCRIPTION]}
+                           loop
+                           cursor
+                           cursorStyle='_'
+                           typeSpeed={50}
+                           deleteSpeed={40}
+                           delaySpeed={1000}
+                        />
                      </motion.p>
-                     <motion.button
+
+                     {/* <motion.button
                         className="view-more-button"
                         variants={fadeInUpAnimation}
-                     >SIGN UP FOR FREE</motion.button>
+                     >JOIN US NOW</motion.button> */}
                   </motion.div>
                </div>
                <div className="land-side-img">
@@ -202,6 +189,26 @@ const Landing = () => {
                   >Our Offers</motion.h1>
                </motion.div>
                <motion.div className="offer-card-container"
+               >
+                  {weOffers.map((offer, index) => (
+                     <motion.div key={index}
+                        className="absolute left-0 flex gap-4"
+                        style={{ x: xTranslation }}
+                        ref={ref}
+                        onHoverStart={() => {
+                           setMustFinish(true);
+                           setDuration(SLOW_DURATION);
+                        }}
+                        onHoverEnd={() => {
+                           setMustFinish(true);
+                           setDuration(FAST_DURATION);
+                        }}
+                     >
+                        <OfferCard image={offer.image} title={offer.title} description={offer.description} />
+                     </motion.div>
+                  ))}
+               </motion.div>
+               <motion.div className="offer-card-container-2"
                >
                   {weOffers.map((offer, index) => (
                      <motion.div key={index}

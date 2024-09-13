@@ -6,8 +6,8 @@ import './Dashboard.css';
 import Doctor from "./img/Doctor.svg"
 import Therapy from "./img/Therapy.svg"
 import FindDisorder from "./img/FindDisorder.svg"
-import DoctorConsultationList from './DoctorComponent/DoctorConsultationList';
 import DashDelivery from './img/DashDelivery.svg';
+import DoctorConsultationList from './DoctorComponent/DoctorConsultationList';
 import RevealRightToLeft from './RevealRightToLeft';
 import RevealLeftToRight from './RevealLeftToRight';
 import RevealUp from './RevealUp';
@@ -244,38 +244,32 @@ const Dashboard = () => {
                </>
             )}
             {localData.TYPE === 'CHILD' && (
-               <div div className='disorder-info-dashboard'>
-                  <div className='dash-disorder-info'>
-                     <div className='disorder-details'>
-                        <div className='disorder-typography'>
-                           <h2 className='dashboard-heading'>
-                              <Typewriter
-                                 words={[disorderData.TYPE]}
-                                 loop
-                                 cursor
-                                 cursorStyle='_'
-                                 typeSpeed={150}
-                                 deleteSpeed={40}
-                                 delaySpeed={1000}
-                              />
-                           </h2>
-                           <p>Discription:
-                              <Typewriter
-                                 words={[disorderData.DESCRIPTION]}
-                                 loop
-                                 cursor
-                                 cursorStyle='_'
-                                 typeSpeed={50}
-                                 deleteSpeed={40}
-                                 delaySpeed={1000}
-                              />
-                           </p>
+               <RevealLeftToRight>
+                  <div div className='disorder-info-dashboard'>
+                     <div className='dash-disorder-info'>
+                        <div className='disorder-details'>
+                           <div className='disorder-typography'>
+                              <h2 className='dashboard-heading'>
+                                 {disorderData.TYPE}
+                              </h2>
+                              <p>Discription: <span></span>
+                                 <Typewriter
+                                    words={[disorderData.DESCRIPTION]}
+                                    loop
+                                    cursor
+                                    cursorStyle='_'
+                                    typeSpeed={50}
+                                    deleteSpeed={40}
+                                    delaySpeed={1000}
+                                 />
+                              </p>
+                           </div>
+                           <button className='view-more-button' onClick={handleDisorder}>View more info about your disorder</button>
                         </div>
-                        <button className='view-more-button' onClick={handleDisorder}>View more info about your disorder</button>
-                     </div>
-                     <img src={FindDisorder} alt="Find Disorder" className="doctor-img" />
+                           <img src={FindDisorder} alt="Find Disorder" className="doctor-img" />
+                        </div>
                   </div>
-               </div>
+               </RevealLeftToRight>
             )}
             {(localData.TYPE === 'PARENT' && displayedDeliveryData.length) && (
                <div className='delivery-info-dash'>

@@ -1,19 +1,16 @@
 .offer-card {
     display: grid;
     grid-template-columns: 325px 2fr;
-    /* flex-direction: column; */
     justify-content: space-between;
     width: 850px;
     height: 350px;
     padding: 10px;
     margin-bottom: 40px;
-    /* border: 1px solid #000000; */
     border-radius: 15px;
     align-items: center;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-    background: #f8f8f886;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-    background: #5291b036;
+    background: #5291b029;
 
 }
 
@@ -21,8 +18,7 @@
 .offer-card img {
     width: 300px;
     height: 300px;
-    /* border-radius: 100%; */
-    /* border: 1px solid #000000; */
+    border-radius: 100%;
 }
 
 
