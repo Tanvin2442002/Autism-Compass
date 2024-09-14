@@ -1,22 +1,21 @@
 import React, { useEffect, useRef } from "react";
 
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion, useAnimation, useInView, AnimatePresence } from "framer-motion";
 
 const Reveal = ({ children}) => {
 
    const ref = useRef(null);
-   const isInView = useInView(ref, {once: true});
+   const isInView = useInView(ref, {amount: 0.3, once: true});
    const mainContent = useAnimation();
 
    useEffect(() => {
       console.log(isInView);
-      // console.log(ref);
       if (isInView) {
          mainContent.start("visible");
       }
       else {
          mainContent.start("hidden");
-      }  
+      }
    }, [isInView]);
 
    return (
@@ -28,7 +27,7 @@ const Reveal = ({ children}) => {
             }}
             initial="hidden"
             animate={mainContent}
-            transition={{ duration: 0.5, delay: 0.25 }}
+            transition={{ duration: 1, delay: 0.25 }}
          >
             {children}
          </motion.div>

@@ -1,30 +1,26 @@
 import React, { useEffect, useRef } from "react";
-
 import { motion, useAnimation, useInView } from "framer-motion";
 
 const RevealUp = ({ children }) => {
-
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
+    // Set amount to 0.3 to trigger when 30% of the component is visible
+    const isInView = useInView(ref, { amount: 0.4, once: true });
     const mainContent = useAnimation();
 
     useEffect(() => {
-        console.log(isInView);
-        // console.log(ref);
         if (isInView) {
             mainContent.start("visible");
-        }
-        else {
+        } else {
             mainContent.start("hidden");
         }
-    }, [isInView]);
+    }, [isInView, mainContent]);
 
     return (
         <div ref={ref} style={{ position: 'relative' }}>
             <motion.div
                 variants={{
                     hidden: { opacity: 0, y: 100 },
-                    visible: { opacity: 1, y: 0 }
+                    visible: { opacity: 1, y: 0 },
                 }}
                 initial="hidden"
                 animate={mainContent}
@@ -35,6 +31,5 @@ const RevealUp = ({ children }) => {
         </div>
     );
 };
-
 
 export default RevealUp;

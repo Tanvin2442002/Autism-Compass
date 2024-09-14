@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast, useToast } from "react-toastify";
@@ -464,6 +464,11 @@ const Registration = () => {
                      </div>
                   }
                   {!showLoader && <button className='view-more-button'> SIGN UP</button>}
+                  <div className="login-register-link">
+                     <p className='login-text'>
+                        Already have an account? <Link to="/login" className='link-to-reg'>Log In</Link>
+                     </p>
+                  </div>
                </form>
             </RevealLeftToRight>
 

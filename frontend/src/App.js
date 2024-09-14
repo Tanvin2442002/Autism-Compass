@@ -27,7 +27,9 @@ import SuggestedList from "./DoctorComponent/Suggested";
 
 import Courses from "./CoursesComponent/Courses";
 import EnrolledCourses from "./CoursesComponent/EnrolledCourses";
+import OfferCard from "./OfferCard";
 
+import ChatBot from "./ChatBotComponent/ChatBot";
 
 import { AnimatePresence } from "framer-motion";
 
@@ -73,6 +75,7 @@ function App() {
                   <Route path='/parent-child' element={<ParentChildProfile />} />
                   <Route path='/consultation' element={<Consultation />} />
                   <Route path='/doctor/feedback' element={<SuggestedList />} />
+                  <Route path='/chatbot' element={<ChatBot />} />
 
                   <Route path='/courses' element={<Courses />} />
                   <Route path='/enrolled-courses' element={<EnrolledCourses />} />

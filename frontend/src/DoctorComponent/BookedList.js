@@ -68,7 +68,7 @@ const BookedList = () => {
         {/* Left Side: Booked List with scrollbar */}
         <div className="list-container-list">
           <div className='list-booked-info'>
-            <div className="header-container">
+            <div className='header-container'>
               <h1>Booked Consultations</h1>
               <p>Here are your booked consultations.</p>
             </div>
