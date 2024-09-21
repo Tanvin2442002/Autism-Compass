@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./footer.css";
-import {} from "@fortawesome/free-solid-svg-icons";
+// import {} from "@fortawesome/free-solid-svg-icons";
 import {
   faTwitter,
   faGithub,
