@@ -41,7 +41,7 @@ const ProductList = () => {
         <SlickComponent products = {productCards} />
       </div>
       <MainContent products = {productCards} />
-      {/* <ComponentName/> */}
+      {/* <ComponentName/>  */}
     </div>
   );
 };

@@ -32,8 +32,15 @@
       max-width: 1230px;
       padding: 40px 15px 450px;
       position: relative;
+      display: flex;
+      flex-wrap: wrap;
       /* flex-direction: column; */
       /* display: flex; */
+  }
+
+  .footer-info-column{
+    display: flex;
+    flex-direction: column;
   }
   
   .footer-content-column {
@@ -52,6 +59,17 @@
 
   .footer-meet-team ul li{
     margin-left: 0px;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-meet-team ul li p{
+    margin-left: 0px;
+    border: 1px solid red;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: space-evenly;
+    /* text-align: justify; */
   }
 
   .footer-content-column ul li a {
@@ -59,11 +77,29 @@
     text-decoration: none;
   }
 
-  .footer-meet-team {
-    align-content: flex-start;
-    float: left;
-  }
+  .footer-meet-team ul {
+    list-style: none;
+    margin-bottom: 0;
+    margin-top: 10px;
+    padding-left: 0;
+    display: flex; /* Enable Flexbox */
+    flex-wrap: wrap; /* Wrap items to the next line if necessary */
+    gap: 20px; /* Add some space between items */
 
+  }
+  
+  .footer-meet-team ul li {
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-meet-team {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align to the left */
+    width: 100%;
+  }
   .footer-meet-team h2{
       color: black;
       font-size: 14px;

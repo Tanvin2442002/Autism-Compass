@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./footer.css";
-import {} from "@fortawesome/free-solid-svg-icons";
+// import {} from "@fortawesome/free-solid-svg-icons";
 import {
   faTwitter,
   faGithub,
@@ -212,20 +212,17 @@ const Footer = () => {
                   <p>
                     <img src="logo.png" alt="" class="footer-meet-team-img" />
                     Yusuf Reza Hasnat
-                    <span class="footer-meet-icon">
-                      <FontAwesomeIcon
-                        icon={faGithub}
-                        className="meet-github"
-                      />
-                      <FontAwesomeIcon
-                        icon={faFacebook}
-                        className="meet-github"
-                      />
-                      <FontAwesomeIcon
-                        icon={faLinkedin}
-                        className="meet-github"
-                      />
-                    </span>
+                  </p>
+                  <p>
+                    <FontAwesomeIcon icon={faGithub} className="meet-github" />
+                    <FontAwesomeIcon
+                      icon={faFacebook}
+                      className="meet-github"
+                    />
+                    <FontAwesomeIcon
+                      icon={faLinkedin}
+                      className="meet-github"
+                    />
                   </p>
                 </li>
                 <li>
