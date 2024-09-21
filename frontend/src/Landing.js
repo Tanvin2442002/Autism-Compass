@@ -9,12 +9,23 @@ import LandMother from './img/LandMother.svg';
 import LandTeaching from './img/LandTeaching.svg';
 import LandTreat from './img/LandTreat.svg';
 import LandPuzzle from "./img/puzzlebg.png";
+import Arrow from "./img/arrow.svg";
 import "./Landing.css";
+import CountUp from 'react-countup';
 import Reveal from "./RevealRightToLeft";
-import { motion, useScroll, useSpring, Variants, animate, useMotionValue, useTransform } from 'framer-motion';
+import RevealUp from "./RevealUp.jsx";
+import { motion, useScroll, useSpring, Variants, useAnimation, useInView, animate, useMotionValue, useTransform, delay } from 'framer-motion';
 import OfferCard from "./OfferCard.jsx";
 import { useEffect, useState } from "react";
 import useMeasure from "react-use-measure";
+import DoctorProfile from "./img/DoctorProfile.svg";
+import UserProfile from "./img/UserProfile.svg";
+import OrganizationProfile from "./img/OrganizationProfile.svg";
+import TherapyProfile from "./img/TherapyProfile.svg";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faStethoscope, faUser, faHospital, faCapsules } from '@fortawesome/free-solid-svg-icons';
 
 const charVariants = {
    hidden: { opacity: 0 },
@@ -133,8 +144,8 @@ const Landing = () => {
          </ul>
          <Reveal>
             <div className="Nav">
-               <Link to="/login" className="login">LOG IN</Link>
-               <Link to="/signup" className="register">JOIN US</Link>
+               <Link to="/login" className="land-login">LOG IN</Link>
+               <Link to="/signup" className="land-login">JOIN US</Link>
             </div>
             <div className="page1">
                <div className="land-main">
@@ -176,6 +187,49 @@ const Landing = () => {
                </div>
             </div>
          </Reveal>
+         <RevealUp>
+            <div className="land-features">
+               <heading>Our partner and users</heading>
+               <div className="verified">
+                  <RevealUp delay={0.2}>
+                     <div className="registered-user" >
+                        <h1>Active <br></br> User</h1>
+                        <FontAwesomeIcon icon={faUser} size="xl" className="land-icon" />
+                        <p>
+                           <CountUp end={10} duration={5} /> K+
+                        </p>
+                     </div>
+                  </RevealUp>
+                  <RevealUp delay={0.4}>
+                     <div className="verified-doctor">
+                        <h1>Online <br></br> Doctor</h1>
+                        <FontAwesomeIcon icon={faStethoscope} size="xl" className="land-icon" />
+                        <p>
+                           <CountUp end={50} duration={5} /> +
+                        </p>
+                     </div>
+                  </RevealUp>
+                  <RevealUp delay={0.6}>
+                     <div className="verified-organization">
+                        <h1>partner <br></br> Organization</h1>
+                        <FontAwesomeIcon icon={faHospital} size="xl" className="land-icon" />
+                        <p>
+                           <CountUp end={112} duration={5} /> +
+                        </p>
+                     </div>
+                  </RevealUp>
+                  <RevealUp delay={0.8}>
+                     <div className="verified-therapy">
+                        <h1>available <br></br> Therapy</h1>
+                        <FontAwesomeIcon icon={faCapsules} size="xl" className="land-icon" />
+                        <p>
+                           <CountUp end={62} duration={5} /> +
+                        </p>
+                     </div>
+                  </RevealUp>
+               </div>
+            </div>
+         </RevealUp>
          <Reveal>
             <div className="our-offers"
             >
@@ -228,6 +282,25 @@ const Landing = () => {
                      </motion.div>
                   ))}
                </motion.div>
+            </div>
+         </Reveal>
+         <Reveal>
+            <div className="new-design">
+               <header className="new-design-header">
+                  <h1>Our New Design</h1>
+               </header>
+               <div>
+                  {weOffers.map((offer, index) => (
+                     <div key={index} className="new-design-card">
+                        <Reveal>
+                           <OfferCard image={offer.image} title={offer.title} description={offer.description} />
+                           {index}
+                           
+                        </Reveal>
+                     </div>
+                  ))
+                  }
+               </div>
             </div>
          </Reveal>
       </motion.div>

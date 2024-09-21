@@ -13,9 +13,12 @@
     flex-direction: column;
     --color: rgba(114, 114, 114, 0.3);
     background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
-        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);    
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
     background-size: 15px 15px;
     z-index: 0;
+    /* background-image: radial-gradient(rgba(26, 24, 24, 0.108) 2px, transparent 0);
+    background-size: 30px 30px;
+    background-position: -5px -5px */
 }
 
 
@@ -147,6 +150,30 @@
     }
 }
 
+
+.land-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    margin: 10px;
+    border-radius: 3px;
+    height: 25px;
+    width: 80px;
+    padding: 10px;
+    background: whitesmoke;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin: 5px;
+    transition: all 0.5s ease;
+}
+
+.land-login:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    background-color: #1a2225;
+    color: white;
+}
 
 
 .Nav {
@@ -307,4 +334,86 @@
     margin-left: calc(10 * 900px - 120px);
     gap: 16px;
     display: flex;
+}
+
+
+
+
+
+.land-features{
+    place-items: center;
+    width: 95%;
+    color: white;
+    font-size: 40px;
+    font-family: 'Bebas Neue', cursive;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: grid;
+    grid-template-rows: 100px 1fr;
+    margin: 20px;
+    border-radius: 20px;
+    background-color: #313131;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.171) 2px, transparent 0);
+    background-size: 30px 30px;
+    background-position: -5px -5px;
+    padding: 20px 10px;
+}
+
+
+.verified {
+    /* border: 1px solid red; */
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    place-items: center;
+    color: black;   
+    font-family: 'Bebas Neue', cursive;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.verified .land-icon{
+    font-size: 70px;
+    /* color: #6DCC6E; */
+}
+
+.verified h1{
+    margin: 0;
+    padding: 0;
+    font-family: 'New Amsterdam', sans-serif;
+    color: #2a110d;
+    font-size: 30px;
+}
+
+.verified p{
+    font-family: 'Poppins', sans-serif;
+    color: #2a110d;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.registered-user, .verified-doctor, .verified-organization, .verified-therapy {
+    background-color:#75C981;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    height: 250px;
+    width: 16.5vw;
+    text-align: center;
+}
+
+.verified-doctor{
+    background-color: #FFDC60;
+}
+
+.verified-organization{
+    background-color: #59C9DA;
+}
+
+.verified-therapy{
+    background-color: #FFADAD;
 }

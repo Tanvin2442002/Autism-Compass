@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 
-const RevealUp = ({ children }) => {
+const RevealUp = ({ children, delay }) => {
     const ref = useRef(null);
     // Set amount to 0.3 to trigger when 30% of the component is visible
     const isInView = useInView(ref, { amount: 0.4, once: true });
@@ -24,7 +24,7 @@ const RevealUp = ({ children }) => {
                 }}
                 initial="hidden"
                 animate={mainContent}
-                transition={{ duration: 0.5, delay: 0.25 }}
+                transition={{ duration: 0.5, delay: delay }}
             >
                 {children}
             </motion.div>

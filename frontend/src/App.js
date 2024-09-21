@@ -40,7 +40,6 @@ function App() {
 
    const rem = JSON.parse(localStorage.getItem('REMEMBER_ME'));
    if (rem === "0") {
-      console.log("4567890");
       window.onbeforeunload = function () {
          localStorage.clear();
       }
