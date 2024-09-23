@@ -80,12 +80,12 @@ function App() {
                   <Route path='/doctor/feedback' element={<SuggestedList />} />
                   <Route path='/chatbot' element={<ChatBot />} />
 
-               <Route path='/courses' element={<Courses />} />
-               <Route path='/enrolled-courses' element={<EnrolledCourses />} />
-               <Route path="/students/:courseCode" element={<StudentList />} /> 
+                  <Route path='/courses' element={<Courses />} />
+                  <Route path='/enrolled-courses' element={<EnrolledCourses />} />
+                  <Route path="/students/:courseCode" element={<StudentList />} /> 
                
-            </Routes>
-         </Router>
+               </Routes>
+            </Router>
          </AnimatePresence>
       </div>
    );
