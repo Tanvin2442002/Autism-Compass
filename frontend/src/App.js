@@ -27,6 +27,8 @@ import SuggestedList from "./DoctorComponent/Suggested";
 
 import Courses from "./CoursesComponent/Courses";
 import EnrolledCourses from "./CoursesComponent/EnrolledCourses";
+import StudentList from "./CoursesComponent/StudentList";
+
 
 
 function App() {
@@ -70,6 +72,9 @@ function App() {
 
                <Route path='/courses' element={<Courses />} />
                <Route path='/enrolled-courses' element={<EnrolledCourses />} />
+               <Route path="/students/:courseCode" element={<StudentList />} /> 
+               
+
             </Routes>
          </Router>
       </div>
