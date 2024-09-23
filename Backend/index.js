@@ -29,6 +29,8 @@ app.use("", require("./Route/Suggest"));
         throw new Error("Database connection not established");
     }
 
+    console.log(`Querying database for user: ${email}, ${password}, ${type}`);
+
     const result = await connection.execute(
         `SELECT *
             FROM LOG_IN, ${type}

@@ -1,0 +1,419 @@
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Protest+Guerrilla&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&family=Lilita+One&display=swap');
+
+.langingPage {
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    --color: rgba(114, 114, 114, 0.3);
+    background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+    background-size: 15px 15px;
+    z-index: 0;
+    /* background-image: radial-gradient(rgba(26, 24, 24, 0.108) 2px, transparent 0);
+    background-size: 30px 30px;
+    background-position: -5px -5px */
+}
+
+
+
+.puzzle-circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    /* overflow: hidden; */
+    z-index: 0;
+    /* border: 5px solid #6DCC6E; */
+}
+
+.puzzle-circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    background-color: #3d52a02a;
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+    z-index: 0;
+    opacity: 0.005;
+}
+
+.puzzle-circles li:nth-child(1) {
+    opacity: 0.1;
+    /* border: 2px solid black; */
+    left: 25%;
+    width: 55px;
+    height: 55px;
+    animation-delay: 0s;
+    background-color: #ea464624;
+}
+
+.puzzle-circles li:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+    background-color: #ffad2934;
+}
+
+.puzzle-circles li:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+    background-color: #55acd537;
+}
+
+.puzzle-circles li:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+    background-color: #6dcc6f36;
+}
+
+.puzzle-circles li:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+    background-color: #ea46462d;
+}
+
+.puzzle-circles li:nth-child(6) {
+    left: 75%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 3s;
+    background-color: #6dcc6f2d;
+}
+
+.puzzle-circles li:nth-child(7) {
+    left: 35%;
+    width: 100px;
+    height: 100px;
+    animation-delay: 7s;
+    background-color: #55acd532;
+}
+
+.puzzle-circles li:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+    background-color: #ffad292b;
+}
+
+.puzzle-circles li:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+    background-color: #55acd53e;
+}
+
+.puzzle-circles li:nth-child(10) {
+    left: 5%;
+    width: 50px;
+    height: 50px;
+    animation-delay: 0s;
+    animation-duration: 15s;
+    background-color: #6dcc6f32;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+
+.land-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    margin: 10px;
+    border-radius: 3px;
+    height: 25px;
+    width: 80px;
+    padding: 10px;
+    background: whitesmoke;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin: 5px;
+    transition: all 0.5s ease;
+}
+
+.land-login:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    background-color: #1a2225;
+    color: white;
+}
+
+
+.Nav {
+    width: 95%;
+    display: flex;
+    padding: 10px;
+    justify-content: end;
+    margin: 0px 15px;
+    gap: 20px;
+    top: 0;
+    position: sticky;
+    /* border: 1px solid #6DCC6E; */
+}
+
+.Nav a {
+    text-decoration: none;
+    /* border: 1px solid gray; */
+    padding: 5px;
+}
+
+.page1 {
+    /* border: .1px solid #EA4647; */
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 600px;
+    place-items: center;
+}
+
+
+.land-main {
+    /* border: 6px solid #6DCC6E; */
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.land-main-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: #0a74ee 1px solid; */
+    position: relative;
+}
+
+.land-main-img img {
+    position: relative;
+}
+
+.land-main-img .im3 {
+    opacity: 0.25;
+    rotate: 45deg;
+}
+
+.land-main-info-text {
+    text-wrap: nowrap;
+    position: absolute;
+    top: 0;
+    width: 35%;
+    padding: 30px;
+    margin-left: 50px;
+    gap: 10px;
+    padding: 10px;
+    border-left: 2px solid #455A64;
+    backdrop-filter: blur(10px);
+}
+
+.land-main-info-text h1 {
+    /* border: 1px solid #022537c8; */
+    height: 60px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 35px;
+    letter-spacing: 3px;
+    color: #037dbb;
+    word-spacing: 5px;
+    margin: 0;
+    margin-left: 10px;
+}
+
+.land-main-info-text p {
+    font-family: 'Poppins', sans-serif;
+    color: #1a2225;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    /* word-spacing: 1px; */
+    margin: 0;
+    margin-left: 10px;
+    text-wrap: wrap;
+}
+
+
+.land-main-info-text button {
+    left: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+
+.land-side-img {
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    right: 0;
+    /* transform: translate(-50%, -50%); */
+}
+
+.land-main-info {
+    position: relative;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    /* border: 1px solid #6DCC6E; */
+}
+
+
+
+
+
+.our-offers {
+    top: 0;
+    margin: 10px;
+    margin-right: 20px;
+    /* border: 5px solid #6DCC6E; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.our-offers h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 40px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+}
+
+.offer-card-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    gap: 16px;
+}
+
+.offer-card-land {
+    border: 1px solid red;
+    /* min-width: 200px; */
+}
+
+.offer-card-container-2 {
+    top: 116px;
+    position: absolute;
+    margin-left: calc(10 * 900px - 120px);
+    gap: 16px;
+    display: flex;
+}
+
+
+
+
+
+.land-features{
+    place-items: center;
+    width: 95%;
+    color: white;
+    font-size: 40px;
+    font-family: 'Bebas Neue', cursive;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: grid;
+    grid-template-rows: 100px 1fr;
+    margin: 20px;
+    border-radius: 20px;
+    background-color: #313131;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.171) 2px, transparent 0);
+    background-size: 30px 30px;
+    background-position: -5px -5px;
+    padding: 20px 10px;
+}
+
+
+.verified {
+    /* border: 1px solid red; */
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    place-items: center;
+    color: black;   
+    font-family: 'Bebas Neue', cursive;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.verified .land-icon{
+    font-size: 70px;
+    /* color: #6DCC6E; */
+}
+
+.verified h1{
+    margin: 0;
+    padding: 0;
+    font-family: 'New Amsterdam', sans-serif;
+    color: #2a110d;
+    font-size: 30px;
+}
+
+.verified p{
+    font-family: 'Poppins', sans-serif;
+    color: #2a110d;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.registered-user, .verified-doctor, .verified-organization, .verified-therapy {
+    background-color:#75C981;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    height: 250px;
+    width: 16.5vw;
+    text-align: center;
+}
+
+.verified-doctor{
+    background-color: #FFDC60;
+}
+
+.verified-organization{
+    background-color: #59C9DA;
+}
+
+.verified-therapy{
+    background-color: #FFADAD;
+}

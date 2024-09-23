@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Logo from './img/logo.png';
+import Logo from './img/puzzlebg.png';
 import './Nav.css';
 import { useNavigate } from 'react-router-dom';
 import Logout from './Logout';
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
    const [isProductsHovered, setIsProductsHovered] = useState(false);
@@ -34,25 +35,41 @@ const Navbar = () => {
    };
 
    return (
-      <nav className="navbar">
+      <motion.nav className="navbar"
+         initial={{ y: -100, opacity: 0 }}
+         animate={{ y: 0, opacity: 1 }}
+         transition={{ delay: 0, ease: 'easeInOut' }}
+
+      >
          <div className="navbar-container">
             <Link to="/dashboard" className="navbar-logo">
-               <img src={Logo} className="navbar-logo-img" alt="Logo" />
+               <motion.img src={Logo} className="navbar-logo-img" alt="Logo" 
+                  initial={{ y: -100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.1, ease: 'backInOut'}}
+               />
             </Link>
             <button className="navbar-menu-button" onClick={toggleMenu}>
                <img src="https://img.icons8.com/ios-glyphs/30/000000/menu--v1.png" alt="menu" />
             </button>
             <div className={`navbar-links-container ${isMenuOpen ? 'open' : ''}`} id="navbar-sticky">
                <ul className="navbar-links">
-                  <li>
+                  <motion.li
+                     initial={{ y: -100, opacity: 0 }}
+                     animate={{ y: 0, opacity: 1 }}
+                     transition={{ delay: 0.15, ease: 'backInOut'}}
+                  >
                      <Link to="/dashboard" className={`navbar-link ${location.pathname === '/dashboard' ? 'active' : ''}`}>Home</Link>
-                  </li>
+                  </motion.li>
                   {userType === 'CHILD' && (
                      <>
-                        <li
+                        <motion.li
                            className="navbar-dropdown"
                            onMouseEnter={() => setIsDocHovered(true)}
                            onMouseLeave={() => setIsDocHovered(false)}
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.2, ease: 'backInOut'}}
                         >
                            <Link
                               to="/HealthProfessionals"
@@ -70,11 +87,14 @@ const Navbar = () => {
                                  <Link to ="/doctor/feedback" className={`navbar-link ${location.pathname.startsWith('/doctor/feedback') ? 'active' : ''}`}>Feedbacks</Link>
                               </div>
                            )}
-                        </li>
-                        <li
+                        </motion.li>
+                        <motion.li
                            className="navbar-dropdown"
                            onMouseEnter={() => setIsHovered(true)}
                            onMouseLeave={() => setIsHovered(false)}
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.25, ease: 'backInOut'}}
                         >
                            <Link to="/therapy" className={`navbar-link ${location.pathname.startsWith('/therapy') ? 'active' : ''}`}>Therapy</Link>
                            {isHovered && (
@@ -95,27 +115,46 @@ const Navbar = () => {
                                  </Link>
                               </div>
                            )}
-                        </li>
-                        <li>
+                        </motion.li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.3, ease: 'backInOut'}}
+                        >
                            <Link to="/courses" className={`navbar-link ${location.pathname === '/courses' ? 'active' : ''}`}>Courses</Link>
-                        </li>
-                        <li>
+                        </motion.li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.35, ease: 'backInOut'}}
+                        >
                            <Link to="/disorder" className={`navbar-link ${location.pathname === '/disorder' ? 'active' : ''}`}>Disorder</Link>
-                        </li>
-                        <li>
+                        </motion.li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.4, ease: 'backInOut'}}
+                        >
                            <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
-                        </li>
+                        </motion.li>
                      </>
                   )}
                   {userType === 'PARENT' && (
                      <>
-                        <li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.2, ease: 'backInOut'}}
+                        >
                            <Link to="/parent-child" className={`navbar-link ${location.pathname === '/parent-child' ? 'active' : ''}`}>Child</Link>
-                        </li>
-                        <li
+                        </motion.li>
+                        <motion.li
                            className="navbar-dropdown"
                            onMouseEnter={() => setIsDocHovered(true)}
                            onMouseLeave={() => setIsDocHovered(false)}
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.25, ease: 'backInOut'}}
                         >
                            <Link
                               to="/HealthProfessionals"
@@ -133,11 +172,14 @@ const Navbar = () => {
                                  <Link to ="/doctor/feedback" className={`navbar-link ${location.pathname.startsWith('/doctor/feedback') ? 'active' : ''}`}>Feedbacks</Link>
                               </div>
                            )}
-                        </li>
-                        <li
+                        </motion.li>
+                        <motion.li
                            className="navbar-dropdown"
                            onMouseEnter={() => setIsHovered(true)}
                            onMouseLeave={() => setIsHovered(false)}
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.3, ease: 'backInOut'}}
                         >
                            <Link to="/therapy" className={`navbar-link ${location.pathname.startsWith('/therapy') ? 'active' : ''}`}>Therapy</Link>
                            {isHovered && (
@@ -158,11 +200,14 @@ const Navbar = () => {
                                  </Link>
                               </div>
                            )}
-                        </li>
-                        <li
+                        </motion.li>
+                        <motion.li
                            className="navbar-dropdown"
                            onMouseEnter={() => setIsProductsHovered(true)}
                            onMouseLeave={() => setIsProductsHovered(false)}
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.35, ease: 'backInOut'}}
                         >
                            <Link to="/products" className={`navbar-link ${location.pathname.startsWith('/products') ? 'active' : ''}`}>Products</Link>
                            {isProductsHovered && (
@@ -181,36 +226,56 @@ const Navbar = () => {
                                  >Delivery</Link>
                               </div>
                            )}
-                        </li>
-                        <li>
+                        </motion.li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.4, ease: 'backInOut'}}
+                        >
                            <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
-                        </li>
+                        </motion.li>
                      </>
                   )}
                   {userType === 'HEALTH_PROFESSIONAL' && (
-                     <li>
+                     <motion.li
+                        initial={{ y: -100, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.2, ease: 'backInOut'}}
+                     >
                         <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
-                     </li>
+                     </motion.li>
 
                   )}
                   {userType === 'TEACHER' && (
                      <>
-                        <li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.2, ease: 'backInOut'}}
+                        >
                            <Link to="/courses" className={`navbar-link ${location.pathname === '/courses' ? 'active' : ''}`}>Courses</Link>
-                        </li>
-                        <li>
+                        </motion.li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.25, ease: 'backInOut'}}
+                        >
                            <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
-                        </li>
+                        </motion.li>
                      </>
                   )}
                </ul>
             </div>
             {/* <button className="navbar-button" onClick={handleLogOut}>Log Out</button> */}
-            <div onClick={handleLogOut}>
+            <motion.div onClick={handleLogOut}
+               initial={{ y: -100, opacity: 0 }}
+               animate={{ y: 0, opacity: 1 }}
+               transition={{ delay: 0.5, ease: 'backInOut'}}
+            >
                <Logout />
-            </div>
+            </motion.div>
          </div>
-      </nav>
+      </motion.nav>
    );
 };
 

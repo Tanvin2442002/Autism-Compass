@@ -8,7 +8,7 @@
 }
 
 
-.sign-up-form .view-more-button{
+.sign-up-form .view-more-button {
     margin-bottom: 10px;
 }
 
@@ -29,6 +29,8 @@
     height: auto;
     justify-content: center;
     margin: 10px 10%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
     background-color: #BDD1E1;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -116,6 +118,14 @@
     flex-direction: column;
     justify-content: flex-start;
 
+}
+
+
+.sign-up-form .view-more-button,
+.sign-up-form .loader-div {
+    margin-bottom: 10px;
+    width: 30%;
+    height: 35px;
 }
 
 

@@ -4,6 +4,8 @@ import './Profile.css';
 import ProfileImage from '../img/Profile.svg';
 import { ToastContainer, toast } from 'react-toastify';
 import LoadingAnimation from '../LoadingAnimation';
+import { motion } from 'framer-motion';
+import RevealLeftToRight from '../RevealLeftToRight';
 
 const Profile = () => {
    const [profileData, setProfileData] = useState({
@@ -201,182 +203,196 @@ const Profile = () => {
                <li></li>
             </ul>
             <div className='user-profile-with-img'>
-               <div className="user-profile">
-                  <div className="avatar">
-                     <img src={`https://avatar.iran.liara.run/public/${gender}?username=${profileData.NAME}`} alt='Avatar' />
-                  </div>
-                  <div className="profile-info">
-                     <h1>{profileData.NAME}</h1>
-                  </div>
-                  <div className='profile-grid'>
-                     <div className="profile-form-group">
-                        <label>Name</label>
-                        <label>:</label>
-                        <input
-                           type="text"
-                           name="NAME"
-                           placeholder="Enter your Name"
-                           value={profileData.NAME}
-                           onChange={handleChange}
-                        />
+               <RevealLeftToRight>
+                  <div className="user-profile">
+                     <div className="avatar">
+                        <img src={`https://avatar.iran.liara.run/public/${gender}?username=${profileData.NAME}`} alt='Avatar' />
                      </div>
-                     <div className="profile-form-group">
-                        <label>Email Address</label>
-                        <label>:</label>
-                        <input
-                           type="text"
-                           name="EMAIL"
-                           placeholder="Email Address"
-                           disabled
-                           value={profileData.EMAIL}
-                           onChange={handleChange}
-                        />
+                     <div className="profile-info">
+                        <h1>{profileData.NAME}</h1>
                      </div>
-                     <div className="profile-form-group">
-                        <label>Contact Number</label>
-                        <label>:</label>
-                        <input
-                           type="text"
-                           name="CONTACT_NO"
-                           placeholder="Enter contact number"
-                           value={profileData.CONTACT_NO}
-                           onChange={handleChange}
-                        />
-                     </div>
-                     {userData.TYPE === 'CHILD' && (
+                     <div className='profile-grid'>
                         <div className="profile-form-group">
-                           <label>Parent Email ID</label>
-                           <label>:</label>
-                           <input
-                              type="email"
-                              name="P_EMAIL"
-                              disabled
-                              value={profileData.P_EMAIL}
-                              onChange={handleChange}
-                           />
-                        </div>
-                     )}
-                     {(userData.TYPE === 'CHILD' || userData.TYPE === 'PARENT' || userData.TYPE === 'HEALTH_PROFESSIONAL') && (
-                        <>
-                           <div className="profile-form-group">
-                              <label>Street</label>
-                              <label>:</label>
-                              <input
-                                 type="text"
-                                 name="STREET"
-                                 placeholder="Enter street"
-                                 value={profileData.STREET}
-                                 onChange={handleChange}
-                              />
-                           </div>
-                           <div className="profile-form-group">
-                              <label>City</label>
-                              <label>:</label>
-                              <input
-                                 type="text"
-                                 name="CITY"
-                                 placeholder="Enter city"
-                                 value={profileData.CITY}
-                                 onChange={handleChange}
-                              />
-                           </div>
-                           <div className="profile-form-group">
-                              <label>Postal Code</label>
-                              <label>:</label>
-                              <input
-                                 type="number"
-                                 name="POSTAL_CODE"
-                                 placeholder="Enter postal code"
-                                 value={profileData.POSTAL_CODE}
-                                 onChange={handleChange}
-                              />
-                           </div>
-                        </>
-                     )}
-                     {userData.TYPE === 'TEACHER' && (
-                        <div className="profile-form-group">
-                           <label>Institution</label>
+                           <label>Name</label>
                            <label>:</label>
                            <input
                               type="text"
-                              name="INSTITUTION"
-                              placeholder="Institution"
-                              value={profileData.INSTITUTION}
+                              name="NAME"
+                              placeholder="Enter your Name"
+                              value={profileData.NAME}
                               onChange={handleChange}
                            />
                         </div>
-                     )}
-                     {userData.TYPE === 'HEALTH_PROFESSIONAL' && (
-                        <>
+                        <div className="profile-form-group">
+                           <label>Email Address</label>
+                           <label>:</label>
+                           <input
+                              type="text"
+                              name="EMAIL"
+                              placeholder="Email Address"
+                              disabled
+                              value={profileData.EMAIL}
+                              onChange={handleChange}
+                           />
+                        </div>
+                        <div className="profile-form-group">
+                           <label>Contact Number</label>
+                           <label>:</label>
+                           <input
+                              type="text"
+                              name="CONTACT_NO"
+                              placeholder="Enter contact number"
+                              value={profileData.CONTACT_NO}
+                              onChange={handleChange}
+                           />
+                        </div>
+                        {userData.TYPE === 'CHILD' && (
                            <div className="profile-form-group">
-                              <label>Degree</label>
+                              <label>Parent Email ID</label>
                               <label>:</label>
                               <input
-                                 type="text"
-                                 name="DEGREE"
-                                 placeholder="Degree"
-                                 value={profileData.DEGREE}
-                                 onChange={handleChange}
-                              />
-                           </div>
-                           <div className="profile-form-group">
-                              <label>Field of Specialization</label>
-                              <label>:</label>
-                              <input
-                                 type="text"
-                                 name="FIELD_OF_SPEC"
-                                 placeholder="Field of specialization"
-                                 value={profileData.FIELD_OF_SPEC}
-                                 onChange={handleChange}
-                              />
-                           </div>
-                           <div className="profile-form-group">
-                              <label>Hospital</label>
-                              <label>:</label>
-                              <input
-                                 type="text"
-                                 name="STREET"
-                                 placeholder="Enter street"
-                                 value={profileData.HOSPITAL}
-                                 onChange={handleChange}
-                              />
-                           </div>
-                           <div className="profile-form-group">
-                              <label>Visit Time</label>
-                              <label>:</label>
-                              <input
-                                 type="text"
-                                 name="CITY"
-                                 placeholder="Enter city"
-                                 value={profileData.VISIT_TIME}
-                                 onChange={handleChange}
-                              />
-                           </div>
-                        </>
-                     )}
-                     {userData.TYPE === 'CHILD' || userData.TYPE == 'PARENT' && (
-                        <>
-                           <div className="profile-form-group">
-                              <label>Age</label>
-                              <label>:</label>
-                              <input
-                                 type="text"
-                                 name="AGE"
+                                 type="email"
+                                 name="P_EMAIL"
                                  disabled
-                                 placeholder="Enter your age"
-                                 value={profileData.AGE}
+                                 value={profileData.P_EMAIL}
                                  onChange={handleChange}
                               />
                            </div>
-                        </>
-                     )}
-                     <div className="button-group">
-                        <button className='view-more-button' onClick={handleDelete}>Delete Account</button>
-                        <button className='view-more-button' onClick={handleSubmit}>Update Info</button>
+                        )}
+                        {(userData.TYPE === 'CHILD' || userData.TYPE === 'PARENT' || userData.TYPE === 'HEALTH_PROFESSIONAL') && (
+                           <>
+                              <div className="profile-form-group">
+                                 <label>Street</label>
+                                 <label>:</label>
+                                 <input
+                                    type="text"
+                                    name="STREET"
+                                    placeholder="Enter street"
+                                    value={profileData.STREET}
+                                    onChange={handleChange}
+                                 />
+                              </div>
+                              <div className="profile-form-group">
+                                 <label>City</label>
+                                 <label>:</label>
+                                 <input
+                                    type="text"
+                                    name="CITY"
+                                    placeholder="Enter city"
+                                    value={profileData.CITY}
+                                    onChange={handleChange}
+                                 />
+                              </div>
+                              <div className="profile-form-group">
+                                 <label>Postal Code</label>
+                                 <label>:</label>
+                                 <input
+                                    type="number"
+                                    name="POSTAL_CODE"
+                                    placeholder="Enter postal code"
+                                    value={profileData.POSTAL_CODE}
+                                    onChange={handleChange}
+                                 />
+                              </div>
+                           </>
+                        )}
+                        {userData.TYPE === 'TEACHER' && (
+                           <div className="profile-form-group">
+                              <label>Institution</label>
+                              <label>:</label>
+                              <input
+                                 type="text"
+                                 name="INSTITUTION"
+                                 placeholder="Institution"
+                                 value={profileData.INSTITUTION}
+                                 onChange={handleChange}
+                              />
+                           </div>
+                        )}
+                        {userData.TYPE === 'HEALTH_PROFESSIONAL' && (
+                           <>
+                              <div className="profile-form-group">
+                                 <label>Degree</label>
+                                 <label>:</label>
+                                 <input
+                                    type="text"
+                                    name="DEGREE"
+                                    placeholder="Degree"
+                                    value={profileData.DEGREE}
+                                    onChange={handleChange}
+                                 />
+                              </div>
+                              <div className="profile-form-group">
+                                 <label>Field of Specialization</label>
+                                 <label>:</label>
+                                 <input
+                                    type="text"
+                                    name="FIELD_OF_SPEC"
+                                    placeholder="Field of specialization"
+                                    value={profileData.FIELD_OF_SPEC}
+                                    onChange={handleChange}
+                                 />
+                              </div>
+                              <div className="profile-form-group">
+                                 <label>Hospital</label>
+                                 <label>:</label>
+                                 <input
+                                    type="text"
+                                    name="STREET"
+                                    placeholder="Enter street"
+                                    value={profileData.HOSPITAL}
+                                    onChange={handleChange}
+                                 />
+                              </div>
+                              <div className="profile-form-group">
+                                 <label>Visit Time</label>
+                                 <label>:</label>
+                                 <input
+                                    type="text"
+                                    name="CITY"
+                                    placeholder="Enter city"
+                                    value={profileData.VISIT_TIME}
+                                    onChange={handleChange}
+                                 />
+                              </div>
+                           </>
+                        )}
+                        {userData.TYPE === 'CHILD' || userData.TYPE == 'PARENT' && (
+                           <>
+                              <div className="profile-form-group">
+                                 <label>Age</label>
+                                 <label>:</label>
+                                 <input
+                                    type="text"
+                                    name="AGE"
+                                    disabled
+                                    placeholder="Enter your age"
+                                    value={profileData.AGE}
+                                    onChange={handleChange}
+                                 />
+                              </div>
+                           </>
+                        )}
+                        <div className="button-group">
+                           <button className='view-more-button' onClick={handleDelete}>Delete Account</button>
+                           <button className='view-more-button' onClick={handleSubmit}>Update Info</button>
+                        </div>
                      </div>
                   </div>
-               </div>
-               <img src={ProfileImage} alt='Profile' className='profile-img' />
+               </RevealLeftToRight>
+               <motion.img src={ProfileImage} alt='Profile' className='profile-img'
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                     duration: 0.3,
+                     ease: [0, 0.71, 0.2, 1.01],
+                     scale: {
+                        type: "spring",
+                        damping: 5,
+                        stiffness: 100,
+                        restDelta: 0.001
+                     }
+                  }} />
             </div>
          </>
       </div>

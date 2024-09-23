@@ -7,6 +7,7 @@ import Navbar from "../../Navbar";
 import StepperComponent from "./StepperComponent.js";
 import delivery from "../../img/deliveryman.svg";
 import { useLocation } from "react-router-dom";
+import Invoice from "./Invoice";
 
 const OrderConfirmation = () => {
   const [OrderList, setOrderList] = useState([]);
@@ -36,6 +37,7 @@ const OrderConfirmation = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        console.log("Order List:", data);
         setOrderList(data);
         setLoading(false);
       } catch (err) {
@@ -62,10 +64,22 @@ const OrderConfirmation = () => {
     fetchDeliveryDetails();
   }, [orderID]);
 
-  const deliveryDate = DeliveryDetailsNew.length > 0 ? DeliveryDetailsNew[0].DELIVERY_DATE?.slice(0, 10) : "Not available";
-  const shippingBy = DeliveryDetailsNew.length > 0 ? DeliveryDetailsNew[0].NAME : "Not available";
-  const address = DeliveryDetailsNew.length > 0 ? `${DeliveryDetailsNew[0].CITY}, ${DeliveryDetailsNew[0].STREET}, ${DeliveryDetailsNew[0].CITY}` : "Not available";
-  const contact = DeliveryDetailsNew.length > 0 ? DeliveryDetailsNew[0].CONTANCT_NO : "Not available";
+  const deliveryDate =
+    DeliveryDetailsNew.length > 0
+      ? DeliveryDetailsNew[0].DELIVERY_DATE?.slice(0, 10)
+      : "Not available";
+  const shippingBy =
+    DeliveryDetailsNew.length > 0
+      ? DeliveryDetailsNew[0].NAME
+      : "Not available";
+  const address =
+    DeliveryDetailsNew.length > 0
+      ? `${DeliveryDetailsNew[0].CITY}, ${DeliveryDetailsNew[0].STREET}, ${DeliveryDetailsNew[0].CITY}`
+      : "Not available";
+  const contact =
+    DeliveryDetailsNew.length > 0
+      ? DeliveryDetailsNew[0].CONTANCT_NO
+      : "Not available";
 
   const deleteCartItems = async () => {
     try {
@@ -86,7 +100,7 @@ const OrderConfirmation = () => {
       setError(error.message);
     }
   };
-  if(getbool){
+  if (getbool) {
     deleteCartItems();
     setGetBool(false);
   }
@@ -112,8 +126,8 @@ const OrderConfirmation = () => {
       console.error("Error:", error);
       setError(error.message);
     }
-  }
-  if(bool){
+  };
+  if (bool) {
     deletegettable();
     setBool(false);
   }
@@ -127,6 +141,13 @@ const OrderConfirmation = () => {
             <header className="order-card-header">
               <u>My order tracking</u>
             </header>
+            <Invoice
+                orderID={orderID}
+                deliveryDate={deliveryDate}
+                shippingBy={shippingBy}
+                contact={contact}
+                orderList={OrderList}
+              />
             <div className="InnerContainer">
               <div className="containerDetails">
                 <div className="col">
@@ -139,7 +160,9 @@ const OrderConfirmation = () => {
                 </div>
                 <div className="col">
                   <p className="que">Shipping BY:</p>
-                  <p className="ans">{shippingBy} | +88{contact}</p>
+                  <p className="ans">
+                    {shippingBy} | +88{contact}
+                  </p>
                 </div>
                 <div className="col">
                   <p className="que">Status:</p>

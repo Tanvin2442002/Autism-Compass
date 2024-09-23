@@ -1,81 +1,297 @@
 import React from "react";
-// import './footer.css';
-import { FaGithub, FaLinkedinIn,FaTwitter,FaInstagram} from "react-icons/fa";
-import './footer.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./footer.css";
+// import {} from "@fortawesome/free-solid-svg-icons";
+import {
+  faTwitter,
+  faGithub,
+  faFacebook,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
+import ifrit from "./img/ifrit.jpg";
 
-const ComponentName = () => {
-    const year = new Date().getFullYear();
+const Footer = () => {
   return (
-    <footer className="relative text-white">
-      <div className="absolute top-0 left-0 w-full overflow-hidden fill-primary">
+    <div className="pg-footer">
+      <footer className="footer">
         <svg
-          data-name="Layer 1"
+          className="footer-wave-svg"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
+          viewBox="0 0 1200 100"
           preserveAspectRatio="none"
         >
           <path
-            d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z"
-            className="relative block fill-primary"
-          ></path>
+            className="footer-wave-path"
+            d="M851.8,100c125,0,288.3-45,348.2-64V0H0v44c3.7-1,7.3-1.9,11-2.9C80.7,22,151.7,10.8,223.5,6.3C276.7,2.9,330,4,383,9.8 c52.2,5.7,103.3,16.2,153.4,32.8C623.9,71.3,726.8,100,851.8,100z"
+          />
         </svg>
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-20 p-20 fill-primary">
-        <div className="flex flex-col">
-               <h2 className="text-2xl text-pink-500 uppercase mb-4">Footer</h2>
-               <p>
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et tempus nisl. Donec quis nibh et mi fringilla condimentum. Suspendisse eu sodales libero</p>
+        <div className="footer-content">
+          <div className="footer-content-column">
+            <div className="footer-logo">
+              <a className="footer-logo-link" href="#">
+                <span className="hidden-link-text">LOGO</span>
+                <h1>LOGO</h1>
+              </a>
             </div>
-            <div className="flex flex-col">
-                <ul>
-                    <li className="text-[22px] list-none font-semibold text-pink-500 py-2 uppercase">Creativity</li>
-                    <li className="my-4 list-none">Website Guide & Ideas</li>
-                    <li className="my-4 list-none">Tips & Tricks</li>
-                    <li className="my-4 list-none">Photography</li>
-                </ul>
+            <div className="footer-menu">
+              <h2 className="footer-menu-name">Get Started</h2>
+              <ul id="menu-get-started" className="footer-menu-list">
+                <li className="menu-item">
+                  <a href="#">Start</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#">Documentation</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#">Installation</a>
+                </li>
+              </ul>
             </div>
-            <div className="flex flex-col">
-                <ul>
-                    <li className="text-[22px] list-none font-semibold text-pink-500 py-2 uppercase">Creativity</li>
-                    <li className="my-4 list-none"> Guide & Ideas</li>
-                    <li className="my-4 list-none">Tips & Tricks</li>
-                    <li className="my-4 list-none">Photography</li>
-                </ul>
+          </div>
+          <div className="footer-content-column">
+            <div className="footer-menu">
+              <h2 className="footer-menu-name">Company</h2>
+              <ul id="menu-company" className="footer-menu-list">
+                <li className="menu-item">
+                  <a href="#">Contact</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#">News</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#">Careers</a>
+                </li>
+              </ul>
             </div>
-            <div className="flex flex-col">
-                <ul>
-                    <li className="text-[22px] list-none font-semibold text-pink-500 py-2 uppercase">Creativity</li>
-                    <li className="my-4 list-none">Email: yougmail@gmail.com</li>
-                    <li className="my-4 list-none">phone: +880 1790009585</li>
-                    
-                </ul>
-                <div className="flex space-x-4 ">
-                    <a className="text-white  hover:text-pink-500 transform hover:scale-150 transition-all duration-150 ease-in-out" href="">
-                        <FaGithub/>
-                    </a>
-                    <a className="text-white  hover:text-pink-500 transform hover:scale-150 transition-all duration-150 ease-in-out" href="">
-                        <FaLinkedinIn/>
-                    </a>
-                    <a className="text-white  hover:text-pink-500 transform hover:scale-150 transition-all duration-150 ease-in-out" href="">
-                        <FaTwitter/>
-                    </a>
-                    <a className="text-white  hover:text-pink-500 transform hover:scale-150 transition-all duration-150 ease-in-out" href="">
-                        <FaInstagram/>
-                    </a>
-                </div>
+            <div className="footer-menu">
+              <h2 className="footer-menu-name">Legal</h2>
+              <ul id="menu-legal" className="footer-menu-list">
+                <li className="menu-item">
+                  <a href="#">Privacy Notice</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#">Terms of Use</a>
+                </li>
+              </ul>
             </div>
+          </div>
+          <div className="footer-content-column">
+            <div className="footer-menu">
+              <h2 className="footer-menu-name">Quick Links</h2>
+              <ul id="menu-quick-links" className="footer-menu-list">
+                <li className="menu-item">
+                  <a target="_blank" rel="noopener noreferrer" href="#">
+                    Support Center
+                  </a>
+                </li>
+                <li className="menu-item">
+                  <a target="_blank" rel="noopener noreferrer" href="#">
+                    Service Status
+                  </a>
+                </li>
+                <li className="menu-item">
+                  <a href="#">Security</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#">Reviews</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer-content-column">
+            <div className="footer-call-to-action">
+              <h2 className="footer-call-to-action-title">Let's Chat</h2>
+              <p className="footer-call-to-action-description">
+                Have a support question?
+              </p>
+              <a className="footer-call-to-action-button button" href="#">
+                Get in Touch
+              </a>
+            </div>
+            <div className="footer-call-to-action">
+              <h2 className="footer-call-to-action-title">You Call Us</h2>
+              <p className="footer-call-to-action-link-wrapper">
+                <a
+                  className="footer-call-to-action-link"
+                  href="tel:0124-64XXXX"
+                >
+                  0124-64XXXX
+                </a>
+              </p>
+            </div>
+          </div>
+          <div className="footer-social-links">
+            <svg
+              className="footer-social-amoeba-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 236 54"
+            >
+              <path
+                className="footer-social-amoeba-path"
+                d="M223.06,43.32c-.77-7.2,1.87-28.47-20-32.53C187.78,8,180.41,18,178.32,20.7s-5.63,10.1-4.07,16.7-.13,15.23-4.06,15.91-8.75-2.9-6.89-7S167.41,36,167.15,33a18.93,18.93,0,0,0-2.64-8.53c-3.44-5.5-8-11.19-19.12-11.19a21.64,21.64,0,0,0-18.31,9.18c-2.08,2.7-5.66,9.6-4.07,16.69s.64,14.32-6.11,13.9S108.35,46.5,112,36.54s-1.89-21.24-4-23.94S96.34,0,85.23,0,57.46,8.84,56.49,24.56s6.92,20.79,7,24.59c.07,2.75-6.43,4.16-12.92,2.38s-4-10.75-3.46-12.38c1.85-6.6-2-14-4.08-16.69a21.62,21.62,0,0,0-18.3-9.18C13.62,13.28,9.06,19,5.62,24.47A18.81,18.81,0,0,0,3,33a21.85,21.85,0,0,0,1.58,9.08,16.58,16.58,0,0,1,1.06,5A6.75,6.75,0,0,1,0,54H236C235.47,54,223.83,50.52,223.06,43.32Z"
+              />
+            </svg>
+            <a
+              className="footer-social-link linkedin"
+              href="#"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="hidden-link-text">Linkedin</span>
+              <svg
+                className="footer-social-icon-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 30 30"
+              >
+                <path
+                  className="footer-social-icon-path"
+                  d="M9,25H4V10h5V25z M6.501,8C5.118,8,4,6.879,4,5.499S5.12,3,6.501,3C7.879,3,9,4.121,9,5.499C9,6.879,7.879,8,6.501,8z M27,25h-4.807v-7.3c0-1.741-0.033-3.98-2.499-3.98c-2.503,0-2.888,1.896-2.888,3.854V25H12V9.989h4.614v2.051h0.065 c0.642-1.18,2.211-2.424,4.551-2.424c4.87,0,5.77,3.109,5.77,7.151C27,16.767,27,25,27,25z"
+                />
+              </svg>
+            </a>
+            <a
+              className="footer-social-link twitter"
+              href="#"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="hidden-link-text">Twitter</span>
+              <svg
+                className="footer-social-icon-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 30 30"
+              >
+                <path
+                  className="footer-social-icon-path"
+                  d="M30,6.076c-1.104,0.49-2.285,0.82-3.522,0.967c1.265-0.759,2.238-1.961,2.698-3.396 c-1.183,0.701-2.491,1.213-3.884,1.486C24.348,3.847,22.844,3,21.175,3c-3.179,0-5.515,2.966-4.797,6.082 C10.318,8.877,5.466,6.741,2.228,3.148C0.792,5.362,1.359,8.271,3.723,9.723c-0.952-0.03-1.848-0.291-2.626-0.724 c-0.063,2.281,1.581,4.415,3.946,4.894c-0.693,0.188-1.451,0.232-2.224,0.084c0.626,1.956,2.444,3.379,4.6,3.418 c-2.07,1.624-4.678,2.348-7.29,2.037c2.179,1.394,4.768,2.208,7.557,2.208c9.142,0,14.307-7.721,13.995-14.646 C28.28,8.41,29.26,7.304,30,6.076z"
+                />
+              </svg>
+            </a>
+            <a
+              className="footer-social-link youtube"
+              href="#"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="hidden-link-text">Youtube</span>
+              <svg
+                className="footer-social-icon-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 30 30"
+              >
+                <path
+                  className="footer-social-icon-path"
+                  d="M 15 4 C 10.814 4 5.3808594 5.0488281 5.3808594 5.0488281 L 5.3671875 5.0644531 C 3.4606632 5.3693645 2 7.0076245 2 9 L 2 15 L 2 15.001953 L 2 21 L 2 21.001953 A 4 4 0 0 0 5.3769531 24.945312 L 5.3808594 24.951172 C 5.3808594 24.951172 10.814 26.001953 15 26.001953 C 19.186 26.001953 24.619141 24.951172 24.619141 24.951172 L 24.621094 24.949219 A 4 4 0 0 0 28 21.001953 L 28 21 L 28 15.001953 L 28 15 L 28 9 A 4 4 0 0 0 24.623047 5.0546875 L 24.619141 5.0488281 C 24.619141 5.0488281 19.186 4 15 4 z M 12 10.398438 L 20 15 L 12 19.601562 L 12 10.398438 z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              className="footer-social-link github"
+              href="https://github.com/hasnat0006/Autism-Compass"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="hidden-link-text">Github</span>
+              <svg
+                className="footer-social-icon-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  className="footer-social-icon-path"
+                  d="M 16 4 C 9.371094 4 4 9.371094 4 16 C 4 21.300781 7.4375 25.800781 12.207031 27.386719 C 12.808594 27.496094 13.027344 27.128906 13.027344 26.808594 C 13.027344 26.523438 13.015625 25.769531 13.011719 24.769531 C 9.671875 25.492188 8.96875 23.160156 8.96875 23.160156 C 8.421875 21.773438 7.636719 21.402344 7.636719 21.402344 C 6.546875 20.660156 7.71875 20.675781 7.71875 20.675781 C 8.921875 20.761719 9.554688 21.910156 9.554688 21.910156 C 10.625 23.746094 12.363281 23.214844 13.046875 22.910156 C 13.15625 22.132813 13.46875 21.605469 13.808594 21.304688 C 11.144531 21.003906 8.34375 19.972656 8.34375 15.375 C 8.34375 14.0625 8.8125 12.992188 9.578125 12.152344 C 9.457031 11.851563 9.042969 10.628906 9.695313 8.976563 C 9.695313 8.976563 10.703125 8.65625 12.996094 10.207031 C 13.953125 9.941406 14.980469 9.808594 16 9.804688 C 17.019531 9.808594 18.046875 9.941406 19.003906 10.207031 C 21.296875 8.65625 22.300781 8.976563 22.300781 8.976563 C 22.957031 10.628906 22.546875 11.851563 22.421875 12.152344 C 23.191406 12.992188 23.652344 14.0625 23.652344 15.375 C 23.652344 19.984375 20.847656 20.996094 18.175781 21.296875 C 18.605469 21.664063 18.988281 22.398438 18.988281 23.515625 C 18.988281 25.121094 18.976563 26.414063 18.976563 26.808594 C 18.976563 27.128906 19.191406 27.503906 19.800781 27.386719 C 24.566406 25.796875 28 21.300781 28 16 C 28 9.371094 22.628906 4 16 4 Z "
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <div className="footer-info-column">
+            <div className="footer-meet-team">
+              <h2>Meet our team</h2>
+              <ul>
+                <li>
+                  <p>
+                    <img src="logo.png" alt="" class="footer-meet-team-img" />
+                    Yusuf Reza Hasnat
+                  </p>
+                  <p>
+                    <FontAwesomeIcon icon={faGithub} className="meet-github" />
+                    <FontAwesomeIcon
+                      icon={faFacebook}
+                      className="meet-github"
+                    />
+                    <FontAwesomeIcon
+                      icon={faLinkedin}
+                      className="meet-github"
+                    />
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <img src="logo.png" alt="" class="footer-meet-team-img" />
+                    Tanvin Sarkar Pallab
+                    <span class="footer-meet-icon">
+                      <FontAwesomeIcon
+                        icon={faGithub}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faFacebook}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faLinkedin}
+                        className="meet-github"
+                      />
+                    </span>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <img src={ifrit} alt="" class="footer-meet-team-img" />
+                    Nazifa Zahin Ifrit
+                    <span class="footer-meet-icon">
+                      <FontAwesomeIcon
+                        icon={faGithub}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faFacebook}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faLinkedin}
+                        className="meet-github"
+                      />
+                    </span>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <img src="logo.png" alt="" class="footer-meet-team-img" />
+                    Mehnaj Hridi
+                    <span class="footer-meet-icon">
+                      <FontAwesomeIcon
+                        icon={faGithub}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faFacebook}
+                        className="meet-github"
+                      />
+                      <FontAwesomeIcon
+                        icon={faLinkedin}
+                        className="meet-github"
+                      />
+                    </span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        {/* <div>
-            <div className="h-full flex items-center justify-center mb-5">
-                <form className="w-96 relative" action="">
-                    <input className="w-full text-gray-800 p-4 h-10 rounded-full focus:outline-none focus:border border-pink-800" type="email"/>
-                    <button className="bg-pink-400 px-8 py-2 rounded-full text-white absolute top-0 right-0" type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
-        <h6 className="text-center">&copy; Copy right Dev Pallob {year}</h6> */}
-      </div>
-    </footer>
+      </footer>
+    </div>
   );
 };
 
-export default ComponentName;
+export default Footer;

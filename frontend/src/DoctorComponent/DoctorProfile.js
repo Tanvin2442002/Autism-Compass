@@ -14,8 +14,8 @@ const DoctorProfile = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const doctorId = params.get('id');
-  const navigate = useNavigate(); // Use useNavigate for redirection
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     const fetchDoctor = async () => {
       try {

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import AddCart from "../AddCart";
 import { toast, ToastContainer } from "react-toastify";
+import { motion } from 'framer-motion';
+import Reveal from "../../RevealRightToLeft";
+
 
 const SingleProductCard = ({ itemDetails }) => {
   const [PopUp, setPopUp] = useState(false);
@@ -70,38 +73,40 @@ const SingleProductCard = ({ itemDetails }) => {
 
   return (
     <StyledWrapper>
-      <ToastContainer/>
-      <div className="card">
-        <div className="card-img-body">
-          <img
-            src={itemDetails.SRC}
-            alt={itemDetails.NAME}
-            className="card-img"
-          />
-          <div className="card-info">
-            <p className="text-title">{itemDetails.NAME} </p>
-            <p className="text-body">{itemDetails.DESCRIPTION}</p>
-          </div>
-        </div>
-        <div className="card-footer">
-          <div className="card-button" onClick={handleAddCart}>
-            <AddCart price={itemDetails.PRICE} />
-          </div>
-        </div>
-        {PopUp && (
-          <div className="confirmation-dial">
-            <div className="confirmation-dial-content">
-              <p>Do you want to add this product to cart?</p>
-              <button className="confi-btn" onClick={handlePopUp}>
-                Yes
-              </button>
-              <button className="canc-btn" onClick={handleCancel}>
-                No
-              </button>
+      <ToastContainer />
+      <Reveal>
+        <div className="card" >
+          <div className="card-img-body">
+            <img
+              src={itemDetails.SRC}
+              alt={itemDetails.NAME}
+              className="card-img"
+            />
+            <div className="card-info">
+              <p className="text-title">{itemDetails.NAME} </p>
+              <p className="text-body">{itemDetails.DESCRIPTION}</p>
             </div>
           </div>
-        )}
-      </div>
+          <div className="card-footer">
+            <div className="card-button" onClick={handleAddCart}>
+              <AddCart price={itemDetails.PRICE} />
+            </div>
+          </div>
+          {PopUp && (
+            <div className="confirmation-dial">
+              <div className="confirmation-dial-content">
+                <p>Do you want to add this product to cart?</p>
+                <button className="confi-btn" onClick={handlePopUp}>
+                  Yes
+                </button>
+                <button className="canc-btn" onClick={handleCancel}>
+                  No
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </Reveal>
     </StyledWrapper>
   );
 };
