@@ -501,12 +501,7 @@ routerProduct.get("/delivery/get/orders", async (req, res) => {
   try {
     connection = await getConnection();
     const result = await connection.execute(
-      `SELECT DISTINCT B.B_ID, B.AMOUNT, B.DELIVERY_DATE, D.NAME, D.CONTANCT_NO
-           FROM BILLS B, ASSIGNED_TO AT, DELIVERY D, PAYS P
-           WHERE B.B_ID = AT.B_ID
-           AND AT.D_ID = D.D_ID
-           AND P.B_ID = B.B_ID
-           AND P.P_ID = :userID`,
+      `SELECT * FROM OrderDetails WHERE P_ID = :userID`,
       { userID }
     );
     const orders = await connection.execute(

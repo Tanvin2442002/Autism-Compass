@@ -174,7 +174,9 @@ const OrderConfirmation = () => {
                 </div>
               </div>
               <div>
-                <StepperComponent />
+                <StepperComponent
+                  date={deliveryDate}
+                />
               </div>
               <img src={delivery} alt="delivery" className="imgtruck" />
             </div>
