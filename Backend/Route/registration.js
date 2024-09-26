@@ -15,15 +15,14 @@ router.post("/child", async (req, res) => {
     );
     console.log(findParent);
     // console.log(findParent.rows[0].P_ID);
-    if(findParent.rows.length == 0){
+    if (findParent.rows.length == 0) {
         res.status(404).send({ message: "Parent not found" });
         return;
     }
     const resultReg = await connection.execute(
         `INSERT INTO CHILD (C_ID, NAME, DOB, CONTACT_NO, EMAIL, P_EMAIL, CITY, STREET, POSTAL_CODE)
-            VALUES (:C_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, LOWER(:EMAIL), LOWER(:P_EMAIL), :CITY, :STREET, :POSTAL_CODE)`,
+            VALUES (USER_ID.NEXTVAL, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, LOWER(:EMAIL), LOWER(:P_EMAIL), :CITY, :STREET, :POSTAL_CODE)`,
         {
-            C_ID: req.body.C_ID,
             NAME: req.body.NAME,
             DOB: req.body.DOB,
             CONTACT_NO: req.body.CONTACT_NO,
@@ -47,9 +46,8 @@ router.post("/child", async (req, res) => {
 
     const resultParent = await connection.execute(
         `INSERT INTO PARENT_HAS_CHILD (C_ID, P_ID)
-            VALUES (:C_ID, :P_ID)`,
+            VALUES (USER_ID.CURRVAL, :P_ID)`,
         {
-            C_ID: req.body.C_ID,
             P_ID: findParent.rows[0].P_ID,
         },
         { autoCommit: true }
@@ -67,9 +65,8 @@ router.post("/child", async (req, res) => {
     console.log(resultDisability.rows[0].D0_ID);
     const resultDisorder = await connection.execute(
         `INSERT INTO CHILD_HAS_DISORDER (C_ID, D0_ID)
-            VALUES (:C_ID, :D0_ID)`,
+            VALUES (USER_ID.CURRVAL, :D0_ID)`,
         {
-            C_ID: req.body.C_ID,
             D0_ID: resultDisability.rows[0].D0_ID,
         },
         { autoCommit: true }
@@ -89,9 +86,8 @@ router.post("/parent", async (req, res) => {
         // Insert into PARENT table
         const resultReg = await connection.execute(
             `INSERT INTO PARENT (P_ID, NAME, DOB, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE)
-             VALUES (:P_ID, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, LOWER(:EMAIL), :CITY, :STREET, :POSTAL_CODE)`,
+            VALUES (USER_ID.NEXTVAL, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, LOWER(:EMAIL), :CITY, :STREET, :POSTAL_CODE)`,
             {
-                P_ID: req.body.P_ID,
                 NAME: req.body.NAME,
                 DOB: req.body.DOB,
                 CONTACT_NO: req.body.CONTACT_NO,
@@ -127,9 +123,8 @@ router.post("/doctor", async (req, res) => {
     const connection = await getConnection();
     console.log("Received data:", req.body);
     const resultReg = await connection.execute(
-        `INSERT INTO HEALTH_PROFESSIONAL (H_ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC, NAME_OF_HOSPITAL, VISIT_TIME, ADDRESS) VALUES (:H_ID, :NAME, :CONTACT_NO, LOWER(:EMAIL), :DEGREE, :FIELD_OF_SPEC, :NAME_OF_HOSPITAL, :VISIT_TIME, ADDR(:CITY, :STREET, :POSTAL_CODE))`,
+        `INSERT INTO HEALTH_PROFESSIONAL (H_ID, NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC, NAME_OF_HOSPITAL, VISIT_TIME, ADDRESS) VALUES (USER_ID.NEXTVAL, :NAME, :CONTACT_NO, LOWER(:EMAIL), :DEGREE, :FIELD_OF_SPEC, :NAME_OF_HOSPITAL, :VISIT_TIME, ADDR(:CITY, :STREET, :POSTAL_CODE))`,
         {
-            H_ID: req.body.H_ID,
             NAME: req.body.NAME,
             CONTACT_NO: req.body.CONTACT_NO,
             EMAIL: req.body.EMAIL,
@@ -163,9 +158,8 @@ router.post("/teacher", async (req, res) => {
     console.log("Received data:", req.body);
     const resultReg = await connection.execute(
         `INSERT INTO TEACHER (T_ID, NAME, CONTACT_NO, EMAIL,INSTITUTION)
-                 VALUES (:T_ID, :NAME, :CONTACT_NO, LOWER(:EMAIL), :INSTITUTION)`,
+                VALUES (USER_ID.NEXTVAL, :NAME, :CONTACT_NO, LOWER(:EMAIL), :INSTITUTION)`,
         {
-            T_ID: req.body.T_ID,
             NAME: req.body.NAME,
             CONTACT_NO: req.body.CONTACT_NO,
             EMAIL: req.body.EMAIL,
@@ -175,7 +169,7 @@ router.post("/teacher", async (req, res) => {
     );
     const resultLog = await connection.execute(
         `INSERT INTO LOG_IN (EMAIL, PASSWORD, TYPE)
-                 VALUES (LOWER(:EMAIL), :PASSWORD, 'TEACHER')`,
+                VALUES (LOWER(:EMAIL), :PASSWORD, 'TEACHER')`,
         {
             EMAIL: req.body.EMAIL,
             PASSWORD: req.body.PASSWORD,
@@ -183,8 +177,8 @@ router.post("/teacher", async (req, res) => {
         { autoCommit: true }
     );
     res
-        .status(201)
-        .send({ message: "Doctor registered successfully!", resultReg });
+        .status(200)
+        .send({ message: "Teacher registered successfully!", resultReg });
     console.log("Request processed");
 });
 
@@ -308,7 +302,7 @@ router.get("/parent-child-info", async (req, res) => {
             { ID: id, }
         );
     }
-    else{
+    else {
         result = await connection.execute(
             `SELECT P.NAME, P.EMAIL, P.DOB, P.AGE, P.CONTACT_NO
             FROM PARENT P, CHILD C, PARENT_HAS_CHILD PHC
@@ -325,5 +319,7 @@ router.get("/parent-child-info", async (req, res) => {
     }
 
 });
+
+
 
 module.exports = router;

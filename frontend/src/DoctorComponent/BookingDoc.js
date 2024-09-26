@@ -65,8 +65,10 @@ const BookingDoc = () => {
       const time = doctorDetails.VISIT_TIME;
       const startTime = parseInt(time.split(' ')[0]);
       const endTime = parseInt(time.split(' ')[2]);
-      // console.log('Start Time:', startTime);
-      // console.log('End Time:', endTime);
+      console.log('Time:', time);
+      console.log('Start Time:', startTime);
+      console.log('End Time:', endTime);
+
 
       for (let i = startTime; i < endTime; i++) {
         if (i < 12)

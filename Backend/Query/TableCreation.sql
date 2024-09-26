@@ -1,3 +1,9 @@
+CREATE SEQUENCE
+    USER_ID
+    INCREMENT BY 1
+    START WITH 1001;
+
+
 create table LOG_IN
 (
     EMAIL    VARCHAR2(255) not null,

@@ -25,7 +25,7 @@ import TherapyProfile from "./img/TherapyProfile.svg";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faStethoscope, faUser, faHospital, faCapsules } from '@fortawesome/free-solid-svg-icons';
+import { faStethoscope, faUser, faHospital, faCapsules, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 const charVariants = {
    hidden: { opacity: 0 },
@@ -142,6 +142,11 @@ const Landing = () => {
             <li></li>
             <li></li>
          </ul>
+         <div className="chat-icon">
+            <FontAwesomeIcon icon={faMessage} 
+               color="#3293C4"
+            />
+         </div>
          <Reveal>
             <div className="Nav">
                <Link to="/login" className="land-login">LOG IN</Link>
