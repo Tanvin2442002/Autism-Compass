@@ -15,7 +15,7 @@ router.post("/child", async (req, res) => {
     );
     console.log(findParent);
     // console.log(findParent.rows[0].P_ID);
-    if(findParent.rows.length == 0){
+    if (findParent.rows.length == 0) {
         res.status(404).send({ message: "Parent not found" });
         return;
     }
@@ -46,9 +46,8 @@ router.post("/child", async (req, res) => {
 
     const resultParent = await connection.execute(
         `INSERT INTO PARENT_HAS_CHILD (C_ID, P_ID)
-            VALUES (:C_ID, :P_ID)`,
+            VALUES (USER_ID.CURRVAL, :P_ID)`,
         {
-            C_ID: req.body.C_ID,
             P_ID: findParent.rows[0].P_ID,
         },
         { autoCommit: true }
@@ -66,9 +65,8 @@ router.post("/child", async (req, res) => {
     console.log(resultDisability.rows[0].D0_ID);
     const resultDisorder = await connection.execute(
         `INSERT INTO CHILD_HAS_DISORDER (C_ID, D0_ID)
-            VALUES (:C_ID, :D0_ID)`,
+            VALUES (USER_ID.CURRVAL, :D0_ID)`,
         {
-            C_ID: req.body.C_ID,
             D0_ID: resultDisability.rows[0].D0_ID,
         },
         { autoCommit: true }
@@ -88,7 +86,7 @@ router.post("/parent", async (req, res) => {
         // Insert into PARENT table
         const resultReg = await connection.execute(
             `INSERT INTO PARENT (P_ID, NAME, DOB, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE)
-             VALUES (USER_ID.NEXTVAL, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, LOWER(:EMAIL), :CITY, :STREET, :POSTAL_CODE)`,
+            VALUES (USER_ID.NEXTVAL, :NAME, TO_DATE(:DOB, 'YYYY-MM-DD'), :CONTACT_NO, LOWER(:EMAIL), :CITY, :STREET, :POSTAL_CODE)`,
             {
                 NAME: req.body.NAME,
                 DOB: req.body.DOB,
@@ -304,7 +302,7 @@ router.get("/parent-child-info", async (req, res) => {
             { ID: id, }
         );
     }
-    else{
+    else {
         result = await connection.execute(
             `SELECT P.NAME, P.EMAIL, P.DOB, P.AGE, P.CONTACT_NO
             FROM PARENT P, CHILD C, PARENT_HAS_CHILD PHC
@@ -321,5 +319,7 @@ router.get("/parent-child-info", async (req, res) => {
     }
 
 });
+
+
 
 module.exports = router;

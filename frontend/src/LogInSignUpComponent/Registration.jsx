@@ -46,7 +46,6 @@ const Registration = () => {
       if (userType === 'PARENT') {
 
          const parentData = {
-            P_ID: Math.floor(Math.random() * 1000),
             NAME: document.getElementById("name").value,
             DOB: document.getElementById("dob").value,
             EMAIL: document.getElementById("email").value,
@@ -88,7 +87,6 @@ const Registration = () => {
       }
       else if (userType === 'CHILD') {
          const childData = {
-            C_ID: Math.floor(Math.random() * 1000),
             NAME: document.getElementById("name").value,
             DOB: document.getElementById("dob").value,
             EMAIL: document.getElementById("email").value,
@@ -149,7 +147,6 @@ const Registration = () => {
          const visitTime = startTime + " - " + endTime;
          console.log(visitTime);
          const doctorData = {
-            H_ID: Math.floor(Math.random() * 1000),
             NAME: document.getElementById("name").value,
             EMAIL: document.getElementById("email").value,
             CONTACT_NO: document.getElementById("contact-no").value,
@@ -193,7 +190,6 @@ const Registration = () => {
       }
       else if (userType === 'TEACHER') {
          const teacherData = {
-            T_ID: Math.floor(Math.random() * 1000),
             NAME: document.getElementById("name").value,
             EMAIL: document.getElementById("email").value,
             CONTACT_NO: document.getElementById("contact-no").value,

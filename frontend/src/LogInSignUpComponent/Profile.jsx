@@ -170,7 +170,18 @@ const Profile = () => {
    };
 
    const handleDelete = () => {
-      console.log('Delete Account');
+      const ID = userData.ID;
+      console.log('Deleting Account:', ID);
+      if(userData.TYPE === 'CHILD'){
+         const response = fetch('http://localhost:5000/remove/child', {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ C_ID: ID })
+         });
+         console.log(response);
+      }
    };
 
    if (loading) return <LoadingAnimation />;

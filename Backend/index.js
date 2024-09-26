@@ -17,11 +17,11 @@ app.use("/booking", require("./Route/BookingTherapy"));
 app.use("", require("./Route/BookingDoc"));
 app.use("/dash", require("./Route/Dashboard"));
 app.use("", require("./Route/Suggest"));  
+app.use("/remove", require("./Route/DeleteUser"));
 
 
 
-
-/*app.post("/login", async (req, res) => {     
+app.post("/login", async (req, res) => {     
     const { email, password, type } = req.body;
     console.log(`User login request: ${email}, ${password}, ${type}`);
     const connection = await getConnection();
@@ -47,51 +47,51 @@ app.use("", require("./Route/Suggest"));
         console.log(`User logged in: ${email}`);
     } else res.send({ result: "No user found!" });
     console.log("Request processed");
-});*/
-
-app.post("/login", async (req, res) => {     
-    const { email, password, type } = req.body;
-    console.log(`User login request: ${email}, ${password}, ${type}`);
-    const connection = await getConnection();
-    if (!connection) {
-        throw new Error("Database connection not established");
-    }
-
-    let query = `SELECT LOG_IN.EMAIL, LOG_IN.TYPE`;
-
-    // If the user type is 'child', include C_ID in the result
-    if (type === 'CHILD') {
-        query += `, CHILD.C_ID`;
-    }
-    else if(type === 'TEACHER')
-    {
-        query += `, TEACHER.T_ID`;
-    }
-
-    query += `
-        FROM LOG_IN
-        JOIN ${type} ON LOG_IN.EMAIL = ${type}.EMAIL
-        WHERE LOG_IN.EMAIL = LOWER(:email)
-        AND LOG_IN.PASSWORD = :password
-        AND LOG_IN.TYPE = :type`;
-
-    try {
-        const result = await connection.execute(query, { email, password, type });
-        console.log(`Query result: ${JSON.stringify(result.rows)}`);
-
-        const rows = result.rows;
-        if (rows.length > 0) {
-            res.send(rows[0]);
-            console.log(`User logged in: ${email}`);
-        } else {
-            res.send({ result: "No user found!" });
-        }
-        console.log("Request processed");
-    } catch (err) {
-        console.error('Error during login:', err);
-        res.status(500).send('Internal Server Error');
-    }
 });
+
+// app.post("/login", async (req, res) => {     
+//     const { email, password, type } = req.body;
+//     console.log(`User login request: ${email}, ${password}, ${type}`);
+//     const connection = await getConnection();
+//     if (!connection) {
+//         throw new Error("Database connection not established");
+//     }
+
+//     let query = `SELECT LOG_IN.EMAIL, LOG_IN.TYPE`;
+
+//     // If the user type is 'child', include C_ID in the result
+//     if (type === 'CHILD') {
+//         query += `, CHILD.C_ID`;
+//     }
+//     else if(type === 'TEACHER')
+//     {
+//         query += `, TEACHER.T_ID`;
+//     }
+
+//     query += `
+//         FROM LOG_IN
+//         JOIN ${type} ON LOG_IN.EMAIL = ${type}.EMAIL
+//         WHERE LOG_IN.EMAIL = LOWER(:email)
+//         AND LOG_IN.PASSWORD = :password
+//         AND LOG_IN.TYPE = :type`;
+
+//     try {
+//         const result = await connection.execute(query, { email, password, type });
+//         console.log(`Query result: ${JSON.stringify(result.rows)}`);
+
+//         const rows = result.rows;
+//         if (rows.length > 0) {
+//             res.send(rows[0]);
+//             console.log(`User logged in: ${email}`);
+//         } else {
+//             res.send({ result: "No user found!" });
+//         }
+//         console.log("Request processed");
+//     } catch (err) {
+//         console.error('Error during login:', err);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
 
 
 /*app.get('/api/courses', async (req, res) => {
