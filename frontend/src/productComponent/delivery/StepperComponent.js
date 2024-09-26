@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Stepper, Step, StepLabel } from '@mui/material';
 
-const VerticalStepper = () => {
-  const [activeStep, setActiveStep] = useState(0); // Start with the first step
+const VerticalStepper = ({date}) => {
+  const [activeStep, setActiveStep] = useState(0);
   const steps = ['Order Confirmed', 'Order Processed', 'Order Shipped', 'Order Delivered'];
+  
+  
+  const deliveryDate = new Date(date);
+  console.log("deliveryDate",deliveryDate);
 
   useEffect(() => {
-    // Increment the active step every 2 seconds (just for demonstration)
-    const stepTimer = setTimeout(() => {
-      if (activeStep < steps.length - 1) {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      }
-    }, 2000);
+    const currentDate = new Date();
+    console.log(currentDate);
+    
+    const daysDifference = Math.floor((currentDate - deliveryDate) / (1000 * 60 * 60 * 24));
+    console.log("daysDifference",daysDifference);
 
-    // Automatically reset the stepper after 4 days (in milliseconds)
-    const resetTimer = setTimeout(() => {
-      setActiveStep(0);
-    }, 8000); // 4 days in milliseconds
-
-    return () => {
-      clearTimeout(stepTimer);
-      clearTimeout(resetTimer);
-    };
-  }, [activeStep, steps.length]);
+    const updatedStep = Math.abs(Math.min(Math.max(0, -daysDifference), steps.length )-4);
+    console.log("updatedStep",updatedStep);
+    
+    setActiveStep(updatedStep);
+  }, [deliveryDate, steps.length]);
 
   return (
     <div>
@@ -32,11 +30,11 @@ const VerticalStepper = () => {
             <StepLabel
               StepIconProps={{
                 style: {
-                  color: index <= activeStep ? '#ee5435' : 'grey', // Change the icon color for completed steps
+                  color: index <= activeStep ? '#ee5435' : 'grey',
                 },
               }}
               style={{
-                color: index <= activeStep ? '#ee5435' : 'black', // Change the text color for completed steps
+                color: index <= activeStep ? '#ee5435' : 'black',
               }}
             >
               {label}
