@@ -226,6 +226,7 @@ router.post("/user-info", async (req, res) => {
             FROM ${TYPE}
             WHERE ${idColumn} = :id`;
     const result = await connection.execute(query, { id: ID });
+    // console.log("Result:", result);
     if (result.rows.length > 0) {
         res.status(200).send(result.rows);
     } else {

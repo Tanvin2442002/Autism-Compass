@@ -53,3 +53,126 @@ EXCEPTION
 
 END;
 /
+
+--------------------------------------------------------------
+-- DELETE A PARENT USER FROM THE DATABASE USING FUNCTION
+CREATE OR REPLACE FUNCTION DELETE_PARENT (RECEIVED_P_ID VARCHAR2)
+    RETURN VARCHAR2
+    IS
+    USER_NOT_DELETED EXCEPTION;
+    CNT INTEGER;
+    E VARCHAR2(100);
+BEGIN
+    -- Check if the parent exists
+    SELECT COUNT(*) INTO CNT FROM PARENT WHERE P_ID = RECEIVED_P_ID;
+
+    IF CNT = 0 THEN
+        RAISE USER_NOT_DELETED;
+    END IF;
+
+    -- Find the email associated with the parent to delete from LOGIN table
+    SELECT EMAIL INTO E FROM PARENT WHERE P_ID = RECEIVED_P_ID;
+
+    -- Delete records from all related tables
+    DELETE FROM PARENT_HAS_CHILD WHERE P_ID = RECEIVED_P_ID;
+    DELETE FROM BOOKS WHERE P_ID = RECEIVED_P_ID;
+    DELETE FROM CONSULTS WHERE P_ID = RECEIVED_P_ID;
+    DELETE FROM PURCHASES WHERE P_ID = RECEIVED_P_ID;
+    DELETE FROM PAYS WHERE P_ID = RECEIVED_P_ID;
+    DELETE FROM GET WHERE P_ID = RECEIVED_P_ID;
+    DELETE FROM PARENT WHERE P_ID = RECEIVED_P_ID;
+    DELETE FROM LOG_IN WHERE EMAIL = E;
+
+    RETURN 'Parent deleted successfully';
+
+EXCEPTION
+    WHEN USER_NOT_DELETED THEN
+        RAISE_APPLICATION_ERROR(-20112, 'USER NOT FOUND!');
+    WHEN OTHERS THEN
+        RETURN 'Error occurred during deletion: ' || SQLERRM;
+END;
+/
+
+--------------------------------------------------------------
+
+-- DELETE HEALTH PROFESSIONAL USER FROM THE DATABASE USING FUNCTION
+CREATE OR REPLACE FUNCTION DELETE_HEALTH_PROFESSIONAL (RECEIVED_H_ID VARCHAR2)
+    RETURN VARCHAR2
+    IS
+    USER_NOT_DELETED EXCEPTION;
+    CNT INTEGER;
+    E VARCHAR2(100);
+BEGIN
+
+    -- Check if the health professional exists
+    SELECT COUNT(*) INTO CNT FROM HEALTH_PROFESSIONAL WHERE H_ID = RECEIVED_H_ID;
+
+    IF CNT = 0 THEN
+        RAISE USER_NOT_DELETED;
+    END IF;
+
+    -- Find the email associated with the health professional to delete from LOGIN table
+    SELECT EMAIL INTO E FROM HEALTH_PROFESSIONAL WHERE H_ID = RECEIVED_H_ID;
+
+    -- Delete records from all related tables
+    DELETE FROM CONSULTS WHERE H_ID = RECEIVED_H_ID;
+    DELETE FROM SUGGESTS WHERE H_ID = RECEIVED_H_ID;
+    DELETE FROM HEALTH_PROFESSIONAL WHERE H_ID = RECEIVED_H_ID;
+    DELETE FROM LOG_IN WHERE EMAIL = E;
+
+    RETURN 'Health professional deleted successfully';
+
+EXCEPTION
+    WHEN USER_NOT_DELETED THEN
+        RAISE_APPLICATION_ERROR(-20112, 'USER NOT FOUND!');
+    WHEN OTHERS THEN
+        RETURN 'Error occurred during deletion: ' || SQLERRM;
+
+END;
+/
+--------------------------------------------------------------
+-- DELETE TEACHER USER FROM THE DATABASE USING FUNCTION
+CREATE OR REPLACE FUNCTION DELETE_TEACHER (RECEIVED_T_ID VARCHAR2)
+    RETURN VARCHAR2
+    IS
+    USER_NOT_DELETED EXCEPTION;
+    CNT INTEGER;
+    E VARCHAR2(100);
+BEGIN
+
+    -- Check if the teacher exists
+    SELECT COUNT(*) INTO CNT FROM TEACHER WHERE T_ID = RECEIVED_T_ID;
+
+    IF CNT = 0 THEN
+        RAISE USER_NOT_DELETED;
+    END IF;
+
+    -- Find the email associated with the teacher to delete from LOGIN table
+    SELECT EMAIL INTO E FROM TEACHER WHERE T_ID = RECEIVED_T_ID;
+
+    -- Delete records from all related tables
+    DELETE FROM ASSIGNED WHERE T_ID = RECEIVED_T_ID;
+    DELETE FROM TEACHER WHERE T_ID = RECEIVED_T_ID;
+    DELETE FROM LOG_IN WHERE EMAIL = E;
+
+    RETURN 'Teacher deleted successfully';
+
+EXCEPTION
+    WHEN USER_NOT_DELETED THEN
+        RAISE_APPLICATION_ERROR(-20112, 'USER NOT FOUND!');
+    WHEN OTHERS THEN
+        RETURN 'Error occurred during deletion: ' || SQLERRM;
+END;
+
+
+-- TO EXECUTE THE FUNCTION
+DECLARE
+    v_result VARCHAR2(100);
+BEGIN
+    -- Call the function to delete customer 201 and related orders
+    v_result := DELETE_PARENT(1);
+
+    -- Output the result message
+    DBMS_OUTPUT.PUT_LINE(v_result);
+END;
+/

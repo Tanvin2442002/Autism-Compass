@@ -128,10 +128,10 @@ app.get('/api/courses/:c_id', async (req, res) => {
         // Fetch all available courses (those not already enrolled by the child)
         const availableCoursesResult = await connection.execute(
             `SELECT c.course_code, c.course_name, t.name AS teacher_name
-             FROM courses c
-             JOIN assigned a ON c.course_code = a.course_code
-             JOIN teacher t ON a.t_id = t.t_id
-             WHERE c.course_code NOT IN (
+            FROM courses c
+            JOIN assigned a ON c.course_code = a.course_code
+            JOIN teacher t ON a.t_id = t.t_id
+            WHERE c.course_code NOT IN (
                 SELECT e.course_code FROM enrolls e WHERE e.c_id = :c_id
              )`, // This closes the subquery
             [C_ID]

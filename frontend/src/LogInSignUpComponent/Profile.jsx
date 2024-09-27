@@ -6,8 +6,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import LoadingAnimation from '../LoadingAnimation';
 import { motion } from 'framer-motion';
 import RevealLeftToRight from '../RevealLeftToRight';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+   const navigate = useNavigate();
    const [profileData, setProfileData] = useState({
       TYPE: '',
       ID: '',
@@ -53,28 +55,28 @@ const Profile = () => {
             }
 
             const data = await response.json();
-            console.log('Data:', data);
+            console.log('Data:', data[0]);
             setProfileData({
                TYPE: userData.TYPE,
                ID: userData.ID,
-               NAME: data[0].NAME,
-               DOB: data[0].DOB,
-               AGE: data[0].AGE,
-               CONTACT_NO: data[0].CONTACT_NO,
-               EMAIL: data[0].EMAIL,
-               P_EMAIL: data[0].P_EMAIL,
-               STREET: data[0].STREET || data[0].ADDRESS.STREET,
-               CITY: data[0].CITY || data[0].ADDRESS.CITY,
-               POSTAL_CODE: data[0].POSTAL_CODE || data[0].ADDRESS.POSTAL_CODE,
-               DEGREE: data[0].DEGREE,
-               FIELD_OF_SPEC: data[0].FIELD_OF_SPEC,
-               INSTITUTION: data[0].INSTITUTION,
-               HOSPITAL: data[0].NAME_OF_HOSPITAL,
-               VISIT_TIME: data[0].VISIT_TIME
+               NAME: data[0].NAME || '',
+               DOB: data[0].DOB || '',
+               AGE: data[0].AGE || '',
+               CONTACT_NO: data[0].CONTACT_NO || '',
+               EMAIL: data[0].EMAIL || '',
+               P_EMAIL: data[0].P_EMAIL || '',
+               STREET: data[0].STREET || data[0].ADDRESS?.STREET || '',
+               CITY: data[0].CITY || data[0].ADDRESS?.CITY || '',
+               POSTAL_CODE: data[0].POSTAL_CODE || data[0].ADDRESS?.POSTAL_CODE || '',
+               DEGREE: data[0].DEGREE || '',
+               FIELD_OF_SPEC: data[0].FIELD_OF_SPEC || '',
+               INSTITUTION: data[0].INSTITUTION || '',
+               HOSPITAL: data[0].NAME_OF_HOSPITAL || '',
+               VISIT_TIME: data[0].VISIT_TIME || ''
             });
             console.log('PROFILE DATA:', profileData);
          } catch (err) {
-            setError(err.message);
+            // setError(err.message);
          } finally {
             setLoading(false);
          }
@@ -169,18 +171,95 @@ const Profile = () => {
       // await fetchGenderData();
    };
 
-   const handleDelete = () => {
+   const handleDelete = async () => {
       const ID = userData.ID;
       console.log('Deleting Account:', ID);
-      if(userData.TYPE === 'CHILD'){
-         const response = fetch('http://localhost:5000/remove/child', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ C_ID: ID })
-         });
-         console.log(response);
+      if (userData.TYPE === 'CHILD') {
+         try{
+            const response = await fetch('http://localhost:5000/remove/child', {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({ C_ID: ID }),
+            });
+            if (response.ok) {
+               const res = await response.json();
+               console.log(res);
+               localStorage.removeItem('USER');
+               navigate('/');
+            } else {
+               console.error('Failed to delete the child.');
+            }
+         }catch(err){
+            console.error('Error:', err);
+         }
+      }
+      else if (userData.TYPE === 'PARENT') {
+         try {
+            const response = await fetch('http://localhost:5000/remove/parent', {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({ P_ID: ID }),
+            });
+            if (response.ok) {
+               const res = await response.json();
+               console.log(res);
+               localStorage.removeItem('USER');
+               navigate('/');
+            } else {
+               console.error('Failed to delete the parent.');
+            }
+         } catch (err) {
+            console.error('Error:', err);
+         }
+      }
+
+      else if (userData.TYPE === 'HEALTH_PROFESSIONAL') {
+         try {
+            const response = await fetch('http://localhost:5000/remove/doctor', {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({ D_ID: ID }),
+            });
+            if (response.ok) {
+               const res = await response.json();
+               console.log(res);
+               localStorage.removeItem('USER');
+               navigate('/');
+            } else {
+               console.error('Failed to delete the health professional.');
+            }
+         } catch (err) {
+            console.error('Error:', err);
+         }
+      }
+
+      else if (userData.TYPE === 'TEACHER') {
+         console.log('Deleting Teacher');
+         try {
+            const response = await fetch('http://localhost:5000/remove/teacher', {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({ T_ID: ID }),
+            });
+            if (response.ok) {
+               const res = await response.json();
+               console.log(res);
+               localStorage.removeItem('USER');
+               navigate('/');
+            } else {
+               console.error('Failed to delete the teacher.');
+            }
+         } catch (err) {
+            console.error('Error:', err);
+         }
       }
    };
 
