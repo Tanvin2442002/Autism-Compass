@@ -285,6 +285,16 @@ app.post('/api/teacher/create-course', async (req, res) => {
     try {
         connection = await getConnection();
 
+        const existingCourse = await connection.execute(
+            `SELECT COUNT(*) AS count FROM courses WHERE course_code = :course_code`,
+            { course_code: COURSE_CODE }
+        );
+
+        if (existingCourse.rows[0].COUNT > 0) {
+            // If the course code already exists, return an error response
+            return res.status(400).send({ message: 'Course code already exists' });
+        }
+
         // Insert the new course
         const createCourseResult = await connection.execute(
             `INSERT INTO courses (course_code, course_name) VALUES (:course_code, :course_name)`,
@@ -310,6 +320,8 @@ app.post('/api/teacher/create-course', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+
 
 
 
@@ -383,46 +395,46 @@ app.post('/api/teacher/upload-assignment', upload.single('assignment'), async (r
 
 app.get('/api/download-assignment/:course_code', async (req, res) => {
     let connection;
-    console.log("test");
-    const { COURSE_CODE } = req.params;
-    console.log("Requested Course Code:", COURSE_CODE);
+    const { course_code } = req.params;
 
     try {
-        connection = await getConnection();
+        connection = await getConnection(); // Open the connection
+        console.log("Requested Course Code:", course_code);
 
-        // Query to get the assignment path for the course
         const result = await connection.execute(
             `SELECT assignment_path FROM courses WHERE course_code = :course_code`,
-            { COURSE_CODE }
+            { course_code }
         );
 
-        if (result.rows.length === 0) {
-            console.log("Assignment not found for course code:", COURSE_CODE);
+        /*if (result.rows.length === 0) {
+            console.log("Assignment not found for course code:", course_code);
             return res.status(404).send('Assignment not found for this course');
+        }*/
+
+        if (result.rows.length === 0 || !result.rows[0].ASSIGNMENT_PATH) {
+            console.log("No assignment uploaded for course code:", course_code);
+            return res.status(204).send('No assignment uploaded for this course'); // 204 status means no content
         }
 
-        const assignmentFilename = result.rows[0].ASSIGNMENT_PATH; // This should be the filename only
-        const filePath = path.join(__dirname, 'uploads', assignmentFilename); // Ensure full path
+        const assignmentFilename = result.rows[0].ASSIGNMENT_PATH;
+        const filePath = path.join(__dirname, 'uploads', assignmentFilename);
 
         console.log("Resolved File Path:", filePath);
 
         // Check if the file exists
         if (fs.existsSync(filePath)) {
-            res.setHeader('Content-Type', 'application/pdf'); // Explicitly set the Content-Type to PDF
-            res.setHeader('Content-Disposition', `attachment; filename=${assignmentFilename}`); // Ensure it's downloaded with the correct name
-            return res.download(filePath); // Send the file for download
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', `attachment; filename=${assignmentFilename}`);
+            return res.download(filePath); // Send file for download
         } else {
             return res.status(404).send('File not found');
         }
     } catch (err) {
         console.error('Error downloading assignment:', err);
         return res.status(500).send('Internal Server Error');
-    } finally {
-        if (connection) {
-            await connection.close();
-        }
-    }
+    } 
 });
+
 
 
 

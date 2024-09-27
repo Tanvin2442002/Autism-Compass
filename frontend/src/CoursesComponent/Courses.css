@@ -526,3 +526,20 @@
 
 
 
+
+.modal-buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: #46607d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-buttons button:hover {
+    background-color: #022851;
+}
+
+
+

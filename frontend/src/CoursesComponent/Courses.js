@@ -17,6 +17,10 @@ const Courses = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [showConfetti, setShowConfetti] = useState(false);
     const [showMessage, setShowMessage] = useState(false);
+    const [enrollmentMessage, setEnrollmentMessage] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showcoursecreate, setCourseCreate] = useState(false);
+    const [uploadsucess, setUploadSucess] = useState(false);
     
 
     
@@ -45,6 +49,15 @@ const Courses = () => {
             },
         })
         .then((response) => {
+
+            if (response.status === 200) {
+                setUploadSucess(true);
+
+                setTimeout(() => {
+                    setUploadSucess(false);
+                }, 3000);
+            }
+
             console.log('Assignment uploaded:', response.data);
         })
         .catch((error) => {
@@ -113,10 +126,12 @@ const Courses = () => {
                     
                     setShowConfetti(true);
                     setShowMessage(true);
+                    setEnrollmentMessage(true);
     
                     // Hide the message after 3 seconds
                     setTimeout(() => {
                         setShowMessage(false);
+                        setEnrollmentMessage(false);
                     }, 3000);
                    
                 }
@@ -175,6 +190,11 @@ const Courses = () => {
                     </div>
                     
                 </div>
+                {enrollmentMessage && (
+                <div className="enrollment-message">
+                    Successfully Enrolled!
+                </div>
+            )}
             </>
         );
     } 
@@ -183,6 +203,9 @@ const Courses = () => {
 else if (userData.TYPE === 'TEACHER') {
     const handleCreateCourse = (e) => {
         e.preventDefault();
+
+        setErrorMessage('');
+
         if (newCourseCode && newCourseName) {
             axios.post('http://localhost:5000/api/teacher/create-course', {
                 T_ID,
@@ -196,10 +219,21 @@ else if (userData.TYPE === 'TEACHER') {
                     setShowCreateCourseForm(false);
                     setNewCourseCode('');
                     setNewCourseName('');
+
+                    setCourseCreate(true);
+
+                    setTimeout(() => {
+                        setCourseCreate(false);
+                    }, 3000);
                 }
             })
             .catch(error => {
-                console.error('Error creating course:', error);
+                 if (error.response && error.response.status === 400) {
+                    // If a 400 error is received, show a pop-up message that the course code exists
+                    setErrorMessage('Course code already exists. Please choose another.');
+                } else {
+                    console.error('Error creating course:', error);
+                }
             });
         }
     };
@@ -237,6 +271,8 @@ else if (userData.TYPE === 'TEACHER') {
                                     onChange={(e) => setNewCourseName(e.target.value)}
                                     required
                                 />
+                                 {/* Show error message if course code exists */}
+                                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                                 <div className="form-buttons">
                                     <button type="submit" className="submit-course-button">Create Course</button>
                                     <button 
@@ -283,7 +319,22 @@ else if (userData.TYPE === 'TEACHER') {
                         <p>No courses assigned</p>
                     )}
                 </div>
+
+                {/* Show success message after assignment upload */}
+            {uploadsucess && (
+                <div className="enrollment-message">
+                    Assignment uploaded successfully!
+                </div>
+            )}
+
+            {showcoursecreate && (
+                <div className="enrollment-message">
+                    Successfully Course Created!
+                </div>
+            )}
+                
             </div>
+            
         </>
     );
     
