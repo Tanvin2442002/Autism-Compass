@@ -1,8 +1,12 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
+import ChatBotImg from '../img/chatBot.svg';
 import './ChatBot.css';
 import { IoSend } from 'react-icons/io5';
+import Navbar from '../Navbar';
+import { motion } from 'framer-motion';
+
 
 const ChatBot = () => {
    const [messages, setMessages] = useState([]);
@@ -53,50 +57,68 @@ const ChatBot = () => {
    };
 
    return (
-      <div className="chatbot-main">
-         <header>Autism Compass Chatbot</header>
-         <div className="chat-content" ref={chatContentRef}>
-            {messages.map((message, index) => (
-               <div
-                  key={index}
-                  className={`message-${message.sender}`}
-                  ref={index === messages.length - 1 ? lastMessageRef : null}
-               >
-                  <p>
-                     {message.sender === 'bot' && (
-                        <Typewriter
-                           words={[message.text]}
-                           typeSpeed={15}
-                           onType={() => setIsTyping(true)} // Set typing state to true when typing starts
-                           // onDone={() => setIsTyping(false)} 
-                           onLoopDone={() => setIsTyping(false)} 
-                        />
-                     )}
-                     {message.sender === 'user' && message.text}
-                  </p>
+      <>
+         <Navbar />
+         <div className='chatbot-main-main'>
+            <motion.div 
+               initial={{ opacity: 0, x: -100 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6 }}
+               className='chat-bot-img'
+            >
+               <img src={ChatBotImg} alt="chatBotImg" />
+            </motion.div>
+            <motion.div 
+               className="chatbot-main"
+               initial={{ opacity: 0, x: 100 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6 }}
+            >
+               <header>Autism Compass Chatbot</header>
+               <div className="chat-content" ref={chatContentRef}>
+                  {messages.map((message, index) => (
+                     <div
+                        key={index}
+                        className={`message-${message.sender}`}
+                        ref={index === messages.length - 1 ? lastMessageRef : null}
+                     >
+                        <p>
+                           {message.sender === 'bot' && (
+                              <Typewriter
+                                 words={[message.text]}
+                                 typeSpeed={15}
+                                 onType={() => setIsTyping(true)} // Set typing state to true when typing starts
+                                 // onDone={() => setIsTyping(false)} 
+                                 onLoopDone={() => setIsTyping(false)}
+                              />
+                           )}
+                           {message.sender === 'user' && message.text}
+                        </p>
+                     </div>
+                  ))}
                </div>
-            ))}
-         </div>
-         <div className="input-content">
-            <textarea
-               disabled={loading}
-               placeholder="Ask me anything.."
-               value={inputMessage}
-               onChange={(e) => setInputMessage(e.target.value)}
-               onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-            ></textarea>
-            <div className="send-loading">
-               {loading && (
-                  <div className='loader-div'>
-                     <div className='loader-animation'></div>
+               <div className="input-content">
+                  <textarea
+                     disabled={loading}
+                     placeholder="Ask me anything.."
+                     value={inputMessage}
+                     onChange={(e) => setInputMessage(e.target.value)}
+                     onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                  ></textarea>
+                  <div className="send-loading">
+                     {loading && (
+                        <div className='loader-div'>
+                           <div className='loader-animation'></div>
+                        </div>
+                     )}
+                     {!loading && (
+                        <IoSend className="chatbot-button" onClick={handleSendMessage} />
+                     )}
                   </div>
-               )}
-               {!loading && (
-                  <IoSend className="chatbot-button" onClick={handleSendMessage} />
-               )}
-            </div>
+               </div>
+            </motion.div>
          </div>
-      </div>
+      </>
    );
 };
 
