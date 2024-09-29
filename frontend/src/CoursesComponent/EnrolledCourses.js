@@ -15,6 +15,17 @@ const EnrolledCourses = () => {
     const [showModal, setShowModal] = useState(false); // State to control modal visibility
     const [courseToUnenroll, setCourseToUnenroll] = useState(null); // Course selected for unenrollment
 
+    const viewFile = (course) => {
+        if (!course.ASSIGNMENT_PATH) {
+            alert("No assignment has been uploaded for this course.");
+            return; // Exit function if no assignment exists
+        }
+
+        window.open(`http://localhost:5000/api/view-assignment/${course.COURSE_CODE}`, '_blank');
+        console.log("view dl\n");
+    };
+    
+
     const downloadFile = (courseCode) => {
         axios({
             url: `http://localhost:5000/api/download-assignment/${courseCode}`, // Correct backend URL
@@ -97,13 +108,21 @@ const EnrolledCourses = () => {
                                     <h2>{course.COURSE_NAME}</h2>
                                     <p>Instructor: {course.TEACHER_NAME}</p>
                                     
-                                    <div className="download">
+                                    <div className="assignment-container">
+                                    <button className="assignment-button">Assignment</button>
+                                    <div className="assignment-options">
                                         <button 
-                                        className="upload-assignment-button"
-                                        onClick={() => downloadFile(course.COURSE_CODE)}>
-                                            Download Assignment
+                                            onClick={() => viewFile(course)}
+                                        >
+                                            View
+                                        </button>
+                                        <button 
+                                            onClick={() => downloadFile(course.COURSE_CODE)}
+                                        >
+                                            Download
                                         </button>
                                     </div>
+                                </div>
                                     <div className="unenrolll">
                                         <button
                                             className="unenrolll-button"
