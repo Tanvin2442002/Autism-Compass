@@ -182,11 +182,7 @@
     background-color: #022851;
 }
 
-.file-input {
-    position: absolute;
-    bottom: 20px;
-    right: 160px; /* Adjust this value if necessary to position properly */
-}
+
 
 .upload-assignment-button {
     background-color: #46607d;
@@ -541,55 +537,88 @@
     background-color: #022851;
 }
 
-.assignment-container {
-    margin-top: 16px;
-    align-self: flex-end; /* Aligns the Assignment button to the right */
-    background-color: #46607d;
-    border-radius: 4px;
+
+
+
+/* Container for the dropdown */
+.dropdown {
     position: relative;
-    display: inline-block;
-    top: -20px;
-}
-
-.assignment-button {
-    background-color: #46607d; /* Button color */
-    border-radius: 4px;
-    color: white;
-    border: none;
+    
+  display: flex;
+  justify-content: flex-end;
+  }
+  
+  /* The dropdown button styling */
+  .dropdown-btn {
+    background-color: #3f4c68; /* Dark blue background */
+    color: white; /* White text color */
+    position: relative;
+  
     padding: 10px 20px;
-    cursor: pointer;
     font-size: 16px;
-}
-
-.assignment-options {
-    display: none;
-    position: absolute;
-    top: 100%; /* Position just below the assignment button */
-    left: 50;
-    transform: translateX(20%);
-    background-color: #5a718d; /* A shade of #46607d for the dropdown */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.assignment-options button {
-    background-color: #5a718d; /* Lighter shade for options */
-    color: white;
-    padding: 10px 16px;
-    text-align: left;
     border: none;
-    display: block;
-    width: 100%;
+    border-radius: 5px;
     cursor: pointer;
-}
-
-.assignment-options button:hover {
-    background-color: #46607d; /* Darker color on hover */
-    text-decoration: underline; /* Show underline when hovering */
-
-}
-
-.assignment-container:hover .assignment-options {
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    
+  }
+  
+  .dropdown-btn:hover {
+    background-color: #2c3651; /* Slightly darker on hover */
+  }
+  
+  /* Dropdown items container */
+  .dropdown-menu {
+    position: absolute;
+    top: 93%; /* Display right below the button */
+    left: 90%;
+    background-color: #3f4c68; /* Same dark blue background as button */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+    z-index: 1;
+    list-style: none;
+    width: 100px;
+    overflow: hidden;
+  }
+  
+  /* Individual dropdown items */
+  .dropdown-item {
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #2c3651; /* Add a border to separate items */
+  }
+  
+  .dropdown-item:last-child {
+    border-bottom: none; /* No border on the last item */
+  }
+  
+  .dropdown-item:hover {
+    background-color: #2c3651; /* Darker background when hovering over an item */
+  }
+  
+  /* Styling for the file input */
+  .file-input {
+    width: 200px; /* Full width minus padding */
+    margin: 10px auto; /* Center the file input */
+    padding: 5px;
     display: block;
-}
+    background-color: #fff;
+    color: #3f4c68;
+    border: 1px solid #3f4c68;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .file-input:hover {
+    background-color: #e6e6e6; /* Slight background change on hover */
+  }
+  
 

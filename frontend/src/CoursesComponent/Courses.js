@@ -19,7 +19,20 @@ const Courses = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showcoursecreate, setCourseCreate] = useState(false);
   const [uploadsucess, setUploadSucess] = useState(false);
-  const [selectedAction, setSelectedAction] = useState('');
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+
+  
+  
+  
+
+ const toggleDropdown = (courseCode) => {
+    if (openDropdown === courseCode) {
+      setOpenDropdown(null); // Close the dropdown if it's already open
+    } else {
+      setOpenDropdown(courseCode); // Open the clicked course's dropdown
+    }
+  };
 
   // Fetch the C_ID or T_ID from local storage, which was set during login
   const userData = JSON.parse(localStorage.getItem("USER"));
@@ -335,42 +348,29 @@ const Courses = () => {
                     >
                       Show Students
                     </button>
-                    <div className="assignment-container">
                     
-                      <select
-                        className="assignment-dropdown"
-                        onChange={(e) => {
-                          setSelectedAction(e.target.value);
-                          if (e.target.value === "view") {
-                            handleViewAssignment(course.COURSE_CODE);
-                          }
-                        }}
-                        value={selectedAction}
-                      >
-   
-                        <option value="upload">Upload Assignment</option>
-                        <option value="view">View Assignment</option>
-                      </select>
+    <input class="file-input" type="file" onChange={handleFileChange} />
+           
+    <button onClick={() => toggleDropdown(course.COURSE_CODE)} className="upload-assignment-button">
+  Assignment
+</button>
 
-                      {selectedAction === "upload" && (
-                        <>
-                          <input
-                            type="file"
-                            onChange={handleFileChange}
-                            className="file-input"
-                            style={{ marginTop: "10px" }}
-                          />
-                          <button
-                            className="upload-assignment-button"
-                            onClick={() =>
-                              handleUploadAssignment(course.COURSE_CODE)
-                            }
-                          >
-                            Upload Assignment
-                          </button>
-                        </>
-                      )}
-                    </div>
+      
+      {openDropdown === course.COURSE_CODE && (
+        <ul className="dropdown-menu">
+          
+         
+          <li className="dropdown-item" onClick={() => handleUploadAssignment(course.COURSE_CODE)}>
+            Upload
+          </li>
+          
+          <li className="dropdown-item" onClick={() => handleViewAssignment(course.COURSE_CODE)}>
+            View
+          </li>
+        </ul>
+      )}
+  
+                    {/*ekhan porjinto code*/}
                   </div>
                 );
               })
