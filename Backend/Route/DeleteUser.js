@@ -28,15 +28,7 @@ router.post('/child', async (req, res) => {
         // Handle errors
         console.error(err);
         res.status(500).json({ message: 'Error occurred during deletion' });
-    } finally {
-        if (connection) {
-            try {
-                await connection.close();  // Close the connection
-            } catch (err) {
-                console.error('Error closing connection:', err);
-            }
-        }
-    }
+    } 
 });
 
 router.post('/parent', async (req, res) => {
@@ -61,18 +53,15 @@ router.post('/parent', async (req, res) => {
         console.log(result);
         res.status(200).json({ message: result.outBinds.result });
     } catch (err) {
-        // Handle errors
-        console.error(err);
-        res.status(500).json({ message: 'Error occurred during deletion' });
-    } finally {
-        if (connection) {
-            try {
-                await connection.close();  // Close the connection
-            } catch (err) {
-                console.error('Error closing connection:', err);
-            }
+        if (err.message.includes('ORA-20113')) {
+            res.status(400).json({ message: 'Cannot delete parent: Undelivered orders are still pending' });
+        } else if(err.message.includes('ORA-20114')){
+            res.status(401).json({ message: 'Cannot delete parent account: Child account still exists' });
+        }else{
+            console.error(err);
+            res.status(500).json({ message: 'Error occurred during deletion' });
         }
-    }
+    } 
 });
 
 router.post('/doctor', async (req, res) => {

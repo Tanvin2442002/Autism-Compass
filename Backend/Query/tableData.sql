@@ -242,7 +242,7 @@ INSERT INTO HEALTH_PROFESSIONAL (
     'MD',
     'Cardiology',
     'Evercare Hospital',
-    '09:00 AM - 01:00 PM',
+    '09:00 - 13:00',
     ADDR('Dhaka', '2/A, Gulshan-2', 1216)
 );
 
@@ -264,7 +264,7 @@ INSERT INTO HEALTH_PROFESSIONAL (
     'MD',
     'Pediatrics',
     'United Hospital',
-    '10:00 AM - 02:00 PM',
+    '10:00 - 15:00 ',
     ADDR('Dhaka', '11/A, Bashundhara R/A', 1202)
 );
 
@@ -286,7 +286,7 @@ INSERT INTO HEALTH_PROFESSIONAL (
     'FCPS',
     'Pediatrics',
     'Dhaka Medical College Hospital',
-    '11:00 AM - 03:00 PM',
+    '11:00 - 16:00 ',
     ADDR('Dhaka', 'Shahabag', 1245)
 );
 
@@ -308,7 +308,7 @@ INSERT INTO HEALTH_PROFESSIONAL (
     'MD',
     'Psychology',
     'Shiraj Khaleda General Hospital',
-    '12:00 PM - 04:00 PM',
+    '12:00 - 16:00 ',
     ADDR('Dhaka', 'Post Office, Dhaka Cantonment', 1206)
 );
 
@@ -330,7 +330,7 @@ INSERT INTO HEALTH_PROFESSIONAL (
     'MD',
     'Cardiology',
     'High-Tech Multicare Hospital',
-    '08:00 AM - 12:00 PM',
+    '08:00 - 12:00 ',
     ADDR('Dhaka', 'Uttar Kafrul', 1206)
 );
 
@@ -352,7 +352,7 @@ INSERT INTO HEALTH_PROFESSIONAL (
     'FCPS',
     'Medicine',
     'Comfort Hospital',
-    '02:00 PM - 06:00 PM',
+    '02:00 - 18:00 ',
     ADDR('Dhaka', '2/A Farmgate', 1285)
 );
 
@@ -374,7 +374,7 @@ INSERT INTO HEALTH_PROFESSIONAL (
     'FCPS',
     'Cardiology',
     'Enam Medical College Hospital',
-    '03:00 PM - 07:00 PM',
+    '15:00 - 19:00 ',
     ADDR('Savar', '2/A Kalshi', 1245)
 );
 

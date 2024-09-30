@@ -94,27 +94,7 @@ app.post("/login", async (req, res) => {
 // });
 
 
-/*app.get('/api/courses', async (req, res) => {
-    let connection;
-    const { C_ID } = req.body;
-//console.log("hello");
-    try {
-        connection = await getConnection();
-        const result = await connection.execute('SELECT c.course_code,c.course_name,t.name AS teacher_name FROM courses c JOIN assigned a ON c.course_code = a.course_code JOIN teacher t ON a.T_ID = t.T_ID WHERE c.course_code NOT IN (SELECT course_code FROM enrolls WHERE c_id = :c_id)'[C_ID]);
-        const rows = result.rows;
-//console.log(rows);
-        if (Array.isArray(rows)) {
-           
-            res.status(200).send(rows);
-        } else {
-            res.status(500).send('Unexpected result format');
-        }
-    } catch (err) {
-        console.error('Error fetching courses:', err);
-        res.status(500).send('Internal Server Error');
-    } 
-    
-});*/
+
 
 // GET endpoint to fetch available and enrolled courses for a specific child
 app.get('/api/courses/:c_id', async (req, res) => {
@@ -390,8 +370,7 @@ app.post('/api/teacher/upload-assignment', upload.single('assignment'), async (r
 });
 
 
-//const path = require('path');
-//const fs = require('fs');
+
 
 app.get('/api/download-assignment/:course_code', async (req, res) => {
     let connection;
@@ -406,10 +385,7 @@ app.get('/api/download-assignment/:course_code', async (req, res) => {
             { course_code }
         );
 
-        /*if (result.rows.length === 0) {
-            console.log("Assignment not found for course code:", course_code);
-            return res.status(404).send('Assignment not found for this course');
-        }*/
+       
 
         if (result.rows.length === 0 || !result.rows[0].ASSIGNMENT_PATH) {
             console.log("No assignment uploaded for course code:", course_code);
@@ -434,6 +410,43 @@ app.get('/api/download-assignment/:course_code', async (req, res) => {
         return res.status(500).send('Internal Server Error');
     } 
 });
+
+app.get('/api/view-assignment/:course_code', async (req, res) => {
+    let connection;
+    const { course_code } = req.params;
+
+    try {
+        connection = await getConnection(); // Open the connection
+        console.log("Requested Course Code for view:", course_code);
+
+        const result = await connection.execute(
+            `SELECT assignment_path FROM courses WHERE course_code = :course_code`,
+            { course_code }
+        );
+
+        if (result.rows.length === 0 || !result.rows[0].ASSIGNMENT_PATH) {
+            console.log("No assignment uploaded for course code:", course_code);
+            return res.status(204).send('No assignment uploaded for this course');
+        }
+
+        const assignmentFilename = result.rows[0].ASSIGNMENT_PATH;
+        const filePath = path.join(__dirname, 'uploads', assignmentFilename);
+
+        console.log("Resolved File Path for view:", filePath);
+
+        // Check if the file exists
+        if (fs.existsSync(filePath)) {
+            res.setHeader('Content-Type', 'application/pdf');
+            return res.sendFile(filePath); // Stream the PDF for viewing
+        } else {
+            return res.status(404).send('File not found');
+        }
+    } catch (err) {
+        console.error('Error viewing assignment:', err);
+        return res.status(500).send('Internal Server Error');
+    } 
+});
+
 
 
 

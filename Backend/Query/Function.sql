@@ -60,6 +60,10 @@ CREATE OR REPLACE FUNCTION DELETE_PARENT (RECEIVED_P_ID VARCHAR2)
     RETURN VARCHAR2
     IS
     USER_NOT_DELETED EXCEPTION;
+    PENDING_ORDERS_FOUND EXCEPTION ;
+    PARENT_CHILD_EXISTS EXCEPTION ;
+    ORDER_CNT INTEGER;
+    CHILD_CNT INTEGER;
     CNT INTEGER;
     E VARCHAR2(100);
 BEGIN
@@ -70,6 +74,23 @@ BEGIN
         RAISE USER_NOT_DELETED;
     END IF;
 
+    SELECT COUNT(*) INTO ORDER_CNT
+    FROM ORDERDETAILS
+    WHERE P_ID = RECEIVED_P_ID
+    AND DELIVERY_DATE > SYSDATE; -- Assuming 'DELIVERY_DATE' is used to determine delivery status
+
+    IF ORDER_CNT > 0 THEN
+        RAISE PENDING_ORDERS_FOUND; -- Raise exception if undelivered orders exist
+    END IF;
+
+
+    SELECT COUNT(*) INTO CHILD_CNT
+    FROM PARENT_HAS_CHILD
+    WHERE P_ID = RECEIVED_P_ID;
+
+    IF CHILD_CNT>0 THEN
+        RAISE PARENT_CHILD_EXISTS;
+    END IF;
     -- Find the email associated with the parent to delete from LOGIN table
     SELECT EMAIL INTO E FROM PARENT WHERE P_ID = RECEIVED_P_ID;
 
@@ -88,6 +109,10 @@ BEGIN
 EXCEPTION
     WHEN USER_NOT_DELETED THEN
         RAISE_APPLICATION_ERROR(-20112, 'USER NOT FOUND!');
+    WHEN PENDING_ORDERS_FOUND THEN
+        RAISE_APPLICATION_ERROR(-20113, 'Cannot delete parent account: undelivered orders pending.');
+    WHEN PARENT_CHILD_EXISTS THEN
+        RAISE_APPLICATION_ERROR(-20114, 'Cannot delete parent account: Child account exists.');
     WHEN OTHERS THEN
         RETURN 'Error occurred during deletion: ' || SQLERRM;
 END;
