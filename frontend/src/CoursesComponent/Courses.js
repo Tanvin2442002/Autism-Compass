@@ -24,7 +24,12 @@ const Courses = () => {
   const [showMessagee, setShowMessagee] = useState(false);
   const [enrollmentMessagee, setEnrollmentMessagee] = useState(false);
 
+  const [searchTerm, setSearchTerm] = useState(""); // Add state for the search term
 
+
+  const filteredCourses = courses.filter((course) =>
+    course.COURSE_NAME.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   
   
   
@@ -297,6 +302,14 @@ const Courses = () => {
         <div className="teacher-courses-container">
           <div className="headline-button-container">
             <h2 className="courses-title">Assigned Courses</h2>
+            {/* Search input */}
+        <input
+          type="text"
+          placeholder="Search Courses"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="course-search-input"
+        />
             <button
               onClick={() => setShowCreateCourseForm(!showCreateCourseForm)}
               className="create-course-button"
@@ -348,8 +361,8 @@ const Courses = () => {
           )}
 
           <div className="courses-grid">
-            {courses.length > 0 ? (
-              courses.map((course) => {
+            {filteredCourses.length > 0 ? (
+              filteredCourses.map((course) => {
                 const studentCount =
                   studentsByCourse[course.COURSE_CODE]?.length || 0;
                 return (

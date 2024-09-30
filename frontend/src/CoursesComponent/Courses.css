@@ -645,3 +645,16 @@
     align-items: flex-end;
     justify-content: flex-end;
 }
+
+.course-search-input {
+    width: 200px; /* Match the size of the create button */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    position: relative;
+    margin-right: 10px; /* Adjust how far to the right you want the input */
+    top: -70px; /* Moves the search input higher (adjust as needed) */
+    left: 20px; /* Moves the search input to the right (adjust as needed) */
+  }
+  
+  
