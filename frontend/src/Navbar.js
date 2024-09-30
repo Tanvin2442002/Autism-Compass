@@ -133,6 +133,13 @@ const Navbar = () => {
                         <motion.li
                            initial={{ y: -100, opacity: 0 }}
                            animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.37, ease: 'backInOut' }}
+                        >
+                           <Link to="/chatbot" className={`navbar-link ${location.pathname === '/chatbot' ? 'active' : ''}`}>CHATBOT</Link>
+                        </motion.li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
                            transition={{ delay: 0.4, ease: 'backInOut'}}
                         >
                            <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
@@ -244,13 +251,22 @@ const Navbar = () => {
                      </>
                   )}
                   {userType === 'HEALTH_PROFESSIONAL' && (
-                     <motion.li
-                        initial={{ y: -100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.2, ease: 'backInOut'}}
-                     >
-                        <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
-                     </motion.li>
+                     <>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.17, ease: 'backInOut' }}
+                        >
+                           <Link to="/chatbot" className={`navbar-link ${location.pathname === '/chatbot' ? 'active' : ''}`}>CHATBOT</Link>
+                        </motion.li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.2, ease: 'backInOut' }}
+                        >
+                           <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
+                        </motion.li>
+                     </>
 
                   )}
                   {userType === 'TEACHER' && (
@@ -265,7 +281,14 @@ const Navbar = () => {
                         <motion.li
                            initial={{ y: -100, opacity: 0 }}
                            animate={{ y: 0, opacity: 1 }}
-                           transition={{ delay: 0.25, ease: 'backInOut'}}
+                           transition={{ delay: 0.25, ease: 'backInOut' }}
+                        >
+                           <Link to="/chatbot" className={`navbar-link ${location.pathname === '/chatbot' ? 'active' : ''}`}>CHATBOT</Link>
+                        </motion.li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.30, ease: 'backInOut'}}
                         >
                            <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
                         </motion.li>
