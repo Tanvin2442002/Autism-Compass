@@ -232,6 +232,13 @@ const Navbar = () => {
                         <motion.li
                            initial={{ y: -100, opacity: 0 }}
                            animate={{ y: 0, opacity: 1 }}
+                           transition={{ delay: 0.35, ease: 'backInOut' }}
+                        >
+                           <Link to="/chatbot" className={`navbar-link ${location.pathname === '/chatbot' ? 'active' : ''}`}>CHATBOT</Link>
+                        </motion.li>
+                        <motion.li
+                           initial={{ y: -100, opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
                            transition={{ delay: 0.4, ease: 'backInOut'}}
                         >
                            <Link to="/profile" className={`navbar-link ${location.pathname === '/profile' ? 'active' : ''}`}>Profile</Link>
@@ -266,6 +273,7 @@ const Navbar = () => {
                         </motion.li>
                      </>
                   )}
+                  
                </ul>
                {/* <FontAwesomeIcon icon={faCartShopping} /> */}
             </div>

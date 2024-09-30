@@ -142,11 +142,11 @@ const Landing = () => {
             <li></li>
             <li></li>
          </ul>
-         <div className="chat-icon">
+         {/* <div className="chat-icon">
             <FontAwesomeIcon icon={faMessage} 
                color="#3293C4"
             />
-         </div>
+         </div> */}
          <Reveal>
             <div className="Nav">
                <Link to="/login" className="land-login">LOG IN</Link>
@@ -192,49 +192,7 @@ const Landing = () => {
                </div>
             </div>
          </Reveal>
-         <RevealUp>
-            <div className="land-features">
-               <heading>Our partner and users</heading>
-               <div className="verified">
-                  <RevealUp delay={0.2}>
-                     <div className="registered-user" >
-                        <h1>Active <br></br> User</h1>
-                        <FontAwesomeIcon icon={faUser} size="xl" className="land-icon" />
-                        <p>
-                           <CountUp end={10} duration={5} /> K+
-                        </p>
-                     </div>
-                  </RevealUp>
-                  <RevealUp delay={0.4}>
-                     <div className="verified-doctor">
-                        <h1>Online <br></br> Doctor</h1>
-                        <FontAwesomeIcon icon={faStethoscope} size="xl" className="land-icon" />
-                        <p>
-                           <CountUp end={50} duration={5} /> +
-                        </p>
-                     </div>
-                  </RevealUp>
-                  <RevealUp delay={0.6}>
-                     <div className="verified-organization">
-                        <h1>partner <br></br> Organization</h1>
-                        <FontAwesomeIcon icon={faHospital} size="xl" className="land-icon" />
-                        <p>
-                           <CountUp end={112} duration={5} /> +
-                        </p>
-                     </div>
-                  </RevealUp>
-                  <RevealUp delay={0.8}>
-                     <div className="verified-therapy">
-                        <h1>available <br></br> Therapy</h1>
-                        <FontAwesomeIcon icon={faCapsules} size="xl" className="land-icon" />
-                        <p>
-                           <CountUp end={62} duration={5} /> +
-                        </p>
-                     </div>
-                  </RevealUp>
-               </div>
-            </div>
-         </RevealUp>
+         
          <Reveal>
             <div className="our-offers"
             >
@@ -289,7 +247,50 @@ const Landing = () => {
                </motion.div>
             </div>
          </Reveal>
-         <Reveal>
+         <RevealUp>
+            <div className="land-features">
+               <heading>Our partner and users</heading>
+               <div className="verified">
+                  <RevealUp delay={0.2}>
+                     <div className="registered-user" >
+                        <h1>Active <br></br> User</h1>
+                        <FontAwesomeIcon icon={faUser} size="xl" className="land-icon" />
+                        <p>
+                           <CountUp end={10} duration={5} /> K+
+                        </p>
+                     </div>
+                  </RevealUp>
+                  <RevealUp delay={0.4}>
+                     <div className="verified-doctor">
+                        <h1>Online <br></br> Doctor</h1>
+                        <FontAwesomeIcon icon={faStethoscope} size="xl" className="land-icon" />
+                        <p>
+                           <CountUp end={50} duration={5} /> +
+                        </p>
+                     </div>
+                  </RevealUp>
+                  <RevealUp delay={0.6}>
+                     <div className="verified-organization">
+                        <h1>partner <br></br> Organization</h1>
+                        <FontAwesomeIcon icon={faHospital} size="xl" className="land-icon" />
+                        <p>
+                           <CountUp end={112} duration={5} /> +
+                        </p>
+                     </div>
+                  </RevealUp>
+                  <RevealUp delay={0.8}>
+                     <div className="verified-therapy">
+                        <h1>available <br></br> Therapy</h1>
+                        <FontAwesomeIcon icon={faCapsules} size="xl"    className="land-icon" />
+                        <p>
+                           <CountUp end={62} duration={5} /> +
+                        </p>
+                     </div>
+                  </RevealUp>
+               </div>
+            </div>
+         </RevealUp>
+         {/* <Reveal>
             <div className="new-design">
                <header className="new-design-header">
                   <h1>Our New Design</h1>
@@ -307,7 +308,7 @@ const Landing = () => {
                   }
                </div>
             </div>
-         </Reveal>
+         </Reveal> */}
       </motion.div>
    );
 };
