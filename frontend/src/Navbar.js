@@ -5,6 +5,8 @@ import './Nav.css';
 import { useNavigate } from 'react-router-dom';
 import Logout from './Logout';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
    const [isProductsHovered, setIsProductsHovered] = useState(false);
@@ -265,13 +267,15 @@ const Navbar = () => {
                      </>
                   )}
                </ul>
+               {/* <FontAwesomeIcon icon={faCartShopping} /> */}
             </div>
             {/* <button className="navbar-button" onClick={handleLogOut}>Log Out</button> */}
             <motion.div onClick={handleLogOut}
                initial={{ y: -100, opacity: 0 }}
                animate={{ y: 0, opacity: 1 }}
                transition={{ delay: 0.5, ease: 'backInOut'}}
-            >
+            >  
+
                <Logout />
             </motion.div>
          </div>

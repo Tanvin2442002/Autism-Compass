@@ -133,11 +133,11 @@ const SlickComponent = ({ products }) => {
           <h2>{item.NAME}</h2>
           <p>{item.DESCRIPTION}</p>
         </div>
-        <div className="card-footer">
+        {/* <div className="card-footer">
           <div className="card-button">
             <AddCart price={item.PRICE} onClick={()=>handleAddCart()} />
           </div>
-        </div>
+        </div> */}
       </div>
       {PopUp && (
         <div className="con-dialog">

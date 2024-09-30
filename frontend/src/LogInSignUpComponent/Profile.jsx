@@ -209,9 +209,32 @@ const Profile = () => {
                console.log(res);
                localStorage.removeItem('USER');
                navigate('/');
-            } else {
-               console.error('Failed to delete the parent.');
-            }
+            } else if(response.status==400){
+               const errorResponse = await response.json(); 
+               toast.error(errorResponse.message, {
+                  position: "top-right",
+                  autoClose: 2500,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "colored",
+               });
+           }
+           else if(response.status==401){
+            const errorResponse = await response.json(); 
+            toast.error(errorResponse.message, {
+               position: "top-right",
+               autoClose: 2500,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: false,
+               draggable: true,
+               progress: undefined,
+               theme: "colored",
+            });
+        }
          } catch (err) {
             console.error('Error:', err);
          }
