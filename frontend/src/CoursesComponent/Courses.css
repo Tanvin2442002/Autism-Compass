@@ -622,3 +622,14 @@
   }
   
 
+.jani-na{
+    display: flex;
+    justify-content: space-between;
+}
+
+.assignment-container-1{
+    gap: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
