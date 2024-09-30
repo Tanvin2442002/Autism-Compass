@@ -21,6 +21,9 @@ const Courses = () => {
   const [uploadsucess, setUploadSucess] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
 
+  const [showMessagee, setShowMessagee] = useState(false);
+  const [enrollmentMessagee, setEnrollmentMessagee] = useState(false);
+
 
   
   
@@ -157,17 +160,17 @@ const Courses = () => {
         })
         .then((response) => {
           console.log(response.data);
-
+    
           // If enrollment is successful, update the local state
           if (response.status === 200) {
             setCourses((prevCourses) =>
               prevCourses.filter((c) => c.COURSE_CODE !== course.COURSE_CODE)
             );
-
+            
             setShowConfetti(true);
             setShowMessage(true);
             setEnrollmentMessage(true);
-
+    
             // Hide the message after 3 seconds
             setTimeout(() => {
               setShowMessage(false);
@@ -177,9 +180,22 @@ const Courses = () => {
         })
         .catch((error) => {
           console.error("Error enrolling in the course:", error);
+    
+          // Check if it's the trigger error (seat filled up)
+          if (error.response && error.response.status === 400) {
+            // Display message indicating course seat is filled
+            setShowMessagee(true);
+            setEnrollmentMessagee(true);
+            
+            // Hide the message after 3 seconds
+            setTimeout(() => {
+              setShowMessagee(false);
+              setEnrollmentMessagee(false);
+            }, 3000);
+          }
         });
     };
-
+    
     const goToEnrolledCourses = () => {
       navigate("/enrolled-courses", { state: { enrolledCourses } });
     };
@@ -225,6 +241,9 @@ const Courses = () => {
         </div>
         {enrollmentMessage && (
           <div className="enrollment-message">Successfully Enrolled!</div>
+        )}
+         {enrollmentMessagee && (
+          <div className="enrollment-messagee">Course seat has been filled up :( !</div>
         )}
       </>
     );

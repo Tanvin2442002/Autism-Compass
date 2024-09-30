@@ -147,7 +147,7 @@ app.get('/api/courses/:c_id', async (req, res) => {
 
 
 // POST endpoint to enroll a course
-app.post('/api/enroll', async (req, res) => {
+/*app.post('/api/enroll', async (req, res) => {
     let connection;
     const { COURSE_CODE, C_ID } = req.body;
     console.log(req.body);
@@ -185,7 +185,50 @@ console.log(`Rows affected: ${result.rowsAffected}`);
         console.error('Error enrolling the course:', err);
         res.status(500).send('Internal Server Error');
     }
+});*/
+
+app.post('/api/enroll', async (req, res) => {
+    let connection;
+    const { COURSE_CODE, C_ID } = req.body;
+    console.log(req.body);
+    try {
+        connection = await getConnection();
+        
+        // Insert the record into the enrolls table
+        const result = await connection.execute(
+            'INSERT INTO enrolls (course_code, c_id) VALUES (:course_code, :c_id)',
+            { COURSE_CODE, C_ID }, { autoCommit: true }
+        );
+
+        const rows = result.rows;
+        console.log("2 no api");
+        console.log(rows);
+
+        console.log(`Rows affected: ${result.rowsAffected}`);
+        console.log(`Last inserted ID: ${result.lastInsertId || 'N/A'}`);
+
+        // Optionally log the full result object
+        console.log(result);
+
+        if (result.rowsAffected === 1) {
+            console.log("yes successful\n");
+            res.status(200).send('Enrolled successfully');
+        } else {
+            console.log("not joy\n");
+            res.status(500).send('Failed to enroll');
+        }
+    } catch (err) {
+        // Check if it's a trigger violation error
+        if (err.errorNum === 20001) {
+            console.error('Trigger violation: ', err.message);
+            res.status(400).send('Only one student can be enrolled in this course.');
+        } else {
+            console.error('Error enrolling the course:', err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
 });
+
 
 app.post('/api/unenroll', async (req, res) => {
     let connection;

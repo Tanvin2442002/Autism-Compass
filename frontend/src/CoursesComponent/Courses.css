@@ -476,7 +476,19 @@
     z-index: 1000; /* Ensure it’s above other content */
     transition: opacity 0.5s ease-in-out; /* Fade effect */
 }
-
+.enrollment-messagee {
+    position: fixed; /* Fix it on the screen */
+    top: 20%; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%); /* Center it */
+    background-color: rgba(243, 19, 8, 0.8); /* Green background */
+    color: white; /* White text */
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    z-index: 1000; /* Ensure it’s above other content */
+    transition: opacity 0.5s ease-in-out; /* Fade effect */
+}
 .confetti {
     position: fixed;
     top: 0;
