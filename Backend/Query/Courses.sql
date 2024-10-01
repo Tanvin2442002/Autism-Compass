@@ -15,3 +15,23 @@ COMMIT;
 
 
 ALTER TABLE COURSES ADD ASSIGNMENT_PATH VARCHAR(255);
+
+
+--trigger
+
+CREATE OR REPLACE TRIGGER limit_enrollment
+BEFORE INSERT ON enrolls
+FOR EACH ROW
+DECLARE
+    existing_count NUMBER;
+BEGIN
+    -- Check if a student is already enrolled in the course
+    SELECT COUNT(*) INTO existing_count
+    FROM enrolls
+    WHERE course_code = :NEW.COURSE_CODE;
+
+    IF existing_count > 1 THEN
+        -- Raise an exception to prevent the insert
+        RAISE_APPLICATION_ERROR(-20001, 'Only one student can be enrolled in this course.');
+    END IF;
+END;
