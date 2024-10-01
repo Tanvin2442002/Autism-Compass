@@ -633,3 +633,31 @@
     align-items: flex-end;
     justify-content: flex-end;
 }
+
+.hridi{
+    display: flex;
+    justify-content: space-between; 
+    /* border: 1px solid red; */
+    align-items: center;
+}
+
+.hridi1{
+    display: flex;
+    justify-content: space-between; 
+    /* border: 1px solid red; */
+    align-items: center;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.hridi button{
+    height: 40px;
+}
+
+.view-more-button .hello{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}

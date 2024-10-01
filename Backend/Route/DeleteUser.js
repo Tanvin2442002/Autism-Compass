@@ -54,9 +54,9 @@ router.post('/parent', async (req, res) => {
         res.status(200).json({ message: result.outBinds.result });
     } catch (err) {
         if (err.message.includes('ORA-20113')) {
-            res.status(400).json({ message: 'Cannot delete parent: Undelivered orders are still pending' });
+            res.status(400).json({ message: 'Your delivery is in process.Wait untill you received the product' });
         } else if(err.message.includes('ORA-20114')){
-            res.status(401).json({ message: 'Cannot delete parent account: Child account still exists' });
+            res.status(401).json({ message: 'Child account exist. Delete all the child account first' });
         }else{
             console.error(err);
             res.status(500).json({ message: 'Error occurred during deletion' });
