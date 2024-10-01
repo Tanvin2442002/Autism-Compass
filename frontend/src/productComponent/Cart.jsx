@@ -14,6 +14,7 @@ const Cart = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [error, setError] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
+  const [DeliveryCost,setDeliveryCost] = useState(5);
   const [assignedDeliveryMan, setAssignedDeliveryMan] = useState("");
   const [deliverymanID, setdeliverymanID] = useState("");
   const [address, setAddress] = useState({
@@ -480,11 +481,11 @@ const Cart = () => {
                 disabled
               />
               <label htmlFor="shipping">Delivery Type</label>
-              <select id="shipping" className="shipping">
+              <select id="shipping" className="shipping"  onChange={(e) => setDeliveryCost(parseInt(e.target.value))}>
                 <option value="5" className="shipping">
                   Standard-Delivery - €5.00
                 </option>
-                <option value="5" className="shipping">
+                <option value="10" className="shipping">
                   Super Fast Delivery - €10.00
                 </option>
               </select>
@@ -495,8 +496,8 @@ const Cart = () => {
                 <p>TOTAL PRICE INCLUDING 5% VAT</p>
               </div>
               <div className="final-total">
-                <p>: {subtotal.TOTAL}$</p>
-                <p>: {subtotal.TOTAL_AMOUNT}$</p>
+                <p>: {(subtotal.TOTAL+DeliveryCost)}$</p>
+                <p>: {(subtotal.TOTAL_AMOUNT + DeliveryCost).toFixed(2)}$</p> 
               </div>
             </div>
             <div
