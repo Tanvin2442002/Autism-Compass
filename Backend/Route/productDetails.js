@@ -28,14 +28,13 @@ const oracledb = require("oracledb");
 routerProduct.get("/products", async (req, res) => {
   let connection;
   console.log("Fetching all the products using cursor");
-
   try {
     connection = await getConnection(); 
     const result = await connection.execute(
       `BEGIN
-         OPEN :cursor FOR
+          OPEN :cursor FOR
          SELECT * FROM PRODUCT;
-       END;`,
+      END;`,
       {
         cursor: { type: oracledb.CURSOR, dir: oracledb.BIND_OUT },
       }

@@ -476,7 +476,19 @@
     z-index: 1000; /* Ensure it’s above other content */
     transition: opacity 0.5s ease-in-out; /* Fade effect */
 }
-
+.enrollment-messagee {
+    position: fixed; /* Fix it on the screen */
+    top: 20%; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%); /* Center it */
+    background-color: rgba(243, 19, 8, 0.8); /* Green background */
+    color: white; /* White text */
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    z-index: 1000; /* Ensure it’s above other content */
+    transition: opacity 0.5s ease-in-out; /* Fade effect */
+}
 .confetti {
     position: fixed;
     top: 0;
@@ -622,3 +634,55 @@
   }
   
 
+.jani-na{
+    display: flex;
+    justify-content: space-between;
+}
+
+.assignment-container-1{
+    gap: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.course-search-input {
+    width: 200px; /* Match the size of the create button */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    position: relative;
+    margin-right: 10px; /* Adjust how far to the right you want the input */
+    top: -70px; /* Moves the search input higher (adjust as needed) */
+    left: 20px; /* Moves the search input to the right (adjust as needed) */
+  }
+  
+  
+
+.hridi{
+    display: flex;
+    justify-content: space-between; 
+    /* border: 1px solid red; */
+    align-items: center;
+}
+
+.hridi1{
+    display: flex;
+    justify-content: space-between; 
+    /* border: 1px solid red; */
+    align-items: center;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.hridi button{
+    height: 40px;
+}
+
+.view-more-button .hello{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}

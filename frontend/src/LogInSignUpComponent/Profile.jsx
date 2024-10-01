@@ -211,7 +211,7 @@ const Profile = () => {
                navigate('/');
             } else if(response.status==400){
                const errorResponse = await response.json(); 
-               toast.error(errorResponse.message, {
+               toast.warning(errorResponse.message, {
                   position: "top-right",
                   autoClose: 2500,
                   hideProgressBar: false,
@@ -219,12 +219,12 @@ const Profile = () => {
                   pauseOnHover: false,
                   draggable: true,
                   progress: undefined,
-                  theme: "colored",
+                  theme: "light",
                });
            }
            else if(response.status==401){
             const errorResponse = await response.json(); 
-            toast.error(errorResponse.message, {
+            toast.warning(errorResponse.message, {
                position: "top-right",
                autoClose: 2500,
                hideProgressBar: false,
@@ -232,7 +232,7 @@ const Profile = () => {
                pauseOnHover: false,
                draggable: true,
                progress: undefined,
-               theme: "colored",
+               theme: "light",
             });
         }
          } catch (err) {
