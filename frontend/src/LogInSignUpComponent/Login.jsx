@@ -53,12 +53,18 @@ const LogIn = () => {
       };
       setTimeout(() => {
          if (data.TYPE) {
-            navigate("/dashboard");
+            // navigate("/dashboard");
             localStorage.setItem("USER", JSON.stringify(userData));
             if (rememberMe) {
                localStorage.setItem("REMEMBER_ME", "1");
             } else {
                localStorage.setItem("REMEMBER_ME", "0");
+            }
+            if(data.TYPE === 'TEACHER'){
+               navigate("/courses");
+            }
+            else{
+               navigate("/dashboard");
             }
          } else {
             toast.error('Invalid credentials', {
