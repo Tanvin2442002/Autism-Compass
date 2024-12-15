@@ -37,20 +37,22 @@ const LogIn = () => {
          },
       });
       const data = await response.json();
+      console.log(data);
       let ID = "";
-      if (data.TYPE === "CHILD") {
-         ID = data.C_ID;
-      } else if (data.TYPE === "PARENT") {
-         ID = data.P_ID;
-      } else if (data.TYPE === "HEALTH_PROFESSIONAL") {
-         ID = data.H_ID;
-      } else if (data.TYPE === "TEACHER") {
-         ID = data.T_ID;
-      }
+      // if (data.TYPE === "CHILD") {
+      //    ID = data.C_ID;
+      // } else if (data.TYPE === "PARENT") {
+      //    ID = data.P_ID;
+      // } else if (data.TYPE === "HEALTH_PROFESSIONAL") {
+      //    ID = data.H_ID;
+      // } else if (data.TYPE === "TEACHER") {
+      //    ID = data.T_ID;
+      // }
       let userData = {
-         ID: ID,
+         ID: data.ID,
          TYPE: data.TYPE,
       };
+      console.log(userData);
       setTimeout(() => {
          if (data.TYPE) {
             // navigate("/dashboard");
