@@ -16,7 +16,7 @@ router.get("/booked-doc", async (req, res) => {
                 JOIN CONSULTS CO ON H.H_ID = CO.H_ID
                 JOIN CHILD C ON CO.C_ID = C.C_ID
                 JOIN PARENT P ON CO.P_ID = P.P_ID
-                WHERE P.P_ID = ${id}
+                WHERE P.P_ID = ${id}+
                 ORDER BY CO.SELECTED_DATE;
             `;
         } else {

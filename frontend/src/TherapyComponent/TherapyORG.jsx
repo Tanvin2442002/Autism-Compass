@@ -8,7 +8,11 @@ import { motion } from 'framer-motion';
 const TherapyOrganizations = () => {
 	const [therapyOrgData, setTherapyOrgData] = useState([]);
 	// const [loading, setLoading] = useState(true);
-
+	const transformToUppercase = (data) => {
+		return Object.fromEntries(
+			Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+		);
+	};
 	useEffect(() => {
 		const fetchTherapyOrgData = async () => {
 			try {
@@ -18,7 +22,8 @@ const TherapyOrganizations = () => {
 						'Content-Type': 'application/json'
 					}
 				});
-				const data = await response.json();
+				const tempData = await response.json();
+				const data = tempData.map(transformToUppercase);
 				console.log("Data received");
 				console.log(data);
 				setTherapyOrgData(data);
@@ -37,7 +42,8 @@ const TherapyOrganizations = () => {
 			if (!response.ok) {
 				throw new Error("Network response was not ok");
 			}
-			const data = await response.json();
+			const tempData = await response.json();
+			const data = tempData.map(transformToUppercase);
 			console.log('Search value:', searchValue);
 			console.log('Fetched data:', data);
 			setTherapyOrgData(data);

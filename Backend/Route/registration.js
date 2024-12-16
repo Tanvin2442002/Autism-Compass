@@ -207,16 +207,20 @@ router.post("/update-password", async (req, res) => {
     }
 });
 
-router.post("/user-info", async (req, res) => {
+router.get("/user-info", async (req, res) => {
     try {
-        console.log("Received data:", req.body);
-
-        const { TYPE, ID } = req.body;
-        const idColumn = `${TYPE[0]}_ID`;
-
-        const userResult = await sql`
-        SELECT * FROM ${sql(TYPE)} WHERE ${sql(idColumn)} = ${ID};
+        const { ID, TYPE } = req.query;
+        if (!ID || !TYPE) {
+            return res.status(400).send({ message: "ID and TYPE are required" });
+        }const idColumn = `${TYPE[0]}_ID`;
+        console.log("ID column:", idColumn);
+        const query = `
+            SELECT * 
+            FROM ${TYPE} 
+            WHERE ${idColumn} = $1;
         `;
+        const userResult = await sql.unsafe(query, [ID]);
+        console.log("User result:", userResult);
 
         if (userResult.length > 0) {
             res.status(200).send(userResult);
@@ -230,6 +234,9 @@ router.post("/user-info", async (req, res) => {
         res.status(500).send({ message: "Error during user info query", error: err.message });
     }
 });
+
+
+
 
 router.post("/update-user-info", async (req, res) => {
     try {

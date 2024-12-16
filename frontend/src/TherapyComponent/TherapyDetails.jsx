@@ -25,11 +25,18 @@ const TherapyDetail = () => {
   const [ans, setAns] = useState('');
   const [loadingTherapyDetails, setLoadingTherapyDetails] = useState(false);
 
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+  };
+
   useEffect(() => {
     const fetchTherapyData = async () => {
       try {
         const response = await fetch(`http://localhost:5000/therapy/Detail?type=${therapyId}`);
-        const data = await response.json();
+        const tempData = await response.json();
+        const data = tempData.map(transformToUppercase);
         setTherapyData(data[0]); // Assuming the API returns an array
       } catch (error) {
         console.error('Error fetching therapy data:', error);
@@ -42,7 +49,8 @@ const TherapyDetail = () => {
     const fetchTherapyOrgData = async () => {
       try {
         const response = await fetch(`http://localhost:5000/therapy/org?type=${therapyId}`);
-        const data = await response.json();
+        const tempData = await response.json();
+        const data = tempData.map(transformToUppercase);
         setTherapyOrgData(data);
       } catch (error) {
         console.error('Error fetching therapy data:', error);

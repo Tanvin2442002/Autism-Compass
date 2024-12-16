@@ -26,15 +26,19 @@ const BookingTherapy = () => {
    const orgId = params.get('THO_ID');
 
    const localData = JSON.parse(localStorage.getItem('USER'));
-
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
    useEffect(() => {
       console.log('Therapy ID:', therapyId, 'Org ID:', orgId);
 
       const fetchOrgDetails = async () => {
          try {
             const response = await fetch(`http://localhost:5000/booking/therapy/orgdata?THO_ID=${orgId}`);
-            console.log('Response:', response);
-            const data = await response.json();
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             console.log('Data:', data);
             setOrgDetails(data);
          } catch (error) {
@@ -48,7 +52,8 @@ const BookingTherapy = () => {
       const fetchTherapyDetails = async () => {
          try {
             const response = await fetch(`http://localhost:5000/booking/therapy/therapydata?TH_ID=${therapyId}`);
-            const data = await response.json();
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             console.log("Therapy data:", data[0].THERAPY_TYPE);
             setTherapyType(data[0].THERAPY_TYPE);
          } catch (error) {
@@ -69,7 +74,8 @@ const BookingTherapy = () => {
             } else {
                response = await fetch(`http://localhost:5000/booking/therapy/parent/data?C_ID=${localData.ID}`);
             }
-            const data = await response.json();
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             console.log('User data:', data[0]);
             setUserDetails(data[0]);
          } catch (error) {
@@ -95,7 +101,8 @@ const BookingTherapy = () => {
 
       // if cid, pid, thid, thoid are already present in the database then update the booking date
       const checkExist = await fetch(`http://localhost:5000/booking/therapy/check?C_ID=${userDetails.C_ID}&P_ID=${userDetails.P_ID}&TH_ID=${therapyId}&THO_ID=${orgId}`);
-      const checkData = await checkExist.json();
+      const tempCheckData = await checkExist.json();
+      const checkData = tempCheckData.map(transformToUppercase);
       console.log('Check data:', checkData);
       if (checkData.length > 0) {
          console.log("IN.......");

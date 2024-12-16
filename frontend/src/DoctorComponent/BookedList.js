@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import bookeddoc from '../img/bookeddoc.svg';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const BookedList = () => {
   const [consultations, setConsultations] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -12,12 +15,19 @@ const BookedList = () => {
   const [showPopup, setShowPopup] = useState(false);
   const localData = JSON.parse(localStorage.getItem('USER'));
 
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+  };
+
   useEffect(() => {
     const fetchConsultations = async () => {
       try {
         const response = await fetch(`http://localhost:5000/consult/data?id=${localData.ID}&type=${localData.TYPE}`);
-        const data = await response.json();
-
+        const tempData = await response.json();
+        const data = tempData.map(transformToUppercase);
+        console.log('Consultations:', data);
         if (Array.isArray(data)) {
           setConsultations(data);
         } else {
@@ -39,11 +49,23 @@ const BookedList = () => {
         method: 'DELETE',
       });
       const data = await response.json();
+      
+      console.log('Response:', data);
 
       if (data.success) {
+        toast.success('Booking Successful!', {
+          position: 'top-right',
+          autoClose: 2500,
+        });
         setConsultations(consultations.filter(consultation => !(consultation.P_ID === P_ID && consultation.H_ID === H_ID && consultation.C_ID === C_ID)));
         setShowPopup(true);
         setTimeout(() => setShowPopup(false), 3000);
+      }
+      else {
+        toast.error('Booking Failed!', {
+          position: 'top-right',
+          autoClose: 2500,
+        });
       }
       setShowConfirmation(false);
     } catch (error) {

@@ -14,6 +14,12 @@ const AvailableTherapies = () => {
    const [error, setError] = useState(null);
    const navigate = useNavigate();
 
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
+
    useEffect(() => {
       const fetchTherapies = async () => {
          try {
@@ -21,7 +27,8 @@ const AvailableTherapies = () => {
             if (!response.ok) {
                throw new Error("Network response was not ok");
             }
-            const data = await response.json();
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             console.log('Fetched data:', data);
             setTherapies(data);
          } catch (err) {
@@ -41,7 +48,8 @@ const AvailableTherapies = () => {
          if (!response.ok) {
             throw new Error("Network response was not ok");
          }
-         const data = await response.json();
+         const tempData = await response.json();
+         const data = tempData.map(transformToUppercase);
          console.log('Search value:', searchValue);
          console.log('Fetched data:', data);
          setTherapies(data);
