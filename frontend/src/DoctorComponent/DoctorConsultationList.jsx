@@ -3,9 +3,8 @@ import Navbar from "../Navbar";
 import DataTable from 'react-data-table-component';
 import "./DoctorConsultationList.css";
 import { useNavigate } from "react-router-dom";
-
 import DoctorConsultImg from "../img/DoctorConsultation.svg";
-
+const URL = process.env.REACT_APP_API_URL;
 
 const DoctorConsultation = () => {
 
@@ -55,7 +54,7 @@ const DoctorConsultation = () => {
    useEffect(() => {
       const fetchConsultations = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/consultations/data?id=${localData.ID}`);
+            const response = await fetch(`${URL}/consultations/data?id=${localData.ID}`);
             const data = await response.json();
             console.log("Data:", data);
             setConsultations(data);

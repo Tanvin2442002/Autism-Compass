@@ -7,6 +7,7 @@ import Navbar from '../Navbar';
 import LoadingAnimation from '../LoadingAnimation';
 import { motion } from 'framer-motion';
 import RevealLeftToRight from '../RevealLeftToRight';
+const URL = process.env.REACT_APP_API_URL;
 
 const AvailableTherapies = () => {
    const [therapies, setTherapies] = useState([]);
@@ -23,7 +24,7 @@ const AvailableTherapies = () => {
    useEffect(() => {
       const fetchTherapies = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/therapy/all`);
+            const response = await fetch(`${URL}/therapy/all`);
             if (!response.ok) {
                throw new Error("Network response was not ok");
             }
@@ -44,7 +45,7 @@ const AvailableTherapies = () => {
       const searchValue = e.target.value;
       setLoading(true);
       try {
-         const response = await fetch(`http://localhost:5000/therapy/search?search=${searchValue}`);
+         const response = await fetch(`${URL}/therapy/search?search=${searchValue}`);
          if (!response.ok) {
             throw new Error("Network response was not ok");
          }

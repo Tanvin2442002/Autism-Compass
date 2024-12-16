@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
-import RevealLeftToRight from '../RevealLeftToRight'
 
 const Card = ({ product }) => {
 

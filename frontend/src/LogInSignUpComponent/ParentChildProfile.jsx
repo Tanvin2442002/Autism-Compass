@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ParentChildProfile.css";
 import parentChildImg from "../img/ParentChild.svg";
 import Navbar from '../Navbar.js';
+const URL = process.env.REACT_APP_API_URL;
 
 const ParentChildProfile = () => {
    const [infoList, setInfoList] = useState([]);
@@ -14,7 +15,7 @@ const ParentChildProfile = () => {
    useEffect(() => {
       const fetchInfo = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/reg/parent-child-info?TYPE=${type}&ID=${parentId}`);
+            const response = await fetch(`${URL}/reg/parent-child-info?TYPE=${type}&ID=${parentId}`);
             const data = await response.json();
             if (data && data.length > 0) {
                const formattedData = data.map(childData => ({

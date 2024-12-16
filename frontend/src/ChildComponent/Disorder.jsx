@@ -5,6 +5,8 @@ import './Disorder.css';
 import DisoderImg from '../img/Disorder.svg';
 import LoadingAnimation from '../LoadingAnimation';
 
+const URL = process.env.REACT_APP_API_URL;
+
 const Disorder = () => {
    const [DisorderDetails, setDisorderDetails] = useState({
       Name: '',
@@ -23,7 +25,7 @@ const Disorder = () => {
          setLoading(true);
          try {
             const queryParams = new URLSearchParams({ ID: userData.ID }).toString();
-            const response = await fetch(`http://localhost:5000/child/disorder?${queryParams}`, {
+            const response = await fetch(`${URL}/child/disorder?${queryParams}`, {
                method: 'GET',
                headers: {
                   'Content-Type': 'application/json'
@@ -35,8 +37,8 @@ const Disorder = () => {
             console.log(data);
 
             setDisorderDetails({
-               Name: data[0].TYPE,
-               Description: data[0].DESCRIPTION
+               Name: data[0].type,
+               Description: data[0].description
             });
             console.log("Details");
             console.log(DisorderDetails);

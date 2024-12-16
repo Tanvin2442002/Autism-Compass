@@ -8,6 +8,7 @@ import './Registration.css';
 import SignUpImg from '../img/SignUp.svg'
 import { motion } from 'framer-motion';
 import RevealLeftToRight from '../RevealLeftToRight';
+const URL = process.env.REACT_APP_API_URL;
 
 const Registration = () => {
    const navigate = useNavigate();
@@ -57,7 +58,7 @@ const Registration = () => {
             CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
          };
          console.log(parentData);
-         const response = await fetch("http://localhost:5000/reg/parent", {
+         const response = await fetch(`${URL}/reg/parent`, {
             method: "POST",
             body: JSON.stringify(parentData),
             headers: {
@@ -100,7 +101,7 @@ const Registration = () => {
             DISORDER_TYPE: document.getElementById("disability-type").value,
          };
          console.log(childData);
-         const response = await fetch("http://localhost:5000/reg/child", {
+         const response = await fetch(`${URL}/reg/child`, {
             method: "POST",
             body: JSON.stringify(childData),
             headers: {
@@ -161,7 +162,7 @@ const Registration = () => {
             CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
          };
          console.log(doctorData);
-         const response = await fetch("http://localhost:5000/reg/doctor", {
+         const response = await fetch(`${URL}/reg/doctor`, {
             method: "POST",
             body: JSON.stringify(doctorData),
             headers: {
@@ -198,7 +199,7 @@ const Registration = () => {
             CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
          };
          console.log(teacherData);
-         const response = await fetch("http://localhost:5000/reg/teacher", {
+         const response = await fetch(`${URL}/reg/teacher`, {
             method: "POST",
             body: JSON.stringify(teacherData),
             headers: {

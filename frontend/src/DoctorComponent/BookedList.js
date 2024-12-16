@@ -4,9 +4,9 @@ import Navbar from '../Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import bookeddoc from '../img/bookeddoc.svg';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+const URL = process.env.REACT_APP_API_URL;
 
 const BookedList = () => {
   const [consultations, setConsultations] = useState([]);
@@ -24,7 +24,7 @@ const BookedList = () => {
   useEffect(() => {
     const fetchConsultations = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/consult/data?id=${localData.ID}&type=${localData.TYPE}`);
+        const response = await fetch(`${URL}/consult/data?id=${localData.ID}&type=${localData.TYPE}`);
         const tempData = await response.json();
         const data = tempData.map(transformToUppercase);
         console.log('Consultations:', data);
@@ -45,7 +45,7 @@ const BookedList = () => {
   const handleDelete = async () => {
     const { P_ID, H_ID, C_ID } = consultationToDelete;
     try {
-      const response = await fetch(`http://localhost:5000/consultations/delete?P_ID=${P_ID}&H_ID=${H_ID}&C_ID=${C_ID}`, {
+      const response = await fetch(`${URL}/consultations/delete?P_ID=${P_ID}&H_ID=${H_ID}&C_ID=${C_ID}`, {
         method: 'DELETE',
       });
       const data = await response.json();

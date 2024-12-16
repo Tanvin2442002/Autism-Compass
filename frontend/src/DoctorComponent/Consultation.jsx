@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Prescription from '../img/Prescription.svg';
 import './DoctorConsultationList.css'
+const URL = process.env.REACT_APP_API_URL;
 
 const Consultation = () => {
 
@@ -29,7 +30,7 @@ const Consultation = () => {
    useEffect(() => {
       const fetchData = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/consultation/form/data?P_ID=${p_id}&C_ID=${c_id}&D_ID=${d_id}`);
+            const response = await fetch(`${URL}/consultation/form/data?P_ID=${p_id}&C_ID=${c_id}&D_ID=${d_id}`);
             const responseData = await response.json();
             console.log('Response Data', responseData);
             setInfo(responseData[0]);
@@ -41,7 +42,7 @@ const Consultation = () => {
 
       const fetchTherapyData = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/therapy/all`);
+            const response = await fetch(`${URL}/therapy/all`);
             const responseData = await response.json();
             console.log('Therapy Data', responseData);
             setTherapy(responseData);
@@ -66,7 +67,7 @@ const Consultation = () => {
    const handleConsultation = async (e) => {
       e.preventDefault();
 
-      const response = await fetch('http://localhost:5000/consultation/done', {
+      const response = await fetch(`${URL}/consultation/done`, {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json'

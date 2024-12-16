@@ -7,7 +7,6 @@ import LoadingAnimation from '../LoadingAnimation';
 import Navbar from '../Navbar.js';
 import RevealLeftToRight from '../RevealLeftToRight';
 import './Profile.css';
-
 const URL = process.env.REACT_APP_API_URL;
 
 const Profile = () => {
@@ -158,7 +157,7 @@ const Profile = () => {
       }
 
       console.log('New Data:', newUserData);
-      const response = await fetch('http://localhost:5000/reg/update-user-info', {
+      const response = await fetch(`${URL}/reg/update-user-info`, {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json'
@@ -184,7 +183,7 @@ const Profile = () => {
       console.log('Deleting Account:', ID);
       if (userData.TYPE === 'CHILD') {
          try{
-            const response = await fetch('http://localhost:5000/remove/child', {
+            const response = await fetch(`${URL}/remove/child`, {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',
@@ -205,7 +204,7 @@ const Profile = () => {
       }
       else if (userData.TYPE === 'PARENT') {
          try {
-            const response = await fetch('http://localhost:5000/remove/parent', {
+            const response = await fetch(`${URL}/remove/parent`, {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',
@@ -250,7 +249,7 @@ const Profile = () => {
 
       else if (userData.TYPE === 'HEALTH_PROFESSIONAL') {
          try {
-            const response = await fetch('http://localhost:5000/remove/doctor', {
+            const response = await fetch(`${URL}/remove/doctor`, {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',
@@ -273,7 +272,7 @@ const Profile = () => {
       else if (userData.TYPE === 'TEACHER') {
          console.log('Deleting Teacher');
          try {
-            const response = await fetch('http://localhost:5000/remove/teacher', {
+            const response = await fetch(`${URL}/remove/teacher`, {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',
