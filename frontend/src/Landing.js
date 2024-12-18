@@ -3,34 +3,24 @@ import { Typewriter } from 'react-simple-typewriter'
 import { Link } from "react-router-dom";
 import LandDelivery from './img/LandDelivery.svg';
 import LandDoc from './img/LandDoc.svg';
-import LandDocPrec from './img/LandDocPrec.svg';
 import LandFam from './img/LandFam.svg';
 import LandMother from './img/LandMother.svg';
 import LandTeaching from './img/LandTeaching.svg';
 import LandTreat from './img/LandTreat.svg';
 import LandPuzzle from "./img/puzzlebg.png";
-import Arrow from "./img/arrow.svg";
 import "./Landing.css";
 import CountUp from 'react-countup';
 import Reveal from "./RevealRightToLeft";
 import RevealUp from "./RevealUp.jsx";
-import { motion, useScroll, useSpring, Variants, useAnimation, useInView, animate, useMotionValue, useTransform, delay } from 'framer-motion';
+import { motion, useScroll, animate, useMotionValue, useTransform } from 'framer-motion';
 import OfferCard from "./OfferCard.jsx";
 import { useEffect, useState } from "react";
 import useMeasure from "react-use-measure";
-import DoctorProfile from "./img/DoctorProfile.svg";
-import UserProfile from "./img/UserProfile.svg";
-import OrganizationProfile from "./img/OrganizationProfile.svg";
-import TherapyProfile from "./img/TherapyProfile.svg";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faStethoscope, faUser, faHospital, faCapsules, faMessage } from '@fortawesome/free-solid-svg-icons';
+import { faStethoscope, faUser, faHospital, faCapsules } from '@fortawesome/free-solid-svg-icons';
 
-const charVariants = {
-   hidden: { opacity: 0 },
-   reveal: { opacity: 1 }
-}
 
 const fadeInUpAnimation = {
    hidden: {
@@ -46,8 +36,6 @@ const fadeInUpAnimation = {
       },
    },
 };
-
-
 
 
 const weOffers = [
@@ -142,11 +130,6 @@ const Landing = () => {
             <li></li>
             <li></li>
          </ul>
-         {/* <div className="chat-icon">
-            <FontAwesomeIcon icon={faMessage} 
-               color="#3293C4"
-            />
-         </div> */}
          <Reveal>
             <div className="Nav">
                <Link to="/login" className="land-login">LOG IN</Link>
@@ -180,11 +163,6 @@ const Landing = () => {
                            delaySpeed={1000}
                         />
                      </motion.p>
-
-                     {/* <motion.button
-                        className="view-more-button"
-                        variants={fadeInUpAnimation}
-                     >JOIN US NOW</motion.button> */}
                   </motion.div>
                </div>
                <div className="land-side-img">
@@ -290,25 +268,6 @@ const Landing = () => {
                </div>
             </div>
          </RevealUp>
-         {/* <Reveal>
-            <div className="new-design">
-               <header className="new-design-header">
-                  <h1>Our New Design</h1>
-               </header>
-               <div>
-                  {weOffers.map((offer, index) => (
-                     <div key={index} className="new-design-card">
-                        <Reveal>
-                           <OfferCard image={offer.image} title={offer.title} description={offer.description} />
-                           {index}
-                           
-                        </Reveal>
-                     </div>
-                  ))
-                  }
-               </div>
-            </div>
-         </Reveal> */}
       </motion.div>
    );
 };

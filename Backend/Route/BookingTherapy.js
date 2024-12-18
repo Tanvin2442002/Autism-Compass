@@ -123,7 +123,7 @@ router.get('/data', async (req, res) => {
       if (type === "CHILD") {
          const parentId = await sql`
                 SELECT P_ID FROM PARENT_HAS_CHILD WHERE C_ID = ${id}
-            `; 
+            `;
          const P_ID = parentId[0]?.p_id;
 
          if (!P_ID) {
@@ -149,13 +149,13 @@ router.get('/data', async (req, res) => {
                   THO.STREET AS ORG_STREET,
                   THO.POSTAL_CODE AS ORG_POSTAL_CODE
                FROM CHILD C
-               JOIN PARENT P ON P.P_ID = C.P_ID
+               JOIN PARENT_HAS_CHILD PHC ON C.C_ID = PHC.C_ID
+               JOIN PARENT P ON PHC.P_ID = P.P_ID
                JOIN BOOKS B ON C.C_ID = B.C_ID AND P.P_ID = B.P_ID
                JOIN THERAPY TH ON TH.TH_ID = B.TH_ID
                JOIN THERAPY_ORG THO ON THO.THO_ID = B.THO_ID
                WHERE B.C_ID = ${id} AND B.P_ID = ${P_ID}
                ORDER BY TO_CHAR(B.BOOKING_DATE, 'DD-MON-YYYY')
-
             `;
       } else if (type === "PARENT") {
          result = await sql`
@@ -178,7 +178,7 @@ router.get('/data', async (req, res) => {
                     THO.POSTAL_CODE AS ORG_POSTAL_CODE
                 FROM CHILD C
                 JOIN PARENT_HAS_CHILD PHC ON C.C_ID = PHC.C_ID
-                JOIN PARENT P ON P.P_ID = PHC.P_ID
+                JOIN PARENT P ON PHC.P_ID = P.P_ID
                 JOIN BOOKS B ON C.C_ID = B.C_ID AND P.P_ID = B.P_ID
                 JOIN THERAPY TH ON TH.TH_ID = B.TH_ID
                 JOIN THERAPY_ORG THO ON THO.THO_ID = B.THO_ID
@@ -192,7 +192,6 @@ router.get('/data', async (req, res) => {
       res.status(500).send({ error: 'Database query failed' });
    }
 });
-
 router.delete('/delete', async (req, res) => {
    console.log("Request received to delete booking");
    const { C_ID, P_ID, TH_ID, THO_ID } = req.query;

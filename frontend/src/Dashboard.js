@@ -36,7 +36,7 @@ const Dashboard = () => {
    useEffect(() => {
       const fetchBookedDocData = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/dash/booked-doc?id=${localData.ID}&type=${localData.TYPE}`);
+            const response = await fetch(`${URL}/dash/booked-doc?id=${localData.ID}&type=${localData.TYPE}`);
             const tempData = await response.json();
             const data = tempData.map(transformToUppercase);
             setBookedDocData(data);
@@ -71,7 +71,7 @@ const Dashboard = () => {
       };
       const fetchBookedTherapy = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/booking/data?id=${localData.ID}&type=${localData.TYPE}`);
+            const response = await fetch(`${URL}/booking/data?id=${localData.ID}&type=${localData.TYPE}`);
             const tempData = await response.json();
             const data = tempData.map(transformToUppercase);
             setBookedTherapyData(data);
@@ -98,7 +98,7 @@ const Dashboard = () => {
       const fetchOrderList = async () => {
          try {
             const response = await fetch(
-               `http://localhost:5000/delivery/get/orders?userID=${localData.ID}`
+               `${URL}/delivery/get/orders?userID=${localData.ID}`
             );
             if (!response.ok) {
                throw new Error("Network response was not ok");

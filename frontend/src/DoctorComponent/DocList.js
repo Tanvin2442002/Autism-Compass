@@ -7,7 +7,6 @@ import Navbar from '../Navbar';
 import LoadingAnimation from '../LoadingAnimation';
 import Doclist from '../img/Doclist.svg';
 import Doctor from '../img/Doctor.svg';
-
 const URL = process.env.REACT_APP_API_URL;
 
 const DoctorsList = () => {

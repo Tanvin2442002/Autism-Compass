@@ -19,6 +19,7 @@
   "homepage": "https://github.com/hasnat0006/Autism-Compass#readme",
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
+    "@google/generative-ai": "^0.21.0",
     "@supabase/supabase-js": "^2.47.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

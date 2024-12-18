@@ -1,8 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 require('dotenv').config();
-// const supabase = require('./DB/supabase');
-
 const sql = require('./DB/supabase');
 
 const app = express();
@@ -11,7 +9,6 @@ app.use(express.json());
 
 
 const routerProduct = require('./Route/productDetails');
-const { autoCommit } = require("oracledb");
 app.use(routerProduct);
 app.use("/reg", require("./Route/registration"));
 app.use("/child", require("./Route/childThings"));
@@ -29,7 +26,7 @@ app.use("/remove", require("./Route/DeleteUser"));
 app.post("/login", async (req, res) => {
     try {
         const { email, password, type } = req.body;
-        console.log(`User login request: ${email}, ${password}, ${type}`);
+        console.log(`User login request: ${email}, ${type}`);
 
         // Query the database for user
         const result = await sql`
@@ -84,7 +81,7 @@ app.post("/login", async (req, res) => {
         console.log(`User ID: ${JSON.stringify(userId)}`);
         if (result.length > 0) {
             res.status(200).send(result[0]);
-            console.log(`User logged in: ${email}`);
+            console.log(`User logged in: ${email}, ${type}`);
         } else {
             res.status(404).send({ result: "No user found!" });
         }
@@ -101,20 +98,27 @@ app.get("/", (req, res) => {
     res.send("Welcome to the Autism Compass API!");
 });
 
-// app.get("/disorder", async (req, res) => {
-//     const { data, error } = await supabase.from('disorder').select('*');
-//     if (error) {
-//         res.status(400).send({ error: error.message });
-//     }
-//     res.send(data);
-//     console.log(data);
-// });
 
-app.get("/disorder", async (req, res) => {
-    const data = await sql`SELECT * FROM disorder`;
-    res.send(data);
-    console.log(data);
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+
+
+app.get("/ai", async (req, res) => {
+    const prompt = "Explain how AI works";
+    try {
+        const result = await model.generateContent(prompt);
+        console.log(result.response.text());
+        res.status(200).send(result.response.text());
+        console.log("AI response sent");
+    } catch (err) {
+        console.error("Error during AI generation:", err);
+        res.status(500).send({ message: "Error during AI generation", error: err.message });
+    }
 });
+
 
 app.listen(5000, async (req, resp) => {
     // console.log(sql);

@@ -10,7 +10,7 @@ import OrgCard from './OrgCard';
 import LoadingAnimation from '../LoadingAnimation';
 import RevealLeftToRight from '../RevealLeftToRight';
 import RevealRightToLeft from '../RevealRightToLeft';
-
+const URL = process.env.REACT_APP_API_URL;
 
 const TherapyDetail = () => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const TherapyDetail = () => {
   useEffect(() => {
     const fetchTherapyData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/therapy/Detail?type=${therapyId}`);
+        const response = await fetch(`${URL}/therapy/Detail?type=${therapyId}`);
         const tempData = await response.json();
         const data = tempData.map(transformToUppercase);
         setTherapyData(data[0]); // Assuming the API returns an array
@@ -48,7 +48,7 @@ const TherapyDetail = () => {
 
     const fetchTherapyOrgData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/therapy/org?type=${therapyId}`);
+        const response = await fetch(`${URL}/therapy/org?type=${therapyId}`);
         const tempData = await response.json();
         const data = tempData.map(transformToUppercase);
         setTherapyOrgData(data);
@@ -106,11 +106,15 @@ const TherapyDetail = () => {
         <div className="therapy-details-content">
           <RevealLeftToRight>
             <div className="details-of-therapy">
-              <h2>{therapyData.THERAPY_TYPE}</h2>
-              <p>{therapyData.THERAPY_DESCRIPTION}</p>
-              <button className='view-more-button' onClick={generateTherapyDetails}>
-                Want to know more about this therapy
-              </button>
+              {therapyData && (
+                <>
+                  <h2>{therapyData.THERAPY_TYPE}</h2>
+                  <p>{therapyData.THERAPY_DESCRIPTION}</p>
+                  <button className='view-more-button' onClick={generateTherapyDetails}>
+                    Want to know more about this therapy
+                  </button>
+                </>
+              )}
               <div className='disorder-item-details'>
                 {loadingTherapyDetails ? (
                   <LoadingAnimation />

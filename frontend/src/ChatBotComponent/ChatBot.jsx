@@ -29,31 +29,40 @@ const ChatBot = () => {
       const question = inputMessage;
       setInputMessage('');
       setLoading(true);
-      try {
-         const response = await axios({
-            method: 'POST',
-            url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDYuRJ9qvb47Q0Jspl1g3Ey4jNrRHTUe9g',
-            data: {
-               contents: [
-                  {
-                     parts: [{ text: question + ' within 200 words' }],
-                  },
-               ],
-            },
-         });
+      // try {
+      //    const response = await axios({
+      //       method: 'POST',
+      //       url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDYuRJ9qvb47Q0Jspl1g3Ey4jNrRHTUe9g',
+      //       data: {
+      //          contents: [
+      //             {
+      //                parts: [{ text: question + ' within 200 words' }],
+      //             },
+      //          ],
+      //       },
+      //    });
 
-         const botMessage = response.data.candidates[0].content.parts[0].text.replace(/\*/g, '');
+      //    const botMessage = response.data.candidates[0].content.parts[0].text.replace(/\*/g, '');
 
-         setMessages((prevMessages) => [
-            ...prevMessages,
-            { sender: 'user', text: question },
-            { sender: 'bot', text: botMessage },
-         ]);
-      } catch (error) {
-         console.error('Error generating response:', error);
-      } finally {
-         setLoading(false);
-      }
+      //    setMessages((prevMessages) => [
+      //       ...prevMessages,
+      //       { sender: 'user', text: question },
+      //       { sender: 'bot', text: botMessage },
+      //    ]);
+      // } catch (error) {
+      //    console.error('Error generating response:', error);
+      // } finally {
+      //    setLoading(false);
+      // }
+      // Dummy data
+      const botMessage = 'I am a chatbot. I can help you with your queries.';
+      setMessages((prevMessages) => [
+         ...prevMessages,
+         { sender: 'user', text: question },
+         { sender: 'bot', text: botMessage },
+      ]);
+      setLoading(false);   
+      console.log(messages);
    };
 
    return (

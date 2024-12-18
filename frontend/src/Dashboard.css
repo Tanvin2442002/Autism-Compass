@@ -247,3 +247,11 @@
         }
     }
 }
+
+@media (max-width: 350px) {
+    .card-item-doc {
+        width: 100%;
+    }
+    
+    
+}

@@ -4,6 +4,7 @@ import 'boxicons/css/boxicons.min.css';
 import Navbar from '../Navbar';
 import OrgCard from './OrgCard';
 import { motion } from 'framer-motion';
+const URL = process.env.REACT_APP_API_URL;
 
 const TherapyOrganizations = () => {
 	const [therapyOrgData, setTherapyOrgData] = useState([]);
@@ -16,7 +17,7 @@ const TherapyOrganizations = () => {
 	useEffect(() => {
 		const fetchTherapyOrgData = async () => {
 			try {
-				const response = await fetch('http://localhost:5000/therapy/orgdata', {
+				const response = await fetch(`${URL}/therapy/orgdata`, {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json'
@@ -38,7 +39,7 @@ const TherapyOrganizations = () => {
 	const handleSearch = async (e) => {
 		const searchValue = e.target.value;
 		try {
-			const response = await fetch(`http://localhost:5000/therapy/org/search?search=${searchValue}`);
+			const response = await fetch(`${URL}/therapy/org/search?search=${searchValue}`);
 			if (!response.ok) {
 				throw new Error("Network response was not ok");
 			}

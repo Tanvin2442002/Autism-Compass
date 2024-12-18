@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, useLocation, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Disorder from "./ChildComponent/Disorder";
 import Dashboard from "./Dashboard";
 import Landing from "./Landing";
@@ -24,21 +24,12 @@ import BookedList from "./DoctorComponent/BookedList";
 import Consultation from "./DoctorComponent/Consultation";
 import Allorderlist from "./productComponent/delivery/Allorderlist";
 import SuggestedList from "./DoctorComponent/Suggested";
-
-import Courses from "./CoursesComponent/Courses";
-import EnrolledCourses from "./CoursesComponent/EnrolledCourses";
-
-import OfferCard from "./OfferCard";
-
 import ChatBot from "./ChatBotComponent/ChatBot";
-import StudentList from "./CoursesComponent/StudentList";
-
-
 import { AnimatePresence } from "framer-motion";
-
-
-
 import "./App.css";
+
+
+
 function App() {
 
 
@@ -79,10 +70,6 @@ function App() {
                   <Route path='/consultation' element={<Consultation />} />
                   <Route path='/doctor/feedback' element={<SuggestedList />} />
                   <Route path='/chatbot' element={<ChatBot />} />
-
-                  <Route path='/courses' element={<Courses />} />
-                  <Route path='/enrolled-courses' element={<EnrolledCourses />} />
-                  <Route path="/students/:courseCode" element={<StudentList />} /> 
                
                </Routes>
             </Router>

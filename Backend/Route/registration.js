@@ -270,7 +270,7 @@ router.get("/parent-child-info", async (req, res) => {
         let result;
         if (TYPE === 'PARENT') {
             result = await sql`
-            SELECT C.NAME AS NAME, C.EMAIL AS EMAIL, D.TYPE AS DISORDER, C.DOB AS DOB, C.CONTACT_NO AS CONTACT_NO
+            SELECT C.NAME AS NAME, C.EMAIL AS EMAIL, C.AGE AS AGE, D.TYPE AS DISORDER, C.DOB AS DOB, C.CONTACT_NO AS CONTACT_NO
             FROM CHILD C
             JOIN PARENT_HAS_CHILD PHC ON PHC.C_ID = C.C_ID
             JOIN CHILD_HAS_DISORDER CHD ON CHD.C_ID = C.C_ID
