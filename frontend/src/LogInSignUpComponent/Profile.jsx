@@ -326,7 +326,7 @@ const Profile = () => {
                <RevealLeftToRight>
                   <div className="user-profile">
                      <div className="avatar">
-                        <img src={`https://avatar.iran.liara.run/public/${gender}?username=${profileData.NAME}`} alt='Avatar' />
+                        <img src={`https://avatar.iran.liara.run/public/${gender}?username=${encodeURIComponent(profileData.NAME)}`} alt='Avatar' />
                      </div>
                      <div className="profile-info">
                         <h1>{profileData.NAME}</h1>
