@@ -26,7 +26,7 @@ app.use("/remove", require("./Route/DeleteUser"));
 app.post("/login", async (req, res) => {
     try {
         const { email, password, type } = req.body;
-        console.log(`User login request: ${email}, ${password}, ${type}`);
+        console.log(`User login request: ${email}, ${type}`);
 
         // Query the database for user
         const result = await sql`
@@ -81,7 +81,7 @@ app.post("/login", async (req, res) => {
         console.log(`User ID: ${JSON.stringify(userId)}`);
         if (result.length > 0) {
             res.status(200).send(result[0]);
-            console.log(`User logged in: ${email}`);
+            console.log(`User logged in: ${email}, ${type}`);
         } else {
             res.status(404).send({ result: "No user found!" });
         }
