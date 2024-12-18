@@ -8,7 +8,7 @@ import StepperComponent from "./StepperComponent.js";
 import delivery from "../../img/deliveryman.svg";
 import { useLocation } from "react-router-dom";
 import Invoice from "./Invoice";
-
+const URL = process.env.REACT_APP_API_URL;
 const OrderConfirmation = () => {
   const [OrderList, setOrderList] = useState([]);
   const [OrderDetails, setOrderDetails] = useState([]);
@@ -36,7 +36,7 @@ const OrderConfirmation = () => {
     const fetchOrderList = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/delivery/orderlist?orderID=${orderID}`
+          `${URL}/delivery/orderlist?orderID=${orderID}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -55,7 +55,7 @@ const OrderConfirmation = () => {
     const fetchDeliveryDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/delivery/deliverydetails?orderID=${orderID}`
+          `${URL}/delivery/deliverydetails?orderID=${orderID}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -91,7 +91,7 @@ const OrderConfirmation = () => {
   const deleteCartItems = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/delivery/cart?userID=${userID}`,
+        `${URL}/delivery/cart?userID=${userID}`,
         {
           method: "DELETE",
         }
@@ -119,7 +119,7 @@ const OrderConfirmation = () => {
   const deletegettable = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/delivery/get?userID=${userID}`,
+        `${URL}/delivery/get?userID=${userID}`,
         {
           method: "DELETE",
         }

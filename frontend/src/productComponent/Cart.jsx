@@ -5,7 +5,7 @@ import Button from "./Button";
 import CarLoader from "./CarLoader.js";
 import "./Cart.css";import { toast, ToastContainer } from "react-toastify";
 
-
+const URL = process.env.REACT_APP_API_URL;
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -49,7 +49,7 @@ const Cart = () => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/detail/checkout?userID=${userID}`
+          `${URL}/products/detail/checkout?userID=${userID}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -71,7 +71,7 @@ const Cart = () => {
   const fetchSubtotal = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/products/detail/checkout/total?userID=${userID}`
+        `${URL}/products/detail/checkout/total?userID=${userID}`
       );
       if (response.status === 404) {
         setErrorMessage(
@@ -110,7 +110,7 @@ const Cart = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/products/detail/checkout/updateQuantity`,
+        `${URL}/products/detail/checkout/updateQuantity`,
         {
           method: "POST",
           headers: {
@@ -138,7 +138,7 @@ const Cart = () => {
     setLoading(true); // Set loading state when removing an item
     try {
       const response = await fetch(
-        `http://localhost:5000/products/detail/checkout?userID=${userID}&PR_ID=${PR_ID}`,
+        `${URL}/products/detail/checkout?userID=${userID}&PR_ID=${PR_ID}`,
         {
           method: "DELETE",
         }
@@ -164,7 +164,7 @@ const Cart = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/products/detail/checkout/deliveryman?city=${city}`
+        `${URL}/products/detail/checkout/deliveryman?city=${city}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -183,7 +183,7 @@ const Cart = () => {
   const deleteCartItems = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/delivery/cart?userID=${userID}`,
+        `${URL}/delivery/cart?userID=${userID}`,
         {
           method: "DELETE",
         }
@@ -203,7 +203,7 @@ const Cart = () => {
   const deletegettable = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/delivery/get?userID=${userID}`,
+        `${URL}/delivery/get?userID=${userID}`,
         {
           method: "DELETE",
         }
@@ -246,7 +246,7 @@ const Cart = () => {
     };
     try {
       const response = await fetch(
-        "http://localhost:5000/products/detail/checkout/setAddress",
+        "${URL}/products/detail/checkout/setAddress",
         {
           method: "POST",
           body: JSON.stringify(param),
@@ -279,7 +279,7 @@ const Cart = () => {
         DELIVERY_DATE: date.toISOString().split("T")[0],
       };
       const response = await fetch(
-        "http://localhost:5000/products/detail/checkout/setBill",
+        "${URL}/products/detail/checkout/setBill",
         {
           method: "POST",
           body: JSON.stringify(params),
@@ -298,7 +298,7 @@ const Cart = () => {
         D_ID: deliverymanID,
       };
       const response = await fetch(
-        "http://localhost:5000/products/detail/checkout/setAssignedTo",
+        "${URL}/products/detail/checkout/setAssignedTo",
         {
           method: "POST",
           body: JSON.stringify(params),
@@ -327,7 +327,7 @@ const Cart = () => {
 
       try {
         const response = await fetch(
-          "http://localhost:5000/products/detail/checkout/setOrder",
+          "${URL}/products/detail/checkout/setOrder",
           {
             method: "POST",
             body: JSON.stringify(params), // Note: Changed 'param' to 'params'

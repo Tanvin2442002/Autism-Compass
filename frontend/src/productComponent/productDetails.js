@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navbar";
 import MainContent from "./ProductList/mainContent";
-
+const URL = process.env.REACT_APP_API_URL;
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/detail?ID=${productType}`
+          `${URL}/products/detail?ID=${productType}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -41,7 +41,7 @@ const ProductDetails = () => {
     const exi = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/detail/exists?userID=${userData.ID}`
+          `${URL}/products/detail/exists?userID=${userData.ID}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -67,7 +67,7 @@ const ProductDetails = () => {
   const exist = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/products/detail/exists?userID=${userData.ID}`
+        `${URL}/products/detail/exists?userID=${userData.ID}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -100,7 +100,7 @@ const ProductDetails = () => {
         DOB: new Date().toISOString().slice(0, 10),
       };
       try {
-        const response = await fetch("http://localhost:5000/products/detail", {
+        const response = await fetch("${URL}/products/detail", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

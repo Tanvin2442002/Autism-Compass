@@ -4,7 +4,7 @@ import OrderCard2 from "./OrderCard2";
 import OrderImage from "../../img/Orderlist.svg";
 import Navbar from "../../Navbar";
 import "./Allorderlist.css";
-
+const URL = process.env.REACT_APP_API_URL;
 const Allorderlist = () => {
   const [AllOrderList, setAllOrderList] = useState([]);
   const userData = JSON.parse(localStorage.getItem("USER"));
@@ -19,7 +19,7 @@ const Allorderlist = () => {
     const fetchOrderList = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/delivery/get/orders?userID=${userID}`
+          `${URL}/delivery/get/orders?userID=${userID}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");

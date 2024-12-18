@@ -8,7 +8,7 @@ import "./slickComponent.css";
 import "./mainContent.css"; // Ensure this CSS file has the combined styles
 import { toast, ToastContainer } from "react-toastify";
 import ComponentName from "../../footer";
-
+const URL = process.env.REACT_APP_API_URL;
 
 const ProductList = () => {
   const [productCards, setProduct] = useState([]);
@@ -21,7 +21,7 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/products`);
+        const response = await fetch(`${URL}/products`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }

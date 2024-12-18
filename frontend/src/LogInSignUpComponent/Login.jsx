@@ -54,12 +54,7 @@ const LogIn = () => {
             } else {
                localStorage.setItem("REMEMBER_ME", "0");
             }
-            if(data.TYPE === 'TEACHER'){
-               navigate("/courses");
-            }
-            else{
-               navigate("/dashboard");
-            }
+            navigate("/dashboard");
          } else {
             toast.error('Invalid credentials', {
                position: "top-right",
