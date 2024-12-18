@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar";
+import { faAddressBook, faCalendarDays, faChild, faEnvelope, faHospital, faPenToSquare, faPhone, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHospital, faCalendarDays, faChild, faEnvelope, faPhone, faAddressBook, faTrashAlt, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import './BookedTherapy.css';
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar";
+import './BookedTherapy.css';
+const URL = process.env.REACT_APP_API_URL;
 
 const BookedTherapy = () => {
    const [data, setData] = useState([]);
@@ -12,13 +13,19 @@ const BookedTherapy = () => {
    const [consultationToDelete, setConsultationToDelete] = useState(null);
    const navigate = useNavigate();
 
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
 
    useEffect(() => {
       const fetchData = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/booking/data?id=${localData.ID}&type=${localData.TYPE}`);
+            const response = await fetch(`${URL}/booking/data?id=${localData.ID}&type=${localData.TYPE}`);
             const res = await response.json();
-            setData(res);
+            const data = res.map(it => transformToUppercase(it));
+            setData(data);
          } catch (error) {
             console.error("Error fetching data:", error);
          }
@@ -37,7 +44,7 @@ const BookedTherapy = () => {
       if (consultationToDelete) {
          const { C_ID, P_ID, TH_ID, THO_ID } = consultationToDelete;
          console.log("C_ID:", C_ID, "P_ID:", P_ID, "TH_ID:", TH_ID, "THO_ID:", THO_ID);
-         const response = await fetch(`http://localhost:5000/booking/delete?C_ID=${C_ID}&P_ID=${P_ID}&TH_ID=${TH_ID}&THO_ID=${THO_ID}`, { method: 'DELETE' });
+         const response = await fetch(`${URL}/booking/delete?C_ID=${C_ID}&P_ID=${P_ID}&TH_ID=${TH_ID}&THO_ID=${THO_ID}`, { method: 'DELETE' });
          const res = await response.json();
          console.log("Response:", res);
          if (res.success) {

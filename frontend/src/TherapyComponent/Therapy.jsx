@@ -7,6 +7,7 @@ import Navbar from '../Navbar';
 import LoadingAnimation from '../LoadingAnimation';
 import { motion } from 'framer-motion';
 import RevealLeftToRight from '../RevealLeftToRight';
+const URL = process.env.REACT_APP_API_URL;
 
 const AvailableTherapies = () => {
    const [therapies, setTherapies] = useState([]);
@@ -14,14 +15,21 @@ const AvailableTherapies = () => {
    const [error, setError] = useState(null);
    const navigate = useNavigate();
 
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
+
    useEffect(() => {
       const fetchTherapies = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/therapy/all`);
+            const response = await fetch(`${URL}/therapy/all`);
             if (!response.ok) {
                throw new Error("Network response was not ok");
             }
-            const data = await response.json();
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             console.log('Fetched data:', data);
             setTherapies(data);
          } catch (err) {
@@ -37,11 +45,12 @@ const AvailableTherapies = () => {
       const searchValue = e.target.value;
       setLoading(true);
       try {
-         const response = await fetch(`http://localhost:5000/therapy/search?search=${searchValue}`);
+         const response = await fetch(`${URL}/therapy/search?search=${searchValue}`);
          if (!response.ok) {
             throw new Error("Network response was not ok");
          }
-         const data = await response.json();
+         const tempData = await response.json();
+         const data = tempData.map(transformToUppercase);
          console.log('Search value:', searchValue);
          console.log('Fetched data:', data);
          setTherapies(data);

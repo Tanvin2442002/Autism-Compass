@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../Navbar.js';
-import './Profile.css';
-import ProfileImage from '../img/Profile.svg';
-import { ToastContainer, toast } from 'react-toastify';
-import LoadingAnimation from '../LoadingAnimation';
 import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import ProfileImage from '../img/Profile.svg';
+import LoadingAnimation from '../LoadingAnimation';
+import Navbar from '../Navbar.js';
 import RevealLeftToRight from '../RevealLeftToRight';
-import { Navigate, useNavigate } from 'react-router-dom';
+import './Profile.css';
+const URL = process.env.REACT_APP_API_URL;
 
 const Profile = () => {
    const navigate = useNavigate();
@@ -34,6 +35,12 @@ const Profile = () => {
    const [gender, setGender] = useState('boy');
    const userData = JSON.parse(localStorage.getItem('USER'));
 
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
+
    useEffect(() => {
       const fetchData = async () => {
          if (!userData) {
@@ -42,20 +49,19 @@ const Profile = () => {
             return;
          }
          try {
-            const response = await fetch('http://localhost:5000/reg/user-info', {
-               method: 'POST',
+            const response = await fetch(`${URL}/reg/user-info?ID=${userData.ID}&TYPE=${userData.TYPE}`, {
+               method: 'GET',
                headers: {
                   'Content-Type': 'application/json'
                },
-               body: JSON.stringify({ ID: userData.ID, TYPE: userData.TYPE })
             });
-
             if (!response.ok) {
                throw new Error(`HTTP error! status: ${response.status}`);
             }
-
             const data = await response.json();
             console.log('Data:', data[0]);
+            // uppercase the keys
+            data[0] = transformToUppercase(data[0]);
             setProfileData({
                TYPE: userData.TYPE,
                ID: userData.ID,
@@ -76,11 +82,12 @@ const Profile = () => {
             });
             console.log('PROFILE DATA:', profileData);
          } catch (err) {
-            // setError(err.message);
+            console.error('Error fetching user info:', err);
          } finally {
             setLoading(false);
          }
       };
+
 
       fetchData();
    }, []);
@@ -150,7 +157,7 @@ const Profile = () => {
       }
 
       console.log('New Data:', newUserData);
-      const response = await fetch('http://localhost:5000/reg/update-user-info', {
+      const response = await fetch(`${URL}/reg/update-user-info`, {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json'
@@ -176,7 +183,7 @@ const Profile = () => {
       console.log('Deleting Account:', ID);
       if (userData.TYPE === 'CHILD') {
          try{
-            const response = await fetch('http://localhost:5000/remove/child', {
+            const response = await fetch(`${URL}/remove/child`, {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',
@@ -197,7 +204,7 @@ const Profile = () => {
       }
       else if (userData.TYPE === 'PARENT') {
          try {
-            const response = await fetch('http://localhost:5000/remove/parent', {
+            const response = await fetch(`${URL}/remove/parent`, {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',
@@ -242,7 +249,7 @@ const Profile = () => {
 
       else if (userData.TYPE === 'HEALTH_PROFESSIONAL') {
          try {
-            const response = await fetch('http://localhost:5000/remove/doctor', {
+            const response = await fetch(`${URL}/remove/doctor`, {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',
@@ -265,7 +272,7 @@ const Profile = () => {
       else if (userData.TYPE === 'TEACHER') {
          console.log('Deleting Teacher');
          try {
-            const response = await fetch('http://localhost:5000/remove/teacher', {
+            const response = await fetch(`${URL}/remove/teacher`, {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',

@@ -4,21 +4,27 @@ import 'boxicons/css/boxicons.min.css';
 import Navbar from '../Navbar';
 import OrgCard from './OrgCard';
 import { motion } from 'framer-motion';
+const URL = process.env.REACT_APP_API_URL;
 
 const TherapyOrganizations = () => {
 	const [therapyOrgData, setTherapyOrgData] = useState([]);
 	// const [loading, setLoading] = useState(true);
-
+	const transformToUppercase = (data) => {
+		return Object.fromEntries(
+			Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+		);
+	};
 	useEffect(() => {
 		const fetchTherapyOrgData = async () => {
 			try {
-				const response = await fetch('http://localhost:5000/therapy/orgdata', {
+				const response = await fetch(`${URL}/therapy/orgdata`, {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json'
 					}
 				});
-				const data = await response.json();
+				const tempData = await response.json();
+				const data = tempData.map(transformToUppercase);
 				console.log("Data received");
 				console.log(data);
 				setTherapyOrgData(data);
@@ -33,11 +39,12 @@ const TherapyOrganizations = () => {
 	const handleSearch = async (e) => {
 		const searchValue = e.target.value;
 		try {
-			const response = await fetch(`http://localhost:5000/therapy/org/search?search=${searchValue}`);
+			const response = await fetch(`${URL}/therapy/org/search?search=${searchValue}`);
 			if (!response.ok) {
 				throw new Error("Network response was not ok");
 			}
-			const data = await response.json();
+			const tempData = await response.json();
+			const data = tempData.map(transformToUppercase);
 			console.log('Search value:', searchValue);
 			console.log('Fetched data:', data);
 			setTherapyOrgData(data);

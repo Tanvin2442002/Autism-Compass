@@ -9,6 +9,7 @@ import OrgImage from '../img/OrgImage.svg';
 import LoadingAnimation from '../LoadingAnimation';
 import RevealLeftToRight from '../RevealLeftToRight'
 import RevealRightToLeft from '../RevealRightToLeft'
+const URL = process.env.REACT_APP_API_URL;
 
 const BookingTherapy = () => {
    const [orgDetails, setOrgDetails] = useState(null);
@@ -26,15 +27,19 @@ const BookingTherapy = () => {
    const orgId = params.get('THO_ID');
 
    const localData = JSON.parse(localStorage.getItem('USER'));
-
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
    useEffect(() => {
       console.log('Therapy ID:', therapyId, 'Org ID:', orgId);
 
       const fetchOrgDetails = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/booking/therapy/orgdata?THO_ID=${orgId}`);
-            console.log('Response:', response);
-            const data = await response.json();
+            const response = await fetch(`${URL}/booking/therapy/orgdata?THO_ID=${orgId}`);
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             console.log('Data:', data);
             setOrgDetails(data);
          } catch (error) {
@@ -47,8 +52,9 @@ const BookingTherapy = () => {
 
       const fetchTherapyDetails = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/booking/therapy/therapydata?TH_ID=${therapyId}`);
-            const data = await response.json();
+            const response = await fetch(`${URL}/booking/therapy/therapydata?TH_ID=${therapyId}`);
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             console.log("Therapy data:", data[0].THERAPY_TYPE);
             setTherapyType(data[0].THERAPY_TYPE);
          } catch (error) {
@@ -65,11 +71,12 @@ const BookingTherapy = () => {
          try {
             let response;
             if (localData.TYPE === 'PARENT') {
-               response = await fetch(`http://localhost:5000/booking/therapy/child/data?P_ID=${localData.ID}`);
+               response = await fetch(`${URL}/booking/therapy/child/data?P_ID=${localData.ID}`);
             } else {
-               response = await fetch(`http://localhost:5000/booking/therapy/parent/data?C_ID=${localData.ID}`);
+               response = await fetch(`${URL}/booking/therapy/parent/data?C_ID=${localData.ID}`);
             }
-            const data = await response.json();
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             console.log('User data:', data[0]);
             setUserDetails(data[0]);
          } catch (error) {
@@ -94,12 +101,13 @@ const BookingTherapy = () => {
       }
 
       // if cid, pid, thid, thoid are already present in the database then update the booking date
-      const checkExist = await fetch(`http://localhost:5000/booking/therapy/check?C_ID=${userDetails.C_ID}&P_ID=${userDetails.P_ID}&TH_ID=${therapyId}&THO_ID=${orgId}`);
-      const checkData = await checkExist.json();
+      const checkExist = await fetch(`${URL}/booking/therapy/check?C_ID=${userDetails.C_ID}&P_ID=${userDetails.P_ID}&TH_ID=${therapyId}&THO_ID=${orgId}`);
+      const tempCheckData = await checkExist.json();
+      const checkData = tempCheckData.map(transformToUppercase);
       console.log('Check data:', checkData);
       if (checkData.length > 0) {
          console.log("IN.......");
-         const response = await fetch('http://localhost:5000/booking/therapy/update', {
+         const response = await fetch(`${URL}/booking/therapy/update`, {
             method: 'PUT',
             headers: {
                'Content-Type': 'application/json',
@@ -138,7 +146,7 @@ const BookingTherapy = () => {
       }
 
       console.log('Booking data:', bookingData);
-      const response = await fetch('http://localhost:5000/booking/therapy', {
+      const response = await fetch(`${URL}/booking/therapy`, {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
@@ -179,7 +187,7 @@ const BookingTherapy = () => {
 
       if (email) {
          try {
-            const response = await fetch(`http://localhost:5000/booking/therapy/child/check?email=${email}&P_ID=${userDetails.P_ID}`);
+            const response = await fetch(`${URL}/booking/therapy/child/check?email=${email}&P_ID=${userDetails.P_ID}`);
             const data = await response.json();
             console.log('Email data:', data[0].NAME);
             if (data[0].NAME) {

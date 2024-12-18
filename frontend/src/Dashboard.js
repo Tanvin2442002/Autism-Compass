@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Typewriter } from 'react-simple-typewriter'
-import { useLocation, useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
+import { useNavigate } from 'react-router-dom';
+import { Typewriter } from 'react-simple-typewriter';
 import './Dashboard.css';
-import Doctor from "./img/Doctor.svg"
-import Therapy from "./img/Therapy.svg"
-import FindDisorder from "./img/FindDisorder.svg"
-import DashDelivery from './img/DashDelivery.svg';
 import DoctorConsultationList from './DoctorComponent/DoctorConsultationList';
-import RevealRightToLeft from './RevealRightToLeft';
+import DashDelivery from './img/DashDelivery.svg';
+import Doctor from "./img/Doctor.svg";
+import FindDisorder from "./img/FindDisorder.svg";
+import Therapy from "./img/Therapy.svg";
+import Navbar from './Navbar';
 import RevealLeftToRight from './RevealLeftToRight';
+import RevealRightToLeft from './RevealRightToLeft';
 import RevealUp from './RevealUp';
-import { motion } from 'framer-motion';
-import Reveal from './RevealRightToLeft';
+const URL = process.env.REACT_APP_API_URL;
 
 
 const Dashboard = () => {
@@ -28,12 +27,20 @@ const Dashboard = () => {
    const navigate = useNavigate();
    const localData = JSON.parse(localStorage.getItem('USER'));
 
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
+
    useEffect(() => {
       const fetchBookedDocData = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/dash/booked-doc?id=${localData.ID}&type=${localData.TYPE}`);
-            const data = await response.json();
+            const response = await fetch(`${URL}/dash/booked-doc?id=${localData.ID}&type=${localData.TYPE}`);
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             setBookedDocData(data);
+            console.log('Booked doc data:', data);
          } catch (error) {
             console.error('Error fetching consultations:', error);
             setBookedDocData([]);
@@ -42,30 +49,31 @@ const Dashboard = () => {
 
       const fetchAvailableDocData = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/dash/available-doc`);
+            const response = await fetch(`${URL}/dash/available-doc`);
             const data = await response.json();
-            setAvailableDocData(data);
+            const upperCaseData = data.map((item) => transformToUppercase(item));
+            setAvailableDocData(upperCaseData);
          } catch (error) {
             console.error('Error fetching consultations:', error);
             setAvailableDocData([]);
          }
       };
-
       const fetchAvailableTherapyData = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/dash/available-therapy`);
+            const response = await fetch(`${URL}/dash/available-therapy`);
             const data = await response.json();
-            setAvailableTherapyData(data);
+            const upperCaseData = data.map((item) => transformToUppercase(item));
+            setAvailableTherapyData(upperCaseData);
          } catch (error) {
             console.error('Error fetching consultations:', error);
             setAvailableTherapyData([]);
          }
       };
-
       const fetchBookedTherapy = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/booking/data?id=${localData.ID}&type=${localData.TYPE}`);
-            const data = await response.json();
+            const response = await fetch(`${URL}/booking/data?id=${localData.ID}&type=${localData.TYPE}`);
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             setBookedTherapyData(data);
 
          } catch (error) {
@@ -75,10 +83,13 @@ const Dashboard = () => {
       };
       const fetchDisorderData = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/dash/disorder-info?id=${localData.ID}`);
+            const response = await fetch(`${URL}/dash/disorder-info?id=${localData.ID}`);
             const data = await response.json();
-            if (data.TYPE && data.DESCRIPTION) {
-               setDisorderData(data);
+            console.log('Disorder data:', data);
+            const upperCaseData = transformToUppercase(data);
+            if (upperCaseData.TYPE && upperCaseData.DESCRIPTION) {
+               console.log('Upper case data:', upperCaseData);
+               setDisorderData(upperCaseData);
             }
          } catch (error) {
             console.error('Error fetching consultations:', error);
@@ -87,7 +98,7 @@ const Dashboard = () => {
       const fetchOrderList = async () => {
          try {
             const response = await fetch(
-               `http://localhost:5000/delivery/get/orders?userID=${localData.ID}`
+               `${URL}/delivery/get/orders?userID=${localData.ID}`
             );
             if (!response.ok) {
                throw new Error("Network response was not ok");
@@ -124,28 +135,12 @@ const Dashboard = () => {
    if (localData.TYPE === 'PARENT') {
       displayedDeliveryData = orderList.slice(0, 4);
    }
-   const handleBookedDoctor = () => {
-      navigate('/doctor/booked');
-   }
-
-   const handleAvailableDoctor = () => {
-      navigate('/HealthProfessionals');
-   }
-
-   const handleBookedTherapy = () => {
-      navigate('/therapy/booked');
-   }
-
-   const handleAvailableTherapy = () => {
-      navigate('/therapy');
-   }
-
-   const handleDisorder = () => {
-      navigate('/disorder');
-   }
-   const handleDeliveryDetails = () => {
-      navigate('/products/orders');
-   }
+   const handleBookedDoctor = () =>       {navigate('/doctor/booked');}
+   const handleAvailableDoctor = () =>    {navigate('/HealthProfessionals');}
+   const handleBookedTherapy = () =>      {navigate('/therapy/booked');}
+   const handleAvailableTherapy = () =>   {navigate('/therapy');}
+   const handleDisorder = () =>           {navigate('/disorder');}
+   const handleDeliveryDetails = () =>    {navigate('/products/orders');}
 
    return (
       <div>
