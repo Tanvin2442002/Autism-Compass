@@ -8,6 +8,8 @@ import Loader from "../../LoadingAnimation";
 import AddCart from "../AddCart";
 import { toast, ToastContainer } from "react-toastify";
 
+const URL = process.env.REACT_APP_API_URL;
+
 const SlickComponent = ({ products }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -49,7 +51,7 @@ const SlickComponent = ({ products }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/products/add/cart`, {
+      const response = await fetch(`${URL}/products/add/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

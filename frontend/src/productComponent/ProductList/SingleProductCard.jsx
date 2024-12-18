@@ -4,7 +4,7 @@ import AddCart from "../AddCart";
 import { toast, ToastContainer } from "react-toastify";
 import { motion } from 'framer-motion';
 import Reveal from "../../RevealRightToLeft";
-
+const URL = process.env.REACT_APP_API_URL;
 
 const SingleProductCard = ({ itemDetails }) => {
   const [PopUp, setPopUp] = useState(false);
@@ -32,7 +32,7 @@ const SingleProductCard = ({ itemDetails }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/products/add/cart`, {
+      const response = await fetch(`${URL}/products/add/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

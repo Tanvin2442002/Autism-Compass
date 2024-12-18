@@ -1,18 +1,14 @@
 const express = require("express");
-const { getConnection } = require("../DB/connection");
-const { autoCommit } = require("oracledb");
+const sql = require("../DB/supabase");
 const routerProduct = express.Router();
 
 routerProduct.get("/products/detail", async (req, res) => {
-  const connection = await getConnection();
   const productID = req.query.ID;
   console.log("Request received");
   console.log(req.query);
   try {
-    const result = await connection.execute(
-      `SELECT * FROM PRODUCT WHERE PR_ID = :productID`,
-      { productID }
-    );
+    const result = await sql
+      `SELECT * FROM PRODUCT WHERE PR_ID = ${productID};`;
     console.log(`Query result: ${JSON.stringify(result.rows)}`);
     res.status(200).send(result.rows[0]); // Send the first product in the array
   } catch (error) {
@@ -23,51 +19,26 @@ routerProduct.get("/products/detail", async (req, res) => {
   }
 });
 
-const oracledb = require("oracledb"); 
+// const oracledb = require("oracledb"); 
 
 routerProduct.get("/products", async (req, res) => {
-  let connection;
-  console.log("Fetching all the products using cursor");
   try {
-    connection = await getConnection(); 
-    const result = await connection.execute(
-      `BEGIN
-          OPEN :cursor FOR
-         SELECT * FROM PRODUCT;
-      END;`,
-      {
-        cursor: { type: oracledb.CURSOR, dir: oracledb.BIND_OUT },
-      }
-    );
-
-    const cursor = result.outBinds.cursor;
-    let rows = [];
-    let row;
-    while ((row = await cursor.getRow())) {
-      rows.push(row);
-    }
-    await cursor.close();
+    const result = await sql`SELECT * FROM PRODUCT;`;
+    const rows = result;
     res.json(rows);
-    console.log("Fetched products using cursor:", rows);
-  } catch (err) {
-    console.error("Database query error:", err);
+  } catch (error) {
+    console.error("Database query error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
+
 routerProduct.post("/products/add/cart", async (req, res) => {
-  const connection = await getConnection();
   const { P_ID, PR_ID, AMOUNT, QUANTITY, DOB } = req.body;
   const FinalAmount = parseInt(AMOUNT);
-  console.log("Request received");
-  console.log(req.body); // Use req.body instead of req.query
-  console.log(FinalAmount);
   try {
-    const result = await connection.execute(
-      `INSERT INTO PURCHASES (P_ID, PR_ID, AMOUNT,QUANTITY, PURCHASE_DATE) VALUES (:P_ID, :PR_ID, :AMOUNT,:QUANTITY, TO_DATE(:DOB, 'YYYY-MM-DD'))`,
-      { P_ID, PR_ID, AMOUNT, QUANTITY, DOB },
-      { autoCommit: true }
-    );
+    const result = await sql
+    `INSERT INTO PURCHASES (P_ID, PR_ID, AMOUNT,QUANTITY, PURCHASE_DATE) VALUES (${P_ID}, ${PR_ID},${FinalAmount},${QUANTITY}, TO_DATE(${DOB}, 'YYYY-MM-DD'));`;
     console.log(`Query result: ${JSON.stringify(result)}`);
     res
       .status(200)
@@ -82,26 +53,23 @@ routerProduct.post("/products/add/cart", async (req, res) => {
 
 routerProduct.get("/products/detail/checkout", async (req, res) => {
   const { userID } = req.query;
-
+  console.log("Request received");
+  console.log(req.query);
   if (!userID) {
     return res.status(400).send({ error: "User ID is required" });
   }
-  let connection;
-
   try {
-    connection = await getConnection();
-
-    const result = await connection.execute(
+    const result = await sql
       `
             SELECT PURCHASES.PR_ID, NAME, SRC, AMOUNT, PURCHASES.quantity
             FROM PRODUCT, PURCHASES
             WHERE PRODUCT.PR_ID = PURCHASES.PR_ID
-            AND p_id = :userID
-        `,
-      { userID }
-    );
+            AND P_ID = ${userID};
+        `;
+    console.log("Request processed");
+    console.log(result);
+    res.status(200).send(result);
 
-    res.json(result.rows);
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).send({ error: "Internal server error" });
@@ -110,13 +78,9 @@ routerProduct.get("/products/detail/checkout", async (req, res) => {
 
 routerProduct.get("/products/detail/exists", async (req, res) => {
   const { userID } = req.query;
-  let connection;
   try {
-    connection = await getConnection();
-    const result = await connection.execute(
-      `SELECT PR_ID FROM PURCHASES WHERE P_ID = :userID `,
-      { userID }
-    );
+    const result = await sql
+      `SELECT PR_ID FROM PURCHASES WHERE P_ID = ${userID};`;
     res.json(result.rows);
   } catch (error) {
     console.error("Error executing query:", error);
@@ -132,32 +96,21 @@ routerProduct.delete("/products/detail/checkout", async (req, res) => {
       .status(400)
       .send({ error: "User ID and Product ID are required" });
   }
-  let connection;
-
   try {
-    connection = await getConnection();
-
-    const result = await connection.execute(
+    const result = await sql
       `
             DELETE FROM PURCHASES
-            WHERE p_id = :userID
-            AND pr_id = :PR_ID
-        `,
-      { userID, PR_ID },
-      { autoCommit: true }
-    );
-
-    const updatedCart = await connection.execute(
+            WHERE p_id = ${userID}
+            AND pr_id = ${PR_ID};
+        `;
+    const updatedCart = await sql
       `
             SELECT PURCHASES.PR_ID, NAME, SRC, AMOUNT, PURCHASES.quantity
             FROM PRODUCT, PURCHASES
             WHERE PRODUCT.PR_ID = PURCHASES.PR_ID
-            AND p_id = :userID
-        `,
-      { userID }
-    );
-
-    res.json(updatedCart.rows);
+            AND p_id = ${userID};
+        `;
+      res.status(200).send(updatedCart);
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).send({ error: "Internal server error" });
@@ -170,29 +123,29 @@ routerProduct.get("/products/detail/checkout/total", async (req, res) => {
   if (!userID) {
     return res.status(400).send({ error: "User ID is required" });
   }
-  let connection;
 
   try {
-    connection = await getConnection();
+    const result = await sql`
+      SELECT 
+        SUM(AMOUNT) AS total,
+        SUM(PRICE_WITH_VAT) AS total_amount
+      FROM PURCHASES
+      WHERE P_ID = ${userID}
+      GROUP BY P_ID;
+    `;
 
-    const result = await connection.execute(
-      `
-            select sum(AMOUNT) as total,sum(PRICE_WITH_VAT) AS TOTAL_AMOUNT
-            from PURCHASES
-            GROUP BY P_ID
-            HAVING P_ID = :userID`,
-      { userID }
-    );
-    if (result.rows.length === 0) {
-      res.status(404).send({ error: "No products found for this user" });
-    } else {
-      res.json(result.rows[0]);
+    if (result.length === 0) {
+      return res.status(404).send({ error: "No products found for this user" });
     }
+    console.log("Result:", result[0]);
+    res.status(200).send(result);
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).send({ error: "Internal server error" });
   }
 });
+
+
 routerProduct.post(
   "/products/detail/checkout/updateQuantity",
   async (req, res) => {
@@ -203,37 +156,26 @@ routerProduct.post(
         .status(400)
         .send({ error: "User ID, Product ID, and Quantity are required" });
     }
-
-    let connection;
-
     try {
-      connection = await getConnection();
-
-      // Update the quantity in the PURCHASES table
-      const result = await connection.execute(
+      const result = await sql
         `
       UPDATE PURCHASES
-      SET QUANTITY = :quantity,
-      AMOUNT = (SELECT PRICE FROM PRODUCT WHERE PR_ID = :id) * :quantity
-      WHERE P_ID = :userID
-      AND PR_ID = :id
-      `,
-        { userID, id, quantity },
-        { autoCommit: true }
-      );
+      SET QUANTITY = ${quantity},
+      AMOUNT = (SELECT PRICE FROM PRODUCT WHERE PR_ID = ${id}) * ${quantity}
+      WHERE P_ID = ${userID}
+      AND PR_ID = ${id};
+      `;
 
       // Fetch the updated cart items
-      const updatedCartItems = await connection.execute(
+      const updatedCartItems = await sql
         `
       SELECT PURCHASES.PR_ID, NAME, SRC, AMOUNT, PURCHASES.quantity
       FROM PRODUCT, PURCHASES
       WHERE PRODUCT.PR_ID = PURCHASES.PR_ID
-      AND P_ID = :userID
-      `,
-        { userID }
-      );
+      AND P_ID = ${userID};
+      `;
 
-      res.json(updatedCartItems.rows);
+      res.status(200).send(updatedCartItems);
     } catch (error) {
       console.error("Error executing query:", error);
       res.status(500).send({ error: "Internal server error" });
@@ -243,17 +185,15 @@ routerProduct.post(
 
 routerProduct.get("/products/detail/checkout/deliveryman", async (req, res) => {
   const { city } = req.query;
-  let connection;
+  // let connection;
   try {
-    connection = await getConnection();
-    const result = await connection.execute(
+    // connection = await getConnection();
+    const result = await sql
       `
             SELECT D_ID,NAME FROM DELIVERY
             WHERE
-            LOWER(CITY) = LOWER(:city)`,
-      { city }
-    );
-    res.json(result.rows);
+            LOWER(CITY) = LOWER(${city});`;
+    res.status(200).send(result);
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).send({ error: "Internal server error" });
@@ -261,20 +201,13 @@ routerProduct.get("/products/detail/checkout/deliveryman", async (req, res) => {
 });
 
 routerProduct.post("/products/detail/checkout/setAddress", async (req, res) => {
-  let connection;
   const { P_ID, D_ID, DELIVERY_DATE, CITY, STREET, HOUSE_NO } = req.body;
   console.log(req.body);
   try {
-    connection = await getConnection();
     console.log("-------");
-    const result = await connection.execute(
+    const result = await sql
       `INSERT INTO GET (P_ID, D_ID, DELIVERY_DATE, CITY, STREET, HOUSE_NO) 
-        VALUES (:P_ID,:D_ID,TO_DATE(:DELIVERY_DATE,'YYYY-MM-DD'),:CITY,:STREET,:HOUSE_NO)`,
-      { P_ID, D_ID, DELIVERY_DATE, CITY, STREET, HOUSE_NO },
-      {
-        autoCommit: true,
-      }
-    );
+        VALUES (${P_ID},${D_ID},TO_DATE(${DELIVERY_DATE},'YYYY-MM-DD'),${CITY},${STREET},${HOUSE_NO});`;
     res
       .status(200)
       .send({ message: "Delivery address updated successfully!", result });
@@ -381,26 +314,11 @@ routerProduct.post("/products/detail/checkout/setOrder", async (req, res) => {
     DELIVERY_DATE,
   } = req.body;
   console.log("set prder", req.body);
-  let connection;
   try {
-    connection = await getConnection();
-    const result = await connection.execute(
+    const result = await sql
       `INSERT INTO PAYS (B_ID, PR_ID, QUANTITY, P_ID, CITY, STREET, HOUSE_NO, DATE_OF_DELIVERY) 
-          VALUES (:ORDER_ID, :PR_ID, :QUANTITY, :P_ID, :CITY, :STREET, :HOUSE_NO, TO_DATE(:DELIVERY_DATE, 'YYYY-MM-DD'))`,
-      {
-        ORDER_ID,
-        PR_ID,
-        QUANTITY,
-        P_ID,
-        CITY,
-        STREET,
-        HOUSE_NO,
-        DELIVERY_DATE,
-      },
-      {
-        autoCommit: true,
-      }
-    );
+          VALUES (${ORDER_ID}, ${PR_ID}, ${QUANTITY}, ${P_ID}, ${CITY}, ${STREET}, ${HOUSE_NO}, TO_DATE(${DELIVERY_DATE}, 'YYYY-MM-DD'))`;
+  
     console.log("set result: ", result);
     res.status(200).send({ message: "Order placed successfully!", result });
   } catch (error) {
@@ -412,17 +330,10 @@ routerProduct.post("/products/detail/checkout/setOrder", async (req, res) => {
 routerProduct.post("/products/detail/checkout/setBill", async (req, res) => {
   const { ORDER_ID, AMOUNT, DELIVERY_DATE } = req.body;
   console.log(req.body);
-  let connection;
   try {
-    connection = await getConnection();
-    const result = await connection.execute(
+    const result = await sql
       `INSERT INTO BILLS (B_ID,AMOUNT,DELIVERY_DATE) 
-            VALUES (:ORDER_ID,:AMOUNT,TO_DATE(:DELIVERY_DATE, 'YYYY-MM-DD'))`,
-      { ORDER_ID, AMOUNT, DELIVERY_DATE },
-      {
-        autoCommit: true,
-      }
-    );
+            VALUES (${ORDER_ID},${AMOUNT},TO_DATE(${DELIVERY_DATE}, 'YYYY-MM-DD'))`;
     res.status(200).send({ message: "Bill generated successfully!", result });
   } catch (error) {
     console.error("Error executing query:", error);
@@ -435,17 +346,10 @@ routerProduct.post(
   async (req, res) => {
     const { ORDER_ID, D_ID } = req.body;
     console.log(req.body);
-    let connection;
     try {
-      connection = await getConnection();
-      const result = await connection.execute(
+      const result = await sql
         `INSERT INTO ASSIGNED_TO (B_ID,D_ID) 
-            VALUES (:ORDER_ID,:D_ID)`,
-        { ORDER_ID, D_ID },
-        {
-          autoCommit: true,
-        }
-      );
+            VALUES (${ORDER_ID},${D_ID})`;
       res
         .status(200)
         .send({ message: "Delivery assigned successfully!", result });
@@ -458,16 +362,9 @@ routerProduct.post(
 
 routerProduct.delete("/delivery/cart", async (req, res) => {
   const { userID } = req.query;
-  let connection;
   try {
-    connection = await getConnection();
-    const result = await connection.execute(
-      `DELETE FROM PURCHASES WHERE P_ID = :userID`,
-      { userID },
-      {
-        autoCommit: true,
-      }
-    );
+    const result = await sql
+      `DELETE FROM PURCHASES WHERE P_ID = ${userID};`;
     res.status(200).send({ message: "Cart cleared successfully!", result });
   } catch (error) {
     console.error("Error executing query:", error);
@@ -477,16 +374,9 @@ routerProduct.delete("/delivery/cart", async (req, res) => {
 
 routerProduct.delete("/delivery/get", async (req, res) => {
   const { userID } = req.query;
-  let connection;
   try {
-    connection = await getConnection();
-    const result = await connection.execute(
-      `DELETE FROM GET WHERE P_ID = :userID`,
-      { userID },
-      {
-        autoCommit: true,
-      }
-    );
+    const result = await sql
+      `DELETE FROM GET WHERE P_ID = ${userID};`;
     res.status(200).send({ message: "Cart cleared successfully!", result });
   } catch (error) {
     console.error("Error executing query:", error);
@@ -496,27 +386,27 @@ routerProduct.delete("/delivery/get", async (req, res) => {
 
 routerProduct.get("/delivery/get/orders", async (req, res) => {
   const { userID } = req.query;
-  let connection;
   try {
-    connection = await getConnection();
-    const result = await connection.execute(
-      `SELECT * FROM OrderDetails WHERE P_ID = :userID`,
-      { userID }
-    );
-    const orders = await connection.execute(
+    const result = await sql
+      `SELECT * FROM OrderDetails WHERE P_ID = ${userID};`;
+
+    const orders = await sql
       `SELECT B_ID, SUM(QUANTITY) AS TOTAL_QUANTITY
            FROM PAYS
-           WHERE P_ID = :userID
-           GROUP BY B_ID`,
-      { userID }
-    );
-    const mergedResults = result.rows.map((order) => {
-      const quantity = orders.rows.find((q) => q.B_ID === order.B_ID);
+           WHERE P_ID = ${userID}
+           GROUP BY B_ID;`;
+
+    console.log("Orders:", orders);
+    const mergedResults = result.map((order) => {
+      console.log(order);
+      // console.log(orders.rows);
+      const quantity = orders.find((q) => q.B_ID === order.B_ID);
       return {
         ...order,
-        TOTAL_QUANTITY: quantity ? quantity.TOTAL_QUANTITY : 0,
+        TOTAL_QUANTITY: quantity ? Number(quantity.total_quantity) : 0,
       };
     });
+    console.log("Merged results:", mergedResults);
     res.status(200).send(mergedResults);
   } catch (error) {
     console.error("Error executing query:", error);
@@ -527,17 +417,13 @@ routerProduct.get("/delivery/get/orders", async (req, res) => {
 routerProduct.get("/delivery/orderlist", async (req, res) => {
   const { orderID } = req.query;
   console.log(orderID);
-  let connection;
   try {
-    connection = await getConnection();
-    const result = await connection.execute(
+    const result = await sql
       `SELECT P.PR_ID, P.NAME, P.SRC, P.PRICE, PAYS.QUANTITY
            FROM PRODUCT P, PAYS
            WHERE P.PR_ID = PAYS.PR_ID
-           AND PAYS.B_ID = :orderID`,
-      { orderID }
-    );
-    res.status(200).send(result.rows);
+           AND PAYS.B_ID = ${orderID};`;
+    res.status(200).send(result);
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).send({ error: "Internal server error" });
@@ -546,10 +432,8 @@ routerProduct.get("/delivery/orderlist", async (req, res) => {
 routerProduct.get("/delivery/deliverydetails", async (req, res) => {
   const { orderID } = req.query;
   console.log(orderID);
-  let connection;
   try {
-    connection = await getConnection();
-    const result = await connection.execute(
+    const result = await sql
       `SELECT DISTINCT D.NAME,D.CONTANCT_NO, B.DELIVERY_DATE, PAYS.CITY,PAYS.STREET,PAYS.HOUSE_NO
            FROM
            DELIVERY D,BILLS B,PAYS,ASSIGNED_TO AT
@@ -559,10 +443,8 @@ routerProduct.get("/delivery/deliverydetails", async (req, res) => {
            B.B_ID=AT.B_ID
            AND
            AT.D_ID=D.D_ID
-           AND PAYS.B_ID=:orderID`,
-      { orderID }
-    );
-    res.status(200).send(result.rows);
+           AND PAYS.B_ID=${orderID};`;
+    res.status(200).send(result);
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).send({ error: "Internal server error" });
