@@ -11,24 +11,24 @@ const OrderCard2 = ({ product }) => {
   const cmpdeliveryDate = new Date(product.DELIVERY_DATE);
   // console.log("Delivery Date:", cmpdeliveryDate);
   const deliveryDate = product.DELIVERY_DATE.slice(0, 10);
-  console.log("product:", product);
+  // console.log("product:", product);
 
   useEffect(() => {
     const currentDate = new Date();
-    console.log("Current Date:", currentDate);
+    // console.log("Current Date:", currentDate);
     if (currentDate < cmpdeliveryDate) {
       setPending(false);
     } else {
       setPending(true);
     }
-    console.log("Pending:", pending);
+    // console.log("Pending:", pending);
   }, [cmpdeliveryDate]);
 
   const handleDeliveryDetails = () => {
-    console.log("Delivery Details:", product);
+    // console.log("Delivery Details:", product);
     navigate(`/products/delivery?ORDER_ID=${product.B_ID}`);
   };
-
+  // console.log("Product:", product);
   return (
     <StyledWrapper>
       <div className="card">

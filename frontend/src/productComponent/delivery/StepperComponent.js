@@ -7,17 +7,17 @@ const VerticalStepper = ({date}) => {
   
   
   const deliveryDate = new Date(date);
-  console.log("deliveryDate",deliveryDate);
+  // console.log("deliveryDate",deliveryDate);
 
   useEffect(() => {
     const currentDate = new Date();
-    console.log(currentDate);
+    // console.log(currentDate);
     
     const daysDifference = Math.floor((currentDate - deliveryDate) / (1000 * 60 * 60 * 24));
-    console.log("daysDifference",daysDifference);
+    // console.log("daysDifference",daysDifference);
 
     const updatedStep = Math.abs(Math.min(Math.max(0, -daysDifference), steps.length )-4);
-    console.log("updatedStep",updatedStep);
+    // console.log("updatedStep",updatedStep);
     
     setActiveStep(updatedStep);
   }, [deliveryDate, steps.length]);

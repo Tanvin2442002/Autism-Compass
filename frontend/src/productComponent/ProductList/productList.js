@@ -13,7 +13,11 @@ import ComponentName from "../../footer";
 const ProductList = () => {
   const [productCards, setProduct] = useState([]);
   const [error, setError] = useState(false);
-
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+       Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+ };
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -22,8 +26,9 @@ const ProductList = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        const finalData = data.map(transformToUppercase);
         // console.log('Fetched data:', data);
-        setProduct(data);
+        setProduct(finalData);
       } catch (err) {
         setError(err.message);
       } 

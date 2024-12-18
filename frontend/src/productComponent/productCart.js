@@ -10,7 +10,11 @@ const ProductCart = () => {
 
   const userData = JSON.parse(localStorage.getItem("USER"));
   const userID = userData.ID;
-
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+       Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+ };
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -21,8 +25,9 @@ const ProductCart = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        const finalData = data.map(transformToUppercase);
         console.log("Fetched data:", data);
-        setCartItems(data);
+        setCartItems(finalData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -42,6 +47,7 @@ const ProductCart = () => {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      // const finalData = data.map(transformToUppercase);
       console.log("Fetched data:", data);
       setSubtotal(data);
     } catch (err) {
@@ -72,8 +78,9 @@ const ProductCart = () => {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      const finalData = data.map(transformToUppercase);
       console.log("Fetched data:", data);
-      setCartItems(data);
+      setCartItems(finalData);
       fetchSubtotal(); // Call fetchSubtotal after removing an item
     } catch (err) {
       setError(err.message);

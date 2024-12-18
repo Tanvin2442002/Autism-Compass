@@ -39,6 +39,12 @@ const Cart = () => {
   const userData = JSON.parse(localStorage.getItem("USER"));
   const userID = userData.ID;
 
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+       Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+ };
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -49,8 +55,9 @@ const Cart = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("Fetched data:", data);
-        setCartItems(data);
+        const finalData = data.map(transformToUppercase);
+        console.log("Fetched data:", finalData);
+        setCartItems(finalData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -75,6 +82,7 @@ const Cart = () => {
 
       }
       const data = await response.json();
+      // const finalData = data.map(transformToUppercase);
       console.log("Fetched data:", data);
       setSubtotal(data);
     } catch (err) {
@@ -115,7 +123,8 @@ const Cart = () => {
         throw new Error("Network response was not ok");
       }
       const updatedCartItems = await response.json();
-      setCartItems(updatedCartItems);
+      const finalupdatedCartItems = updatedCartItems.map(transformToUppercase);
+      setCartItems(finalupdatedCartItems);
       fetchSubtotal(); // Update the subtotal after quantity change
     } catch (err) {
       setError(err.message);
@@ -139,7 +148,8 @@ const Cart = () => {
       }
       const data = await response.json();
       console.log("Fetched data:", data);
-      setCartItems(data);
+      const finalData = data.map(transformToUppercase);
+      setCartItems(finalData);
       fetchSubtotal(); // Call fetchSubtotal after removing an item
     } catch (err) {
       setError(err.message);
@@ -160,9 +170,10 @@ const Cart = () => {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      const finalData = data.map(transformToUppercase);
       console.log(data);
-      setAssignedDeliveryMan(data[0].NAME);
-      setdeliverymanID(data[0].D_ID);
+      setAssignedDeliveryMan(finalData[0].NAME);
+      setdeliverymanID(finalData[0].D_ID);
     } catch (err) {
       console.error("Failed to fetch the assigned delivery man:", err);
       setAssignedDeliveryMan("");
@@ -245,7 +256,7 @@ const Cart = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
+      // const finalData = data.map(transformToUppercase);
     } catch (error) {
       console.error("Error executing fetch:", error);
       toast.error("Failed to update delivery address", {
@@ -264,7 +275,7 @@ const Cart = () => {
     try {
       const params = {
         ORDER_ID: orderID,
-        AMOUNT: subtotal.TOTAL_AMOUNT,
+        AMOUNT: subtotal[0].total_amount,
         DELIVERY_DATE: date.toISOString().split("T")[0],
       };
       const response = await fetch(
@@ -278,11 +289,9 @@ const Cart = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error("Error executing fetch:", error);
     }
-
     try {
       const params = {
         ORDER_ID: orderID,
@@ -299,7 +308,6 @@ const Cart = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error("Error executing fetch:", error);
     }
@@ -329,6 +337,7 @@ const Cart = () => {
           }
         );
         const data = await response.json();
+        // const finalData = data.map(transformToUppercase);
         console.log("hello:", data);
         console.log("hello message:", data.message);
         setMessage(data.message);
@@ -373,7 +382,8 @@ const Cart = () => {
     });
     console.log("skjfhakjdf", message);
   };
-
+  // console.log("Subtotal:", s[0]ubtotal);
+  // console.log("TYPE",typeof subtotal.total);
   if (error) return <div>Error: {error}</div>;
   if (!cartItems.length) return <div>page not found</div>;
   const isFormComplete =
@@ -496,9 +506,9 @@ const Cart = () => {
                 <p>TOTAL PRICE INCLUDING 5% VAT</p>
               </div>
               <div className="final-total">
-                <p>: {(subtotal.TOTAL+DeliveryCost)}$</p>
-                <p>: {(subtotal.TOTAL_AMOUNT + DeliveryCost).toFixed(2)}$</p> 
-              </div>
+                <p>: {((Number(subtotal[0]?.total) + DeliveryCost).toFixed(2))}$</p>
+                <p>: {((Number(subtotal[0]?.total_amount)) + DeliveryCost).toFixed(2)}$</p> 
+            </div>
             </div>
             <div
               className="checkout"

@@ -9,8 +9,12 @@ const Allorderlist = () => {
   const [AllOrderList, setAllOrderList] = useState([]);
   const userData = JSON.parse(localStorage.getItem("USER"));
   const userID = userData.ID;
-  console.log("User ID:", userID);
-
+  // console.log("User ID:", userID);
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+       Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+ };
   useEffect(() => {
     const fetchOrderList = async () => {
       try {
@@ -21,8 +25,9 @@ const Allorderlist = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("Fetched data:", data);
-        setAllOrderList(data);
+        const finalData = data.map(transformToUppercase);
+        // console.log("Fetched data:", finalData);
+        setAllOrderList(finalData);
       } catch (err) {
         console.error(err);
       }

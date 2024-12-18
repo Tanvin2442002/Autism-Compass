@@ -104,8 +104,9 @@ const Dashboard = () => {
                throw new Error("Network response was not ok");
             }
             const data = await response.json();
-            console.log("Fetched data:", data);
-            setorderList(data);
+            // console.log("Fetched data:", data);
+            const finalData = data.map(transformToUppercase);
+            setorderList(finalData);
          } catch (err) {
             console.error(err);
          }

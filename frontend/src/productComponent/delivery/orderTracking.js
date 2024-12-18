@@ -24,6 +24,11 @@ const OrderConfirmation = () => {
   const userID = userData.ID;
   const params = new URLSearchParams(location.search);
   const orderID = params.get("ORDER_ID");
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+       Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+  };
 
   useEffect(() => {
     setBool(true);
@@ -37,8 +42,10 @@ const OrderConfirmation = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("Order List:", data);
-        setOrderList(data);
+        // console.log("Order List:", data);
+        const finalData = data.map(transformToUppercase);
+        // console.log("Fetched data:", finalData);
+        setOrderList(finalData);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -66,19 +73,19 @@ const OrderConfirmation = () => {
 
   const deliveryDate =
     DeliveryDetailsNew.length > 0
-      ? DeliveryDetailsNew[0].DELIVERY_DATE?.slice(0, 10)
+      ? DeliveryDetailsNew[0].delivery_date?.slice(0, 10)
       : "Not available";
   const shippingBy =
     DeliveryDetailsNew.length > 0
-      ? DeliveryDetailsNew[0].NAME
+      ? DeliveryDetailsNew[0].name
       : "Not available";
   const address =
     DeliveryDetailsNew.length > 0
-      ? `${DeliveryDetailsNew[0].CITY}, ${DeliveryDetailsNew[0].STREET}, ${DeliveryDetailsNew[0].CITY}`
+      ? `${DeliveryDetailsNew[0].city}, ${DeliveryDetailsNew[0].street}, ${DeliveryDetailsNew[0].city}`
       : "Not available";
   const contact =
     DeliveryDetailsNew.length > 0
-      ? DeliveryDetailsNew[0].CONTANCT_NO
+      ? DeliveryDetailsNew[0].contanct_no
       : "Not available";
 
   const deleteCartItems = async () => {
@@ -94,7 +101,7 @@ const OrderConfirmation = () => {
         throw new Error("Failed to delete cart items");
       }
       setorderCartItems([]);
-      console.log("Cart items deleted successfully");
+      // console.log("Cart items deleted successfully");
     } catch (error) {
       console.error("Error:", error);
       setError(error.message);
