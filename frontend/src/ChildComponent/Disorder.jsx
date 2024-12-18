@@ -59,7 +59,7 @@ const Disorder = () => {
       try {
          const response = await axios({
             method: 'POST',
-            url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDYuRJ9qvb47Q0Jspl1g3Ey4jNrRHTUe9g',
+            url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyBDtsrV0-dkgREsVJixmXSr6piKXbw9QPA',
             data: {
                contents: [
                   {

@@ -1,90 +1,54 @@
-const express = require("express");
-const { getConnection } = require("../DB/connection");
+const express = require('express');
+const sql = require('../DB/supabase');  // Use Supabase instance
 const router = express.Router();
-const oracledb = require('oracledb');
 
 router.post('/child', async (req, res) => {
     const { C_ID } = req.body;
-    let connection;
-    try {
-        connection = await getConnection();
 
-        // Execute the Oracle function
-        const result = await connection.execute(
-            `BEGIN
-                :result := DELETE_CHILD(:customer_id);
-            END;`,
-            {
-                customer_id: { val: C_ID, dir: oracledb.BIND_IN, type: oracledb.STRING },  // Use STRING for VARCHAR2
-                result: { dir: oracledb.BIND_OUT, type: oracledb.STRING }  // Keep result as STRING
-            },{
-                autoCommit : true
-            }
-        );
+    try {
+        // Call the PostgreSQL function
+        const result = await sql`
+            SELECT DELETE_CHILD(${C_ID})
+        `;
 
         console.log(result);
-        res.status(200).json({ message: result.outBinds.result });
+        res.status(200).json({ message: result[0].result });
     } catch (err) {
         // Handle errors
         console.error(err);
         res.status(500).json({ message: 'Error occurred during deletion' });
-    } 
+    }
 });
 
 router.post('/parent', async (req, res) => {
     const { P_ID } = req.body;
-    let connection;
-    try {
-        connection = await getConnection();
 
-        // Execute the Oracle function
-        const result = await connection.execute(
-            `BEGIN
-                :result := DELETE_PARENT(:customer_id);
-            END;`,
-            {
-                customer_id: { val: P_ID, dir: oracledb.BIND_IN, type: oracledb.STRING },  // Use STRING for VARCHAR2
-                result: { dir: oracledb.BIND_OUT, type: oracledb.STRING }  // Keep result as STRING
-            },{
-                autoCommit : true
-            }
-        );
+    try {
+        // Call the PostgreSQL function
+        const result = await sql`
+            SELECT DELETE_PARENT(${P_ID})
+        `;
 
         console.log(result);
-        res.status(200).json({ message: result.outBinds.result });
+        res.status(200).json({ message: result[0].result });
     } catch (err) {
-        if (err.message.includes('ORA-20113')) {
-            res.status(400).json({ message: 'Your delivery is in process.Wait untill you received the product' });
-        } else if(err.message.includes('ORA-20114')){
-            res.status(401).json({ message: 'Child account exist. Delete all the child account first' });
-        }else{
-            console.error(err);
-            res.status(500).json({ message: 'Error occurred during deletion' });
-        }
-    } 
+        // Handle errors
+        console.error(err);
+        res.status(500).json({ message: 'Error occurred during deletion' });
+    }
 });
 
 router.post('/doctor', async (req, res) => {
     const { D_ID } = req.body;
-    let connection;
-    try {
-        connection = await getConnection();
 
-        // Execute the Oracle function
-        const result = await connection.execute(
-            `BEGIN
-                :result := DELETE_HEALTH_PROFESSIONAL(:customer_id);
-            END;`,
-            {
-                customer_id: { val: D_ID, dir: oracledb.BIND_IN, type: oracledb.STRING },  // Use STRING for VARCHAR2
-                result: { dir: oracledb.BIND_OUT, type: oracledb.STRING }  // Keep result as STRING
-            },{
-                autoCommit : true
-            }
-        );
+    try {
+        // Call the PostgreSQL function
+        const result = await sql`
+            SELECT DELETE_HEALTH_PROFESSIONAL(${D_ID})
+        `;
 
         console.log(result);
-        res.status(200).json({ message: result.outBinds.result });
+        res.status(200).json({ message: result[0].result });
     } catch (err) {
         // Handle errors
         console.error(err);
@@ -94,23 +58,20 @@ router.post('/doctor', async (req, res) => {
 
 router.post('/teacher', async (req, res) => {
     const { T_ID } = req.body;
-    let connection;
-    try {
-        connection = await getConnection();
-        const result = await connection.execute(
-            `BEGIN
-                :result := DELETE_TEACHER(:customer_id);
-            END;`,
-            {
-                customer_id: { val: T_ID, dir: oracledb.BIND_IN, type: oracledb.STRING },
-                result: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
-            },{
-                autoCommit : true
-            }
-        );
 
-        console.log(result);
-        res.status(200).json({ message: result.outBinds.result });
+    try {
+        // Execute the PostgreSQL function with cascade delete
+        const result = await sql`
+            DELETE FROM TEACHER
+            WHERE T_ID = ${T_ID}
+            RETURNING T_ID
+        `;
+
+        if (result.count === 0) {
+            res.status(404).json({ message: 'Teacher not found' });
+        } else {
+            res.status(200).json({ message: `Teacher with ID ${T_ID} deleted successfully` });
+        }
     } catch (err) {
         // Handle errors
         console.error(err);

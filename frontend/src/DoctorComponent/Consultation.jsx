@@ -27,11 +27,18 @@ const Consultation = () => {
 
    console.log('P_ID & C_ID', p_id, c_id, d_id);
 
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
+
    useEffect(() => {
       const fetchData = async () => {
          try {
             const response = await fetch(`${URL}/consultation/form/data?P_ID=${p_id}&C_ID=${c_id}&D_ID=${d_id}`);
-            const responseData = await response.json();
+            const tempData = await response.json();
+            const responseData = tempData.map(transformToUppercase);
             console.log('Response Data', responseData);
             setInfo(responseData[0]);
             console.log('Info', info);
@@ -43,7 +50,8 @@ const Consultation = () => {
       const fetchTherapyData = async () => {
          try {
             const response = await fetch(`${URL}/therapy/all`);
-            const responseData = await response.json();
+            const tempData = await response.json();
+            const responseData = tempData.map(transformToUppercase);
             console.log('Therapy Data', responseData);
             setTherapy(responseData);
          } catch (error) {

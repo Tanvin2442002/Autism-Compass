@@ -431,3 +431,20 @@
 .verified-therapy{
     background-color: #FFADAD;
 }
+
+@media (max-width: 350px) {
+    .land-main-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: #0a74ee 1px solid;
+            position: relative;
+        }
+        .land-side-img {
+            height: 400px;
+            width: 400px;
+            position: absolute;
+            right: 0;
+            transform: translate(0%, 0%);
+        }
+}

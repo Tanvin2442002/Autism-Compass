@@ -12,6 +12,12 @@ const DoctorConsultation = () => {
    const localData = JSON.parse(localStorage.getItem('USER'));
    const navigate = useNavigate();
 
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
+
    const columns = [
       {
          name: 'Parent Name',
@@ -55,8 +61,8 @@ const DoctorConsultation = () => {
       const fetchConsultations = async () => {
          try {
             const response = await fetch(`${URL}/consultations/data?id=${localData.ID}`);
-            const data = await response.json();
-            console.log("Data:", data);
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             setConsultations(data);
             console.log("Consultations:", consultations);
          } catch (error) {

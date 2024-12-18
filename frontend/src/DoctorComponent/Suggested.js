@@ -11,12 +11,19 @@ const SuggestedList = () => {
   const [isParent, setIsParent] = useState(false);
   const navigate = useNavigate();
 
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+  };
+
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
         const response = await fetch(`${URL}/suggests/data?id=${userData.ID}&type=${userData.TYPE}`);
-        const data = await response.json();
-
+        const tempData = await response.json();
+        console.log('Suggestions:', tempData);
+        const data = tempData.map(transformToUppercase);
         if (Array.isArray(data)) {
           setSuggestions(data);
         } else {

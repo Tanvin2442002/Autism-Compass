@@ -11,12 +11,19 @@ const ParentChildProfile = () => {
    const parentId = localData.ID;
    const type = localData.TYPE;
 
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
 
    useEffect(() => {
       const fetchInfo = async () => {
          try {
             const response = await fetch(`${URL}/reg/parent-child-info?TYPE=${type}&ID=${parentId}`);
-            const data = await response.json();
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
+            console.log("Data fetched:", data);
             if (data && data.length > 0) {
                const formattedData = data.map(childData => ({
                   name: childData.NAME,
