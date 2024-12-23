@@ -8,7 +8,7 @@ import StepperComponent from "./StepperComponent.js";
 import delivery from "../../img/deliveryman.svg";
 import { useLocation } from "react-router-dom";
 import Invoice from "./Invoice";
-
+const URL = process.env.REACT_APP_API_URL;
 const OrderConfirmation = () => {
   const [OrderList, setOrderList] = useState([]);
   const [OrderDetails, setOrderDetails] = useState([]);
@@ -24,6 +24,11 @@ const OrderConfirmation = () => {
   const userID = userData.ID;
   const params = new URLSearchParams(location.search);
   const orderID = params.get("ORDER_ID");
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+       Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+  };
 
   useEffect(() => {
     setBool(true);
@@ -31,14 +36,16 @@ const OrderConfirmation = () => {
     const fetchOrderList = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/delivery/orderlist?orderID=${orderID}`
+          `${URL}/delivery/orderlist?orderID=${orderID}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("Order List:", data);
-        setOrderList(data);
+        // console.log("Order List:", data);
+        const finalData = data.map(transformToUppercase);
+        // console.log("Fetched data:", finalData);
+        setOrderList(finalData);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -48,7 +55,7 @@ const OrderConfirmation = () => {
     const fetchDeliveryDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/delivery/deliverydetails?orderID=${orderID}`
+          `${URL}/delivery/deliverydetails?orderID=${orderID}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -66,25 +73,25 @@ const OrderConfirmation = () => {
 
   const deliveryDate =
     DeliveryDetailsNew.length > 0
-      ? DeliveryDetailsNew[0].DELIVERY_DATE?.slice(0, 10)
+      ? DeliveryDetailsNew[0].delivery_date?.slice(0, 10)
       : "Not available";
   const shippingBy =
     DeliveryDetailsNew.length > 0
-      ? DeliveryDetailsNew[0].NAME
+      ? DeliveryDetailsNew[0].name
       : "Not available";
   const address =
     DeliveryDetailsNew.length > 0
-      ? `${DeliveryDetailsNew[0].CITY}, ${DeliveryDetailsNew[0].STREET}, ${DeliveryDetailsNew[0].CITY}`
+      ? `${DeliveryDetailsNew[0].city}, ${DeliveryDetailsNew[0].street}, ${DeliveryDetailsNew[0].city}`
       : "Not available";
   const contact =
     DeliveryDetailsNew.length > 0
-      ? DeliveryDetailsNew[0].CONTANCT_NO
+      ? DeliveryDetailsNew[0].contanct_no
       : "Not available";
 
   const deleteCartItems = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/delivery/cart?userID=${userID}`,
+        `${URL}/delivery/cart?userID=${userID}`,
         {
           method: "DELETE",
         }
@@ -94,7 +101,7 @@ const OrderConfirmation = () => {
         throw new Error("Failed to delete cart items");
       }
       setorderCartItems([]);
-      console.log("Cart items deleted successfully");
+      // console.log("Cart items deleted successfully");
     } catch (error) {
       console.error("Error:", error);
       setError(error.message);
@@ -112,7 +119,7 @@ const OrderConfirmation = () => {
   const deletegettable = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/delivery/get?userID=${userID}`,
+        `${URL}/delivery/get?userID=${userID}`,
         {
           method: "DELETE",
         }

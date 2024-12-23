@@ -8,22 +8,27 @@ import "./slickComponent.css";
 import "./mainContent.css"; // Ensure this CSS file has the combined styles
 import { toast, ToastContainer } from "react-toastify";
 import ComponentName from "../../footer";
-
+const URL = process.env.REACT_APP_API_URL;
 
 const ProductList = () => {
   const [productCards, setProduct] = useState([]);
   const [error, setError] = useState(false);
-
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+       Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+ };
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/products`);
+        const response = await fetch(`${URL}/products`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        const finalData = data.map(transformToUppercase);
         // console.log('Fetched data:', data);
-        setProduct(data);
+        setProduct(finalData);
       } catch (err) {
         setError(err.message);
       } 
