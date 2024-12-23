@@ -12,7 +12,6 @@ const OfferCard = ({ image, title, description }) => {
     const handleJoin = () => {
         navigate('/signup');
     }
-
     return (
         <motion.div className='offer-card'>
             <div className='offer-card-img'>
