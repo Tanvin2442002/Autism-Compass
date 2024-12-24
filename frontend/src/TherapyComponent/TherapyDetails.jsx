@@ -10,7 +10,7 @@ import OrgCard from './OrgCard';
 import LoadingAnimation from '../LoadingAnimation';
 import RevealLeftToRight from '../RevealLeftToRight';
 import RevealRightToLeft from '../RevealRightToLeft';
-
+const URL = process.env.REACT_APP_API_URL;
 
 const TherapyDetail = () => {
   const navigate = useNavigate();
@@ -25,11 +25,18 @@ const TherapyDetail = () => {
   const [ans, setAns] = useState('');
   const [loadingTherapyDetails, setLoadingTherapyDetails] = useState(false);
 
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+  };
+
   useEffect(() => {
     const fetchTherapyData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/therapy/Detail?type=${therapyId}`);
-        const data = await response.json();
+        const response = await fetch(`${URL}/therapy/Detail?type=${therapyId}`);
+        const tempData = await response.json();
+        const data = tempData.map(transformToUppercase);
         setTherapyData(data[0]); // Assuming the API returns an array
       } catch (error) {
         console.error('Error fetching therapy data:', error);
@@ -41,8 +48,9 @@ const TherapyDetail = () => {
 
     const fetchTherapyOrgData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/therapy/org?type=${therapyId}`);
-        const data = await response.json();
+        const response = await fetch(`${URL}/therapy/org?type=${therapyId}`);
+        const tempData = await response.json();
+        const data = tempData.map(transformToUppercase);
         setTherapyOrgData(data);
       } catch (error) {
         console.error('Error fetching therapy data:', error);
@@ -98,11 +106,15 @@ const TherapyDetail = () => {
         <div className="therapy-details-content">
           <RevealLeftToRight>
             <div className="details-of-therapy">
-              <h2>{therapyData.THERAPY_TYPE}</h2>
-              <p>{therapyData.THERAPY_DESCRIPTION}</p>
-              <button className='view-more-button' onClick={generateTherapyDetails}>
-                Want to know more about this therapy
-              </button>
+              {therapyData && (
+                <>
+                  <h2>{therapyData.THERAPY_TYPE}</h2>
+                  <p>{therapyData.THERAPY_DESCRIPTION}</p>
+                  <button className='view-more-button' onClick={generateTherapyDetails}>
+                    Want to know more about this therapy
+                  </button>
+                </>
+              )}
               <div className='disorder-item-details'>
                 {loadingTherapyDetails ? (
                   <LoadingAnimation />

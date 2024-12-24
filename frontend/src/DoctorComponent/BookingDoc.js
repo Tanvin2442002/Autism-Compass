@@ -6,9 +6,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'boxicons/css/boxicons.min.css';
 import './BookingDoc.css';
 
+const URL = process.env.REACT_APP_API_URL;
+
 const BookingDoc = () => {
   const [doctorDetails, setDoctorDetails] = useState(null);
   const [userDetails, setUserDetails] = useState([]);
+  const [parentId, setParentId] = useState(null);
   const [selectedChildId, setSelectedChildId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,12 +23,19 @@ const BookingDoc = () => {
 
   const localData = JSON.parse(localStorage.getItem('USER'));
 
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+  };
+
   // Fetch doctor details
   useEffect(() => {
     const fetchDoctorDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/physician/detail?H_ID=${doctorId}`);
-        const data = await response.json();
+        const response = await fetch(`${URL}/physician/detail?H_ID=${doctorId}`);
+        const tempData = await response.json();
+        const data = tempData.map(transformToUppercase);
         setDoctorDetails(data[0]);
       } catch (error) {
         console.error('Error fetching doctor data:', error);
@@ -39,14 +49,16 @@ const BookingDoc = () => {
       try {
         let response;
         if (localData.TYPE === 'PARENT') {
-          response = await fetch(`http://localhost:5000/physician/child/data?P_ID=${localData.ID}`);
+          response = await fetch(`${URL}/physician/child/data?P_ID=${localData.ID}`);
         } else if (localData.TYPE === 'CHILD') {
-          response = await fetch(`http://localhost:5000/physician/parent/data?C_ID=${localData.ID}`);
+          response = await fetch(`${URL}/physician/parent/data?C_ID=${localData.ID}`);
         }
-
-        const data = await response.json();
-        setUserDetails(data);
-        setSelectedChildId(data.C_ID);
+        const tempData = await response.json();
+        const data = tempData.map(transformToUppercase);
+        setUserDetails(data[0]);
+        console.log('User Details:', data[0]);
+        setSelectedChildId(data[0].C_ID);
+        setParentId(data[0].P_ID);
       } catch (error) {
         console.error('Error fetching user data:', error);
         setError('Failed to fetch user data.');
@@ -95,16 +107,18 @@ const BookingDoc = () => {
       C_ID: localData.TYPE === 'PARENT' ? selectedChildId : localData.ID,
       BOOKING_DATE: document.getElementById('consultation-date').value,
       BOOKING_TIME: document.getElementById('consultation-time').value,
+      P_ID : localData.TYPE === 'PARENT' ? localData.ID : parentId
     };
 
     if (localData.TYPE === 'PARENT') {
       bookingData.P_ID = localData.ID;
     }
+    console.log('Local Data:', localData.ID);
 
     console.log('Booking data:', bookingData);
 
     try {
-      const response = await fetch('http://localhost:5000/physician', {
+      const response = await fetch(`${URL}/physician`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

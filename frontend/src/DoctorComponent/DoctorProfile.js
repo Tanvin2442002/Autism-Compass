@@ -5,6 +5,8 @@ import './DoctorProfile.css';
 import { useLocation } from 'react-router-dom';
 import docProfile from '../img/docProfile.svg';
 
+const URL = process.env.REACT_APP_API_URL;
+
 const DoctorProfile = () => {
   const { id } = useParams();
   const [doctor, setDoctor] = useState(null);
@@ -16,19 +18,26 @@ const DoctorProfile = () => {
   const doctorId = params.get('id');
   const navigate = useNavigate();
   
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+  };
+
   useEffect(() => {
     const fetchDoctor = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/doctor/detail?id=${doctorId}`);
+        const response = await fetch(`${URL}/doctor/detail?id=${doctorId}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        const data = await response.json();
+        const tempData = await response.json();
+        const data = tempData.map(transformToUppercase);
         setDoctor(data[0]);
 
         await fetchGenderData(data[0].NAME);
         console.log(data[0]);
-        const add = data[0].ADDRESS.STREET + ", " + data[0].ADDRESS.CITY + "- " + data[0].ADDRESS.POSTAL_CODE;
+        const add = data[0].ADDRESS.street + ", " + data[0].ADDRESS.city + "- " + data[0].ADDRESS.postal_code;
         setDocAddress(add);
       } catch (err) {
         setError(err.message);

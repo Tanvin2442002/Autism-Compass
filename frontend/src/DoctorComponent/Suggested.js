@@ -3,7 +3,7 @@ import './Suggested.css';
 import Navbar from '../Navbar';
 import suggestion from "../img/suggestion.svg";
 import { useNavigate } from 'react-router-dom';
-
+const URL = process.env.REACT_APP_API_URL;
 
 const SuggestedList = () => {
   const [suggestions, setSuggestions] = useState([]);
@@ -11,12 +11,19 @@ const SuggestedList = () => {
   const [isParent, setIsParent] = useState(false);
   const navigate = useNavigate();
 
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+  };
+
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/suggests/data?id=${userData.ID}&type=${userData.TYPE}`);
-        const data = await response.json();
-
+        const response = await fetch(`${URL}/suggests/data?id=${userData.ID}&type=${userData.TYPE}`);
+        const tempData = await response.json();
+        console.log('Suggestions:', tempData);
+        const data = tempData.map(transformToUppercase);
         if (Array.isArray(data)) {
           setSuggestions(data);
         } else {

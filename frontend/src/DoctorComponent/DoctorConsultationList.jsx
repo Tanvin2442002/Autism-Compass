@@ -3,15 +3,20 @@ import Navbar from "../Navbar";
 import DataTable from 'react-data-table-component';
 import "./DoctorConsultationList.css";
 import { useNavigate } from "react-router-dom";
-
 import DoctorConsultImg from "../img/DoctorConsultation.svg";
-
+const URL = process.env.REACT_APP_API_URL;
 
 const DoctorConsultation = () => {
 
    const [consultations, setConsultations] = useState([]);
    const localData = JSON.parse(localStorage.getItem('USER'));
    const navigate = useNavigate();
+
+   const transformToUppercase = (data) => {
+      return Object.fromEntries(
+         Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+      );
+   };
 
    const columns = [
       {
@@ -55,9 +60,9 @@ const DoctorConsultation = () => {
    useEffect(() => {
       const fetchConsultations = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/consultations/data?id=${localData.ID}`);
-            const data = await response.json();
-            console.log("Data:", data);
+            const response = await fetch(`${URL}/consultations/data?id=${localData.ID}`);
+            const tempData = await response.json();
+            const data = tempData.map(transformToUppercase);
             setConsultations(data);
             console.log("Consultations:", consultations);
          } catch (error) {

@@ -7,7 +7,7 @@ import Navbar from '../Navbar';
 import LoadingAnimation from '../LoadingAnimation';
 import Doclist from '../img/Doclist.svg';
 import Doctor from '../img/Doctor.svg';
-
+const URL = process.env.REACT_APP_API_URL;
 
 const DoctorsList = () => {
   const [doctors, setDoctors] = useState([]);
@@ -16,14 +16,24 @@ const DoctorsList = () => {
   const navigate = useNavigate();
 
 
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+  };
+
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await fetch('http://localhost:5000/doctors');
+        const response = await fetch(`${URL}/doctors`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        const data = await response.json();
+
+        const tempData = await response.json();
+        const data = tempData.map(transformToUppercase);
+        console.log('Doctors:', data);
+        
         const doctorsWithGender = await Promise.all(
           data.map(async (doctor) => {
             const genderResponse = await fetch(
@@ -60,13 +70,14 @@ const DoctorsList = () => {
     const searchValue = e.target.value;
     setLoading(true);
     try {
-      const response = await fetch(
-        `http://localhost:5000/doctors/search?search=${searchValue}`
-      );
+      const response = await fetch(`${URL}/doctors/search?search=${searchValue}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const data = await response.json();
+      const tempData = await response.json();
+      const data = tempData.map(transformToUppercase);
+      console.log('Search:', data);
+
 
       const doctorsWithGender = await Promise.all(
         data.map(async (doctor) => {

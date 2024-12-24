@@ -4,25 +4,30 @@ import OrderCard2 from "./OrderCard2";
 import OrderImage from "../../img/Orderlist.svg";
 import Navbar from "../../Navbar";
 import "./Allorderlist.css";
-
+const URL = process.env.REACT_APP_API_URL;
 const Allorderlist = () => {
   const [AllOrderList, setAllOrderList] = useState([]);
   const userData = JSON.parse(localStorage.getItem("USER"));
   const userID = userData.ID;
-  console.log("User ID:", userID);
-
+  // console.log("User ID:", userID);
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+       Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+ };
   useEffect(() => {
     const fetchOrderList = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/delivery/get/orders?userID=${userID}`
+          `${URL}/delivery/get/orders?userID=${userID}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("Fetched data:", data);
-        setAllOrderList(data);
+        const finalData = data.map(transformToUppercase);
+        // console.log("Fetched data:", finalData);
+        setAllOrderList(finalData);
       } catch (err) {
         console.error(err);
       }

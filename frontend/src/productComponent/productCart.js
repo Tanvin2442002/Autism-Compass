@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./productCart.css";
-
+const URL = process.env.REACT_APP_API_URL;
 const ProductCart = () => {
   // Initial state
   const [cartItems, setCartItems] = useState([]);
@@ -10,19 +10,24 @@ const ProductCart = () => {
 
   const userData = JSON.parse(localStorage.getItem("USER"));
   const userID = userData.ID;
-
+  const transformToUppercase = (data) => {
+    return Object.fromEntries(
+       Object.entries(data).map(([key, value]) => [key.toUpperCase(), value])
+    );
+ };
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/detail/checkout?userID=${userID}`
+          `${URL}/products/detail/checkout?userID=${userID}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        const finalData = data.map(transformToUppercase);
         console.log("Fetched data:", data);
-        setCartItems(data);
+        setCartItems(finalData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -36,12 +41,13 @@ const ProductCart = () => {
   const fetchSubtotal = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/products/detail/checkout/total?userID=${userID}`
+        `${URL}/products/detail/checkout/total?userID=${userID}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      // const finalData = data.map(transformToUppercase);
       console.log("Fetched data:", data);
       setSubtotal(data);
     } catch (err) {
@@ -63,7 +69,7 @@ const ProductCart = () => {
     setLoading(true); // Set loading state when removing an item
     try {
       const response = await fetch(
-        `http://localhost:5000/products/detail/checkout?userID=${userID}&PR_ID=${PR_ID}`,
+        `${URL}/products/detail/checkout?userID=${userID}&PR_ID=${PR_ID}`,
         {
           method: "DELETE",
         }
@@ -72,8 +78,9 @@ const ProductCart = () => {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      const finalData = data.map(transformToUppercase);
       console.log("Fetched data:", data);
-      setCartItems(data);
+      setCartItems(finalData);
       fetchSubtotal(); // Call fetchSubtotal after removing an item
     } catch (err) {
       setError(err.message);
