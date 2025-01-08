@@ -47,7 +47,8 @@ const LogIn = () => {
       console.log(userData);
       setTimeout(() => {
          if (data.TYPE) {
-            // navigate("/dashboard");
+            console.log("going to dashboard")
+            navigate("/dashboard");
             localStorage.setItem("USER", JSON.stringify(userData));
             if (rememberMe) {
                localStorage.setItem("REMEMBER_ME", "1");

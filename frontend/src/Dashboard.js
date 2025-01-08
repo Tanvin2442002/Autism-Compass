@@ -15,6 +15,7 @@ const URL = process.env.REACT_APP_API_URL;
 
 
 const Dashboard = () => {
+   console.log("loading dashboard");
    const [bookedDocData, setBookedDocData] = useState([]);
    const [availableDocData, setAvailableDocData] = useState([]);
    const [availableTherapyData, setAvailableTherapyData] = useState([]);
