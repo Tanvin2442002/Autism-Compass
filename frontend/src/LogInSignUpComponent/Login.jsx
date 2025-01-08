@@ -38,16 +38,16 @@ const LogIn = () => {
          },
       });
       const data = await response.json();
-      console.log(data);
+     
       let ID = "";
       let userData = {
          ID: data.ID,
          TYPE: data.TYPE,
       };
-      console.log(userData);
+     
       setTimeout(() => {
          if (data.TYPE) {
-            console.log("going to dashboard")
+           
             navigate("/dashboard");
             localStorage.setItem("USER", JSON.stringify(userData));
             if (rememberMe) {

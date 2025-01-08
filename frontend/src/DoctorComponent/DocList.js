@@ -32,7 +32,7 @@ const DoctorsList = () => {
 
         const tempData = await response.json();
         const data = tempData.map(transformToUppercase);
-        console.log('Doctors:', data);
+        
         
         const doctorsWithGender = await Promise.all(
           data.map(async (doctor) => {
@@ -76,7 +76,7 @@ const DoctorsList = () => {
       }
       const tempData = await response.json();
       const data = tempData.map(transformToUppercase);
-      console.log('Search:', data);
+      
 
 
       const doctorsWithGender = await Promise.all(

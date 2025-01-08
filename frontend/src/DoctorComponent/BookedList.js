@@ -27,7 +27,7 @@ const BookedList = () => {
         const response = await fetch(`${URL}/consult/data?id=${localData.ID}&type=${localData.TYPE}`);
         const tempData = await response.json();
         const data = tempData.map(transformToUppercase);
-        console.log('Consultations:', data);
+      
         if (Array.isArray(data)) {
           setConsultations(data);
         } else {
@@ -50,7 +50,7 @@ const BookedList = () => {
       });
       const data = await response.json();
       
-      console.log('Response:', data);
+    
 
       if (data.success) {
         toast.success('Booking Successful!', {

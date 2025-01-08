@@ -14,21 +14,21 @@ const Card = ({ product }) => {
    const navigate = useNavigate();
 
    // find current page url
-   console.log('Current page URL:', window.location.href);
+   
    // if url end with ord then book now button willnot be shown
 
    const url = window.location.href;
    const isBookingPage = url.endsWith('org');
-   console.log('Is booking page:', isBookingPage);
+   
 
    const handleClick = (ORG_ID) => () => {
-      console.log('Book now clicked');
-      console.log('ORG_ID:', ORG_ID);
-      console.log('Therapy ID:', therapyId);
+      
+      
+      
       navigate(`/therapy/booking?TH_ID=${therapyId}&THO_ID=${ORG_ID}`);
    };
 
-   console.log('Product:', product);
+   
 
    return (
       <StyledWrapper>

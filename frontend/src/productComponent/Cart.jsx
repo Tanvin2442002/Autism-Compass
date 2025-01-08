@@ -56,7 +56,7 @@ const Cart = () => {
         }
         const data = await response.json();
         const finalData = data.map(transformToUppercase);
-        console.log("Fetched data:", finalData);
+        
         setCartItems(finalData);
       } catch (err) {
         setError(err.message);
@@ -83,7 +83,7 @@ const Cart = () => {
       }
       const data = await response.json();
       // const finalData = data.map(transformToUppercase);
-      console.log("Fetched data:", data);
+      
       setSubtotal(data);
     } catch (err) {
       setError(err.message);
@@ -94,7 +94,7 @@ const Cart = () => {
 
   const handleQuantityChange = async (id, quantity) => {
     if (quantity < 1 || isNaN(quantity)) {
-      console.log("Invalid credentials");
+      
       toast.error("Item count cannot be null", {
         position: "top-right",
         autoClose: 2500,
@@ -147,7 +147,7 @@ const Cart = () => {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log("Fetched data:", data);
+      
       const finalData = data.map(transformToUppercase);
       setCartItems(finalData);
       fetchSubtotal(); // Call fetchSubtotal after removing an item
@@ -171,7 +171,7 @@ const Cart = () => {
       }
       const data = await response.json();
       const finalData = data.map(transformToUppercase);
-      console.log(data);
+      
       setAssignedDeliveryMan(finalData[0].NAME);
       setdeliverymanID(finalData[0].D_ID);
     } catch (err) {
@@ -193,7 +193,7 @@ const Cart = () => {
         throw new Error("Failed to delete cart items");
       }
       setorderCartItems([]);
-      console.log("Cart items deleted successfully");
+      
     } catch (error) {
       console.error("Error:", error);
       setError(error.message);
@@ -338,11 +338,11 @@ const Cart = () => {
         );
         const data = await response.json();
         // const finalData = data.map(transformToUppercase);
-        console.log("hello:", data);
-        console.log("hello message:", data.message);
+        
+        
         setMessage(data.message);
-        console.log("flag value before:", flag);
-        console.log(typeof flag);
+        
+        
         address.city = "";
         address.street = "";
         address.houseNo = "";
@@ -380,10 +380,10 @@ const Cart = () => {
         });
       }
     });
-    console.log("skjfhakjdf", message);
+    
   };
-  // console.log("Subtotal:", s[0]ubtotal);
-  // console.log("TYPE",typeof subtotal.total);
+  // 
+  // 
   if (error) return <div>Error: {error}</div>;
   if (!cartItems.length) return <div>page not found</div>;
   const isFormComplete =

@@ -4,18 +4,18 @@ const routerProduct = express.Router();
 
 routerProduct.get("/products/detail", async (req, res) => {
   const productID = req.query.ID;
-  console.log("Request received");
-  console.log(req.query);
+
+
   try {
     const result = await sql
       `SELECT * FROM PRODUCT WHERE PR_ID = ${productID};`;
-    console.log(`Query result: ${JSON.stringify(result.rows)}`);
+  
     res.status(200).send(result.rows[0]); // Send the first product in the array
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).send({ error: "Database query failed" });
   } finally {
-    console.log("Request processed");
+  
   }
 });
 
@@ -39,7 +39,7 @@ routerProduct.post("/products/add/cart", async (req, res) => {
   try {
     const result = await sql
     `INSERT INTO PURCHASES (P_ID, PR_ID, AMOUNT,QUANTITY, PURCHASE_DATE) VALUES (${P_ID}, ${PR_ID},${FinalAmount},${QUANTITY}, TO_DATE(${DOB}, 'YYYY-MM-DD'));`;
-    console.log(`Query result: ${JSON.stringify(result)}`);
+  
     res
       .status(200)
       .send({ message: "Product added to cart successfully", result }); // Send the first product in the array
@@ -47,14 +47,14 @@ routerProduct.post("/products/add/cart", async (req, res) => {
     console.error("Error executing query:", error);
     res.status(500).send({ error: "Database query failed" });
   } finally {
-    console.log("Request processed");
+  
   }
 });
 
 routerProduct.get("/products/detail/checkout", async (req, res) => {
   const { userID } = req.query;
-  console.log("Request received");
-  console.log(req.query);
+
+
   if (!userID) {
     return res.status(400).send({ error: "User ID is required" });
   }
@@ -66,8 +66,8 @@ routerProduct.get("/products/detail/checkout", async (req, res) => {
             WHERE PRODUCT.PR_ID = PURCHASES.PR_ID
             AND P_ID = ${userID};
         `;
-    console.log("Request processed");
-    console.log(result);
+  
+  
     res.status(200).send(result);
 
   } catch (error) {
@@ -137,7 +137,7 @@ routerProduct.get("/products/detail/checkout/total", async (req, res) => {
     if (result.length === 0) {
       return res.status(404).send({ error: "No products found for this user" });
     }
-    console.log("Result:", result[0]);
+  
     res.status(200).send(result);
   } catch (error) {
     console.error("Error executing query:", error);
@@ -202,16 +202,16 @@ routerProduct.get("/products/detail/checkout/deliveryman", async (req, res) => {
 
 routerProduct.post("/products/detail/checkout/setAddress", async (req, res) => {
   const { P_ID, D_ID, DELIVERY_DATE, CITY, STREET, HOUSE_NO } = req.body;
-  console.log(req.body);
+
   try {
-    console.log("-------");
+  
     const result = await sql
       `INSERT INTO GET (P_ID, D_ID, DELIVERY_DATE, CITY, STREET, HOUSE_NO) 
         VALUES (${P_ID},${D_ID},TO_DATE(${DELIVERY_DATE},'YYYY-MM-DD'),${CITY},${STREET},${HOUSE_NO});`;
     res
       .status(200)
       .send({ message: "Delivery address updated successfully!", result });
-    console.log(res.status);
+  
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).send({ error: "Internal server error" });
@@ -313,13 +313,13 @@ routerProduct.post("/products/detail/checkout/setOrder", async (req, res) => {
     HOUSE_NO,
     DELIVERY_DATE,
   } = req.body;
-  console.log("set prder", req.body);
+
   try {
     const result = await sql
       `INSERT INTO PAYS (B_ID, PR_ID, QUANTITY, P_ID, CITY, STREET, HOUSE_NO, DATE_OF_DELIVERY) 
           VALUES (${ORDER_ID}, ${PR_ID}, ${QUANTITY}, ${P_ID}, ${CITY}, ${STREET}, ${HOUSE_NO}, TO_DATE(${DELIVERY_DATE}, 'YYYY-MM-DD'))`;
   
-    console.log("set result: ", result);
+  
     res.status(200).send({ message: "Order placed successfully!", result });
   } catch (error) {
     console.error("Error executing query:", error);
@@ -329,7 +329,7 @@ routerProduct.post("/products/detail/checkout/setOrder", async (req, res) => {
 
 routerProduct.post("/products/detail/checkout/setBill", async (req, res) => {
   const { ORDER_ID, AMOUNT, DELIVERY_DATE } = req.body;
-  console.log(req.body);
+
   try {
     const result = await sql
       `INSERT INTO BILLS (B_ID,AMOUNT,DELIVERY_DATE) 
@@ -345,7 +345,7 @@ routerProduct.post(
   "/products/detail/checkout/setAssignedTo",
   async (req, res) => {
     const { ORDER_ID, D_ID } = req.body;
-    console.log(req.body);
+  
     try {
       const result = await sql
         `INSERT INTO ASSIGNED_TO (B_ID,D_ID) 
@@ -396,17 +396,17 @@ routerProduct.get("/delivery/get/orders", async (req, res) => {
            WHERE P_ID = ${userID}
            GROUP BY B_ID;`;
 
-    console.log("Orders:", orders);
+  
     const mergedResults = result.map((order) => {
-      console.log(order);
-      // console.log(orders.rows);
+    
+      
       const quantity = orders.find((q) => q.B_ID === order.B_ID);
       return {
         ...order,
         TOTAL_QUANTITY: quantity ? Number(quantity.total_quantity) : 0,
       };
     });
-    console.log("Merged results:", mergedResults);
+  
     res.status(200).send(mergedResults);
   } catch (error) {
     console.error("Error executing query:", error);
@@ -416,7 +416,7 @@ routerProduct.get("/delivery/get/orders", async (req, res) => {
 
 routerProduct.get("/delivery/orderlist", async (req, res) => {
   const { orderID } = req.query;
-  console.log(orderID);
+
   try {
     const result = await sql
       `SELECT P.PR_ID, P.NAME, P.SRC, P.PRICE, PAYS.QUANTITY
@@ -431,7 +431,7 @@ routerProduct.get("/delivery/orderlist", async (req, res) => {
 });
 routerProduct.get("/delivery/deliverydetails", async (req, res) => {
   const { orderID } = req.query;
-  console.log(orderID);
+
   try {
     const result = await sql
       `SELECT DISTINCT D.NAME,D.CONTANCT_NO, B.DELIVERY_DATE, PAYS.CITY,PAYS.STREET,PAYS.HOUSE_NO

@@ -22,7 +22,7 @@ const SuggestedList = () => {
       try {
         const response = await fetch(`${URL}/suggests/data?id=${userData.ID}&type=${userData.TYPE}`);
         const tempData = await response.json();
-        console.log('Suggestions:', tempData);
+  
         const data = tempData.map(transformToUppercase);
         if (Array.isArray(data)) {
           setSuggestions(data);
@@ -39,16 +39,12 @@ const SuggestedList = () => {
     setIsParent(userData.TYPE === "PARENT");
   }, []);
 
-  console.log(suggestions);
-
 
   const handleTherapy = (thId) => async () => {
-    console.log("Therapy ID:", thId);
     navigate(`/therapy/detail?type=${thId}`);
   };
 
   const handleDoctor = (hId) => async () => {
-    console.log("Doctor ID:", hId);
     navigate(`/doctor/detail?id=${hId}`);
   }
 

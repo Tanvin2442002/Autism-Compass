@@ -30,7 +30,7 @@ const AvailableTherapies = () => {
             }
             const tempData = await response.json();
             const data = tempData.map(transformToUppercase);
-            console.log('Fetched data:', data);
+            
             setTherapies(data);
          } catch (err) {
             setError(err.message);
@@ -51,8 +51,8 @@ const AvailableTherapies = () => {
          }
          const tempData = await response.json();
          const data = tempData.map(transformToUppercase);
-         console.log('Search value:', searchValue);
-         console.log('Fetched data:', data);
+         
+         
          setTherapies(data);
       } catch (err) {
          setError(err.message);

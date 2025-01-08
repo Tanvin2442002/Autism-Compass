@@ -62,7 +62,6 @@ const ChatBot = () => {
          { sender: 'bot', text: botMessage },
       ]);
       setLoading(false);   
-      console.log(messages);
    };
 
    return (

@@ -18,21 +18,21 @@ const SlickComponent = ({ products }) => {
   const navigate = useNavigate();
   const localData = JSON.parse(localStorage.getItem("USER"));
   useEffect(() => {
-    // console.log("Products:", products);
+    // 
     if (products.length > 0) {
       setProductCards(products);
       setLoading(false);
       setError(false);
-      // console.log("Product cards:", productCards);
+      // 
     } else {
       setError(true);
     }
   }, [products]);
 
   const handleAddCart = () => {
-    console.log("Add to cart clicked");
+    
     setPopUp(true);
-    console.log("PopUp:", PopUp);
+    
   };
 
   const handleCancel = () => {
@@ -40,8 +40,8 @@ const SlickComponent = ({ products }) => {
   };
 
   const handlePopUp = async (itemDetails) => {
-    console.log("Local data:", localData);
-    console.log("Item added to cart", itemDetails);
+    
+    
     const data = {
       PR_ID: itemDetails.PR_ID,
       P_ID: localData.ID,
@@ -84,7 +84,7 @@ const SlickComponent = ({ products }) => {
         });
       }
     } catch (err) {
-      console.log("Error in adding to cart", err);
+      
     }
     setPopUp(false);
   };

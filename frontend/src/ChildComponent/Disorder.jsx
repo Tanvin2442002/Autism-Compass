@@ -16,10 +16,10 @@ const Disorder = () => {
    const [loading, setLoading] = useState(false);
 
    const userData = JSON.parse(localStorage.getItem('USER'));
-   console.log(userData);
+   
 
    useEffect(() => {
-      console.log("Use Effect");
+      
 
       const fetchData = async () => {
          setLoading(true);
@@ -33,17 +33,17 @@ const Disorder = () => {
             });
 
             const data = await response.json();
-            console.log("Data received");
-            console.log(data);
+            
+            
 
             setDisorderDetails({
                Name: data[0].type,
                Description: data[0].description
             });
-            console.log("Details");
-            console.log(DisorderDetails);
+            
+            
          } catch (error) {
-            console.log(error);
+            
          } finally {
             setLoading(false);
          }
@@ -53,8 +53,8 @@ const Disorder = () => {
    }, []);
 
    const generateDisorderDetails = async () => {
-      console.log("Generating disorder details");
-      console.log(DisorderDetails.Name);
+      
+      
       setLoading(true);
       try {
          const response = await axios({
@@ -71,9 +71,9 @@ const Disorder = () => {
             }
          });
 
-         console.log(response.data.candidates[0].content.parts[0].text);
+         
          setAns(response.data.candidates[0].content.parts[0].text);
-         console.log(ans);
+         
          setAns(response.data.candidates[0].content.parts[0].text.replace(/\*/g, ''));
       } catch (error) {
          console.error("Error generating disorder details", error);

@@ -30,7 +30,7 @@ const ProductDetails = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("Fetched data:", data);
+        
         setProduct(data);
       } catch (err) {
         setError(err.message);
@@ -48,7 +48,7 @@ const ProductDetails = () => {
         }
         const data = await response.json();
         setExists(data);
-        console.log("Exists data:", data);
+        
       } catch (err) {
         setError(err.message);
       } finally {
@@ -56,7 +56,7 @@ const ProductDetails = () => {
       }
     }
     exi();
-    console.log("Exists data:", exists);
+    
     fetchProduct();
   }, [productType]);
 
@@ -74,7 +74,7 @@ const ProductDetails = () => {
       }
       const data = await response.json();
       setExists(data);
-      console.log("Exists data:", data);
+      
     } catch (err) {
       setError(err.message);
     } finally {
@@ -111,7 +111,7 @@ const ProductDetails = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("Cart data:", data);
+        
 
         if (data.message === "Product added to cart successfully") {
           toast.success("Product added to cart successfully", {

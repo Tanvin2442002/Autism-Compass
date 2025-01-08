@@ -34,19 +34,19 @@ const BookedTherapy = () => {
    }, []);
 
    const handleDeleteClick = (it) => {
-      console.log("Button Clicked:");
+
       setShowConfirmation(true);
       setConsultationToDelete(it);
    };
 
    const handleDelete = async () => {
-      console.log("showConfirmation:", showConfirmation);
+
       if (consultationToDelete) {
          const { C_ID, P_ID, TH_ID, THO_ID } = consultationToDelete;
-         console.log("C_ID:", C_ID, "P_ID:", P_ID, "TH_ID:", TH_ID, "THO_ID:", THO_ID);
+   
          const response = await fetch(`${URL}/booking/delete?C_ID=${C_ID}&P_ID=${P_ID}&TH_ID=${TH_ID}&THO_ID=${THO_ID}`, { method: 'DELETE' });
          const res = await response.json();
-         console.log("Response:", res);
+   
          if (res.success) {
             setData(data.filter(item => item.C_ID !== C_ID || item.P_ID !== P_ID || item.TH_ID !== TH_ID || item.THO_ID !== THO_ID));
          }
@@ -61,7 +61,7 @@ const BookedTherapy = () => {
    };
 
    const handleEditClick = (it) => {
-      console.log("Edit Button Clicked:", it);
+
       // navigate(`/edit-therapy/${it.C_ID}/${it.P_ID}/${it.TH_ID}/${it.THO_ID}`);
       navigate(`/therapy/booking?TH_ID=${it.TH_ID}&THO_ID=${it.THO_ID}`);
    }

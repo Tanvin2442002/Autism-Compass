@@ -11,7 +11,6 @@ router.post('/child', async (req, res) => {
             SELECT DELETE_CHILD(${C_ID})
         `;
 
-        console.log(result);
         res.status(200).json({ message: result[0].result });
     } catch (err) {
         // Handle errors
@@ -29,7 +28,6 @@ router.post('/parent', async (req, res) => {
             SELECT DELETE_PARENT(${P_ID})
         `;
 
-        console.log(result);
         res.status(200).json({ message: result[0].result });
     } catch (err) {
         // Handle errors
@@ -47,7 +45,6 @@ router.post('/doctor', async (req, res) => {
             SELECT DELETE_HEALTH_PROFESSIONAL(${D_ID})
         `;
 
-        console.log(result);
         res.status(200).json({ message: result[0].result });
     } catch (err) {
         // Handle errors

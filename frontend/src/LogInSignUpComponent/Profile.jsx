@@ -59,7 +59,7 @@ const Profile = () => {
                throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            console.log('Data:', data[0]);
+            
             // uppercase the keys
             data[0] = transformToUppercase(data[0]);
             setProfileData({
@@ -80,7 +80,7 @@ const Profile = () => {
                HOSPITAL: data[0].NAME_OF_HOSPITAL || '',
                VISIT_TIME: data[0].VISIT_TIME || ''
             });
-            console.log('PROFILE DATA:', profileData);
+            
          } catch (err) {
             console.error('Error fetching user info:', err);
          } finally {
@@ -93,16 +93,16 @@ const Profile = () => {
    }, []);
 
    const fetchGenderData = async () => {
-      console.log('Fetching ', profileData.NAME);
+      
       const genderResponse = await fetch(`https://api.genderapi.io/api/?name=${encodeURIComponent(profileData.NAME)}&key=667faf277a781c44944e8b13`);
       const genderData = await genderResponse.json();
       if (genderData.status && genderData.gender !== 'null') {
          setGender(genderData.gender === 'female' ? 'girl' : 'boy');
       }
-      console.log(genderData);
+      
    };
    fetchGenderData();
-   console.log(gender);
+   
 
    const handleChange = (e) => {
       const { name, value } = e.target;
@@ -156,7 +156,7 @@ const Profile = () => {
          };
       }
 
-      console.log('New Data:', newUserData);
+      
       const response = await fetch(`${URL}/reg/update-user-info`, {
          method: 'POST',
          headers: {
@@ -180,7 +180,7 @@ const Profile = () => {
 
    const handleDelete = async () => {
       const ID = userData.ID;
-      console.log('Deleting Account:', ID);
+      
       if (userData.TYPE === 'CHILD') {
          try{
             const response = await fetch(`${URL}/remove/child`, {
@@ -192,7 +192,7 @@ const Profile = () => {
             });
             if (response.ok) {
                const res = await response.json();
-               console.log(res);
+               
                localStorage.removeItem('USER');
                navigate('/');
             } else {
@@ -213,7 +213,7 @@ const Profile = () => {
             });
             if (response.ok) {
                const res = await response.json();
-               console.log(res);
+               
                localStorage.removeItem('USER');
                navigate('/');
             } else if(response.status==400){
@@ -258,7 +258,7 @@ const Profile = () => {
             });
             if (response.ok) {
                const res = await response.json();
-               console.log(res);
+               
                localStorage.removeItem('USER');
                navigate('/');
             } else {
@@ -270,7 +270,7 @@ const Profile = () => {
       }
 
       else if (userData.TYPE === 'TEACHER') {
-         console.log('Deleting Teacher');
+         
          try {
             const response = await fetch(`${URL}/remove/teacher`, {
                method: 'POST',
@@ -281,7 +281,7 @@ const Profile = () => {
             });
             if (response.ok) {
                const res = await response.json();
-               console.log(res);
+               
                localStorage.removeItem('USER');
                navigate('/');
             } else {
@@ -301,7 +301,7 @@ const Profile = () => {
    // teacher user            : name, contact number, email, institution
    // healthprofessional user : name, contact number, email, degree, field of specilaization, street, city, postal code
 
-   console.log("Final Data: ", profileData);
+   
 
    fetchGenderData();
 

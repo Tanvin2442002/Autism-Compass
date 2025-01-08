@@ -36,7 +36,7 @@ const ProductList = () => {
     fetchProduct();
   }, []);
 
-  console.log("Hello", productCards);
+  // console.log("Hello", productCards);
 
   return (
     <div className="container1">

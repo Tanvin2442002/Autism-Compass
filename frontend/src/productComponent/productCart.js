@@ -26,7 +26,7 @@ const ProductCart = () => {
         }
         const data = await response.json();
         const finalData = data.map(transformToUppercase);
-        console.log("Fetched data:", data);
+        
         setCartItems(finalData);
       } catch (err) {
         setError(err.message);
@@ -48,7 +48,7 @@ const ProductCart = () => {
       }
       const data = await response.json();
       // const finalData = data.map(transformToUppercase);
-      console.log("Fetched data:", data);
+      
       setSubtotal(data);
     } catch (err) {
       setError(err.message);
@@ -62,7 +62,7 @@ const ProductCart = () => {
   if (!cartItems.length) return <div>Product not found</div>;
 
   const handleproceedtopay = () => {
-    console.log("Payment Successful");
+    
   };
 
   const handleRemoveItem = async (PR_ID) => {
@@ -79,7 +79,7 @@ const ProductCart = () => {
       }
       const data = await response.json();
       const finalData = data.map(transformToUppercase);
-      console.log("Fetched data:", data);
+      
       setCartItems(finalData);
       fetchSubtotal(); // Call fetchSubtotal after removing an item
     } catch (err) {

@@ -3,7 +3,7 @@ const sql = require('../DB/supabase');  // Use Supabase instance
 const router = express.Router();
 
 router.get('/suggests/data', async (req, res) => {
-  console.log("Request received to fetch suggestions data");
+  
 
   const { id, type } = req.query;
 
@@ -34,7 +34,7 @@ router.get('/suggests/data', async (req, res) => {
     }
 
     res.status(200).send(result || []);
-    console.log("Suggestions data fetched successfully");
+    
   } catch (error) {
     console.error('Error fetching suggestions data:', error);
     res.status(500).send({ error: 'Database query failed' });

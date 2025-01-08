@@ -23,7 +23,6 @@ const ParentChildProfile = () => {
             const response = await fetch(`${URL}/reg/parent-child-info?TYPE=${type}&ID=${parentId}`);
             const tempData = await response.json();
             const data = tempData.map(transformToUppercase);
-            console.log("Data fetched:", data);
             if (data && data.length > 0) {
                const formattedData = data.map(childData => ({
                   name: childData.NAME,
@@ -34,7 +33,6 @@ const ParentChildProfile = () => {
                   disorder: type === 'PARENT' ? childData.DISORDER : '-'
                }));
                setInfoList(formattedData);
-               console.log("Data fetched successfully:", formattedData);
             }
          } catch (error) {
             console.error("Error fetching data:", error);

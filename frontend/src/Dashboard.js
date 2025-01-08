@@ -15,7 +15,7 @@ const URL = process.env.REACT_APP_API_URL;
 
 
 const Dashboard = () => {
-   console.log("loading dashboard");
+   
    const [bookedDocData, setBookedDocData] = useState([]);
    const [availableDocData, setAvailableDocData] = useState([]);
    const [availableTherapyData, setAvailableTherapyData] = useState([]);
@@ -41,7 +41,7 @@ const Dashboard = () => {
             const tempData = await response.json();
             const data = tempData.map(transformToUppercase);
             setBookedDocData(data);
-            console.log('Booked doc data:', data);
+            
          } catch (error) {
             console.error('Error fetching consultations:', error);
             setBookedDocData([]);
@@ -86,10 +86,10 @@ const Dashboard = () => {
          try {
             const response = await fetch(`${URL}/dash/disorder-info?id=${localData.ID}`);
             const data = await response.json();
-            console.log('Disorder data:', data);
+            
             const upperCaseData = transformToUppercase(data);
             if (upperCaseData.TYPE && upperCaseData.DESCRIPTION) {
-               console.log('Upper case data:', upperCaseData);
+               
                setDisorderData(upperCaseData);
             }
          } catch (error) {
@@ -105,7 +105,7 @@ const Dashboard = () => {
                throw new Error("Network response was not ok");
             }
             const data = await response.json();
-            // console.log("Fetched data:", data);
+            // 
             const finalData = data.map(transformToUppercase);
             setorderList(finalData);
          } catch (err) {

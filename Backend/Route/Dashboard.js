@@ -3,9 +3,7 @@ const sql = require('../DB/supabase');
 const router = express.Router();
 
 router.get("/booked-doc", async (req, res) => {
-    console.log("Request received to fetch booked doctor details");
     const { id, type } = req.query;
-    console.log(`ID: ${id}, Type: ${type}`);
     try {
         let result;
         if (type === 'PARENT') {
@@ -24,10 +22,10 @@ router.get("/booked-doc", async (req, res) => {
                 SELECT P_ID FROM PARENT_HAS_CHILD WHERE C_ID = ${id};
             `;
 
-            console.log(`Parent ID: ${parentId[0]}`);
+    
             const P_ID = parentId[0]?.p_id;
             
-            console.log(`Parent ID: ${P_ID}`);
+    
 
             if (!P_ID) {
                 return res.status(404).send({ error: "Parent ID not found for the given child." });
@@ -44,7 +42,7 @@ router.get("/booked-doc", async (req, res) => {
                 ORDER BY CO.SELECTED_DATE;
             `;
 
-            console.log(`Result: ${result}`);
+    
         }
 
         res.status(200).send(result || []);
@@ -55,7 +53,6 @@ router.get("/booked-doc", async (req, res) => {
 });
 
 router.get("/available-doc", async (req, res) => {
-    console.log("Request received to fetch available doctor details");
 
     try {
         const result = await sql`
@@ -74,7 +71,6 @@ router.get("/available-doc", async (req, res) => {
 });
 
 router.get("/available-therapy", async (req, res) => {
-    console.log("Request received to fetch available therapy details");
 
     try {
         const result = await sql`
@@ -92,7 +88,6 @@ router.get("/available-therapy", async (req, res) => {
 router.get("/disorder-info", async (req, res) => {
     const C_ID = req.query.id;
 
-    console.log(`Fetch Disorder Info for Child ID: ${C_ID}`);
 
     try {
         const result = await sql`

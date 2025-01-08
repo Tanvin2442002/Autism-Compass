@@ -12,7 +12,6 @@ const SingleProductCard = ({ itemDetails }) => {
   const localData = JSON.parse(localStorage.getItem("USER"));
 
   const handleAddCart = () => {
-    console.log("Add to cart clicked");
     setPopUp(true);
   };
 
@@ -21,8 +20,6 @@ const SingleProductCard = ({ itemDetails }) => {
   };
 
   const handlePopUp = async () => {
-    console.log("Local data:", localData);
-    console.log("Item added to cart", itemDetails);
     const data = {
       PR_ID: itemDetails.PR_ID,
       P_ID: localData.ID,
@@ -65,7 +62,7 @@ const SingleProductCard = ({ itemDetails }) => {
         });
       }
     } catch (err) {
-      console.log("Error in adding to cart", err);
+
     }
 
     setPopUp(false);

@@ -36,7 +36,6 @@ const DoctorProfile = () => {
         setDoctor(data[0]);
 
         await fetchGenderData(data[0].NAME);
-        console.log(data[0]);
         const add = data[0].ADDRESS.street + ", " + data[0].ADDRESS.city + "- " + data[0].ADDRESS.postal_code;
         setDocAddress(add);
       } catch (err) {

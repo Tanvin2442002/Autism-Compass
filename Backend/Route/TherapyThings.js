@@ -4,12 +4,12 @@ const router = express.Router();
 
 // Fetch all therapies
 router.get('/all', async (req, res) => {
-    console.log("Request received to fetch all therapies");
+    
 
     try {
         const result = await sql`SELECT * FROM THERAPY`;
         res.status(200).send(result || []);
-        console.log("Request processed successfully");
+        
     } catch (error) {
         console.error('Error fetching all therapies:', error);
         res.status(500).send({ error: 'Database query failed' });
@@ -19,7 +19,7 @@ router.get('/all', async (req, res) => {
 // Search therapies by type
 router.get('/search', async (req, res) => {
     const search = req.query.search ? `%${req.query.search.toLowerCase()}%` : '%';
-    console.log("Request received to search therapies");
+    
 
     try {
         const result = await sql`
@@ -27,7 +27,7 @@ router.get('/search', async (req, res) => {
             WHERE LOWER(THERAPY_TYPE) LIKE ${search}
         `;
         res.status(200).send(result || []);
-        console.log("Request processed successfully");
+        
     } catch (error) {
         console.error('Error searching therapies:', error);
         res.status(500).send({ error: 'Database query failed' });
@@ -37,7 +37,7 @@ router.get('/search', async (req, res) => {
 // Fetch therapy details by ID
 router.get('/Detail', async (req, res) => {
     const therapyType = req.query.type;
-    console.log("Request received to fetch therapy details");
+    
 
     try {
         const result = await sql`
@@ -45,7 +45,7 @@ router.get('/Detail', async (req, res) => {
             WHERE TH_ID = ${therapyType}
         `;
         res.status(200).send(result || []);
-        console.log("Request processed successfully");
+        
     } catch (error) {
         console.error('Error fetching therapy details:', error);
         res.status(500).send({ error: 'Database query failed' });
@@ -54,12 +54,12 @@ router.get('/Detail', async (req, res) => {
 
 // Fetch all therapy organizations
 router.get('/orgdata', async (req, res) => {
-    console.log("Request received to fetch all therapy organizations");
+    
 
     try {
         const result = await sql`SELECT * FROM THERAPY_ORG`;
         res.status(200).send(result || []);
-        console.log("Request processed successfully");
+        
     } catch (error) {
         console.error('Error fetching therapy organizations:', error);
         res.status(500).send({ error: 'Database query failed' });
@@ -69,7 +69,7 @@ router.get('/orgdata', async (req, res) => {
 // Fetch organizations associated with a therapy type
 router.get('/org', async (req, res) => {
     const therapyType = req.query.type;
-    console.log("Request received to fetch organizations by therapy type");
+    
 
     try {
         const result = await sql`
@@ -80,7 +80,7 @@ router.get('/org', async (req, res) => {
             WHERE T.TH_ID = ${therapyType}
         `;
         res.status(200).send(result || []);
-        console.log("Request processed successfully");
+        
     } catch (error) {
         console.error('Error fetching therapy organizations:', error);
         res.status(500).send({ error: 'Database query failed' });
@@ -90,7 +90,7 @@ router.get('/org', async (req, res) => {
 // Search therapy organizations by name
 router.get('/org/search', async (req, res) => {
     const search = req.query.search ? `%${req.query.search.toLowerCase()}%` : '%';
-    console.log("Request received to search therapy organizations");
+    
 
     try {
         const result = await sql`
@@ -98,7 +98,7 @@ router.get('/org/search', async (req, res) => {
             WHERE LOWER(NAME) LIKE ${search}
         `;
         res.status(200).send(result || []);
-        console.log("Request processed successfully");
+        
     } catch (error) {
         console.error('Error searching therapy organizations:', error);
         res.status(500).send({ error: 'Database query failed' });

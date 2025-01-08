@@ -31,7 +31,7 @@ const Registration = () => {
          CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
       }
       if (pass.PASSWORD !== pass.CONFIRM_PASSWORD) {
-         console.log("Passwords do not match");
+         
          toast.error("Passwords do not match!", {
             position: "top-right",
             autoClose: 2500,
@@ -57,7 +57,7 @@ const Registration = () => {
             PASSWORD: document.getElementById("password").value,
             CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
          };
-         console.log(parentData);
+         
          const response = await fetch(`${URL}/reg/parent`, {
             method: "POST",
             body: JSON.stringify(parentData),
@@ -67,7 +67,7 @@ const Registration = () => {
          });
          let data = await response.json();
          setTimeout(() => {
-            console.log(data);
+            
             if (data.message === "Parent registered successfully!") {
                navigate("/login");
             }
@@ -100,7 +100,7 @@ const Registration = () => {
             CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
             DISORDER_TYPE: document.getElementById("disability-type").value,
          };
-         console.log(childData);
+         
          const response = await fetch(`${URL}/reg/child`, {
             method: "POST",
             body: JSON.stringify(childData),
@@ -109,9 +109,9 @@ const Registration = () => {
             },
          });
          let data = await response.json();
-         console.log(data);
+         
          setTimeout(() => {
-            console.log(data.message);
+            
             if (data.message === "Child registered successfully!") {
                navigate("/login");
             } else if (data.message === "Parent not found") {
@@ -144,9 +144,9 @@ const Registration = () => {
       else if (userType === 'DOCTOR') {
          const startTime = document.getElementById("start-visit-time").value;
          const endTime = document.getElementById("end-visit-time").value;
-         console.log(startTime, endTime);
+         
          const visitTime = startTime + " - " + endTime;
-         console.log(visitTime);
+         
          const doctorData = {
             NAME: document.getElementById("name").value,
             EMAIL: document.getElementById("email").value,
@@ -161,7 +161,7 @@ const Registration = () => {
             PASSWORD: document.getElementById("password").value,
             CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
          };
-         console.log(doctorData);
+         
          const response = await fetch(`${URL}/reg/doctor`, {
             method: "POST",
             body: JSON.stringify(doctorData),
@@ -171,7 +171,7 @@ const Registration = () => {
          });
          const data = await response.json();
          setTimeout(() => {
-            console.log(data);
+            
             if (data.message === "Doctor registered successfully!")
                navigate("/login");
             else {
@@ -198,7 +198,7 @@ const Registration = () => {
             PASSWORD: document.getElementById("password").value,
             CONFIRM_PASSWORD: document.getElementById("confirm-password").value,
          };
-         console.log(teacherData);
+         
          const response = await fetch(`${URL}/reg/teacher`, {
             method: "POST",
             body: JSON.stringify(teacherData),
@@ -208,7 +208,7 @@ const Registration = () => {
          });
          let data = await response.json();
          setTimeout(() => {
-            console.log(data);
+            
             if (data.message === "Teacher registered successfully!") {
                navigate("/login");
             }
@@ -228,7 +228,7 @@ const Registration = () => {
          }, 1000);
       }
    };
-   console.log(userType);
+   
 
    return (
       <div>

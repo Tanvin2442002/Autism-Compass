@@ -3,9 +3,7 @@ const sql = require('../DB/supabase');
 const router = express.Router();
 
 router.get('/therapy/orgdata', async (req, res) => {
-   console.log("Request received to fetch therapy organization data");
    const { THO_ID } = req.query;
-   console.log(`Organization ID: ${THO_ID}`);
 
    try {
       const result = await sql`
@@ -19,9 +17,7 @@ router.get('/therapy/orgdata', async (req, res) => {
 });
 
 router.get('/therapy/therapydata', async (req, res) => {
-   console.log("Request received to fetch therapy data");
    const { TH_ID } = req.query;
-   console.log(`Therapy ID: ${TH_ID}`);
 
    try {
       const result = await sql`
@@ -35,9 +31,7 @@ router.get('/therapy/therapydata', async (req, res) => {
 });
 
 router.get('/therapy/child/data', async (req, res) => {
-   console.log("Request received to fetch child data");
    const { P_ID } = req.query;
-   console.log(`Parent ID: ${P_ID}`);
 
    try {
       const result = await sql`
@@ -56,9 +50,7 @@ router.get('/therapy/child/data', async (req, res) => {
 });
 
 router.get('/therapy/parent/data', async (req, res) => {
-   console.log("Request received to fetch parent data");
    const { C_ID } = req.query;
-   console.log(`Child ID: ${C_ID}`);
 
    try {
       const result = await sql`
@@ -77,9 +69,7 @@ router.get('/therapy/parent/data', async (req, res) => {
 });
 
 router.post('/therapy', async (req, res) => {
-   console.log("Request received to create a booking");
    const { TH_ID, THO_ID, P_ID, C_ID, BOOKING_DATE } = req.body;
-   console.log(`Booking Details: TH_ID: ${TH_ID}, THO_ID: ${THO_ID}, P_ID: ${P_ID}, C_ID: ${C_ID}, BOOKING_DATE: ${BOOKING_DATE}`);
 
    try {
       await sql`
@@ -94,9 +84,7 @@ router.post('/therapy', async (req, res) => {
 });
 
 router.get('/therapy/child/check', async (req, res) => {
-   console.log("Request received to check child data");
    const { C_EMAIL, P_ID } = req.query;
-   console.log(`Child Email: ${C_EMAIL}, Parent ID: ${P_ID}`);
 
    try {
       const result = await sql`
@@ -114,9 +102,7 @@ router.get('/therapy/child/check', async (req, res) => {
 });
 
 router.get('/data', async (req, res) => {
-   console.log("Request received to fetch booking data");
    const { id, type } = req.query;
-   console.log(`ID: ${id}, Type: ${type}`);
 
    try {
       let result;
@@ -193,9 +179,7 @@ router.get('/data', async (req, res) => {
    }
 });
 router.delete('/delete', async (req, res) => {
-   console.log("Request received to delete booking");
    const { C_ID, P_ID, TH_ID, THO_ID } = req.query;
-   console.log(`C_ID: ${C_ID}, P_ID: ${P_ID}, TH_ID: ${TH_ID}, THO_ID: ${THO_ID}`);
 
    try {
       const result = await sql`
@@ -213,9 +197,7 @@ router.delete('/delete', async (req, res) => {
 });
 
 router.put('/therapy/update', async (req, res) => {
-   console.log("Request received to update booking");
    const { C_ID, P_ID, TH_ID, THO_ID, BOOKING_DATE } = req.body;
-   console.log(`Updated Booking Details: ${C_ID}, ${P_ID}, ${TH_ID}, ${THO_ID}, ${BOOKING_DATE}`);
 
    try {
       await sql`
@@ -232,9 +214,7 @@ router.put('/therapy/update', async (req, res) => {
 
 
 router.get('/therapy/check', async (req, res) => {
-   console.log("Request received to check therapy details");
    const { C_ID, P_ID, TH_ID, THO_ID } = req.query;
-   console.log(`C_ID: ${C_ID}, P_ID: ${P_ID}, TH_ID: ${TH_ID}, THO_ID: ${THO_ID}`);
 
    try {
       const result = await sql`

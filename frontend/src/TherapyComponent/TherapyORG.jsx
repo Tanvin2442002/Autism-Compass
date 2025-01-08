@@ -25,11 +25,11 @@ const TherapyOrganizations = () => {
 				});
 				const tempData = await response.json();
 				const data = tempData.map(transformToUppercase);
-				console.log("Data received");
-				console.log(data);
+				
+				
 				setTherapyOrgData(data);
 			} catch (error) {
-				console.log(error);
+				
 			}
 		}
 		fetchTherapyOrgData();
@@ -45,8 +45,8 @@ const TherapyOrganizations = () => {
 			}
 			const tempData = await response.json();
 			const data = tempData.map(transformToUppercase);
-			console.log('Search value:', searchValue);
-			console.log('Fetched data:', data);
+			
+			
 			setTherapyOrgData(data);
 		} catch (err) {
 			console.warn(err.message);

@@ -33,14 +33,14 @@ const BookingTherapy = () => {
       );
    };
    useEffect(() => {
-      console.log('Therapy ID:', therapyId, 'Org ID:', orgId);
+     
 
       const fetchOrgDetails = async () => {
          try {
             const response = await fetch(`${URL}/booking/therapy/orgdata?THO_ID=${orgId}`);
             const tempData = await response.json();
             const data = tempData.map(transformToUppercase);
-            console.log('Data:', data);
+           
             setOrgDetails(data);
          } catch (error) {
             console.error('Error fetching organization data:', error);
@@ -55,7 +55,7 @@ const BookingTherapy = () => {
             const response = await fetch(`${URL}/booking/therapy/therapydata?TH_ID=${therapyId}`);
             const tempData = await response.json();
             const data = tempData.map(transformToUppercase);
-            console.log("Therapy data:", data[0].THERAPY_TYPE);
+           
             setTherapyType(data[0].THERAPY_TYPE);
          } catch (error) {
             console.error('Error fetching therapy data:', error);
@@ -63,11 +63,11 @@ const BookingTherapy = () => {
          } finally {
             setLoading(false);
          }
-         console.log('Therapy Type:', therapyType);
+        
       };
 
       const fetchData = async () => {
-         console.log('Local data:', localData);
+        
          try {
             let response;
             if (localData.TYPE === 'PARENT') {
@@ -77,7 +77,7 @@ const BookingTherapy = () => {
             }
             const tempData = await response.json();
             const data = tempData.map(transformToUppercase);
-            console.log('User data:', data[0]);
+           
             setUserDetails(data[0]);
          } catch (error) {
             console.error('Error fetching user data:', error);
@@ -104,9 +104,9 @@ const BookingTherapy = () => {
       const checkExist = await fetch(`${URL}/booking/therapy/check?C_ID=${userDetails.C_ID}&P_ID=${userDetails.P_ID}&TH_ID=${therapyId}&THO_ID=${orgId}`);
       const tempCheckData = await checkExist.json();
       const checkData = tempCheckData.map(transformToUppercase);
-      console.log('Check data:', checkData);
+     
       if (checkData.length > 0) {
-         console.log("IN.......");
+        
          const response = await fetch(`${URL}/booking/therapy/update`, {
             method: 'PUT',
             headers: {
@@ -115,8 +115,8 @@ const BookingTherapy = () => {
             body: JSON.stringify(bookingData),
          });
          const data = await response.json();
-         console.log('Booking response:', data);
-         console.log('Booking status:', response.status);
+        
+        
          if (response.status === 200) {
             toast.success("Booking Updated Successfully", {
                position: "top-right",
@@ -141,11 +141,11 @@ const BookingTherapy = () => {
             });
          }
 
-         console.log("DONE.......");
+        
          return;
       }
 
-      console.log('Booking data:', bookingData);
+     
       const response = await fetch(`${URL}/booking/therapy`, {
          method: 'POST',
          headers: {
@@ -154,8 +154,8 @@ const BookingTherapy = () => {
          body: JSON.stringify(bookingData),
       });
       const data = await response.json();
-      console.log('Booking response:', data);
-      console.log('Booking status:', response.status);
+     
+     
       if (response.status === 200) {
          toast.success("Booking Successful", {
             position: "top-right",
@@ -189,10 +189,10 @@ const BookingTherapy = () => {
          try {
             const response = await fetch(`${URL}/booking/therapy/child/check?email=${email}&P_ID=${userDetails.P_ID}`);
             const data = await response.json();
-            console.log('Email data:', data[0].NAME);
+           
             if (data[0].NAME) {
                setChildName(data[0].NAME);
-               console.log('------', childName);
+              
                setIsEmailValid(true);
                const tempData = { ...userDetails, C_ID: data[0].C_ID };
                setUserDetails(tempData);
@@ -209,8 +209,8 @@ const BookingTherapy = () => {
          setChildName('');
          setIsEmailValid(false);
       }
-      console.log('Child email:', email);
-      console.log('Child name:', childName);
+     
+     
    };
 
    if (loading) {

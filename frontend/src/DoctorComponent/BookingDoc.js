@@ -56,7 +56,7 @@ const BookingDoc = () => {
         const tempData = await response.json();
         const data = tempData.map(transformToUppercase);
         setUserDetails(data[0]);
-        console.log('User Details:', data[0]);
+        
         setSelectedChildId(data[0].C_ID);
         setParentId(data[0].P_ID);
       } catch (error) {
@@ -69,7 +69,7 @@ const BookingDoc = () => {
     fetchUserDetails();
   }, [doctorId]);
 
-  console.log('Doctor Details:', doctorDetails);
+  
   // Create visit time slots when doctor details are available
   useEffect(() => {
     if (doctorDetails && doctorDetails.VISIT_TIME) {
@@ -77,9 +77,9 @@ const BookingDoc = () => {
       const time = doctorDetails.VISIT_TIME;
       const startTime = parseInt(time.split(' ')[0]);
       const endTime = parseInt(time.split(' ')[2]);
-      console.log('Time:', time);
-      console.log('Start Time:', startTime);
-      console.log('End Time:', endTime);
+      
+      
+      
 
 
       for (let i = startTime; i < endTime; i++) {
@@ -91,13 +91,13 @@ const BookingDoc = () => {
           timeSlots.push(`${(i % 12)}:00 PM`);
       }
       setVisitTime(timeSlots);
-      console.log("Time Slots: ", timeSlots);
+      
     }
   }, [doctorDetails]);
 
   const handleChildSelection = (childId) => {
     setSelectedChildId(childId);
-    console.log('Selected Child ID:', childId);
+    
   };
 
   const handleConfirmBooking = async (e) => {
@@ -113,9 +113,9 @@ const BookingDoc = () => {
     if (localData.TYPE === 'PARENT') {
       bookingData.P_ID = localData.ID;
     }
-    console.log('Local Data:', localData.ID);
+    
 
-    console.log('Booking data:', bookingData);
+    
 
     try {
       const response = await fetch(`${URL}/physician`, {

@@ -5,13 +5,12 @@ const router = express.Router();
 // Fetch physician details by ID
 router.get('/physician/detail', async (req, res) => {
   const doctorId = req.query.H_ID;
-  console.log("Request received to fetch physician details");
   try {
     const result = await sql`
             SELECT * FROM HEALTH_PROFESSIONAL WHERE H_ID = ${doctorId};
         `;
     res.status(200).send(result || []);
-    console.log("Physician details fetched successfully");
+
   } catch (error) {
     console.error('Error fetching physician details:', error);
     res.status(500).send({ error: 'Database query failed' });
@@ -21,7 +20,6 @@ router.get('/physician/detail', async (req, res) => {
 // Fetch child data for a parent
 router.get('/physician/child/data', async (req, res) => {
   const P_ID = req.query.P_ID;
-  console.log("Request received to fetch child data");
   try {
     const result = await sql`
             SELECT C.C_ID, C.NAME AS CHILD_NAME, C.EMAIL AS CHILD_EMAIL, 
@@ -32,7 +30,7 @@ router.get('/physician/child/data', async (req, res) => {
             WHERE PHC.P_ID = ${P_ID};
         `;
     res.status(200).send(result || []);
-    console.log("Child data fetched successfully");
+
   } catch (error) {
     console.error('Error fetching child data:', error);
     res.status(500).send({ error: 'Database query failed' });
@@ -42,7 +40,6 @@ router.get('/physician/child/data', async (req, res) => {
 // Fetch parent data for a child
 router.get('/physician/parent/data', async (req, res) => {
   const C_ID = req.query.C_ID;
-  console.log("Request received to fetch parent data");
   try {
     const result = await sql`
             SELECT P.P_ID, C.C_ID, P.NAME AS PARENT_NAME, P.EMAIL AS PARENT_EMAIL, 
@@ -53,7 +50,7 @@ router.get('/physician/parent/data', async (req, res) => {
             WHERE PHC.C_ID = ${C_ID};
         `;
     res.status(200).send(result || []);
-    console.log("Parent data fetched successfully");
+
   } catch (error) {
     console.error('Error fetching parent data:', error);
     res.status(500).send({ error: 'Database query failed' });
@@ -63,7 +60,6 @@ router.get('/physician/parent/data', async (req, res) => {
 // Book consultation with physician
 router.post('/physician', async (req, res) => {
   const { P_ID, H_ID, C_ID, BOOKING_DATE, BOOKING_TIME } = req.body;
-  console.log("Request received for booking consultation with physician");
 
   try {
     let parentId = P_ID;
@@ -86,7 +82,7 @@ router.post('/physician', async (req, res) => {
         `;
 
     res.status(200).send({ message: 'Booking successful' });
-    console.log("Consultation booked successfully");
+
   } catch (error) {
     console.error('Error executing query for booking:', error);
     res.status(500).send({ error: 'Database query failed' });
@@ -96,7 +92,6 @@ router.post('/physician', async (req, res) => {
 // Check if child email is associated with a parent
 router.get('/physician/child/check', async (req, res) => {
   const { email, P_ID } = req.query;
-  console.log("Request received for checking child email");
   try {
     const result = await sql`
             SELECT C.C_ID AS C_ID, C.NAME AS NAME
@@ -107,7 +102,7 @@ router.get('/physician/child/check', async (req, res) => {
         `;
 
     res.status(200).send(result || []);
-    console.log("Child email check completed");
+
   } catch (error) {
     console.error('Error executing query for child email check:', error);
     res.status(500).send({ error: 'Database query failed' });
@@ -117,7 +112,6 @@ router.get('/physician/child/check', async (req, res) => {
 // Fetch consultations for a parent or child
 router.get('/consult/data', async (req, res) => {
   const { id, type } = req.query;
-  console.log("Request received for fetching consultations");
   try {
     let result;
     if (type === 'CHILD') {
@@ -148,7 +142,7 @@ router.get('/consult/data', async (req, res) => {
             `;
     }
     res.status(200).send(result || []);
-    console.log("Consultations fetched successfully");
+
   } catch (error) {
     console.error('Error fetching consultations:', error);
     res.status(500).send({ error: 'Database query failed' });
@@ -158,7 +152,6 @@ router.get('/consult/data', async (req, res) => {
 // Cancel a consultation
 router.delete('/consultations/delete', async (req, res) => {
   const { P_ID, H_ID, C_ID } = req.query;
-  console.log("Request received for deleting consultation");
   try {
     const result = await sql`
             DELETE FROM CONSULTS WHERE P_ID = ${P_ID} AND H_ID = ${H_ID} AND C_ID = ${C_ID};
@@ -166,7 +159,7 @@ router.delete('/consultations/delete', async (req, res) => {
 
     if (result.count > 0) {
       res.status(200).send({ success: true });
-      console.log("Consultation deleted successfully");
+  
     } else {
       res.status(404).send({ success: false, message: 'Consultation not found' });
     }

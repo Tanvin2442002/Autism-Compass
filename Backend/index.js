@@ -26,9 +26,7 @@ app.use("/remove", require("./Route/DeleteUser"));
 app.post("/login", async (req, res) => {
     try {
         const { email, password, type } = req.body;
-        // console.log(`User login request: ${email}, ${type}`);
-
-        // Query the database for user
+        
         const result = await sql`
             SELECT *
             FROM LOG_IN
@@ -78,17 +76,13 @@ app.post("/login", async (req, res) => {
         result[0].TYPE = type;
 
 
-        // console.log(`User ID: ${JSON.stringify(userId)}`);
+     
         if (result.length > 0) {
             res.status(200).send(result[0]);
-            console.log(`User logged in: ${email}, ${type}`);
         } else {
             res.status(404).send({ result: "No user found!" });
         }
-
-        console.log("Request processed");
     } catch (err) {
-        console.error("Error during login:", err);
         res.status(500).send({ message: "Error during login", error: err.message });
     }
 });
@@ -110,20 +104,15 @@ app.get("/ai", async (req, res) => {
     const prompt = "Explain how AI works";
     try {
         const result = await model.generateContent(prompt);
-        console.log(result.response.text());
+        
         res.status(200).send(result.response.text());
-        console.log("AI response sent");
     } catch (err) {
-        console.error("Error during AI generation:", err);
         res.status(500).send({ message: "Error during AI generation", error: err.message });
     }
 });
 
 
 app.listen(5000, async (req, resp) => {
-    // console.log(sql);
     console.log("Server is running on port 5000...");
-    console.log(`Database connect with '${process.env.USER}' user and '${process.env.PASS}' password.`);
-
 });
 

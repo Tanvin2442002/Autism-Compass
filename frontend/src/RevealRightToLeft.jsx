@@ -9,7 +9,6 @@ const Reveal = ({ children}) => {
    const mainContent = useAnimation();
 
    useEffect(() => {
-      console.log(isInView);
       if (isInView) {
          mainContent.start("visible");
       }

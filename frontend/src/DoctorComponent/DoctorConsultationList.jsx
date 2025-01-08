@@ -64,9 +64,8 @@ const DoctorConsultation = () => {
             const tempData = await response.json();
             const data = tempData.map(transformToUppercase);
             setConsultations(data);
-            console.log("Consultations:", consultations);
+           
          } catch (error) {
-            console.error('Error fetching consultations:', error);
             setConsultations([]);
          }
       };
@@ -77,7 +76,6 @@ const DoctorConsultation = () => {
    const data = consultations;
    
    const handleConsultation = (p_id, c_id) => () => {
-      console.log('P_ID & C_ID', p_id, c_id);
       navigate('/consultation', { state: { p_id, c_id } });
    };
 

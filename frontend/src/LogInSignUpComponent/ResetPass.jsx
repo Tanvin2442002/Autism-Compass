@@ -75,11 +75,11 @@ const ResetPass = () => {
       )
          .then(
             () => {
-               console.log('Verification code sent successfully!');
+               
                setVerificationSent(true);
             },
             (error) => {
-               console.log('Failed to send verification code...', error.text);
+               
             }
          );
       toast.success('Verification code sent!', {
@@ -92,8 +92,8 @@ const ResetPass = () => {
          progress: undefined,
          theme: "light",
       });
-      console.log('Verification code sent');
-      console.log(code);
+      
+      
 
 
       setVerificationSent(true);
@@ -140,7 +140,7 @@ const ResetPass = () => {
       } catch (error) {
          console.error('Error checking:', error);
       }
-      console.log('Password Recovered Successfully!');
+      
       navigate('/login');
 
    };

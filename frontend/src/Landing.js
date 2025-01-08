@@ -82,7 +82,7 @@ const Landing = () => {
       let controls;
       let finalPosition = -5 * width - 60;
 
-      console.log(finalPosition);
+   
 
       if (mustFinish) {
          controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
@@ -113,7 +113,7 @@ const Landing = () => {
    const x = useTransform(scrollYProgress, [0, 1], ['0%', '-55%']);
 
 
-   console.log(weOffers);
+
 
    return (
       <motion.div className="langingPage"

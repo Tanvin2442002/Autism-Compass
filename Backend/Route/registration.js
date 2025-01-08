@@ -5,7 +5,6 @@ const sql = require('../DB/supabase');
 
 router.post("/parent", async (req, res) => {
     try {
-        console.log("Received data:", req.body);
 
         const { NAME, DOB, CONTACT_NO, EMAIL, CITY, STREET, POSTAL_CODE, PASSWORD } = req.body;
 
@@ -37,7 +36,6 @@ router.post("/parent", async (req, res) => {
             login: loginResult,
         });
 
-        console.log("Parent registration processed successfully");
 
     } catch (err) {
         console.error("Error during parent registration:", err);
@@ -47,7 +45,6 @@ router.post("/parent", async (req, res) => {
 
 router.post("/child", async (req, res) => {
     try {
-        console.log("Received data:", req.body);
         const { NAME, DOB, CONTACT_NO, EMAIL, P_EMAIL, CITY, STREET, POSTAL_CODE, PASSWORD, DISORDER_TYPE } = req.body;
 
         // Find parent by email
@@ -102,7 +99,6 @@ router.post("/child", async (req, res) => {
         `;
 
         res.status(201).send({ message: "Child registered successfully!" });
-        console.log("Child registration processed successfully");
     } catch (err) {
         console.error("Error during child registration:", err);
         res.status(500).send({ message: "Error during child registration", error: err.message });
@@ -111,7 +107,6 @@ router.post("/child", async (req, res) => {
 
 router.post("/doctor", async (req, res) => {
     try {
-        console.log("Received data:", req.body);
 
         const { NAME, CONTACT_NO, EMAIL, DEGREE, FIELD_OF_SPEC, NAME_OF_HOSPITAL, VISIT_TIME, CITY, STREET, POSTAL_CODE, PASSWORD } = req.body;
 
@@ -133,7 +128,6 @@ router.post("/doctor", async (req, res) => {
         `;
 
         res.status(201).send({ message: "Doctor registered successfully!", doctor: doctorResult });
-        console.log("Doctor registration processed successfully");
     } catch (err) {
         console.error("Error during doctor registration:", err);
         res.status(500).send({ message: "Error during doctor registration", error: err.message });
@@ -142,7 +136,6 @@ router.post("/doctor", async (req, res) => {
 
 router.post("/teacher", async (req, res) => {
     try {
-        console.log("Received data:", req.body);
 
         const { NAME, CONTACT_NO, EMAIL, INSTITUTION, PASSWORD } = req.body;
 
@@ -164,7 +157,6 @@ router.post("/teacher", async (req, res) => {
         `;
 
         res.status(201).send({ message: "Teacher registered successfully!", teacher: teacherResult });
-        console.log("Teacher registration processed successfully");
     } catch (err) {
         console.error("Error during teacher registration:", err);
         res.status(500).send({ message: "Error during teacher registration", error: err.message });
@@ -173,7 +165,6 @@ router.post("/teacher", async (req, res) => {
 
 router.post("/check-email", async (req, res) => {
     try {
-        console.log("Received data:", req.body);
 
         const { EMAIL } = req.body;
 
@@ -182,7 +173,6 @@ router.post("/check-email", async (req, res) => {
         `;
 
         res.status(200).send({ valid: emailResult.length > 0 });
-        console.log("Email check processed");
     } catch (err) {
         console.error("Error during email check:", err);
         res.status(500).send({ message: "Error during email check", error: err.message });
@@ -191,7 +181,6 @@ router.post("/check-email", async (req, res) => {
 
 router.post("/update-password", async (req, res) => {
     try {
-        console.log("Received data:", req.body);
 
         const { EMAIL, PASSWORD } = req.body;
 
@@ -200,7 +189,6 @@ router.post("/update-password", async (req, res) => {
         `;
 
         res.status(200).send({ message: "Password updated successfully!" });
-        console.log("Password update processed");
     } catch (err) {
         console.error("Error during password update:", err);
         res.status(500).send({ message: "Error during password update", error: err.message });
@@ -213,14 +201,12 @@ router.get("/user-info", async (req, res) => {
         if (!ID || !TYPE) {
             return res.status(400).send({ message: "ID and TYPE are required" });
         }const idColumn = `${TYPE[0]}_ID`;
-        console.log("ID column:", idColumn);
         const query = `
             SELECT * 
             FROM ${TYPE} 
             WHERE ${idColumn} = $1;
         `;
         const userResult = await sql.unsafe(query, [ID]);
-        console.log("User result:", userResult);
 
         if (userResult.length > 0) {
             res.status(200).send(userResult);
@@ -228,7 +214,6 @@ router.get("/user-info", async (req, res) => {
             res.status(404).send({ message: "User not found" });
         }
 
-        console.log("User info query processed");
     } catch (err) {
         console.error("Error during user info query:", err);
         res.status(500).send({ message: "Error during user info query", error: err.message });
@@ -240,7 +225,6 @@ router.get("/user-info", async (req, res) => {
 
 router.post("/update-user-info", async (req, res) => {
     try {
-        console.log("Received data:", req.body);
 
         const { TYPE, ID, ...fields } = req.body;
         const idColumn = `${TYPE[0]}_ID`;
@@ -254,7 +238,6 @@ router.post("/update-user-info", async (req, res) => {
         `;
 
         res.status(200).send({ message: "User info updated successfully!" });
-        console.log("User info update processed");
     } catch (err) {
         console.error("Error during user info update:", err);
         res.status(500).send({ message: "Error during user info update", error: err.message });
@@ -263,7 +246,6 @@ router.post("/update-user-info", async (req, res) => {
 
 router.get("/parent-child-info", async (req, res) => {
     try {
-        console.log("Received data:", req.query);
 
         const { TYPE, ID } = req.query;
 
@@ -292,7 +274,6 @@ router.get("/parent-child-info", async (req, res) => {
             res.status(404).send({ message: "User not found" });
         }
 
-        console.log("Parent-child info query processed");
     } catch (err) {
         console.error("Error during parent-child info query:", err);
         res.status(500).send({ message: "Error during parent-child info query", error: err.message });
