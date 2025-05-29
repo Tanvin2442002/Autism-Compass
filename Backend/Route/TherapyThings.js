@@ -8,6 +8,7 @@ router.get('/all', async (req, res) => {
 
     try {
         const result = await sql`SELECT * FROM THERAPY`;
+        console.log(result);
         res.status(200).send(result || []);
         
     } catch (error) {
